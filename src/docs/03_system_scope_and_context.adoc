@@ -19,7 +19,16 @@ Various options:
 * Context diagrams
 * Lists of communication partners and their interfaces.
 ****
+* The system will be based on a decentralized architecture where data storage is separated from the app.
+* Users can store their routes in their own pods.
+* Users can view the routes stored on a map (map itself out of scope).
+* The app will allow a user to share pictures, videos or information about a route with other friends.
+* A user can get notifications when some friend shares a route with him.
+* Users can have groups of friends with whom they may want to share a route
+* It should be possible to view routes loaded by users that are using a different app, so interoperability with other route management systems should be taken into account.
 
+# External interfaces:
+* We will connect to the pods by using RDFlib.js javascript library
 
 === Business Context
 
