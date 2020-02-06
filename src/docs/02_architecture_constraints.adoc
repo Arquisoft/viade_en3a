@@ -17,49 +17,49 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 | The programming language used for the most part of this project.
 
 | React-native
-| Combines the best parts of native development with React, it is a JavaScript library for building user interfaces.
+| Combines the best parts of native development with React, it is a JavaScript library for building user interfaces. Reference: "https://facebook.github.io/react-native/"
 
 | Git
-| A version control system.
+| A distributed version control system.
 
 | Node.js
-| Entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación ECMAScript, asíncrono, con I/O de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
+| Node.js is a runtime system used mostly for making server side applications with JavaScript. Reference: "https://simple.wikipedia.org/wiki/Node.js"
 
 | SOLID
-| 
+| Solid (derived from "social linked data") is a proposed set of conventions and tools for building decentralized social applications based on Linked Data principles. Solid is modular and extensible and it relies as much as possible on existing W3C standards and protocols. Reference: "https://solid.mit.edu/"
 
 | Docker
-|
+| Uses OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files. All containers are run by a single operating-system kernel and are thus more lightweight than virtual machines. Reference: "https://en.wikipedia.org/wiki/Docker_(software)"
 
 | Travis
-|
+| As a continuous integration platform, Travis CI supports your development process by automatically building and testing code changes, providing immediate feedback on the success of the change. Reference: "https://docs.travis-ci.com/user/for-beginners/"
 
 | CodeCov
-|
+| Codecov provides highly integrated tools to group, merge, archive, and compare coverage reports. Reference: "https://codecov.io/"
 
 | Codacy
-|
+| Automatically identify issues through static code review analysis. Get notified on security issues, code coverage, code duplication, and code complexity in every commit and pull request, directly from your current workflow. Reference: "https://www.codacy.com/"
 
 | Arc42
-|
+| Template for architecture communication and documentation. This technology will be the base of this project's documentation.
 
 | Web access
-|
+| This project will allow users to use their services through a web interface.
 
 | Smartphone access 
-|
+| This project will also be available for smartphone users.
 
 | Browser agnostic
-|
+| It will not depend on any specific browser.
 
 | Operating system agnostic
-|
+| Any OS will be able to use the products created in this project.
 
 | Decentralized architecture
-|
+| The main aim is to create a decentralized structure supported with SOLID project and kind of social-media approach. Where everyone can interact with each other without everyone being connected at the same time.
 
 | JSON format
-|
+| JavaScript Object Notation data format. Will be used in several parts of this project. For instance, while defining the dependencies of our code/builds.
 
 |===
 
