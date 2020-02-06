@@ -8,58 +8,23 @@ Architectural constraints should be divided into three sections:
 
 Each one of them is broke into two parts: Constraint and a brief explanation of its existence.
 
-.Technical Constraints
-[cols="1,4"]
-|===
-| *Constraint* | *Explanation*
-
-| Decentralized Architecture
-| The data of the app is stored in several places in the world.
-
-| Solid PODs | The data structure developed by Solid is used to store the data.
-
-| OS and browser independent
-| In its native version the app works in all operating systems, and in its web version, in all browsers.
-
-| Web application
-| The application has a web interface.
-
-| JavaScript
-| The core of the application is implemented using JavaScript.
-
-| JSON data format
-| The data of the app is stored in the PODs using JSON files.
-
-| Schema standards
-| The storage of information follows the standards of https://www.schema.org[Schema] for being able to to use different apps with the same data.
-
-| Variety of tests
-| For the application's core, load, acceptance, browser-based, usability, security...
-
-|===
-
 .Organizational constraints
 [cols="1,5"]
 |===
 | *Constraint* | *Explanation*
 
-| The team
-| Daniel Villanueva, David González, Jonás Martínez, Juan Sánchez-Ocaña.
+| Working in a team
+| Must work on a team of 6 people.
 
-| Time schedule
-| Start in late January and deliver the final version in late May/June.
+| Release dates
+| The project has to meet the deadlines of the course.
 
 | Version control
-| A Git repository keeps a complete commit history and the participation of the members of the team.
+| Github has to be used for taking keeping track of the progress done on the project.
 
-| Test tracking
-| Track the different tests of the app with CodeCov or Coveralls. Aim to achieve a sufficient code coverage.
+| Meetings control
+| Minutes of all the team meetings that occur should be recorded and uploaded to the project wiki
 
-| Behaviour Driven Development
-| Design the application encouraging the collaboration between developers and non-technical participants of the project.
-
-| MIT License
-| The project contents are open source and published under the MIT License.
 |===
 
 .Conventions
@@ -67,28 +32,4 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 |===
 | *Constraint* | *Explanation*
 
-| Documentation
-| Based in the arc42 template.
-
-| Coding
-| Use of the https://www.w3schools.com/js/js_conventions.asp[JavaScript coding conventions] and enforce them through Codacy.
-
-| Language
-| Code and documentation is developed in English for our international audience.
 |===
-
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
