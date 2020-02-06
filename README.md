@@ -11,3 +11,12 @@ This project is an assignment for the [Software Architecture course](https://arq
 The app is deployed at [https://arquisoft.github.io/viade_en3a/](https://arquisoft.github.io/viade_0/) which also contains a [technical documentation](https://arquisoft.github.io/viade_en3a/docs).
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_en3a/wiki).
+
+# NAMES
+
+Jesús Quesada Matilla 
+Daniel Finca Martinez
+Nicolás Mencía Gómez
+Óscar Sánchez Campo
+Diego Ramírez Amandi
+Pablo Fernandez Martinez
