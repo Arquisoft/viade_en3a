@@ -13,28 +13,53 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 |===
 | *Constraint* | *Explanation*
 
-| Decentralized Architecture
-| The data of the app is stored in several places in the world.
-
-| Solid PODs | The data structure developed by Solid is used to store the data.
-
-| OS and browser independent
-| In its native version the app works in all operating systems, and in its web version, in all browsers.
-
-| Web application
-| The application has a web interface.
-
 | JavaScript
-| The core of the application is implemented using JavaScript.
+| The programming language used for the most part of this project.
 
-| JSON data format
-| The data of the app is stored in the PODs using JSON files.
+| React-native
+| Combines the best parts of native development with React, it is a JavaScript library for building user interfaces.
 
-| Schema standards
-| The storage of information follows the standards of https://www.schema.org[Schema] for being able to to use different apps with the same data.
+| Git
+| A version control system.
 
-| Variety of tests
-| For the application's core, load, acceptance, browser-based, usability, security...
+| Node.js
+| Entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación ECMAScript, asíncrono, con I/O de datos en una arquitectura orientada a eventos y basado en el motor V8 de Google.
+
+| SOLID
+| 
+
+| Docker
+|
+
+| Travis
+|
+
+| CodeCov
+|
+
+| Codacy
+|
+
+| Arc42
+|
+
+| Web access
+|
+
+| Smartphone access 
+|
+
+| Browser agnostic
+|
+
+| Operating system agnostic
+|
+
+| Decentralized architecture
+|
+
+| JSON format
+|
 
 |===
 
