@@ -14,9 +14,9 @@ More information about how this project has been setup is available [in the wiki
 
 # NAMES
 
-Jesús Quesada Matilla 
-Daniel Finca Martinez
-Nicolás Mencía Gómez
-Óscar Sánchez Campo
-Diego Ramírez Amandi
-Pablo Fernandez Martinez
+* Jesús Quesada Matilla
+* Daniel Finca Martínez
+* Nicolás Mencía Gómez
+* Óscar Sánchez Campo
+* Diego Ramírez Amandi
+* Pablo Fernandez Martínez
