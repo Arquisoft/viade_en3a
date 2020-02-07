@@ -23,7 +23,10 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 | Github has to be used for taking keeping track of the progress done on the project.
 
 | Meetings control
-| Minutes of all the team meetings that occur should be recorded and uploaded to the project wiki
+| Minutes of all the team meetings that occur should be recorded and uploaded to the project wiki.
+
+| Course syllabus
+| All work done has to follow the course syllabus.
 
 |===
 
@@ -31,5 +34,8 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 [cols="1,5"]
 |===
 | *Constraint* | *Explanation*
+
+| ESLint
+| We can use this tool that analyzes the code and makes it easier to follow conventions.
 
 |===
