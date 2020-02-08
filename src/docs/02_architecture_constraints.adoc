@@ -1,12 +1,13 @@
 [[section-architecture-constraints]]
 == Architecture Constraints
 
-Architectural constraints should be divided into three sections:
+Architectural constraints are divided into three sections:
 * Technical
 * Organizational
 * Conventions
 
-Each one of them is broke into two parts: Constraint and a brief explanation of its existence.
+Each one of them is broken into two parts: Constraint and a brief explanation of its existence.
+
 
 .Technical Constraints
 [cols="1,4"]
@@ -63,28 +64,27 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 
 |===
 
+
 .Organizational constraints
 [cols="1,5"]
 |===
 | *Constraint* | *Explanation*
 
-| The team
-| Daniel Villanueva, David González, Jonás Martínez, Juan Sánchez-Ocaña.
+| Working in a team
+| Must work on a team of 6 people.
 
-| Time schedule
-| Start in late January and deliver the final version in late May/June.
+| Release dates
+| The project has to meet the deadlines of the course.
 
 | Version control
-| A Git repository keeps a complete commit history and the participation of the members of the team.
+| Github has to be used for taking keeping track of the progress done on the project.
 
-| Test tracking
-| Track the different tests of the app with CodeCov or Coveralls. Aim to achieve a sufficient code coverage.
+| Meetings control
+| Minutes of all the team meetings that occur should be recorded and uploaded to the project wiki.
 
-| Behaviour Driven Development
-| Design the application encouraging the collaboration between developers and non-technical participants of the project.
+| Course syllabus
+| All work done has to follow the course syllabus.
 
-| MIT License
-| The project contents are open source and published under the MIT License.
 |===
 
 .Conventions
@@ -92,28 +92,7 @@ Each one of them is broke into two parts: Constraint and a brief explanation of 
 |===
 | *Constraint* | *Explanation*
 
-| Documentation
-| Based in the arc42 template.
+| ESLint
+| We can use this tool that analyzes the code and makes it easier to follow conventions.
 
-| Coding
-| Use of the https://www.w3schools.com/js/js_conventions.asp[JavaScript coding conventions] and enforce them through Codacy.
-
-| Language
-| Code and documentation is developed in English for our international audience.
 |===
-
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
