@@ -95,4 +95,7 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 | ESLint
 | We can use this tool that analyzes the code and makes it easier to follow conventions.
 
+| Language
+| This project will be done in english since the course is taught in english, and because the assignment has been proposed as a challenge by Inrupt.
+
 |===
