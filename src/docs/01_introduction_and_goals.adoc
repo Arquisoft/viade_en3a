@@ -18,7 +18,6 @@ In this application we aim to develop a decentralized routes social network. We 
 |===
 |Requirements
 | The system will be based on a decentralized architecture where data stored inside the pod of each user.
-| The system will be based on a decentralized architecture where data stored inside the pod of each user.
 | Users can see their routes in a map, as well as sharing them via multimedia or information with their friends.
 | The application will provide a notification system.
 | Users can have groups of friends with whom they may want to share a route.
