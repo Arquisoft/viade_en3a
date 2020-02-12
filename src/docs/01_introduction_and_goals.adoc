@@ -3,73 +3,65 @@
 
 [role="arc42help"]
 ****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
-
-* underlying business goals, essential features and functional requirements for the system
-* quality goals for the architecture
-* relevant stakeholders and their expectations
+The objective of this application is to connect users that want to share the routes they make with other users, as other commercialized apps do,
+but adding a step further in the level of security of their data, thanks to SOLID specifications. The app is aimed to contact with the pod of each user, 
+allowing them to manage the permissions over their information. 
 ****
 
 === Requirements Overview
 
 [role="arc42help"]
 ****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+In this application we aim to develop a decentralized routes social network. We aim to achieve the following:
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+[options="header",cols="1"]
+|===
+|Requirements
+| The system will be based on a decentralized architecture where data stored inside the pod of each user.
+| The system will be based on a decentralized architecture where data stored inside the pod of each user.
+| Users can see their routes in a map, as well as sharing them via multimedia or information with their friends.
+| The application will provide a notification system.
+| Users can have groups of friends with whom they may want to share a route.
+| Interoperability with other route management systems should be taken into account. 
+|===
 
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
-
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
 ****
-
 === Quality Goals
 
 [role="arc42help"]
 ****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
+[options="header",cols="1,4,8"]
+|===
+|Ref.|Quality Goal|Description
+| _1_ | _Usability_ | _It must be a simple application to ensure that any user, independently of their expertise, can use it to its full potential._
+| _2_ | _Performance_ | _Ensure that our app runs fluently and that access to data is fast to avoid loading screens._
+| _3_ | _Testability_ | _The app must be tested exhaustively, so bugs and programming errors are minimized._
+| _4_ | _Quality_ | _Both code and interface of the app must accomplish profesional feeling. A well designed architecture of the sofware must be priorized._
+| _5_ | _Portability_ | _The app must be available both in the navigator and in a mobile device where it is installed._
+| _6_ | _Security_ | _Although the app must have some security measures, performance and usability limits strict security, so it will not be as important to avoid loosing these other attributes as a tradeoff._
+| _7_ | _Reliability_ | _The number of errors should be minimized to achieve consistency and increase the level of confidence of our users. A good degree of testability should help improve reliance_
 
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
+|===
 
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
 ****
 
 === Stakeholders
 
 [role="arc42help"]
 ****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
 
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2,4"]
 |===
 |Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+| _Developers_ |Jesús Quesada Matilla
+Daniel Finca Martínez
+Nicolás Mencía Gómez
+Óscar Sánchez Campo
+Diego Ramírez Amandi
+Pablo Fernandez Martínez | A well designed architecture to acomplish SOLID specifications and fulfill all the requirements planned.
+| _Teachers_ | José Emilio Labra Gayo, Pablo González González | Obtention of a robust application that shows off everything learned in the course and that proves a well organized team that know how to adapt to new technologies. 
+| _Inrupt & Solid community_ | Sir Tim Berners-Lee | A decentralized product that provides an alternative to massive centralized databases of nowadays companies.
+| _End users_ | Clients | A usable app  that allows them to share their hiking adventures and experiences with their friends.
 |===
+
+****
