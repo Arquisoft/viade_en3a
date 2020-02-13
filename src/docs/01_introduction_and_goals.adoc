@@ -52,14 +52,14 @@ In this application we aim to develop a decentralized routes social network. We 
 [options="header",cols="1,2,4"]
 |===
 |Role/Name|Contact|Expectations
-| _Developers_ |Jesús Quesada Matilla
-Daniel Finca Martínez
-Nicolás Mencía Gómez
-Óscar Sánchez Campo
-Diego Ramírez Amandi
+| _Developers_ |Jesús Quesada Matilla,
+Daniel Finca Martínez,
+Nicolás Mencía Gómez,
+Óscar Sánchez Campo,
+Diego Ramírez Amandi,
 Pablo Fernandez Martínez | A well designed architecture to acomplish SOLID specifications and fulfill all the requirements planned.
 | _Teachers_ | José Emilio Labra Gayo, Pablo González González | Obtention of a robust application that shows off everything learned in the course and that proves a well organized team that know how to adapt to new technologies. 
-| _Inrupt & Solid community_ | Sir Tim Berners-Lee | A decentralized product that provides an alternative to massive centralized databases of nowadays companies.
+| _Inrupt & Solid community_ | Sir Tim Berners-Lee, info@inrupt.com | A decentralized product that provides an alternative to massive centralized databases of nowadays companies.
 | _End users_ | Clients | A usable app  that allows them to share their hiking adventures and experiences with their friends.
 |===
 
