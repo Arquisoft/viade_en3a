@@ -19,7 +19,7 @@ Various options:
 * Context diagrams
 * Lists of communication partners and their interfaces.
 ****
-
+The stakeholders of the application are described in the next lines and how the communicate. 
 
 === Business Context
 
@@ -39,9 +39,16 @@ Alternatively (or additionally) you can use a table.
 The title of the table is the name of your system, the three columns contain the name of the communication partner, the inputs, and the outputs.
 ****
 
-**<Diagram or Table>**
+image::images/BusinessContext.png[BusiContext]
 
-**<optionally: Explanation of external domain interfaces>**
+
+User:: The user can see in the application his stored routes.
+User Friends:: Users can share their routes with other friends and make groups. They can also share videos, photos and
+information about them.
+Other Apps:: Interoperability with other apps is also provided. Routes can be loaded from other applications in multiple formats
+such as KML. 
+
+
 
 === Technical Context
 
@@ -59,8 +66,17 @@ together with a mapping table showing the relationships between channels and inp
 
 ****
 
-**<Diagram or Table>**
+image:images/TechnicalContext.png[TechContext]
 
-**<optionally: Explanation of technical interfaces>**
+==== FrontEnd:
 
-**<Mapping Input/Output to Channels>**
+React:: 
+	It is our framework of choice for the frontend of the application, so this part will be developed in javascript and HTML.
+	Its task is to build the HTMLs views which the user interacts with.
+
+==== BackEnd:
+
+RDFLib.js:: It's the library used to comunicate the Pods (where the information is stored).
+
+The application is based on the SOLID project for the re-decentralization of the web, therefore
+each user is the owner of its own data through the mentioned Pods.
