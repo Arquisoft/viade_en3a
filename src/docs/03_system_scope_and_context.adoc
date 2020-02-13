@@ -68,6 +68,14 @@ together with a mapping table showing the relationships between channels and inp
 
 image:images/TechnicalContext.png[TechContext]
 
+==== FrontEnd:
+
+React:: 
+	It is our framework of choice for the frontend of the application, so this part will be developed in javascript and HTML.
+	Its task is to build the HTMLs views which the user interacts with.
+
+==== BackEnd:
+
 RDFLib.js:: It's the library used to comunicate the Pods (where the information is stored).
 
 The application is based on the SOLID project for the re-decentralization of the web, therefore
