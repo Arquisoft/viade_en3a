@@ -24,3 +24,19 @@ Various options:
 * more detailed in form of separate sections per decision
 * ADR (architecture decision record) for every important decision
 ****
+
+=== _Use of React Native_
+
+.Pros
+
+* Will allow creating apps for Android and iOS with the same code than the web application.
+
+.Cons
+
+* Will take time to learn the language.
+
+=== _Other Decisions_
+This part will be done in the future. Some decisions haven't been taken yet, for example:
+
+* Which map provider we will use
+* Features that the app will have

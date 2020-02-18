@@ -49,6 +49,8 @@ on this list.
 image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 ****
 
+To be done (This point refers mainly to implementation decisions, rules and conventions followed
+that haven't been done yet)
 
 === _<Concept 1>_
 
