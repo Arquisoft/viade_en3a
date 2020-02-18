@@ -5,10 +5,6 @@
 
 Viade is multiplatform, so in the following lines we will show the physical architecture that our app will run over.
 
-
-
-
-
 === Infrastructure Level 1
 
 image::images/DeploymentView.png[DepView]
@@ -42,27 +38,3 @@ _<explanation in text form>_
 
 Mapping of Building Blocks to Infrastructure::
 _<description of the mapping>_
-
-
-=== Infrastructure Level 2
-
-[role="arc42help"]
-****
-Here you can include the internal structure of (some) infrastructure elements from level 1.
-
-Please copy the structure from level 1 for each selected element.
-****
-
-==== _<Infrastructure Element 1>_
-
-_<diagram + explanation>_
-
-==== _<Infrastructure Element 2>_
-
-_<diagram + explanation>_
-
-...
-
-==== _<Infrastructure Element n>_
-
-_<diagram + explanation>_
