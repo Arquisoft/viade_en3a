@@ -1,6 +1,6 @@
 [[section-quality-scenarios]]
 == Quality Requirements
-=======
+
 ****
 In this section we expand and go into more detail in our quality goals, already defined in the 1st section of our documentation.
 ****
@@ -30,5 +30,4 @@ image::images/10_qualityTree.png[QualityTree]
 |9|Security - Data security|Unauthorized user access must be reported|LOW
 |10|Reliability - Error handling|Small errors shouldn't result in a system crash, fatal errors must be minimized|LOW
 |===
-=======
 ****
