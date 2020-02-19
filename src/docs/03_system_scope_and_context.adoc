@@ -5,7 +5,7 @@ The stakeholders of the application are described in the next lines and how the 
 
 === Business Context
 
-image::images/BusinessContext.png[BusiContext]
+image::BusinessContext.png[BusiContext]
 
 User:: The user can see in the application his stored routes.
 User Friends:: Users can share their routes with other friends and make groups. They can also share videos, photos and
@@ -17,7 +17,7 @@ such as KML.
 
 === Technical Context
 
-image:images/TechnicalContext.png[TechContext]
+image:TechnicalContext.png[TechContext]
 
 ==== FrontEnd:
 

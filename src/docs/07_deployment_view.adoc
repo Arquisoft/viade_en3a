@@ -7,7 +7,7 @@ Viade is multiplatform, so in the following lines we will show the physical arch
 
 === Infrastructure Level 1
 
-image::images/DeploymentView.png[DepView]
+image::DeploymentView.png[DepView]
 
 .Legend
 [cols="1,4"]
