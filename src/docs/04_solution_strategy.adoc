@@ -11,7 +11,7 @@ This objective is fulfilled by means of several weekly meetings during our lab p
 
 It should be noted that many of the decissions have been given solved as a constraint or requirement right before starting the project. So, many of the mentioned below are just explanations and not actual team made decissions.
 
-.Decissions
+.Decisions
 
 * Programming language: JavaScript has been the one of choice.
 * Architectural model: MVC --> Model - View - Controller.
