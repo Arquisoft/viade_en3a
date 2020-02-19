@@ -4,7 +4,7 @@
 
 [role="arc42help"]
 ****
-In the developement of the project, we expect to find the following difficulties:
+In the developement of the project, we expect to find the following difficulties (ordered by priority):
 
 [options="header",cols="1,2,4,4"]
 |===
