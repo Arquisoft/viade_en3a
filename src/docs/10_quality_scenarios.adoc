@@ -1,19 +1,17 @@
 [[section-quality-scenarios]]
 == Quality Requirements
-
+=======
 ****
 In this section we expand and go into more detail in our quality goals, already defined in the 1st section of our documentation.
 ****
 
 === Quality Tree
-
 Here our quality tree is represented, showing the most important quality goals beside their requirements.
 Their are prioritized from I to III, being I the highest and III the lowest. 
 
 image::images/10_qualityTree.png[QualityTree]
 
 === Quality Scenarios
-
 |===
 |*Ref*|*Quality Attribute*|*Quality Scenario*|*Priority*
 |1|Usability - Seamless UI|UI is easy and intuitive to use, no need of a guide for any user to understand it|HIGH
@@ -27,5 +25,5 @@ image::images/10_qualityTree.png[QualityTree]
 |9|Security - Data security|Unauthorized user access must be reported|LOW
 |10|Reliability - Error handling|Small errors shouldn't result in a system crash, fatal errors must be minimized|LOW
 |===
-
+=======
 ****

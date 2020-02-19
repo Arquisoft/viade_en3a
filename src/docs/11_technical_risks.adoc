@@ -2,7 +2,6 @@
 == Risks and Technical Debts
 
 
-[role="arc42help"]
 ****
 In the developement of the project, we expect to find the following difficulties (ordered by priority):
 
