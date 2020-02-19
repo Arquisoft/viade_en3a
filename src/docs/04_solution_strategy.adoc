@@ -1,7 +1,7 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-# Contents
+=== Contents
 
 .Summary
 
