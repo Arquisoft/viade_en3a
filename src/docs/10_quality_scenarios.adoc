@@ -18,9 +18,9 @@ image::images/10_qualityTree.png[QualityTree]
 |*Ref*|*Quality Attribute*|*Quality Scenario*|*Priority*
 |1|Usability - Seamless UI|UI is easy and intuitive to use, no need of a guide for any user to understand it|HIGH
 |2|Usability - Compliance|UI complies with EU internet accessibility standards|HIGH
-|3|Performance - Responsive|User interaction must be reflected at the moment|HIGH
-|4|Performance - Loading times|Loading times don't have to be a bother to the user|HIGH
-|5|Testability - Fully tested UI|Every aspect of the app must be tested extensively|HIGH
+|3|Performance - Responsive|User interaction must be reflected with a low response time, less than 1 second|HIGH
+|4|Performance - Loading times|Loading times don't have to be a bother to the user, at max 30 seconds waiting|HIGH
+|5|Testability - Fully tested UI|All the most important aspects of the app must be implemented with a high degree of testing|HIGH
 |6|Quality - Code quality|The code has to maintain a quality level expeted from a software engineer|MEDIUM
 |7|Portability - Platforms|The app must be available both in the navigator and in a mobile device|MEDIUM
 |8|Security - Data control|Users must have complete control over their data flow|LOW
