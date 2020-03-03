@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import ReactDOM from 'react-dom';
+import MyMap from './components/MyMap';
 
 function App() {
   return (
@@ -18,9 +21,19 @@ function App() {
         >
           Learn React. Developed using Docker.
         </a>
+		<Button variant='contained' color='primary' onClick={()=>goToMap()}>
+			See Map
+		</Button>
+		<div id="container"  style= {{width:'400px', height:'400px'}}></div>
       </header>
     </div>
   );
 }
+   
+export default App; 
 
-export default App;
+function goToMap(){
+	ReactDOM.render(<MyMap/>, document.getElementById ('container')); 
+
+
+}
