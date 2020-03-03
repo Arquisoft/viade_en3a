@@ -1,0 +1,44 @@
+.routeCardGrid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: 
+        "routeCardImage routeCardHeader"
+        "routeCardImage routeCardInfo";
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+}
+
+.routeCardHeader {
+    grid-area: routeCardHeader;
+}
+
+.routeCardImage {
+    grid-area: routeCardImage;
+    width: auto;
+    height: auto;
+}
+
+.routeCardInfo {
+    grid-area: routeCardInfo;
+}
+
+.routeCardHeader p {
+    text-align: left;
+    margin: 0;
+    padding: 0 2.5% 1% 2.5%;
+}
+
+.routeCardInfo {
+    text-align: left;
+}
+    
+.routeCardImage img {
+    width: 100%; 
+    height: 100%; 
+}
+
+.routeCard p {
+    list-style-type: none;
+    margin: 0;
+}
