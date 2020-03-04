@@ -13,7 +13,7 @@ function RouteCard(props) {
                 <MDBBtn color="info" className="routeCardInfoButton">Info</MDBBtn>
             </header>
             <div className="routeCardImage">
-                <img src={props.routeImageSource} alt="Route representation on an image" />
+                <img src={props.routeImageSource} alt="Route representation" />
             </div>
             <div className="routeCardInfo">
                 <p>Creator: {props.routeAuthor}</p>
