@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import RouteList from './components/routeList/RouteList';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         >
           Learn React. Developed using Docker.
         </a>
+        <RouteList />
       </header>
     </div>
   );
