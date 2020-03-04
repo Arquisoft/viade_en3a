@@ -1,0 +1,66 @@
+.routeCardGrid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+        "routeCardImage routeCardHeader"
+        "routeCardImage routeCardInfo";
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+}
+
+.routeCardHeader {
+    grid-area: routeCardHeader;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: 
+        "routeCardTitle routeCardInfoButton"
+        "routeCardHorizontalBarSeparator routeCardInfoButton";
+    height: 60px;
+}
+
+.routeCardImage {
+    grid-area: routeCardImage;
+    width: auto;
+    height: auto;
+}
+
+.routeCardInfo {
+    grid-area: routeCardInfo;
+}
+
+.routeCardTitle {
+    grid-area: routeCardTitle;
+}
+
+.routeCardInfoButton {
+    grid-area: routeCardInfoButton;
+}
+
+.horizontalBarSeparator {
+    grid-area: routeCardHorizontalBarSeparator;
+}
+
+.routeCardHeader p {
+    text-align: left;
+    margin: 0;
+    padding: 2.5% 2.5% 1% 2.5%;
+}
+
+.routeCardInfo {
+    text-align: left;
+}
+
+.routeCardImage img {
+    width: 100%;
+    height: 100%;
+}
+
+.routeCard p {
+    list-style-type: none;
+    margin: 0;
+}
+
+.routeCardInfo p {
+    padding-left: 2.5%;
+}
