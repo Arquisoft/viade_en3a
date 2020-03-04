@@ -14,7 +14,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: white;
     color: black;
-    box-shadow: 5px 5px teal;
+    box-shadow: 5px 5px 3px gray;
 }
 
 .routeCardImage img {
