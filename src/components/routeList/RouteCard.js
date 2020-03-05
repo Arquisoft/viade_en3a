@@ -1,5 +1,5 @@
 import React from 'react';
-import Card, { CardHeader } from 'react-bootstrap/Card';
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import MyMap from '../myMap/MyMap';
 import Route from '../myMap/Route';
