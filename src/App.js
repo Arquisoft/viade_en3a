@@ -30,7 +30,7 @@ function App() {
 
         <button id="main" onClick={() => showMap()}>
           See Map
-		    </button>
+	</button>
 
       </header>
     </div>
