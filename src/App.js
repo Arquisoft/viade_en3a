@@ -20,6 +20,8 @@ function App() {
           Learn React. Developed using Docker.
         </a>
         <RouteList />
+        <br />
+        <RouteList />
       </header>
     </div>
   );

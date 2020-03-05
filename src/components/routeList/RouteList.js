@@ -1,12 +1,13 @@
 import React from 'react';
 import RouteCard from './RouteCard';
+import CardDeck from 'react-bootstrap/CardDeck';
 
 function RouteList(props) {
     // TODO: (Idea) Call fetchRoutesFromPod() and obtain something iterable.
     // So that when fetched I can create a new Card for each Route
     // with needed parameters. 
     return (
-        <div id="routeList">
+        <CardDeck>
             <RouteCard
                 routeName="Las Xanas"
                 routeAuthor="Miguel Menéndez"
@@ -31,7 +32,7 @@ function RouteList(props) {
                 routeDescription="Interesting passages make this route unique on its own. Visit worthy."
                 routeImageSource="http://soyrural.es/wp-content/uploads/2017/07/ruta-del-Cares.jpg"
             />
-        </div>
+        </CardDeck>
     );
 }
 
