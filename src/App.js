@@ -23,9 +23,14 @@ function App() {
           Learn React. Developed using Docker.
         </a>
         <RouteList />
+
+        <br />
+        <RouteList />
+
 		<button id="main"  onClick={()=>showMap()}>
 			See Map
 		</button>
+
       </header>
     </div>
   );
