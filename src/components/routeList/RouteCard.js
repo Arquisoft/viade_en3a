@@ -1,23 +1,21 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-import './RouteCardStyle.css';
-import './RouteCardLayout.css';
+const cardStyle = {
+    width: "30rem"
+};
 
 function RouteCard(props) {
     return (
-        <div className="routeCardGrid routeCard">
-            <header className="routeCardHeader">
-                <p className="routeCardTitle">{props.routeName}</p>
-                <hr className="horizontalBarSeparator" />
-            </header>
-            <div className="routeCardImage">
-                <img src={props.routeImageSource} alt="Route representation" />
-            </div>
-            <div className="routeCardInfo">
-                <p>Creator: {props.routeAuthor}</p>
-                <p>Description: {props.routeDescription}</p>
-            </div>
-        </div>
+        <Card style={cardStyle} text="dark">
+            <Card.Img variant="bottom" src="" />
+            <Card.Body>
+                <Card.Title>{props.routeName}</Card.Title>
+                <Card.Text>{props.routeDescription}</Card.Text>
+                <Button variant="dark">Info</Button>
+            </Card.Body>
+        </Card>
     );
 }
 
