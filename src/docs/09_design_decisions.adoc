@@ -23,8 +23,23 @@
 
 * The XML notation may result in more cumbersome processing than with JSON.
 
+=== _Leaflet_
+
+We chose Leaflet as our map provider.
+
+.Pros
+
+* It provides the advantage that is OpenSource and that it doesn't need any API Key. This
+was the main reason why we discard Google Maps.
+* Also with React-Leaflet library, we don't have to program the basic components such as
+Map, Marker or Polyline. They came already implemented.
+
+.Cons
+
+* None of us has previously worked with this tool, so it's another thing to learn.
+
+
 === _Other Decisions_
 This part will be done in the future. Some decisions haven't been taken yet, for example:
 
-* Which map provider we will use
 * Features that the app will have
