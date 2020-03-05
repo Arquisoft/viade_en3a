@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import RouteList from './components/routeList/RouteList';
+import CustomNavBar from './components/navBar/CustomNavBar';
 import './App.css';
 import MyMap from './components/myMap/MyMap';
 import Route from './components/myMap/Route'; 
@@ -9,6 +10,7 @@ import Route from './components/myMap/Route';
 function App() {
   return (
     <div className="App">
+      <CustomNavBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
