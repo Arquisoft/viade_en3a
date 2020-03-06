@@ -28,9 +28,7 @@ function App() {
         <br />
         <RouteList />
 
-        <button id="main" onClick={() => showMap()}>
-          See Map
-	</button>
+       
 
       </header>
     </div>
