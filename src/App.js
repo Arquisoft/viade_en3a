@@ -5,7 +5,10 @@ import RouteList from './components/routeList/RouteList';
 import CustomNavBar from './components/navBar/CustomNavBar';
 import './App.css';
 import MyMap from './components/myMap/MyMap';
-import Route from './components/myMap/Route'; 
+import MyRoute from './components/myMap/MyRoute'; 
+import EditableMap from './components/editableMap/EditableMap';
+import { HashRouter, Route, Link } from "react-router-dom";
+
 
 function App() {
   return (
@@ -50,7 +53,7 @@ function showMap(){
 			[43.209754, -5.777683]];
 	
 	
-	ReactDOM.render(<MyMap route={new Route(points)} zoom= {13}  /> ,document.getElementById('main'));
+	ReactDOM.render(<MyMap route={new MyRoute(points)} zoom= {13}  /> ,document.getElementById('main'));
 
 }
 

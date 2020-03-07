@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup,Polyline } from 'react-leaflet';
-import Route from './Route.js'
+import MyRoute from './MyRoute.js'
 
 class MyMap extends React.Component {
   
