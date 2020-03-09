@@ -1,6 +1,5 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup,Polyline } from 'react-leaflet';
-//import Route from './Route.js'
 
 class EditableMap extends React.Component {
   
@@ -11,15 +10,40 @@ class EditableMap extends React.Component {
 	}
 	
 	addPoint = (e) =>{
-		console.log("added"+e.latlng);
 		const { points } = this.state;
 		if(this.initial){
 			points.pop();
 			this.initial=false;
 		}
 		points.push(e.latlng);
-		this.setState({points});
-		console.log({points});
+		this.setState({points: points.slice()});
+		
+	}
+	
+	getPoints(){
+		return this.state.points.slice();
+		
+	}
+	
+	updatePoint = (event) =>{
+		var id=event.target.options.marker_index;
+		var newPosition=event.target.getLatLng();
+		console.log(this.state.points);
+		const { points } = this.state;
+		
+		points[id]=newPosition;
+		this.setState({points: points.slice()});
+	}
+	
+	remove = (event) =>{
+		console.log(event);
+		console.log(event.originalEvent.key);
+		if(event.originalEvent.key=='Backspace'){
+			var id=event.target.options.marker_index;
+			const { points } = this.state;
+			points.splice(id,1);
+			this.setState({points: points.slice()});
+		}
 	}
 	
   render() {
@@ -40,16 +64,19 @@ class EditableMap extends React.Component {
 			attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			/>
 			
-			{this.state.points.map((position) =>
-				<Polyline  positions={this.state.points} color='red'/>
-			)}
 			
-			{this.state.points.map((position) =>
+			<Polyline  positions={this.state.points} color='red'/>
+			
+			
+			{this.state.points.map((position,index) =>
 				<Marker 
+					marker_index={index}
 					position={position} 
-					draggable={false} 
-					
-				></Marker>
+					draggable={true} 	
+					ondrag={this.updatePoint}
+					onkeydown={this.remove}
+				>
+				</Marker>
 			)}
 			
 		</Map>

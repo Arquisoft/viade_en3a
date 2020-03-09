@@ -10,7 +10,7 @@ import MapCreation from "../../pages/MapCreation"
 
 const Home = () => <h1>Bienvenid@</h1>
 const Features = () => <h1>Features</h1>
-const Pricing = () => <MapCreation/>
+const RouteCreation = () => <MapCreation/>
 const Action = () => <h1>Action</h1>
 const Action3_1 = () => <h2>Action3.1</h2>
 const Action3_2 = () => <h2>Action3.2</h2>
@@ -26,7 +26,7 @@ function CustomNavbar() {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+                <Nav.Link href="#RouteCreation">Route Creation</Nav.Link>
                 <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -44,7 +44,7 @@ function CustomNavbar() {
           <header id="mainView" className="App-header">
             <Route exact path="/home" component={Home} />
             <Route path="/features" component={Features} />
-            <Route path="/pricing" component={Pricing} />
+            <Route path="/RouteCreation" component={RouteCreation} />
             <Route path="/action" component={Action} />
             <Route path="/action/3.1" component={Action3_1} />
             <Route path="/action/3.2" component={Action3_2} />
