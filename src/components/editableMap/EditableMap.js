@@ -9,14 +9,13 @@ class EditableMap extends React.Component {
 		this.initial=true;
 	}
 	
-	addPoint = (e) =>{
-		const { points } = this.state;
+	addPoint = (e) => {
 		if(this.initial){
-			points.pop();
+			this.state.points.pop();
 			this.initial=false;
 		}
-		points.push(e.latlng);
-		this.setState({points: points.slice()});
+		this.state.points.push(e.latlng);
+		this.setState({points: this.state.points.slice()});
 		
 	}
 	
@@ -25,20 +24,17 @@ class EditableMap extends React.Component {
 		
 	}
 	
-	updatePoint = (event) =>{
+	updatePoint = (event) => {
 		var id=event.target.options.marker_index;
 		var newPosition=event.target.getLatLng();
-		console.log(this.state.points);
 		const { points } = this.state;
 		
 		points[id]=newPosition;
 		this.setState({points: points.slice()});
 	}
 	
-	remove = (event) =>{
-		console.log(event);
-		console.log(event.originalEvent.key);
-		if(event.originalEvent.key=='Backspace'){
+	remove = (event) => {
+		if(event.originalEvent.key==='Backspace'){
 			var id=event.target.options.marker_index;
 			const { points } = this.state;
 			points.splice(id,1);
@@ -47,7 +43,7 @@ class EditableMap extends React.Component {
 	}
 	
   render() {
-	const position = [43, -5]	
+	const position = [43, -5];	
 	
 	return(
 		
