@@ -1,6 +1,8 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 
+
+
 class MyMap extends React.Component {
 	render() {
 		const position = [this.props.route.points[0][0], this.props.route.points[0][1]];
