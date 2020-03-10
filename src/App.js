@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import RouteList from './components/routeList/RouteList';
-import CustomNavBar from './components/navBar/CustomNavBar';
 import './App.css';
+import MyNavBar from './components/navBar/navBar';
 
 
 
@@ -10,7 +9,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <CustomNavBar />
+      <MyNavBar/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -27,9 +26,6 @@ function App() {
         <RouteList />
         <br />
         <RouteList />
-
-       
-
       </header>
     </div>
   );
