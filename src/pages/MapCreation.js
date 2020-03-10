@@ -3,7 +3,7 @@ import '../App.css';
 import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import {Button, InputGroup, FormControl} from 'react-bootstrap';
-import 'URL';
+
 
 
 class MapCreation extends Component {

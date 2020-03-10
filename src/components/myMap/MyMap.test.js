@@ -1,6 +1,6 @@
 import React from 'react';
 import MyMap from './MyMap';
-import MyRoute from './Route';
+import MyRoute from './MyRoute';
 import { render, getByTestId } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 

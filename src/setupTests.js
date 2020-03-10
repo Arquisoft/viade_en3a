@@ -14,4 +14,4 @@ global.document.createElementNS = function(namespaceURI, qualifiedName) {
   return createElementNSOrig.apply(this,arguments)
 }
 
-window.URL.createObjectURL = function() {}
+window.URL.createObjectURL = function() {};
