@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import MyMap from '../myMap/MyMap';
-import Route from '../myMap/Route';
+import MyRoute from '../myMap/MyRoute';
 
 const cardStyle = {
     width: "30rem"
@@ -13,7 +13,7 @@ function RouteCard(props) {
         <Card style={cardStyle} text="dark">
             {/* <Card.Img variant="bottom" src="" /> */}
             <Card.Header>
-                <MyMap route={new Route(props.routePoints)} zoom={13} />
+                <MyMap route={new MyRoute(props.routePoints)} zoom={13} />
             </Card.Header>
             <Card.Body>
                 <Card.Title>{props.routeName}</Card.Title>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Popup,Polyline } from 'react-leaflet';
+import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
 
 class EditableMap extends React.Component {
   
