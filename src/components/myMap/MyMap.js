@@ -1,16 +1,14 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 
-
-
 class MyMap extends React.Component {
 	render() {
 		const position = [this.props.route.points[0][0], this.props.route.points[0][1]];
 
 		return (
-			<Map center={position} zoom={this.props.zoom} dragging={false} 
-			scrollWheelZoom={false} touchZoom={false} zoomControl={false}
-			doubleClickZoom={false} style={{ width: '200px', height: '200px' }}>
+			<Map center={position} zoom={this.props.zoom} dragging={false}
+				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
+				doubleClickZoom={false} style={{ width: '200px', height: '200px' }}>
 				<TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

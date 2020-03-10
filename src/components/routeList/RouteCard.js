@@ -4,14 +4,9 @@ import Button from 'react-bootstrap/Button';
 import MyMap from '../myMap/MyMap';
 import MyRoute from '../myMap/MyRoute';
 
-const cardStyle = {
-    width: "30rem"
-};
-
 function RouteCard(props) {
     return (
-        <Card style={cardStyle} text="dark">
-            {/* <Card.Img variant="bottom" src="" /> */}
+        <Card text="dark">
             <Card.Header>
                 <MyMap route={new MyRoute(props.routePoints)} zoom={13} />
             </Card.Header>

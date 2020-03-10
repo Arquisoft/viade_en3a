@@ -1,22 +1,22 @@
-import React  from 'react';
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import  { AuthButton } from '@solid/react';
+import { AuthButton } from '@solid/react';
 import { HashRouter, Route } from 'react-router-dom';
 import RegisterWindow from '../registerWindow/registerWindow';
 
 function MyNavBar(props) {
-    return (
-      <HashRouter basename='/'>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  return (
+    <HashRouter basename='/'>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="#home">Viade</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -26,22 +26,22 @@ function MyNavBar(props) {
           </Nav>
           <Nav>
             <Nav.Link className="mt-1 mr-2" href="#/register">Sign up</Nav.Link>
-            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out"/>
+            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out" />
             <Nav.Link href="https://github.com/Arquisoft/viade_en3a" target="_blank">
               <img
-                  src="github.png"
-                  width="30"
-                  height="30"
-                  className="d-inline-block align-top"
-                  alt="GitHub link"
+                src="github.png"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                alt="GitHub link"
               />
             </Nav.Link>
           </Nav>
-          </Navbar.Collapse>
-          </Navbar>
-          <Route exact path="/register" component={RegisterWindow} />
-        </HashRouter>
-    ); 
+        </Navbar.Collapse>
+      </Navbar>
+      <Route exact path="/register" component={RegisterWindow} />
+    </HashRouter>
+  );
 }
 
 export default MyNavBar;
