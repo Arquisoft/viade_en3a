@@ -10,6 +10,7 @@ import EditableMap from './components/editableMap/EditableMap';
 import { HashRouter, Route, Link } from "react-router-dom";
 
 
+
 function App() {
   return (
     <div className="App">
@@ -28,18 +29,16 @@ function App() {
           Learn React. Developed using Docker.
         </a>
         <RouteList />
-
         <br />
         <RouteList />
 
-		<button id="main"  onClick={()=>showMap()}>
-			See Map
-		</button>
+       
 
       </header>
     </div>
   );
 }
+
 
 
 function showMap(){
@@ -54,6 +53,7 @@ function showMap(){
 	
 	
 	ReactDOM.render(<MyMap route={new MyRoute(points)} zoom= {13}  /> ,document.getElementById('main'));
+
 
 }
 
