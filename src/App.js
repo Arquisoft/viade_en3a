@@ -1,57 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import logo from './logo.svg';
-import RouteList from './components/routeList/RouteList';
 import CustomNavBar from './components/navBar/CustomNavBar';
+import SolidThing from './components/podService/podTry';
 import './App.css';
-import MyMap from './components/myMap/MyMap';
-import Route from './components/myMap/Route'; 
 
 function App() {
   return (
     <div className="App">
       <CustomNavBar />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React. Developed using Docker.
-        </a>
-        <RouteList />
-
-        <br />
-        <RouteList />
-
-		<button id="main"  onClick={()=>showMap()}>
-			See Map
-		</button>
-
-      </header>
-    </div>
+      <button id="main" onClick={() => SolidThing()}>
+        Trigger solid thing
+		  </button>
+    </div >
   );
-}
-
-
-function showMap(){
-	
-	const points= [[43.211820, -5.787902],
-			[43.210796, -5.786690],
-			[43.210082, -5.785064],
-			[43.209800, -5.783841],
-			[43.210121, -5.782339],
-			[43.210379, -5.780773],
-			[43.209754, -5.777683]];
-	
-	
-	ReactDOM.render(<MyMap route={new Route(points)} zoom= {13}  /> ,document.getElementById('main'));
-
 }
 
 export default App;
