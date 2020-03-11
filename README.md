@@ -12,11 +12,11 @@ The app is deployed at [https://arquisoft.github.io/viade_en3a/](https://arquiso
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_en3a/wiki).
 
-# NAMES
+## Developer names
 
-* Jesús Quesada Matilla
-* Daniel Finca Martínez
-* Nicolás Mencía Gómez
-* Óscar Sánchez Campo
-* Diego Ramírez Amandi
-* Pablo Fernandez Martínez
+  * Jesús Quesada Matilla [https://github.com/jesQM]
+  * Daniel Finca Martínez [https://github.com/fincamd]
+  * Nicolás Mencía Gómez [https://github.com/nicomencia]
+  * Óscar Sánchez Campo [https://github.com/oscar134]
+  * Diego Ramírez Amandi [https://github.com/Drastur]
+  * Pablo Fernandez Martínez [https://github.com/PabloFerMar]
