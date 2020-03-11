@@ -15,7 +15,7 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className="App-header">
 				<h1>Create your own Route</h1>
 				<EditableMap ref={this.points} role='map' />
 

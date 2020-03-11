@@ -4,7 +4,9 @@ import "./RegisterWindow.css";
 
 function RegisterWindow(props) {
     return (
-        <div style={{ textAlign: "center", paddingTop: "4em" }}><RegisterForm /></div>
+        <div className="App-header">
+            <RegisterForm />
+        </div>
     );
 }
 export default RegisterWindow;

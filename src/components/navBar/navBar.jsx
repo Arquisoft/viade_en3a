@@ -3,25 +3,23 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthButton } from '@solid/react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
 import RegisterWindow from '../registerWindow/registerWindow';
+import MapCreation from '../../pages/MapCreation';
+import RouteList from '../routeList/RouteList';
+import Home from '../../pages/Home';
 
 function MyNavBar(props) {
   return (
     <HashRouter basename='/'>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="#home">Viade</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            <NavDropdown title="Route management" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#myRouteList">My routes</NavDropdown.Item>
+              <NavDropdown.Item href="#routeCreation">Create new route</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
@@ -40,6 +38,10 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={RegisterWindow} />
+      <Route exact path="/routeCreation" component={MapCreation} />
+      <Route exact path="/myRouteList" component={RouteList} />
+      <Route exact path="/home" component={Home} />
+      <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );
 }

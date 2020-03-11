@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 function RegisterForm(props) {
     return (
-        <Card bg="light" style={{ width: '18rem', display: "inline-block" }}>
+        <Card bg="light" style={{ color: "black", width: '18rem', display: "inline-block" }}>
             <Card.Body>
                 <Card.Title>Obtén tu pod SOLID</Card.Title>
                 <Card.Text>
