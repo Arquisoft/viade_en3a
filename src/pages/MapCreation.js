@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import StorageHandler from "../components/podService/storageHandler";
 
-
-
 class MapCreation extends Component {
 
 	constructor() {
@@ -16,11 +14,9 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div className="App-header">
+			<div className="App-header" style={{ height: "80%" }} >
 				<h1>Create your own Route</h1>
-				<EditableMap ref={this.points} role='map' />
-
-				<InputGroup className="mb-3">
+				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
 						<InputGroup.Text id="basic-addon1">Route Name</InputGroup.Text>
 					</InputGroup.Prepend>
@@ -30,10 +26,11 @@ class MapCreation extends Component {
 						role='title'
 					/>
 				</InputGroup>
-				<Button variant="primary" onClick={() => this.save()}  >Save</Button>
-				<Button variant="primary" onClick={() => this.uploadToPod()}  >Upload To Pod</Button>
-				<Button variant="primary" onClick={() => this.viewRoutes()}  >View Pod</Button>
-			</div>
+				<EditableMap ref={this.points} role='map' />
+				<Button variant="primary" onClick={() => this.save()} style={{ margin: "2vh" }}>Save as json file</Button>
+        <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "2vh" }}>Upload To Pod</Button>
+				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "2vh" }}>View Pod</Button>
+			</div >
 		);
 	}
 

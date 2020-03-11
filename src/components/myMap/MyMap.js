@@ -8,8 +8,8 @@ class MyMap extends React.Component {
 		return (
 			<Map center={position} zoom={this.props.zoom} dragging={false}
 				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
-				doubleClickZoom={false} style={{ width: '200px', height: '200px' }}>
-				<TileLayer
+				doubleClickZoom={false} style={{ width: "20vw", height: "15vw", margin: "0" }}>
+				< TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 				/>
@@ -20,7 +20,7 @@ class MyMap extends React.Component {
 				<Marker position={this.props.route.points[this.props.route.points.length - 1]}>
 					<Popup>End</Popup>
 				</Marker>
-			</Map>
+			</Map >
 		);
 	}
 }
