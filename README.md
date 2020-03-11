@@ -4,7 +4,18 @@
 
 # VIADE EN3A
 
-This repository contains a skeleton of the VIADE project.
+Viade is an Application whose task is to manage routes.
+<p>
+    <img src="./public/img/sample/main.png">
+</p>
+
+It allows you to store your favourite scenic routes on your [Solid Pod](https://solid.inrupt.com/how-it-works) and to share it with your friends and family.
+
+<p>
+    <img src="./public/img/sample/routeList.png">
+</p>
+
+## Miscelaneous Information
 
 This project is an assignment for the [Software Architecture course](https://arquisoft.github.io/) following [these requirements](https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/).
 
@@ -14,9 +25,9 @@ More information about how this project has been setup is available [in the wiki
 
 ## Developer names
 
-  * Jesús Quesada Matilla [https://github.com/jesQM]
-  * Daniel Finca Martínez [https://github.com/fincamd]
-  * Nicolás Mencía Gómez [https://github.com/nicomencia]
-  * Óscar Sánchez Campo [https://github.com/oscar134]
-  * Diego Ramírez Amandi [https://github.com/Drastur]
-  * Pablo Fernandez Martínez [https://github.com/PabloFerMar]
+  * Jesús Quesada Matilla    [jesQM](https://github.com/jesQM)
+  * Daniel Finca Martínez    [fincamd](https://github.com/fincamd)
+  * Nicolás Mencía Gómez     [nicomencia](https://github.com/nicomencia)
+  * Óscar Sánchez Campo      [oscar134](https://github.com/oscar134)
+  * Diego Ramírez Amandi     [Drastur](https://github.com/Drastur)
+  * Pablo Fernandez Martínez [PabloFerMar](https://github.com/PabloFerMar)

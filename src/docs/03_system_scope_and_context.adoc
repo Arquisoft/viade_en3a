@@ -27,7 +27,14 @@ React::
 
 ==== BackEnd:
 
-RDFLib.js:: It's the library used to comunicate the Pods (where the information is stored).
+RDFLib.js::
+    It's a library used to communicate with the Pods (where the information is stored); to fetch and update data whenever necessary.
+
+solid-file-client::
+    A library used to store files in any format to the PODs.
+
+solid-auth-client::
+    A library used to authenticate a user securely and have access to parts of their PODs.
 
 The application is based on the SOLID project for the re-decentralization of the web, therefore
 each user is the owner of its own data through the mentioned Pods.
