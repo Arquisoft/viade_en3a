@@ -4,6 +4,7 @@
   "homepage": "https://arquisoft.github.io/viade_en3a/",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@solid/react": "^1.8.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
