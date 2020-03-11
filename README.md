@@ -25,9 +25,9 @@ More information about how this project has been setup is available [in the wiki
 
 ## Developer names
 
-  * Jesús Quesada Matilla    [jesQM](https://github.com/jesQM)
-  * Daniel Finca Martínez    [fincamd](https://github.com/fincamd)
-  * Nicolás Mencía Gómez     [nicomencia](https://github.com/nicomencia)
-  * Óscar Sánchez Campo      [oscar134](https://github.com/oscar134)
-  * Diego Ramírez Amandi     [Drastur](https://github.com/Drastur)
-  * Pablo Fernandez Martínez [PabloFerMar](https://github.com/PabloFerMar)
+  * Jesús Quesada Matilla - [jesQM](https://github.com/jesQM)
+  * Daniel Finca Martínez - [fincamd](https://github.com/fincamd)
+  * Nicolás Mencía Gómez - [nicomencia](https://github.com/nicomencia)
+  * Óscar Sánchez Campo - [oscar134](https://github.com/oscar134)
+  * Diego Ramírez Amandi - [Drastur](https://github.com/Drastur)
+  * Pablo Fernandez Martínez - [PabloFerMar](https://github.com/PabloFerMar)
