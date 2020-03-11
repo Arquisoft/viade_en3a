@@ -4,12 +4,15 @@ import Nav from 'react-bootstrap/Nav';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route } from 'react-router-dom';
 import RegisterWindow from '../registerWindow/registerWindow';
+import WelcomeCarousel from '../carousel/WelcomeCarousel';
+
+import './NavBarNotAuthenticated.css'
 
 function NavBarNotAuthenticated(props) {
   return (
     <HashRouter basename='/'>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Viade</Navbar.Brand>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+        <Navbar.Brand href="#">Viade</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -29,7 +32,10 @@ function NavBarNotAuthenticated(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Route exact path="/register" component={RegisterWindow} />
+      <div id="container">
+        <Route exact path="/register" component={RegisterWindow} />
+        <Route exact path="/" component={WelcomeCarousel} />
+      </div>
     </HashRouter>
   );
 }
