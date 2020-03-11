@@ -5,7 +5,7 @@ import image1 from './../../assets/car_img1.jpeg';
 import image2 from './../../assets/car_img2.jpg';
 
 const containerStyle = { height: "93vh" };
-const imageStyle = { width: "100%", height: "100%" }
+const imageStyle = { width: "100%", height: "100%" };
 
 function WelcomeCarousel(props) {
     return (
