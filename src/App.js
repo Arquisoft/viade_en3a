@@ -9,11 +9,9 @@ function App() {
     <div className="App">
       <LoggedOut>
         <NavBarNotAuthenticated/>
-        <p>You are not logged in, and this is a members-only area!</p>
       </LoggedOut>
       <LoggedIn>
-        <MyNavBar />
-        <p>You are logged in and can see the special content.</p>
+        <MyNavBar/>
       </LoggedIn>
     </div>
   );
