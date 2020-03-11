@@ -47,7 +47,7 @@ class EditableMap extends React.Component {
 			<Map
 				center={position}
 				zoom={12}
-				style={{ width: '400px', height: '400px' }}
+				style={{ width: "50vw", height: "50vh" }}
 				onClick={this.addPoint}
 			>
 				<TileLayer

@@ -3,8 +3,6 @@ import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
-
-
 class MapCreation extends Component {
 
 	constructor() {
@@ -15,11 +13,9 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div className="App-header">
+			<div className="App-header" style={{ height: "80%" }} >
 				<h1>Create your own Route</h1>
-				<EditableMap ref={this.points} role='map' />
-
-				<InputGroup className="mb-3">
+				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
 						<InputGroup.Text id="basic-addon1">Route Name</InputGroup.Text>
 					</InputGroup.Prepend>
@@ -29,8 +25,9 @@ class MapCreation extends Component {
 						role='title'
 					/>
 				</InputGroup>
-				<Button variant="primary" onClick={() => this.save()}  >Save</Button>
-			</div>
+				<EditableMap ref={this.points} role='map' />
+				<Button variant="primary" onClick={() => this.save()} style={{ margin: "2vh" }}>Save as json file</Button>
+			</div >
 		);
 	}
 
