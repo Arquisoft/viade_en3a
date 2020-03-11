@@ -17,13 +17,16 @@ function MyNavBar(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
+            <Nav.Link href="#profile">Profile</Nav.Link>
+            <Nav.Link href="#friends">Friends</Nav.Link>
             <NavDropdown title="Route management" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#myRouteList">My routes</NavDropdown.Item>
-              <NavDropdown.Item href="#routeCreation">Create new route</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/add">Create a new route</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#routes/example">How do routes work?</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link className="mt-1 mr-2" href="#/register">Sign up</Nav.Link>
             <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out" />
             <Nav.Link href="https://github.com/Arquisoft/viade_en3a" target="_blank">
               <img
@@ -38,8 +41,8 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={RegisterWindow} />
-      <Route exact path="/routeCreation" component={MapCreation} />
-      <Route exact path="/myRouteList" component={RouteList} />
+      <Route exact path="/routes/add" component={MapCreation} />
+      <Route exact path="/routes/list" component={RouteList} />
       <Route exact path="/home" component={Home} />
       <Redirect from path="/" exact to="/home" />
     </HashRouter>
