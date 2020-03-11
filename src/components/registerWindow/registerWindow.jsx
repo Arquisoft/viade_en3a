@@ -3,7 +3,9 @@ import RegisterForm from '../registerForm/RegisterForm';
 
 function RegisterWindow(props) {
     return (
-        <div id="container" style={{ textAlign: "center", paddingTop: "4em" }}><RegisterForm /></div>
+        <div className="App-header">
+            <RegisterForm />
+        </div>
     );
 }
 export default RegisterWindow;

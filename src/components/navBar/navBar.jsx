@@ -3,7 +3,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthButton } from '@solid/react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
+import RegisterWindow from '../registerWindow/registerWindow';
+import MapCreation from '../../pages/MapCreation';
+import RouteList from '../routeList/RouteList';
+import Home from '../../pages/Home';
 
 function MyNavBar(props) {
   return (
@@ -15,9 +19,9 @@ function MyNavBar(props) {
           <Nav className="mr-auto">
             <Nav.Link href="#profile">Profile</Nav.Link>
             <Nav.Link href="#friends">Friends</Nav.Link>
-            <NavDropdown title="Routes" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#routes/see">Your routes</NavDropdown.Item>
-              <NavDropdown.Item href="#routes/add">Create a route</NavDropdown.Item>
+            <NavDropdown title="Route management" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/add">Create a new route</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#routes/example">How do routes work?</NavDropdown.Item>
             </NavDropdown>
@@ -36,11 +40,11 @@ function MyNavBar(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/*<Route exact path="/profile" component={ProfileView} />*/}
-      {/*<Route exact path="/friends" component={FriendsView} />*/}
-      {/*<Route exact path="/routes/see" component={RoutesView} />*/}
-      {/*<Route exact path="/routes/add" component={AddRoutesView} />*/}
-      {/*<Route exact path="/routes/example" component={ExampleView} />*/}
+      <Route exact path="/register" component={RegisterWindow} />
+      <Route exact path="/routes/add" component={MapCreation} />
+      <Route exact path="/routes/list" component={RouteList} />
+      <Route exact path="/home" component={Home} />
+      <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );
 }
