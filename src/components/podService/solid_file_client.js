@@ -15,7 +15,6 @@ async function login(idp) {
 
 async function run() {
     await login('https://solid.community');
-
     //if (!session) { session = await auth.login() }
     console.log(`Logged in as ${session.webId}.`);
     await fc.createFile("https://uo263624.solid.community/asdf/file", "HOla PeRsona");

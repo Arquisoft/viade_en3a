@@ -3,15 +3,15 @@ import './App.css';
 import MyNavBar from './components/navBar/navBar';
 import NavBarNotAuthenticated from './components/navBar/navBarNotAuthenticated';
 import { LoggedIn, LoggedOut } from '@solid/react';
- 
+
 function App() {
   return (
     <div className="App">
       <LoggedOut>
-        <NavBarNotAuthenticated/>
+        <NavBarNotAuthenticated />
       </LoggedOut>
       <LoggedIn>
-        <MyNavBar/>
+        <MyNavBar />
       </LoggedIn>
     </div>
   );

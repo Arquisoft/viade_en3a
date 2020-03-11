@@ -9,6 +9,8 @@ import MapCreation from '../../pages/MapCreation';
 import RouteList from '../routeList/RouteList';
 import Home from '../../pages/Home';
 
+import gitHubLogo from './../../assets/github.png';
+
 function MyNavBar(props) {
   return (
     <HashRouter basename='/'>
@@ -30,7 +32,7 @@ function MyNavBar(props) {
             <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out" />
             <Nav.Link href="https://github.com/Arquisoft/viade_en3a" target="_blank">
               <img
-                src="github.png"
+                src={gitHubLogo}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
