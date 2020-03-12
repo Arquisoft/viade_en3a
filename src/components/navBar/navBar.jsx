@@ -10,6 +10,7 @@ import RouteList from '../routeList/RouteList';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
+import EditProfile from '../../pages/EditProfile';
 
 import gitHubLogo from './../../assets/github.png';
 import viadeLogo from './../../res/logo/logo_alt.jpeg';
@@ -38,8 +39,15 @@ function MyNavBar(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#profile">Profile</Nav.Link>
-            <Nav.Link href="#friends">Friends</Nav.Link>
+          <NavDropdown title="Profile" id="collapsible-nav-dropdown">
+              <NavDropdown.Item>Signed in as /username/</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#profile">My profile</NavDropdown.Item>
+              <NavDropdown.Item href="#friends">Friends</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item disabled="true" href="#setting">Settings</NavDropdown.Item>
+            </NavDropdown>
             <NavDropdown title="Route management" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
               <NavDropdown.Item href="#routes/add">Create a new route</NavDropdown.Item>
@@ -67,6 +75,7 @@ function MyNavBar(props) {
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/friends" component={Friends} />
+      <Route exact path="/editProfile" component={EditProfile} />
       <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );
