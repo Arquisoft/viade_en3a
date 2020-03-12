@@ -8,14 +8,33 @@ import RegisterWindow from '../registerWindow/registerWindow';
 import MapCreation from '../../pages/MapCreation';
 import RouteList from '../routeList/RouteList';
 import Home from '../../pages/Home';
+import Profile from '../../pages/Profile';
+import Friends from '../../pages/Friends';
 
 import gitHubLogo from './../../assets/github.png';
+import viadeLogo from './../../res/logo/logo_alt.jpeg';
+import viadeText from './../../res/logo/logo_letters.jpeg';
 
 function MyNavBar(props) {
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand href="#home">Viade</Navbar.Brand>
+        <Navbar.Brand href="#home">
+        <img
+          src={viadeLogo}
+          width="40"
+          height="40"
+          className="d-inline-block align-top"
+          alt="Viade logo"
+        />
+        <img
+          src={viadeText}
+          width="140"
+          height="40"
+          className="d-inline-block align-top"
+          alt="Viade text"
+        />
+      </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -46,6 +65,8 @@ function MyNavBar(props) {
       <Route exact path="/routes/add" component={MapCreation} />
       <Route exact path="/routes/list" component={RouteList} />
       <Route exact path="/home" component={Home} />
+      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/friends" component={Friends} />
       <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );

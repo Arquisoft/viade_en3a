@@ -8,12 +8,30 @@ import WelcomeCarousel from '../carousel/WelcomeCarousel';
 
 import gitHubLogo from './../../assets/github.png';
 import './NavBarNotAuthenticated.css'
+import viadeLogo from './../../res/logo/logo_alt.jpeg';
+import viadeText from './../../res/logo/logo_letters.jpeg';
 
 function NavBarNotAuthenticated(props) {
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand href="#">Viade</Navbar.Brand>
+        <Navbar.Brand href="#">
+        <img
+          src={viadeLogo}
+          width="40"
+          height="40"
+          className="d-inline-block align-top"
+          alt="Viade logo"
+        />
+        <img
+          src={viadeText}
+          width="140"
+          height="40"
+          className="d-inline-block align-top"
+          alt="Viade logo"
+        />
+        </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

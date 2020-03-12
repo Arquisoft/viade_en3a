@@ -1,10 +1,10 @@
 import React from 'react';
 import viadeLogo from './../res/logo/logo_full.jpeg';
 
-function Home() {
+function Profile() {
     return (
         <div className="App-header">
-            <h1>Welcome to</h1>
+            <h1>Profile</h1>
             <img
                 src={viadeLogo}
                 width="280"
@@ -17,4 +17,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Profile;
