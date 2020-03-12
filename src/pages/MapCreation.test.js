@@ -1,6 +1,6 @@
 import React from 'react';
 import MapCreation from './MapCreation.js';
-import { render, getByTestId, getByRole, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 test('Test create route', () => {
