@@ -27,10 +27,10 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
-				<Button variant="primary" onClick={() => this.save()} style={{ margin: "2vh" }}>Save as json file</Button>
-        <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "2vh" }}>Upload To Pod</Button>
-				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "2vh" }}>View Pod</Button>
-			</div >
+				<Button variant="primary" onClick={() => this.save()} style={{ margin: "1.5vh" }}>Save as json file</Button>
+				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
+				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
+			</div>
 		);
 	}
 
@@ -48,7 +48,7 @@ class MapCreation extends Component {
 		link.click();
 	}
 
-	uploadToPod(){
+	uploadToPod() {
 		const jsonData = {
 			routeName: this.routeName.current.value,
 			coordinates: this.points.current.getPoints()
@@ -57,18 +57,18 @@ class MapCreation extends Component {
 		new StorageHandler().storeFileAtUrl(null, this.routeName.current.value + ".json", fileData);
 	}
 
-	viewRoutes(){
+	viewRoutes() {
 		let store = new StorageHandler();
 		let files = store.getFolder(null);
-		files.then(function(folder){
+		files.then(function (folder) {
 
 			console.log(folder);
-			for(let i = 0; i < folder.files.length; i++){
-				store.getFile(folder.files[i]).then(function(file){console.log(file)},()=>{})
+			for (let i = 0; i < folder.files.length; i++) {
+				store.getFile(folder.files[i]).then(function (file) { console.log(file) }, () => { })
 				console.log();
 			}
 
-		}, ()=>{console.log("Error retrieving Data!")});
+		}, () => { console.log("Error retrieving Data!") });
 
 	}
 }

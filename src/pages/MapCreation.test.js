@@ -1,6 +1,6 @@
 import React from 'react';
 import MapCreation from './MapCreation.js';
-import { render, getByTestId, getByRole, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 test('Test create route', () => {
@@ -14,7 +14,7 @@ test('Test create route', () => {
 	fireEvent.click(title, leftClick);
 	fireEvent.keyDown(title, { key: 'A' });
 
-	const btn = getByText('Save');
+	const btn = getByText(/save/i);
 	fireEvent.click(btn, leftClick);
 
 	expect(getByText("Create your own Route")).toBeTruthy();
