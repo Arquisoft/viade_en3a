@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { Component } from 'react';
-import profileImg from './../res/profile/profile_img.png';
+import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
 import RouteCard from '../components/routeList/RouteCard';
 import { xanasRoutePoints } from '../components/routeList/Points';
@@ -16,10 +16,10 @@ const routeListStyle = {
     padding: "2%"
 };
 
-class Profile extends Component{
+class Profile extends Component {
 
-	render() {
-		return (
+    render() {
+        return (
             <div className="App-header" onLoad={() => this.loadInfo()}>
                 <h1>Profile</h1>
                 <img
@@ -34,7 +34,7 @@ class Profile extends Component{
                 <h2>Locality:</h2>
                 <h3 id="locality">locality</h3>
                 <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>Edit profile</Button>
-            
+
                 <h1>Last routes done</h1>
                 <div style={routeListStyle}>
                     <RouteCard
@@ -46,22 +46,22 @@ class Profile extends Component{
                     />
                 </div>
             </div>
-            
-        );
-	}
 
-	async loadInfo() {
+        );
+    }
+
+    async loadInfo() {
 
         session = await auth.currentSession();
         var username = session.webId;
-        username = username.replace('https://','');
-        username = username.replace('.solid.community/profile/card#me','');
+        username = username.replace('https://', '');
+        username = username.replace('.solid.community/profile/card#me', '');
 
         //document.getElementById("name").innerHTML = "Juan Martínez";
         document.getElementById("username").innerHTML = username;
         document.getElementById("locality").innerHTML = "Oviedo, Asturias";
     }
-    
+
 }
 
 

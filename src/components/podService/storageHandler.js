@@ -4,42 +4,47 @@ const fc = new FC(auth);
 
 export default class StorageHandler {
 
-    constructor(){
+    constructor() {
         this.repository = null;
         this.defaultFolder = "/viade/en3a/routes"
         this.init();
     }
 
-    async init(){
+    async init() {
         this.repository = "https://" + (await auth.currentSession()).webId.split('/')[2];
     }
 
-    async storeFileAtUrl(url, filename, data ) {
+    async storeFileAtUrl(url, filename, data) {
         if (!this.repository)
             await this.init();
 
-        if (url === undefined || url == null)
-            url =  this.repository + this.defaultFolder + "/" + filename;
+        if (url === undefined || url === null) {
+            url = this.repository + this.defaultFolder + "/" + filename;
+        }
 
         // url =  this.repository + this.defaultFolder + url + "/" + filename;
         //console.log(url);
-        if (this.repository) fc.createFile(url, data);
+        if (this.repository) {
+            fc.createFile(url, data);
+        }
     }
 
     async getFolder(url) {
-        if (!this.repository)
+        if (!this.repository) {
             await this.init();
+        }
 
-        if (url === undefined || url == null)
-            url =  this.repository + this.defaultFolder;
+        if (url === undefined || url == null) {
+            url = this.repository + this.defaultFolder;
+        }
         return await fc.readFolder(url);
     }
 
     async getFile(url) {
-        if (!this.repository)
+        if (!this.repository) {
             await this.init();
-
-        console.log(url);
+        }
+        // console.log(url);
         return await fc.readFile(url);
     }
 

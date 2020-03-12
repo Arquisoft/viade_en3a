@@ -11,7 +11,7 @@ function EditProfile() {
                     <Form.Label>Change name</Form.Label>
                     <Form.Control type="name" placeholder="New name" />
                     <Form.Text className="text-muted">
-                    Min of 8 characters
+                        Min of 8 characters
                     </Form.Text>
                 </Form.Group>
 

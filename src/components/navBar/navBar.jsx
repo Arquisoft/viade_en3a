@@ -12,39 +12,36 @@ import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
 import EditProfile from '../../pages/EditProfile';
 
-import gitHubLogo from './../../assets/github.png';
-import viadeLogo from './../../res/logo/logo_alt.jpeg';
-import viadeText from './../../res/logo/logo_letters.jpeg';
+import gitHubLogo from './../../assets/githubLogo/github.png';
+import viadeLogo from './../../assets/logo/logo_alt.jpeg';
+import viadeText from './../../assets/logo/logo_letters.jpeg';
 
 function MyNavBar(props) {
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="#home">
-        <img
-          src={viadeLogo}
-          width="40"
-          height="40"
-          className="d-inline-block align-top"
-          alt="Viade logo"
-        />
-        <img
-          src={viadeText}
-          width="140"
-          height="40"
-          className="d-inline-block align-top"
-          alt="Viade text"
-        />
-      </Navbar.Brand>
+          <img
+            src={viadeLogo}
+            width="40"
+            height="40"
+            className="d-inline-block align-top"
+            alt="Viade logo"
+          />
+          <img
+            src={viadeText}
+            width="140"
+            height="40"
+            className="d-inline-block align-top"
+            alt="Viade text"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-          <NavDropdown title="Profile" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>Signed in as /username/</NavDropdown.Item>
-              <NavDropdown.Divider />
+            <NavDropdown title="Profile" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#profile">My profile</NavDropdown.Item>
               <NavDropdown.Item href="#friends">Friends</NavDropdown.Item>
-              <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item disabled="true" href="#setting">Settings</NavDropdown.Item>
             </NavDropdown>

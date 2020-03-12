@@ -8,7 +8,7 @@ class MyMap extends React.Component {
 		return (
 			<Map center={position} zoom={this.props.zoom} dragging={false}
 				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
-				doubleClickZoom={false} style={{ width: "20vw", height: "15vw", margin: "0" }}>
+				doubleClickZoom={false} style={{ width: "19.5vw", height: "15vw", margin: "0" }}>
 				< TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

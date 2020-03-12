@@ -4,14 +4,14 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-var createElementNSOrig = global.document.createElementNS
-global.document.createElementNS = function(namespaceURI, qualifiedName) {
-  if (namespaceURI==='http://www.w3.org/2000/svg' && qualifiedName==='svg'){
-    var element = createElementNSOrig.apply(this,arguments)
-    element.createSVGRect = function(){}; 
+var createElementNSOrig = global.document.createElementNS;
+global.document.createElementNS = function (namespaceURI, qualifiedName) {
+  if (namespaceURI === 'http://www.w3.org/2000/svg' && qualifiedName === 'svg') {
+    var element = createElementNSOrig.apply(this, arguments);
+    element.createSVGRect = function () { };
     return element;
   }
-  return createElementNSOrig.apply(this,arguments)
-}
+  return createElementNSOrig.apply(this, arguments);
+};
 
-window.URL.createObjectURL = function() {};
+window.URL.createObjectURL = function () { };

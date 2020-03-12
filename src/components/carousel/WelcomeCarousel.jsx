@@ -1,8 +1,8 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-import image1 from './../../assets/car_img1.jpeg';
-import image2 from './../../assets/car_img2.jpg';
+import image1 from './../../assets/carouselImages/car_img1.jpeg';
+import image2 from './../../assets/carouselImages/car_img2.jpg';
 
 const containerStyle = { height: "93vh" };
 const imageStyle = { width: "100%", height: "100%" };

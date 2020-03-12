@@ -6,30 +6,31 @@ import { HashRouter, Route } from 'react-router-dom';
 import RegisterWindow from '../registerWindow/registerWindow';
 import WelcomeCarousel from '../carousel/WelcomeCarousel';
 
-import gitHubLogo from './../../assets/github.png';
-import './NavBarNotAuthenticated.css'
-import viadeLogo from './../../res/logo/logo_alt.jpeg';
-import viadeText from './../../res/logo/logo_letters.jpeg';
+import gitHubLogo from './../../assets/githubLogo/github.png';
+import viadeLogo from './../../assets/logo/logo_alt.jpeg';
+import viadeText from './../../assets/logo/logo_letters.jpeg';
+
+import './NavBarNotAuthenticated.css';
 
 function NavBarNotAuthenticated(props) {
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="#">
-        <img
-          src={viadeLogo}
-          width="40"
-          height="40"
-          className="d-inline-block align-top"
-          alt="Viade logo"
-        />
-        <img
-          src={viadeText}
-          width="140"
-          height="40"
-          className="d-inline-block align-top"
-          alt="Viade logo"
-        />
+          <img
+            src={viadeLogo}
+            width="40"
+            height="40"
+            className="d-inline-block align-top"
+            alt="Viade logo"
+          />
+          <img
+            src={viadeText}
+            width="140"
+            height="40"
+            className="d-inline-block align-top"
+            alt="Viade logo"
+          />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
