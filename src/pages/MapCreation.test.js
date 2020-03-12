@@ -14,7 +14,7 @@ test('Test create route', () => {
 	fireEvent.click(title, leftClick);
 	fireEvent.keyDown(title, { key: 'A' });
 
-	const btn = getByText('Save');
+	const btn = getByText('/save/i');
 	fireEvent.click(btn, leftClick);
 
 	expect(getByText("Create your own Route")).toBeTruthy();
