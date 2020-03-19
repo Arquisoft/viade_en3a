@@ -1,5 +1,5 @@
 import React from 'react';
-import MapCreation from './MapCreation.js';
+import MapCreation from './../pages/MapCreation';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 

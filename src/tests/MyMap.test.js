@@ -1,6 +1,6 @@
 import React from 'react';
-import MyMap from './MyMap';
-import MyRoute from './MyRoute';
+import MyMap from '../components/myMap/MyMap';
+import MyRoute from '../components/myMap/MyRoute';
 import { render, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -18,7 +18,6 @@ test('Test add route', () => {
 
 	const { getByTestId } = render(<div data-testid="test" ><MyMap route={myRoute} zoom={13} /></div>);
 
-	//const {getByTestId} = render(<h1 data-testid="test">test</h1>);
 	expect(getByTestId("test")).toHaveAttribute("data-testid", "test");
 
 });
