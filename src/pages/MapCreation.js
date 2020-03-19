@@ -61,11 +61,13 @@ class MapCreation extends Component {
 		let store = new StorageHandler();
 		let files = store.getFolder(null);
 		files.then(function (folder) {
-
-			// console.log(folder);
-			for (let i = 0; i < folder.files.length; i++) {
-				store.getFile(folder.files[i]).then(function (file) { console.log(file) }, () => { });
-				console.log();
+			for(let i = 0; i < folder.files.length; i++){
+				store.getFile(folder.files[i].url).then(
+					function(file){
+						console.log(file)
+					},
+					()=>{console.log("Error retrieving Data!")}
+				)
 			}
 
 		}, () => { console.log("Error retrieving Data!") });

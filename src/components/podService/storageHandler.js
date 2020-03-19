@@ -44,7 +44,6 @@ export default class StorageHandler {
         if (!this.repository) {
             await this.init();
         }
-        // console.log(url);
         return await fc.readFile(url);
     }
 
