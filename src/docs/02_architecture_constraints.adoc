@@ -17,8 +17,8 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 | JavaScript
 | The programming language used for the most part of this project.
 
-| React-native
-| Combines the best parts of native development with React, it is a JavaScript library for building user interfaces. Reference: "https://facebook.github.io/react-native/"
+| React
+| JavaScript library for building user interfaces. Reference: "https://reactjs.org/"
 
 | Git
 | A distributed version control system.
@@ -28,6 +28,9 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 
 | SOLID
 | Solid (derived from "social linked data") is a proposed set of conventions and tools for building decentralized social applications based on Linked Data principles. Solid is modular and extensible and it relies as much as possible on existing W3C standards and protocols. Reference: "https://solid.mit.edu/"
+
+| Arc42
+| Template for architecture communication and documentation. This technology will be the base of this project's documentation.
 
 | Docker
 | Uses OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files. All containers are run by a single operating-system kernel and are thus more lightweight than virtual machines. Reference: "https://en.wikipedia.org/wiki/Docker_(software)"
@@ -40,27 +43,6 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 
 | Codacy
 | Automatically identify issues through static code review analysis. Get notified on security issues, code coverage, code duplication, and code complexity in every commit and pull request, directly from your current workflow. Reference: "https://www.codacy.com/"
-
-| Arc42
-| Template for architecture communication and documentation. This technology will be the base of this project's documentation.
-
-| Web access
-| This project will allow users to use their services through a web interface.
-
-| Smartphone access 
-| This project will also be available for smartphone users.
-
-| Browser agnostic
-| It will not depend on any specific browser.
-
-| Operating system agnostic
-| Any OS will be able to use the products created in this project.
-
-| Decentralized architecture
-| The main aim is to create a decentralized structure supported with SOLID project and kind of social-media approach. Where everyone can interact with each other without everyone being connected at the same time.
-
-| JSON format
-| JavaScript Object Notation data format. Will be used in several parts of this project. For instance, while defining the dependencies of our code/builds.
 
 |===
 
@@ -82,8 +64,6 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 | Meetings control
 | Minutes of all the team meetings that occur should be recorded and uploaded to the project wiki.
 
-| Course syllabus
-| All work done has to follow the course syllabus.
 
 |===
 
@@ -92,10 +72,10 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 |===
 | *Constraint* | *Explanation*
 
-| ESLint
-| We can use this tool that analyzes the code and makes it easier to follow conventions.
+| Clean code
+| The project follows clean code conventions so it is easier to maintain.
 
 | Language
-| This project will be done in english since the course is taught in english, and because the assignment has been proposed as a challenge by Inrupt.
+| This project has to be internationalized. For that we use react-i18next. Reference: "https://github.com/i18next/react-i18next"
 
 |===
