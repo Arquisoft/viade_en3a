@@ -14,16 +14,19 @@ export default class StorageHandler {
         this.repository = "https://" + (await auth.currentSession()).webId.split('/')[2];
     }
 
+    /**
+     * @param url, dejar a null para acceder al usuario registrado
+     * @param filename, nombre del archivo (con extension incluida)
+     * @param data, data to be stored
+     */
     async storeFileAtUrl(url, filename, data) {
         if (!this.repository)
             await this.init();
 
-        if (url === undefined || url === null) {
+        if (url === undefined || url == null) {
             url = this.repository + this.defaultFolder + "/" + filename;
         }
 
-        // url =  this.repository + this.defaultFolder + url + "/" + filename;
-        //console.log(url);
         if (this.repository) {
             fc.createFile(url, data);
         }
@@ -47,5 +50,25 @@ export default class StorageHandler {
         return await fc.readFile(url);
     }
 
-}
+    /**
+     * @returns {Array<JSON>[]} An array of Routes or null if there was an error
+     */
+    async getRoutes(){
+        let result = [];
 
+        let folder = await this.getFolder(null);
+        for (let i = 0; i < folder.files.length; i++) {
+            await this.getFile(folder.files[i].url).then(
+                function (file) {
+                    result.push(JSON.parse(file));
+                    //console.log(result[result.length-1]); // print current route
+                },
+                () => {
+                    result = null
+                }
+            )
+        }
+        return result;
+    }
+
+}
