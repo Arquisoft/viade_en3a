@@ -11,6 +11,7 @@ import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
 import EditProfile from '../../pages/EditProfile';
+import InfoView from "../../pages/InfoView";
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
@@ -73,6 +74,7 @@ function MyNavBar(props) {
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/friends" component={Friends} />
       <Route exact path="/editProfile" component={EditProfile} />
+      <Route exact path="/routes/info/:id" component={InfoView}/>
       <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );
