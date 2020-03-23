@@ -30,7 +30,7 @@ class RouteList extends React.Component {
         return (
             <div className="App-header">
                 <h1>Route list</h1>
-                {routesForCardDecks.map(route => route)}
+                {routesForCardDecks.map((route) => route)}
             </div >
         );
     }
