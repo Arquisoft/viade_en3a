@@ -24,7 +24,7 @@ class RouteList extends React.Component {
            <div className="App-header">
                 <h1>Route list</h1>
                 <div style={routeListStyle}>
-                    {this.routeManager.getRoutes().map( r =>
+                    {this.routeManager.getRoutes().map( (r) =>
                     <RouteCard
                         route={r}
                     />

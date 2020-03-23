@@ -1,7 +1,7 @@
 import React from "react";
 import MyMap from "../components/myMap/MyMap";
 import {Table} from 'react-bootstrap';
-import MyElevationChart from '../components/myElevationChart/MyElevationChart'
+import MyElevationChart from '../components/myElevationChart/MyElevationChart';
 
 
 class InfoView extends React.Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import RouteManager from "../model/RouteManager";
 import RouteCreator from "./RouteCreator";
-import assert from 'assert'
+import assert from 'assert';
 
 const routeManager = new RouteManager();
 

@@ -8,7 +8,7 @@ const routeManager = new RouteManager();
 
 test('Test create route', () => {
 
-    const match = { params :{ id: "1" } }
+    const match = { params :{ id: "1" } };
 
     const { getByText } = render(<InfoView match={match} routeManager={routeManager}/>);
 

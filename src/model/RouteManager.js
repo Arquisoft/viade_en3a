@@ -36,7 +36,7 @@ class RouteManager{
             "http://soyrural.es/wp-content/uploads/2017/07/ruta-del-Cares.jpg",
             [200,250,500,400,350]);
 
-        this.routes=[xanes,fuso,cares,picos]
+        this.routes=[xanes,fuso,cares,picos];
 
     }
 
@@ -47,7 +47,7 @@ class RouteManager{
     }
 
     getRouteById(id){
-        return this.routes.find( route => route.id===id);
+        return this.routes.find( (route) => route.id===id);
     }
 
     addRoute(route){
