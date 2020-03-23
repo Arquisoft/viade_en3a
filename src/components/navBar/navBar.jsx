@@ -11,10 +11,14 @@ import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
 import EditProfile from '../../pages/EditProfile';
+import InfoView from "../../pages/InfoView";
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
 import viadeText from './../../assets/logo/logo_letters.jpeg';
+import RouteManager from "../../model/RouteManager";
+
+const routeManager = new RouteManager();
 
 function MyNavBar(props) {
   return (
@@ -67,12 +71,13 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={RegisterWindow} />
-      <Route exact path="/routes/add" component={MapCreation} />
-      <Route exact path="/routes/list" component={RouteList} />
+      <Route exact path="/routes/add" render={ () => <MapCreation routeManager={routeManager}/>} />
+      <Route exact path="/routes/list" render={ () => <RouteList routeManager={routeManager}/>} />
       <Route exact path="/home" component={Home} />
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/profile" render={ () => <Profile routeManager={routeManager}/>} />
       <Route exact path="/friends" component={Friends} />
       <Route exact path="/editProfile" component={EditProfile} />
+      <Route exact path="/routes/info/:id" render={ (props) => <InfoView routeManager={routeManager} {...props}/>}/>
       <Redirect from path="/" exact to="/home" />
     </HashRouter>
   );

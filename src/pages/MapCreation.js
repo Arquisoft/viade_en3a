@@ -3,13 +3,15 @@ import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import StorageHandler from "../components/podService/storageHandler";
+import RouteCreator from "../model/RouteCreator";
 
 class MapCreation extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.routeName = React.createRef();
 		this.points = React.createRef();
+		this.routeManager=props.routeManager;
 	}
 
 	render() {
@@ -35,6 +37,9 @@ class MapCreation extends Component {
 	}
 
 	save() {
+		const route = new RouteCreator().createRoute(this.routeName.current.value,this.points.current.getPoints());
+		this.routeManager.addRoute(route);
+
 		const jsonData = {
 			routeName: this.routeName.current.value,
 			coordinates: this.points.current.getPoints()

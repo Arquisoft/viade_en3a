@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
 import RouteCard from '../components/routeList/RouteCard';
-import { xanasRoutePoints } from '../components/routeList/Points';
 
 const auth = require('solid-auth-client');
 var session = null;
@@ -17,6 +16,10 @@ const routeListStyle = {
 };
 
 class Profile extends Component {
+    constructor(props) {
+        super();
+        this.routeManager = props.routeManager;
+    }
 
     render() {
         return (
@@ -38,11 +41,7 @@ class Profile extends Component {
                 <h1>Last routes done</h1>
                 <div style={routeListStyle}>
                     <RouteCard
-                        routeName="Las Xanas"
-                        routeAuthor="Miguel Menéndez"
-                        routeDescription="Really beautiful landscape but not wise to traverse with kids. They might fall off of some cliff."
-                        routeImageSource="https://www.senditur.com/multimedia/uploads/images/Rutas/Espa%C3%B1a/Asturias/Ruta%20de%20Las%20Xanas/Ruta_de_Las_Xanas.jpg"
-                        routePoints={xanasRoutePoints}
+                        route={this.routeManager.getRoutes()[0]}
                     />
                 </div>
             </div>

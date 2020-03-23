@@ -1,9 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import RouteCard from '../components/routeList/RouteCard';
+import React from "react";
+import { render } from "@testing-library/react";
+import RouteManager from "./../model/RouteManager";
+import RouteCard from "./../components/routeList/RouteCard";
 
-test('renders creator text', () => {
-  const { getByText } = render(<RouteCard routePoints={[[0, 0], [3, 3]]} routeName='a' routeDescription='creator' />);
-  const creatorText = getByText(/creator/i);
+const routeManager = new RouteManager();
+
+test("renders route name text", () => {
+  const { getByText } = render(<RouteCard route={routeManager.getRoutes()[0]} />);
+  const creatorText = getByText(/Las Xanas/i);
   expect(creatorText).toBeInTheDocument();
 });

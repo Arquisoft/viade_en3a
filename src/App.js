@@ -3,16 +3,19 @@ import './App.css';
 import MyNavBar from './components/navBar/navBar';
 import NavBarNotAuthenticated from './components/navBar/navBarNotAuthenticated';
 import { LoggedIn, LoggedOut } from '@solid/react';
+import {HashRouter} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <LoggedOut>
-        <NavBarNotAuthenticated />
-      </LoggedOut>
-      <LoggedIn>
-        <MyNavBar />
-      </LoggedIn>
+        <HashRouter basename='/'>
+              <LoggedOut>
+                <NavBarNotAuthenticated />
+              </LoggedOut>
+              <LoggedIn>
+                <MyNavBar />
+              </LoggedIn>
+        </HashRouter>
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import React from 'react';
-import MyMap from '../components/myMap/MyMap';
-import MyRoute from '../components/myMap/MyRoute';
-import { render, getByTestId } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import React from "react";
+import MyMap from "../components/myMap/MyMap";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import RouteCreator from "./../model/RouteCreator";
 
-test('Test add route', () => {
+test("Test add route", () => {
 
 	const points = [[43.211820, -5.787902],
 	[43.210796, -5.786690],
@@ -14,7 +14,7 @@ test('Test add route', () => {
 	[43.210379, -5.780773],
 	[43.209754, -5.777683]];
 
-	const myRoute = new MyRoute(points);
+	const myRoute = new RouteCreator().createRoute("prueba", points);
 
 	const { getByTestId } = render(<div data-testid="test" ><MyMap route={myRoute} zoom={13} /></div>);
 
