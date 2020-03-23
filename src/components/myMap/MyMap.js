@@ -2,10 +2,11 @@ import React from 'react';
 import { Map, TileLayer, Marker, Polyline, FeatureGroup } from 'react-leaflet';
 
 class MyMap extends React.Component {
+
 	constructor(props) {
 		super();
-		this.map =React.createRef();
-		this.route=props.route;
+		this.map = React.createRef();
+		this.route = props.route;
 	}
 
 	setPositionScaled = (e) => {
@@ -14,7 +15,7 @@ class MyMap extends React.Component {
 
 	render() {
 		return (
-			<Map ref={this.map} center={[0,0]} zoom={this.props.zoom} dragging={false}
+			<Map ref={this.map} center={[0, 0]} zoom={this.props.zoom} dragging={false}
 				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
 				doubleClickZoom={false} style={this.props.style}>
 				< TileLayer
@@ -23,8 +24,8 @@ class MyMap extends React.Component {
 				/>
 				<FeatureGroup onAdd={this.setPositionScaled} >
 					<Polyline positions={this.route.points} color='red' />
-					<Marker position={this.route.points[0]}/>
-					<Marker position={this.route.points[this.route.points.length - 1]}/>
+					<Marker position={this.route.points[0]} />
+					<Marker position={this.route.points[this.route.points.length - 1]} />
 				</FeatureGroup>
 			</Map >
 		);

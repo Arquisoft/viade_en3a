@@ -53,7 +53,7 @@ export default class StorageHandler {
     /**
      * @returns {Array<JSON>[]} An array of Routes or null if there was an error
      */
-    async getRoutes(){
+    async getRoutes() {
         let result = [];
 
         let folder = await this.getFolder(null);

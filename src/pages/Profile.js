@@ -2,20 +2,14 @@ import '../App.css';
 import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
-import RouteCard from '../components/routeList/RouteCard';
+import RouteCard from './../components/routeList/RouteCard';
+import CardDeck from "react-bootstrap/CardDeck";
 
 const auth = require('solid-auth-client');
 var session = null;
 
-const routeListStyle = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    padding: "2%"
-};
-
 class Profile extends Component {
+
     constructor(props) {
         super();
         this.routeManager = props.routeManager;
@@ -39,18 +33,16 @@ class Profile extends Component {
                 <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>Edit profile</Button>
 
                 <h1>Last routes done</h1>
-                <div style={routeListStyle}>
+                <CardDeck style={{ margin: "1%" }}>
                     <RouteCard
                         route={this.routeManager.getRoutes()[0]}
                     />
-                </div>
+                </CardDeck>
             </div>
-
         );
     }
 
     async loadInfo() {
-
         session = await auth.currentSession();
         var username = session.webId;
         username = username.replace('https://', '');
@@ -62,7 +54,5 @@ class Profile extends Component {
     }
 
 }
-
-
 
 export default Profile;

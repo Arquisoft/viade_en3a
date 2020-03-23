@@ -11,7 +11,7 @@ class MapCreation extends Component {
 		super(props);
 		this.routeName = React.createRef();
 		this.points = React.createRef();
-		this.routeManager=props.routeManager;
+		this.routeManager = props.routeManager;
 	}
 
 	render() {
@@ -37,7 +37,7 @@ class MapCreation extends Component {
 	}
 
 	save() {
-		const route = new RouteCreator().createRoute(this.routeName.current.value,this.points.current.getPoints());
+		const route = new RouteCreator().createRoute(this.routeName.current.value, this.points.current.getPoints());
 		this.routeManager.addRoute(route);
 
 		const jsonData = {
