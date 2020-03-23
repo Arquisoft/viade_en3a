@@ -62,21 +62,11 @@ class MapCreation extends Component {
 		new StorageHandler().storeFileAtUrl(null, this.routeName.current.value + ".json", fileData);
 	}
 
-	viewRoutes() {
+	async viewRoutes() {
 		let store = new StorageHandler();
-		let files = store.getFolder(null);
-		files.then(function (folder) {
-
-			// console.log(folder);
-			for (let i = 0; i < folder.files.length; i++) {
-				store.getFile(folder.files[i]).then(function (file) { console.log(file) }, () => { });
-				console.log();
-			}
-
-		}, () => { console.log("Error retrieving Data!") });
+		let routes = await store.getRoutes();
+		// do something with routes
 	}
 }
-
-
 
 export default MapCreation;

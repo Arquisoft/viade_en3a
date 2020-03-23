@@ -1,15 +1,13 @@
 import React from 'react';
-import MapCreation from './MapCreation.js';
+import MapCreation from './../pages/MapCreation';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import RouteManager from "../model/RouteManager";
+import RouteManager from "./../model/RouteManager";
 
 const routeManager = new RouteManager();
 
 test('Test create route', () => {
-
-
-	const { getByText, getByRole } = render(<MapCreation routeManager={routeManager}/>);
+	const { getByText, getByRole } = render(<MapCreation routeManager={routeManager} />);
 
 	const map = getByRole('presentation');
 	const leftClick = { button: 1 };
