@@ -8,7 +8,7 @@ function RouteCard(props) {
     return (
         <Card text="dark" style={{ width: "20vw", height: "auto", margin: "1%" }}>
             <Card.Header style={{ alignItems: "center", padding: "0" }}>
-                <MyMap route={props.route} zoom={12} style={{ margin: "0" }} />
+                <MyMap route={props.route} zoom={12} style={{ width: "19.5vw", height: "15vw", margin: "0" }} />
             </Card.Header>
             <Card.Body>
                 <Card.Title style={{ fontSize: "24px" }}>{props.route.name}</Card.Title>

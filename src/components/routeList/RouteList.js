@@ -1,6 +1,5 @@
 import React from 'react';
 import RouteCard from './RouteCard';
-import RouteManager from "../../model/RouteManager";
 
 const routeListStyle = {
     display: "flex",
@@ -14,9 +13,9 @@ const routeListStyle = {
 
 class RouteList extends React.Component {
 
-    constructor() {
-        super();
-        this.routeManager = new RouteManager();
+    constructor(props) {
+        super(props);
+        this.routeManager = props.routeManager;
     }
 
 

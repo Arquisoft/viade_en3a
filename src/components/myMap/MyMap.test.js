@@ -3,6 +3,7 @@ import MyMap from './MyMap';
 import MyRoute from '../../model/MyRoute';
 import { render, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import RouteCreator from "../../model/RouteCreator";
 
 test('Test add route', () => {
 
@@ -14,7 +15,7 @@ test('Test add route', () => {
 	[43.210379, -5.780773],
 	[43.209754, -5.777683]];
 
-	const myRoute = new MyRoute(points);
+	const myRoute = new RouteCreator().createRoute("prueba",points);
 
 	const { getByTestId } = render(<div data-testid="test" ><MyMap route={myRoute} zoom={13} /></div>);
 
