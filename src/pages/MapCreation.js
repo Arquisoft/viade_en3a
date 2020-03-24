@@ -5,6 +5,29 @@ import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import StorageHandler from "../components/podService/storageHandler";
 import MyRoute from "./../model/MyRoute";
 
+function createRoute() {
+	let route = new MyRoute(this.routeName, "Temp author", "Temp description", this.points);
+	this.routeManager.addRoute(route);
+	return route;
+}
+
+function downloadToClient() {
+	let route = createRoute();
+	const fileData = JSON.stringify(route.toJsonLd());
+	const blob = new Blob([fileData], { type: "text/plain" });
+	const url = URL.createObjectURL(blob);
+	const link = document.createElement("a");
+	link.download = route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json";
+	link.href = url;
+	link.click();
+}
+
+function uploadToPod() {
+	let route = createRoute();
+	const fileData = JSON.stringify(route.toJsonLd());
+	new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
+}
+
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -41,29 +64,6 @@ class MapCreation extends Component {
 		let routes = await store.getRoutes();
 		// do something with routes
 	}
-}
-
-function createRoute() {
-	let route = new MyRoute(this.routeName, "Temp author", "Temp description", this.points);
-	this.routeManager.addRoute(route);
-	return route;
-}
-
-function downloadToClient() {
-	let route = createRoute();
-	const fileData = JSON.stringify(route.toJsonLd());
-	const blob = new Blob([fileData], { type: "text/plain" });
-	const url = URL.createObjectURL(blob);
-	const link = document.createElement("a");
-	link.download = route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json";
-	link.href = url;
-	link.click();
-}
-
-function uploadToPod() {
-	let route = createRoute();
-	const fileData = JSON.stringify(route.toJsonLd());
-	new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
 }
 
 export default MapCreation;

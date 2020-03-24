@@ -1,3 +1,13 @@
+async function askForAltitude(latitude, longitude) {
+    return fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
+        .then(
+            (res) => res.json()
+        ).then(
+            (json) => parseInt(json["data"], 10),
+            () => -1
+        );
+}
+
 class RouteWaypoint {
 
     /**
@@ -26,16 +36,6 @@ class RouteWaypoint {
         return this.longitude;
     }
 
-}
-
-async function askForAltitude(latitude, longitude) {
-    return fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
-        .then(
-            (res) => res.json()
-        ).then(
-            (json) => parseInt(json["data"], 10),
-            () => -1
-        );
 }
 
 export default RouteWaypoint;

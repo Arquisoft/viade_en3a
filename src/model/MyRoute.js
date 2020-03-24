@@ -1,6 +1,12 @@
 import { v4 as uuid } from "uuid";
 import RouteWaypoint from "./RouteWaypoint";
 
+async function processPoints(waypoints) {
+	return waypoints.array.reduce(
+		(list, point) => list.push(new RouteWaypoint(point.lat, point.lng)), []
+	);
+}
+
 class MyRoute {
 
 	/**
@@ -11,7 +17,7 @@ class MyRoute {
 	 * @param {String} name The name of the route.
 	 * @param {String} author The creator of the route.
 	 * @param {String} description A description of the route.
- 	 * @param {Array<RouteWaypoint>} waypoints The list of waypoints of this rule.
+ 	 * @param {Array<{lat:"", lng:""}>} points The list of waypoints of this rule.
 	 */
 	constructor(name, author, description, waypoints) {
 		this.id = uuid().toString();
@@ -45,12 +51,6 @@ class MyRoute {
 
 	}
 
-}
-
-async function processPoints(waypoints) {
-	return waypoints.array.reduce(
-		(list, point) => list.push(new RouteWaypoint(point.lat, point.lng)), []
-	);
 }
 
 export default MyRoute;
