@@ -14,6 +14,10 @@ class MyMap extends React.Component {
 	}
 
 	render() {
+		let points = [];
+		this.route.getWaypoints().forEach((waypoint) => {
+			points.push([waypoint.getLatitude(), waypoint.getLongitude()]);
+		});
 		return (
 			<Map ref={this.map} center={[0, 0]} zoom={this.props.zoom} dragging={false}
 				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
@@ -23,9 +27,9 @@ class MyMap extends React.Component {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 				/>
 				<FeatureGroup onAdd={this.setPositionScaled} >
-					<Polyline positions={this.route.points} color='red' />
-					<Marker position={this.route.points[0]} />
-					<Marker position={this.route.points[this.route.points.length - 1]} />
+					<Polyline positions={points} color='red' />
+					<Marker position={points[0]} />
+					<Marker position={points[points.length - 1]} />
 				</FeatureGroup>
 			</Map >
 		);

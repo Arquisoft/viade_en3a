@@ -1,12 +1,3 @@
-async function askForAltitude(latitude, longitude) {
-    return fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
-        .then(
-            (res) => res.json()
-        ).then(
-            (json) => parseInt(json["data"], 10),
-            () => -1
-        );
-}
 
 class RouteWaypoint {
 
@@ -18,10 +9,10 @@ class RouteWaypoint {
      * @param {Integer} longitude The longitude of the point this object represents.
      */
     constructor(latitude, longitude) {
-        this.altitude = -1;
         this.latitude = latitude;
         this.longitude = longitude;
-        askForAltitude(latitude, longitude);
+        this.altitude = -1;
+        this.askForAltitude();
     }
 
     getAltitude() {
@@ -34,6 +25,22 @@ class RouteWaypoint {
 
     getLongitude() {
         return this.longitude;
+    }
+
+    toJson() {
+        return {
+            "latitude": this.latitude,
+            "longitude": this.longitude
+        };
+    }
+
+    askForAltitude() {
+        fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
+            .then(
+                (res) => res.json()
+            ).then(
+                (json) => this.altitude = parseInt(json["data"], 10)
+            );
     }
 
 }

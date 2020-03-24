@@ -1,10 +1,12 @@
 import { v4 as uuid } from "uuid";
 import RouteWaypoint from "./RouteWaypoint";
 
-async function processPoints(waypoints) {
-	return waypoints.array.reduce(
-		(list, point) => list.push(new RouteWaypoint(point.lat, point.lng)), []
-	);
+function processPoints(waypoints) {
+	let list = [];
+	console.log(waypoints);
+	waypoints.forEach((point) => list.push(new RouteWaypoint(point[0], point[1])));
+	console.log(list);
+	return list;
 }
 
 class MyRoute {
@@ -48,7 +50,55 @@ class MyRoute {
 	}
 
 	toJsonLd() {
+		let poinstInJson = [];
+		// this.waypoints.arrray.forEach((point) => poinstInJson.push(point.toJson()));
+		let result = {
+			"@context": {
+				"@version": 1.1,
+				"comments": {
+					"@container": "@list",
+					"@id": "viade:comments"
+				},
+				"description": {
+					"@id": "schema:description",
+					"@type": "xs:string"
+				},
+				"media": {
+					"@container": "@list",
+					"@id": "viade:media"
+				},
+				"name": {
+					"@id": "schema:name",
+					"@type": "xs:string"
+				},
+				"points": {
+					"@container": "@list",
+					"@id": "viade:points"
+				},
+				"latitude": {
+					"@id": "schema:latitude",
+					"@type": "xs:double"
+				},
+				"longitude": {
+					"@id": "schema:longitude",
+					"@type": "xs:double"
+				},
 
+				"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+				"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+				"schema": "http://schema.org/",
+				"viade": "http://arquisoft.github.io/viadeSpec/",
+				"xsd": "http://www.w3.org/2001/XMLSchema#"
+			},
+			"comments": [
+			],
+			"description": this.description,
+			"media": [
+			],
+			"name": this.name,
+			"points": poinstInJson
+		};
+		return result;
 	}
 
 }

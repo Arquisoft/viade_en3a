@@ -5,29 +5,6 @@ import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import StorageHandler from "../components/podService/storageHandler";
 import MyRoute from "./../model/MyRoute";
 
-function createRoute() {
-	let route = new MyRoute(this.routeName, "Temp author", "Temp description", this.points);
-	this.routeManager.addRoute(route);
-	return route;
-}
-
-function downloadToClient() {
-	let route = createRoute();
-	const fileData = JSON.stringify(route.toJsonLd());
-	const blob = new Blob([fileData], { type: "text/plain" });
-	const url = URL.createObjectURL(blob);
-	const link = document.createElement("a");
-	link.download = route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json";
-	link.href = url;
-	link.click();
-}
-
-function uploadToPod() {
-	let route = createRoute();
-	const fileData = JSON.stringify(route.toJsonLd());
-	new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
-}
-
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -52,18 +29,43 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
-				<Button variant="primary" onClick={() => downloadToClient()} style={{ margin: "1.5vh" }}>Save as json file</Button>
-				<Button variant="primary" onClick={() => uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
-				<Button variant="primary" onClick={() => viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
+				<Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "1.5vh" }}>Save as json file</Button>
+				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
+				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
 			</div>
 		);
 	}
 
+	createRoute() {
+		console.log(this.points);
+		let route = new MyRoute(this.routeName, "Temp author", "Temp description", this.points);
+		this.routeManager.addRoute(route);
+		return route;
+	}
+
+	downloadToClient() {
+		let route = this.createRoute();
+		const fileData = JSON.stringify(route.toJsonLd());
+		const blob = new Blob([fileData], { type: "text/plain" });
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement("a");
+		link.download = route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json";
+		link.href = url;
+		link.click();
+	}
+
+	uploadToPod() {
+		let route = this.createRoute();
+		const fileData = JSON.stringify(route.toJsonLd());
+		new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
+	}
+
 	async viewRoutes() {
-		let store = new StorageHandler();
-		let routes = await store.getRoutes();
+		// let store = new StorageHandler();
+		// let routes = await store.getRoutes();
 		// do something with routes
 	}
+
 }
 
 export default MapCreation;

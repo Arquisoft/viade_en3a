@@ -71,14 +71,14 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={RegisterWindow} />
-      <Route exact path="/routes/add" render={ () => <MapCreation routeManager={routeManager}/>} />
-      <Route exact path="/routes/list" render={ () => <RouteList routeManager={routeManager}/>} />
+      <Route exact path="/routes/add" render={() => <MapCreation routeManager={routeManager} />} />
+      <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
       <Route exact path="/home" component={Home} />
-      <Route exact path="/profile" render={ () => <Profile routeManager={routeManager}/>} />
+      <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
       <Route exact path="/friends" component={Friends} />
       <Route exact path="/editProfile" component={EditProfile} />
-      <Route exact path="/routes/info/:id" render={ (props) => <InfoView routeManager={routeManager} {...props}/>}/>
-      <Redirect from path="/" exact to="/home" />
+      <Route exact path="/routes/info/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
+      <Redirect path="/" exact to="/home" />
     </HashRouter>
   );
 }

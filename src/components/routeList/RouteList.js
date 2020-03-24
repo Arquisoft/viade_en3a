@@ -18,9 +18,7 @@ class RouteList extends React.Component {
             routesForCardDecks.push(
                 <CardDeck style={{ margin: "1%" }}>
                     {routes.slice(counter, counter + this.cardDeckSize).map((r) =>
-                        <RouteCard
-                            route={r}
-                        />
+                        <RouteCard route={r} />
                     )}
                 </CardDeck>
             );

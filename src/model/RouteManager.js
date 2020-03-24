@@ -5,37 +5,33 @@ class RouteManager {
 
     constructor() {
 
-        const xanes = new MyRoute("1",
-            xanasRoutePoints,
+        const xanes = new MyRoute(
             "Las Xanas",
             "Miguel Menéndez",
             "Really beautiful landscape but not wise to traverse with kids. They might fall off of some cliff.",
-            "https://www.senditur.com/multimedia/uploads/images/Rutas/Espa%C3%B1a/Asturias/Ruta%20de%20Las%20Xanas/Ruta_de_Las_Xanas.jpg",
-            [200, 250, 500, 400, 350]);
+            xanasRoutePoints
+        );
 
-        const fuso = new MyRoute("2",
-            boldRoutePoints,
+        const fuso = new MyRoute(
             "Fuso de la Reina",
             "María santísima",
             "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
-            "http://www.senderismoenasturias.es/ovimolin.jpg",
-            [200, 250, 500, 400, 350]);
+            boldRoutePoints
+        );
 
-        const cares = new MyRoute("3",
-            caresRoutePoints,
+        const cares = new MyRoute(
             "Cares",
             "Aventura",
             "Medium difficulty, a little bit steep in some parts but still worth to witness.",
-            "https://www.desnivel.com/images/2012/04/roberto-colmenero.-mi-padre-y-hermano-960x1280.jpg",
-            [200, 250, 500, 400, 350]);
+            caresRoutePoints
+        );
 
-        const picos = new MyRoute("4",
-            boldRoutePoints,
+        const picos = new MyRoute(
             "Picos de Europa",
             "Viade",
             "Interesting passages make this route unique on its own. Visit worthy.",
-            "http://soyrural.es/wp-content/uploads/2017/07/ruta-del-Cares.jpg",
-            [200, 250, 500, 400, 350]);
+            boldRoutePoints
+        );
 
         this.routes = [xanes, fuso, cares, picos];
 
