@@ -58,7 +58,7 @@ class MyRoute {
 	toJsonLd() {
 		let poinstInJson = [];
 		this.waypoints.forEach((point) => poinstInJson.push(point.toJson()));
-		let result = {
+		return {
 			"@context": {
 				"@version": 1.1,
 				"comments": {
@@ -103,7 +103,6 @@ class MyRoute {
 			"name": this.name,
 			"points": poinstInJson
 		};
-		return result;
 	}
 
 }

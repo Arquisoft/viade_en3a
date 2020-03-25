@@ -4,7 +4,6 @@ class RouteManager {
     constructor() {
         this.memoiser = {};
         this.routes = [];
-        this.routeHashes = [];
     }
 
     getRoutes() {

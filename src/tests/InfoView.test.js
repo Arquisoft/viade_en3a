@@ -8,7 +8,7 @@ import MyRoute from "./../model/MyRoute";
 const routeManager = new RouteManager();
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 test('Test create route', async () => {
