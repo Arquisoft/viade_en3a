@@ -2,8 +2,10 @@ import '../App.css';
 import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-import StorageHandler from "../components/podService/storageHandler";
 import RouteCreator from "../model/RouteCreator";
+import PodStorageHandler from "../components/podService/podStoreHandler";
+
+const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 
@@ -31,7 +33,7 @@ class MapCreation extends Component {
 				<EditableMap ref={this.points} role='map' />
 				<Button variant="primary" onClick={() => this.save()} style={{ margin: "1.5vh" }}>Save as json file</Button>
 				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
-				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
+				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler}/>
 			</div>
 		);
 	}
@@ -53,19 +55,45 @@ class MapCreation extends Component {
 		link.click();
 	}
 
-	uploadToPod() {
+	async uploadToPod() {
 		const jsonData = {
 			routeName: this.routeName.current.value,
 			coordinates: this.points.current.getPoints()
 		};
 		const fileData = JSON.stringify(jsonData);
-		new StorageHandler().storeFileAtUrl(null, this.routeName.current.value + ".json", fileData);
-	}
 
-	async viewRoutes() {
-		let store = new StorageHandler();
-		let routes = await store.getRoutes();
-		// do something with routes
+		/*
+		// Get All routes
+		new PodStorageHandler(await auth.currentSession()).getRoutes(function (result) {
+			if (result) {
+				console.log("TRUE: " + result);
+			} else {
+				console.log("FALSE: " + result);
+			}
+		});
+		*/
+
+		// Upload route
+		new PodStorageHandler(await auth.currentSession()).storeRoute(jsonData.routeName + ".txt", fileData, function (result, response) {
+			if (result) {
+				console.log("Route stored at: " + result);
+			} else {
+				console.log("Fail: " + response);
+			}
+		});
+		// Upload picture
+		let dom = document.getElementById("pictureUploader")
+		let picture = dom.files[0];
+		if (!(typeof picture === 'undefined')) { // If we have a picture
+			let extension = picture.name.split('.').pop();
+			new PodStorageHandler(await auth.currentSession()).storeResource(jsonData.routeName + "." + extension, picture, function (result, response) {
+				if (result) {
+					console.log("Pic stored at: " + result);
+				} else {
+					console.log("Fail: " + response);
+				}
+			});
+		}
 	}
 }
 

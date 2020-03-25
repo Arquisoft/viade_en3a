@@ -5,12 +5,14 @@ const fc = new FC(auth);
 export default class StorageHandler {
 
     constructor() {
+        console.warn("Deprecated, use podStoreHandler");
         this.repository = null;
         this.defaultFolder = "/viade/en3a/routes"
         this.init();
     }
 
     async init() {
+        console.warn("Deprecated, use podStoreHandler");
         this.repository = "https://" + (await auth.currentSession()).webId.split('/')[2];
     }
 
@@ -20,6 +22,7 @@ export default class StorageHandler {
      * @param data, data to be stored
      */
     async storeFileAtUrl(url, filename, data) {
+        console.warn("Deprecated, use podStoreHandler");
         if (!this.repository)
             await this.init();
 
@@ -33,6 +36,7 @@ export default class StorageHandler {
     }
 
     async getFolder(url) {
+        console.warn("Deprecated, use podStoreHandler");
         if (!this.repository) {
             await this.init();
         }
@@ -44,6 +48,7 @@ export default class StorageHandler {
     }
 
     async getFile(url) {
+        console.warn("Deprecated, use podStoreHandler");
         if (!this.repository) {
             await this.init();
         }
@@ -54,6 +59,7 @@ export default class StorageHandler {
      * @returns {Array<JSON>[]} An array of Routes or null if there was an error
      */
     async getRoutes() {
+        console.warn("Deprecated, use podStoreHandler");
         let result = [];
 
         let folder = await this.getFolder(null);

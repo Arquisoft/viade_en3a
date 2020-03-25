@@ -25,18 +25,21 @@ export default class PodStorageHandler {
      *                            + the first is the URL where the route is stored or null
      *                            + the second is the actual response or error of the POD
      */
-    async storeRoute(routeFileName, data, callback){
-        callback = callback ? callback : () => {};
-
+    async storeRoute(routeFileName, data, callback = ()=>{}){
         let url = this.repository + this.defaultFolder + this.routesDirectory + routeFileName;
+        this.storeFile(url, data, callback)
+
+        /*
         let response = fc.createFile(url, data);
         response.then(
             (response) => {callback(response.url, response)}
         ,   (error) => {callback(null, error)}
         );
+        */
     }
 
     /**
+     * Gets an Array<String> with all the files stored in the routes directory
      *
      * @param {Function} callback - 2 Parameter function,
      *                             + the first is {Array<String>} or null if there was an error. Array with all the routes
@@ -55,6 +58,28 @@ export default class PodStorageHandler {
             )
         }
         callback(result, null);
+    }
+
+    /**
+     * Stores a resource under the /viade/resources/'resourceFileName' URL
+     *
+     * @param {String} resourceFileName - File name with extension, for example: samplePic.png or LasXanas.jpeg
+     * @param {Blob|String} data - The contents of the resource
+     * @param {Function} callback - Calls the function with two parameters,
+     *                            + the first is the URL where the resource is stored or null if it wasnt stored
+     *                            + the second is the actual response or error of the POD
+     */
+    storeResource(resourceFileName, data, callback = ()=>{}){
+        let url = this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
+        this.storeFile(url, data, callback)
+    }
+
+    storeFile(url, data, callback) {
+        let response = fc.createFile(url, data);
+        response.then(
+            (response) => {callback(response.url, response)}
+            ,   (error) => {callback(null, error)}
+        );
     }
 
     async getFolder(url) {
