@@ -24,6 +24,8 @@ class MyRoute {
 	 * @param {String} author The creator of the route.
 	 * @param {String} description A description of the route.
  	 * @param {Array<{lat:"", lng:""}>} points The list of waypoints of this rule.
+	 * @param {Map<String, Number>} memoiser The memoiser dictionary keeping 
+     * track of already calculated points.
 	 */
 	constructor(name, author, description, waypoints, memoiser) {
 		this.id = uuid().toString();
@@ -51,10 +53,6 @@ class MyRoute {
 
 	getWaypoints() {
 		return this.waypoints;
-	}
-
-	associateMemoiser(memoiser) {
-		this.memoiser = memoiser;
 	}
 
 	toJsonLd() {

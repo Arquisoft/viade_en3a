@@ -12,6 +12,7 @@ class MapCreation extends Component {
 		this.routeName = React.createRef();
 		this.points = React.createRef();
 		this.routeManager = props.routeManager;
+		this.tempRoute = undefined;
 	}
 
 	render() {
@@ -41,12 +42,19 @@ class MapCreation extends Component {
 		let waypoints = this.points.current.state.points;
 		let memoiser = this.routeManager.getMemoiser();
 		let route = new MyRoute(name, "Temp author", "Temp description", waypoints, memoiser);
-		this.routeManager.addRoute(route);
 		return route;
+	}
+
+	checkRouteChanged(newRoute) {
+		if ((this.tempRoute === undefined) || (JSON.stringify(this.tempRoute.toJsonLd()) !== JSON.stringify(newRoute.toJsonLd()))) {
+			this.tempRoute = newRoute;
+			this.routeManager.addRoute(this.tempRoute);
+		}
 	}
 
 	downloadToClient() {
 		let route = this.createRoute();
+		this.checkRouteChanged(route);
 		const fileData = JSON.stringify(route.toJsonLd());
 		const blob = new Blob([fileData], { type: "text/plain" });
 		const url = URL.createObjectURL(blob);
@@ -58,6 +66,7 @@ class MapCreation extends Component {
 
 	uploadToPod() {
 		let route = this.createRoute();
+		this.checkRouteChanged(route);
 		const fileData = JSON.stringify(route.toJsonLd());
 		new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
 	}

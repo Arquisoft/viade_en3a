@@ -2,15 +2,21 @@ import React from "react";
 import MyMap from "../components/myMap/MyMap";
 import { Table } from 'react-bootstrap';
 import MyElevationChart from '../components/myElevationChart/MyElevationChart';
-
+import MyRoute from "./../model/MyRoute";
+import { boldRoutePoints } from "./../components/routeList/Points";
 
 class InfoView extends React.Component {
 
     constructor(props) {
         super();
-        this.id = props.match.params.id;
         this.routeManager = props.routeManager;
-        this.route = this.routeManager.getRouteById(this.id);
+        this.route = new MyRoute(
+            "Fuso de la Reina",
+            "María santísima",
+            "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
+            boldRoutePoints,
+            {}
+        );
     }
 
     render() {
@@ -37,15 +43,15 @@ class InfoView extends React.Component {
                     <tbody>
                         <tr>
                             <td>Name:</td>
-                            <td>{this.route.name}</td>
+                            <td>{this.route.getName()}</td>
                         </tr>
                         <tr>
                             <td>Author:</td>
-                            <td>{this.route.author}</td>
+                            <td>{this.route.getAuthor()}</td>
                         </tr>
                         <tr>
                             <td>Description:</td>
-                            <td>{this.route.description}</td>
+                            <td>{this.route.getDescription()}</td>
                         </tr>
                     </tbody>
                 </Table>

@@ -7,7 +7,7 @@ class RouteWaypoint {
      * <https://api.airmap.com>
      * @param {Number} latitude The latitude of the point this object represents.
      * @param {Number} longitude The longitude of the point this object represents.
-     * @param {Map<[Number, Number], Number>} memoiser The memoiser dictionary keeping 
+     * @param {Map<String, Number>} memoiser The memoiser dictionary keeping 
      * track of already calculated points.
      */
     constructor(latitude, longitude, memoiser) {
