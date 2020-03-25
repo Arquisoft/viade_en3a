@@ -1,11 +1,15 @@
 import { v4 as uuid } from "uuid";
 import RouteWaypoint from "./RouteWaypoint";
 
-function processPoints(waypoints) {
+/**
+ * Returns an Array<RouteWaypoint> that represent the same set of points 
+ * received as a parameter.
+ * @param {Array<{lat:"", lng:""}>} waypoints The list of waypoints to 
+ * transform.
+ */
+function processPoints(waypoints, memoiser) {
 	let list = [];
-	console.log(waypoints);
-	waypoints.forEach((point) => list.push(new RouteWaypoint(point[0], point[1])));
-	console.log(list);
+	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng, memoiser)));
 	return list;
 }
 
@@ -21,12 +25,12 @@ class MyRoute {
 	 * @param {String} description A description of the route.
  	 * @param {Array<{lat:"", lng:""}>} points The list of waypoints of this rule.
 	 */
-	constructor(name, author, description, waypoints) {
+	constructor(name, author, description, waypoints, memoiser) {
 		this.id = uuid().toString();
 		this.name = name;
 		this.author = author;
 		this.description = description;
-		this.waypoints = processPoints(waypoints);
+		this.waypoints = processPoints(waypoints, memoiser);
 	}
 
 	getId() {
@@ -49,9 +53,13 @@ class MyRoute {
 		return this.waypoints;
 	}
 
+	associateMemoiser(memoiser) {
+		this.memoiser = memoiser;
+	}
+
 	toJsonLd() {
 		let poinstInJson = [];
-		// this.waypoints.arrray.forEach((point) => poinstInJson.push(point.toJson()));
+		this.waypoints.forEach((point) => poinstInJson.push(point.toJson()));
 		let result = {
 			"@context": {
 				"@version": 1.1,
@@ -83,7 +91,6 @@ class MyRoute {
 					"@id": "schema:longitude",
 					"@type": "xs:double"
 				},
-
 				"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 				"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
 				"schema": "http://schema.org/",

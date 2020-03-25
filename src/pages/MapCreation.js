@@ -37,8 +37,10 @@ class MapCreation extends Component {
 	}
 
 	createRoute() {
-		console.log(this.points);
-		let route = new MyRoute(this.routeName, "Temp author", "Temp description", this.points);
+		let name = this.routeName.current.value;
+		let waypoints = this.points.current.state.points;
+		let memoiser = this.routeManager.getMemoiser();
+		let route = new MyRoute(name, "Temp author", "Temp description", waypoints, memoiser);
 		this.routeManager.addRoute(route);
 		return route;
 	}

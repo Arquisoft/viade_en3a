@@ -22,7 +22,7 @@ class MyMap extends React.Component {
 			<Map ref={this.map} center={[0, 0]} zoom={this.props.zoom} dragging={false}
 				scrollWheelZoom={false} touchZoom={false} zoomControl={false}
 				doubleClickZoom={false} style={this.props.style}>
-				< TileLayer
+				<TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 				/>
@@ -31,7 +31,7 @@ class MyMap extends React.Component {
 					<Marker position={points[0]} />
 					<Marker position={points[points.length - 1]} />
 				</FeatureGroup>
-			</Map >
+			</Map>
 		);
 	}
 }
