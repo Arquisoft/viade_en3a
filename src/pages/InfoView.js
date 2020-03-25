@@ -2,21 +2,14 @@ import React from "react";
 import MyMap from "../components/myMap/MyMap";
 import { Table } from 'react-bootstrap';
 import MyElevationChart from '../components/myElevationChart/MyElevationChart';
-import MyRoute from "./../model/MyRoute";
-import { boldRoutePoints } from "./../components/routeList/Points";
 
 class InfoView extends React.Component {
 
     constructor(props) {
         super();
+        this.id = props.match.params.id;
         this.routeManager = props.routeManager;
-        this.route = new MyRoute(
-            "Fuso de la Reina",
-            "María santísima",
-            "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
-            boldRoutePoints,
-            {}
-        );
+        this.route = this.routeManager.getRouteById(this.id);
     }
 
     render() {
@@ -28,7 +21,7 @@ class InfoView extends React.Component {
                 alignItems: "center"
             }}>
 
-                <h1>Route Info </h1>
+                <h1>Route Info</h1>
 
                 {/* TODO -> Add Images to the routes */}
                 < img src={"https://www.stockvault.net/data/2019/12/21/271997/thumb16.jpg"} alt="routeImage" />
