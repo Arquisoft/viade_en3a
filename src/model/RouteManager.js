@@ -11,8 +11,6 @@ class RouteManager {
     }
 
     getRouteById(id) {
-        // console.log(id);
-        console.log(this.routes);
         return this.routes.find((route) => route.getId() === id);
     }
 
