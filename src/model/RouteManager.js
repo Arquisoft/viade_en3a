@@ -11,7 +11,9 @@ class RouteManager {
     }
 
     getRouteById(id) {
-        return this.routes.find((route) => route.id === id);
+        // console.log(id);
+        console.log(this.routes);
+        return this.routes.find((route) => route.getId() === id);
     }
 
     getMemoiser() {

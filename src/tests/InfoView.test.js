@@ -12,7 +12,6 @@ function sleep(ms) {
 }
 
 test('Test create route', async () => {
-    const match = { params: { id: "1" } };
     const myRoute = new MyRoute(
         "Fuso de la Reina",
         "María santísima",
@@ -20,6 +19,7 @@ test('Test create route', async () => {
         [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }],
         routeManager.getMemoiser()
     );
+    const match = { params: { id: myRoute.getId() } };
     await sleep(2000);
     const myRoute2 = new MyRoute(
         "Fuso de la Reina",
