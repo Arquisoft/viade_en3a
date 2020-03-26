@@ -1,19 +1,34 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-=== Contents
+=== Summary
+This application is implemented using Javascript, React.js, SOLID specifications and many other dependencies gathered thanks to npm. Its architecture follows the MVC pattern.
 
-.Summary
+Allows users to authenticate into the system with their SOLID account and manage their routes (stored inside their pod). These routes can be created by the user, already predefined in the system or shared by other users.
 
-For the duration of the semester, we plan to accomplish a functional application that allows users to have/manage routes in a down-to-earth way. In addition, we shall follow some criteria and requirements pre-established by our teachers and professors. Complying with the approach of a social network where users can share data and interact with each other.
+Pod decentralised data storage alongside a route shape standard provide our application with interoperability with other route management systems, like all the other Viade proyects. Moreover, GPX is also supported.
 
-This objective is fulfilled by means of several weekly meetings during our lab practice session at the unversity. On top of that, we might meet once in a while to finish pending work or to discuss the way to proceed on some matter of the project in general.
+=== Some solution approaches
+[options="header", cols="1, 1, 3, 1"]
+|===
+| *Quality goal* 
+| *Scenario* 
+| *Solution approach* 
+| *Link to Details*
 
-It should be noted that many of the decissions have been given solved as a constraint or requirement right before starting the project. So, many of the mentioned below are just explanations and not actual team made decissions.
+| Standards
+| Route data model
+| Elaboration of a data model
+| link:https://arquisoft.github.io/viadeSpec/[Viade data model]
 
-.Decisions
+| Perfect imperfection
+| Application design
+| The intent of fulfilling our goals while understanding that errors have their place
+| link:https://simplicable.com/new/imperfection[Examples at Simplicable]
 
-* Programming language: JavaScript has been the one of choice.
-* Architectural model: MVC --> Model - View - Controller.
-* Information storage: SOLID Pods.
-* Workflow control: GitHub projects inside repo, issues and branches usage in general.
+| Data ownership
+| Information storage
+| Personal SOLID pod storage
+| link:https://solid.mit.edu/[SOLID webpage]
+
+|===
