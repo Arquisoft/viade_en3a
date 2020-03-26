@@ -2,7 +2,6 @@ import '../App.css';
 import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-import StorageHandler from "../components/podService/storageHandler";
 import MyRoute from "./../model/MyRoute";
 
 class MapCreation extends Component {
@@ -32,7 +31,7 @@ class MapCreation extends Component {
 				<EditableMap ref={this.points} role='map' />
 				<Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "1.5vh" }}>Save as json file</Button>
 				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
-				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler}/>
+				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler} />
 			</div>
 		);
 	}
@@ -68,11 +67,9 @@ class MapCreation extends Component {
 		let route = this.createRoute();
 		this.checkRouteChanged(route);
 		const fileData = JSON.stringify(route.toJsonLd());
-		new StorageHandler().storeFileAtUrl(null, route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json", fileData);
 	}
 
 	async viewRoutes() {
-		// let store = new StorageHandler();
 		// let routes = await store.getRoutes();
 		// do something with routes
 	}
