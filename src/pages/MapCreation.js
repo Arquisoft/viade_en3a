@@ -76,21 +76,21 @@ class MapCreation extends Component {
 		// Upload route
 		new PodStorageHandler(await auth.currentSession()).storeRoute(jsonData.routeName + ".txt", fileData, function (result, response) {
 			if (result) {
-				console.log("Route stored at: " + result);
+				//console.log("Route stored at: " + result);
 			} else {
-				console.log("Fail: " + response);
+				//console.log("Fail: " + response);
 			}
 		});
 		// Upload picture
-		let dom = document.getElementById("pictureUploader")
+		let dom = document.getElementById("pictureUploader");
 		let picture = dom.files[0];
 		if (!(typeof picture === 'undefined')) { // If we have a picture
 			let extension = picture.name.split('.').pop();
 			new PodStorageHandler(await auth.currentSession()).storeResource(jsonData.routeName + "." + extension, picture, function (result, response) {
 				if (result) {
-					console.log("Pic stored at: " + result);
+					//console.log("Pic stored at: " + result);
 				} else {
-					console.log("Fail: " + response);
+					//console.log("Fail: " + response);
 				}
 			});
 		}
