@@ -1,18 +1,15 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-=== Contents
-
-.Summary
-
+=== Summary
 This application is implemented using Javascript, React.js, SOLID specifications and many other dependencies gathered thanks to npm. Its architecture follows the MVC pattern.
 
 Allows users to authenticate into the system with their SOLID account and manage their routes (stored inside their pod). These routes can be created by the user, already predefined in the system or shared by other users.
 
 Pod decentralised data storage alongside a route shape standard provide our application with interoperability with other route management systems, like all the other Viade proyects. Moreover, GPX is also supported.
 
-.Some solution approaches
-[cols="1, 1, 3, 1"]
+=== Some solution approaches
+[options="header", cols="1, 1, 3, 1"]
 |===
 | *Quality goal* 
 | *Scenario* 
