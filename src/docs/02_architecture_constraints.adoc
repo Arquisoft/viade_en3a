@@ -32,9 +32,6 @@ Each one of them is broken into two parts: Constraint and a brief explanation of
 | Arc42
 | Template for architecture communication and documentation. This technology will be the base of this project's documentation.
 
-| Docker
-| Uses OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files. All containers are run by a single operating-system kernel and are thus more lightweight than virtual machines. Reference: "https://en.wikipedia.org/wiki/Docker_(software)"
-
 | Travis
 | As a continuous integration platform, Travis CI supports your development process by automatically building and testing code changes, providing immediate feedback on the success of the change. Reference: "https://docs.travis-ci.com/user/for-beginners/"
 
