@@ -32,7 +32,7 @@ class MapCreation extends Component {
 				<EditableMap ref={this.points} role='map' />
 				<Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "1.5vh" }}>Save as json file</Button>
 				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
-				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
+				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler}/>
 			</div>
 		);
 	}
