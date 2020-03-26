@@ -1,25 +1,21 @@
 const fileClient = require('solid-file-client');
 const auth = require('solid-auth-client');
 
-async function login(credentials) {
+const credentials = {
+    "idp": "https://solid.community",
+    "username": "viadeen3a",
+    "password": "viadeen3atest123"
+}
+
+async function login() {
     var result;
-    if (credentials == null) {
-        result = await fileClient.popupLogin().then(webId => {
-            console.log(`Logged in as ${webId}.`);
-            return true;
-        }, err => {
-            console.log(err);
-            return false;
-        });
-    } else {
-        result = await fileClient.login(credentials).then((session) => {
-            console.log(`Logged in as ` + session.webId);
-            return true;
-        }, err => {
-            console.log(err);
-            return false;
-        });
+    let session = await auth.currentSession()
+    if (!session) { 
+        await auth.login(credentials).then(
+            (param) => { console.log(param)}, (param) => { console.log(param)}) 
+        result = true;
     }
+    console.log(`Logged in as ${session.webId}.`)
     return result;
 }
 
@@ -34,5 +30,5 @@ async function getSession() {
 module.exports = {
     login: login,
     logout: logout,
-    getSession: getSession,
+    getSession: getSession
 };
