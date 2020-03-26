@@ -1,14 +1,14 @@
 import React from 'react';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 
 class MyElevationChart extends React.Component {
 
     constructor(props) {
         super(props);
-        this.route=props.route;
+        this.route = props.route;
         this.data = {
-            labels: this.route.points.map( (p) => ""),
+            labels: this.route.getWaypoints().map((p) => ""),
             datasets: [
                 {
                     label: 'Altitude',
@@ -29,40 +29,40 @@ class MyElevationChart extends React.Component {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: this.route.elevations,
+                    data: this.route.getWaypoints().map((p) => p.getAltitude()),
                 }
             ]
         };
         this.lineOptions = {
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: true,
-                        },
-                    }],
-                    yAxes: [{
-                        // stacked: true,
-                        gridLines: {
-                            display: true,
-                        },
-                        ticks: {
-                            beginAtZero: true,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: true,
+                    },
+                }],
+                yAxes: [{
+                    // stacked: true,
+                    gridLines: {
+                        display: true,
+                    },
+                    ticks: {
+                        beginAtZero: true,
 
-                        },
-                    }],
-                },
-                legend: {
-                    display: false,
-                },
-                tooltips: {
-                    enabled: true,
-                },
-            };
+                    },
+                }],
+            },
+            legend: {
+                display: false,
+            },
+            tooltips: {
+                enabled: true,
+            },
+        };
     }
 
     render() {
         return (
-            <div  style={this.props.style}>
+            <div style={this.props.style}>
                 <Line
                     data={this.data}
                     options={this.lineOptions}

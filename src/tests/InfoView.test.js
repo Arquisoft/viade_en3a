@@ -3,14 +3,33 @@ import InfoView from '../pages/InfoView.js';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import RouteManager from "./../model/RouteManager";
+import MyRoute from "./../model/MyRoute";
 
 const routeManager = new RouteManager();
 
-test('Test create route', () => {
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-    const match = { params: { id: "1" } };
-
-    const { getByText } = render(<InfoView match={match} routeManager={routeManager} />);
-
-    expect(getByText("Route Info")).toBeInTheDocument();
+test('Test create route', async () => {
+    const myRoute = new MyRoute(
+        "Fuso de la Reina",
+        "María santísima",
+        "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
+        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }],
+        routeManager.getMemoiser()
+    );
+    const match = { params: { id: myRoute.getId() } };
+    await sleep(2000);
+    const myRoute2 = new MyRoute(
+        "Fuso de la Reina",
+        "María santísima",
+        "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
+        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }],
+        routeManager.getMemoiser()
+    );
+    routeManager.addRoute(myRoute);
+    routeManager.addRoute(myRoute2);
+    const { getByTestId } = render(<div data-testid="test" ><InfoView match={match} routeManager={routeManager} /></div>);
+    expect(getByTestId("test")).toHaveAttribute("data-testid", "test");
 });

@@ -7,7 +7,7 @@ class RouteList extends React.Component {
     constructor(props) {
         super(props);
         this.routeManager = props.routeManager;
-        this.cardDeckSize = 3;
+        this.cardDeckSize = 4;
     }
 
     render() {
@@ -16,12 +16,11 @@ class RouteList extends React.Component {
         let counter = 0;
         while (counter <= routes.length) {
             routesForCardDecks.push(
-                <CardDeck style={{ margin: "1%" }}>
-                    {routes.slice(counter, counter + this.cardDeckSize).map((r) =>
-                        <RouteCard
-                            route={r}
-                        />
-                    )}
+                <CardDeck style={{ margin: "2%", width: "100%" }}>
+                    {
+                        routes.slice(counter, counter + this.cardDeckSize).map(
+                            (r) => <RouteCard route={r} />)
+                    }
                 </CardDeck>
             );
             counter += this.cardDeckSize;
@@ -30,7 +29,7 @@ class RouteList extends React.Component {
         return (
             <div className="App-header">
                 <h1>Route list</h1>
-                {routesForCardDecks.map((route) => route)}
+                {routesForCardDecks}
             </div >
         );
     }
