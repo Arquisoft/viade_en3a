@@ -29,7 +29,7 @@ class MyElevationChart extends React.Component {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: this.route.elevations,
+                    data: this.route.getWaypoints().map((p) => p.getAltitude()),
                 }
             ]
         };
