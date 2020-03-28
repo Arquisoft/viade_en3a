@@ -1,4 +1,4 @@
-import '../App.css';
+import './../css/App.css';
 import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
@@ -66,7 +66,7 @@ class MapCreation extends Component {
 	uploadToPod() {
 		let route = this.createRoute();
 		this.checkRouteChanged(route);
-		const fileData = JSON.stringify(route.toJsonLd());
+		// const fileData = JSON.stringify(route.toJsonLd());
 	}
 
 	async viewRoutes() {

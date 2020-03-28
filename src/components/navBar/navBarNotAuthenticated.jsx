@@ -10,8 +10,6 @@ import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
 import viadeText from './../../assets/logo/logo_letters.jpeg';
 
-import './NavBarNotAuthenticated.css';
-
 function NavBarNotAuthenticated(props) {
   return (
     <HashRouter basename='/'>
@@ -52,11 +50,11 @@ function NavBarNotAuthenticated(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <div id="container">
+      <div id="container" style={{ backgroundColor: "#282c34" }}>
         <Route exact path="/register" component={RegisterWindow} />
         <Route exact path="/" component={WelcomeCarousel} />
       </div>
-    </HashRouter>
+    </HashRouter >
   );
 }
 
