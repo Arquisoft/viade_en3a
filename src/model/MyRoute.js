@@ -55,10 +55,14 @@ class MyRoute {
 		return this.waypoints;
 	}
 
+	getFileName() {
+		return this.name + "_" + this.id + ".json";
+	}
+
 	toJsonLd() {
 		let poinstInJson = [];
 		this.waypoints.forEach((point) => poinstInJson.push(point.toJson()));
-		return {
+		return JSON.stringify({
 			"@context": {
 				"@version": 1.1,
 				"comments": {
@@ -102,7 +106,7 @@ class MyRoute {
 			],
 			"name": this.name,
 			"points": poinstInJson
-		};
+		});
 	}
 
 }

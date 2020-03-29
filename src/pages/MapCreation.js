@@ -1,8 +1,12 @@
-import './../css/App.css';
-import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
+import PodStorageHandler from "./../components/podService/podStoreHandler";
+import { Button, InputGroup, FormControl } from 'react-bootstrap';
+
+import './../css/App.css';
+
+const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 
@@ -16,7 +20,7 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div className="App-header" style={{ height: "80%" }} >
+			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
 				<h1>Create your own Route</h1>
 				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
@@ -29,8 +33,7 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
-				<Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "1.5vh" }}>Save as json file</Button>
-				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
+				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Save route in pod</Button>
 				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler} />
 			</div>
 		);
@@ -45,33 +48,29 @@ class MapCreation extends Component {
 	}
 
 	checkRouteChanged(newRoute) {
-		if ((this.tempRoute === undefined) || (JSON.stringify(this.tempRoute.toJsonLd()) !== JSON.stringify(newRoute.toJsonLd()))) {
+		if ((this.tempRoute === undefined) || (this.tempRoute.toJsonLd() !== newRoute.toJsonLd())) {
 			this.tempRoute = newRoute;
 			this.routeManager.addRoute(this.tempRoute);
+			return newRoute;
+		} else {
+			return this.tempRoute;
 		}
 	}
 
-	downloadToClient() {
+	async uploadToPod() {
 		let route = this.createRoute();
-		this.checkRouteChanged(route);
-		const fileData = JSON.stringify(route.toJsonLd());
-		const blob = new Blob([fileData], { type: "text/plain" });
-		const url = URL.createObjectURL(blob);
-		const link = document.createElement("a");
-		link.download = route.getAuthor() + "_" + route.toJsonLd()["name"] + ".json";
-		link.href = url;
-		link.click();
-	}
-
-	uploadToPod() {
-		let route = this.createRoute();
-		this.checkRouteChanged(route);
-		// const fileData = JSON.stringify(route.toJsonLd());
-	}
-
-	async viewRoutes() {
-		// let routes = await store.getRoutes();
-		// do something with routes
+		route = this.checkRouteChanged(route);
+		let session = await auth.currentSession();
+		let storageHandler = new PodStorageHandler(session);
+		storageHandler.storeRoute(route.getFileName(), route.toJsonLd(), (filePodUrl, podResponse) => {
+			let alertText = "";
+			if (filePodUrl == null) {
+				alertText = "We are sorry!! Something went wrong while uploading your brand new route to your POD";
+			} else {
+				alertText = "Your brand new shiny route has been successfully uploaded to your pod";
+			}
+			alert(alertText);
+		});
 	}
 
 }

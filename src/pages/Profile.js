@@ -2,8 +2,8 @@ import './../css/App.css';
 import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
-import RouteCard from './../components/routeList/RouteCard';
-import CardDeck from "react-bootstrap/CardDeck";
+// import RouteCard from './../components/routeList/RouteCard';
+// import CardDeck from "react-bootstrap/CardDeck";
 
 const auth = require('solid-auth-client');
 var session = null;

@@ -25,7 +25,7 @@ export default class PodStorageHandler {
      *                            + the first is the URL where the route is stored or null
      *                            + the second is the actual response or error of the POD
      */
-    async storeRoute(routeFileName, data, callback = () => {}){
+    async storeRoute(routeFileName, data, callback = () => { }) {
         let url = this.repository + this.defaultFolder + this.routesDirectory + routeFileName;
         this.storeFile(url, data, callback)
 
@@ -54,7 +54,7 @@ export default class PodStorageHandler {
                 function (file) {
                     result.push(file);
                 },
-                (error) => {callback(null, error);}
+                (error) => { callback(null, error); }
             );
         }
         callback(result, null);
@@ -69,7 +69,7 @@ export default class PodStorageHandler {
      *                            + the first is the URL where the resource is stored or null if it wasnt stored
      *                            + the second is the actual response or error of the POD
      */
-    storeResource(resourceFileName, data, callback = () => {}){
+    storeResource(resourceFileName, data, callback = () => { }) {
         let url = this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
         this.storeFile(url, data, callback);
     }
@@ -77,8 +77,8 @@ export default class PodStorageHandler {
     storeFile(url, data, callback) {
         let response = fc.createFile(url, data);
         response.then(
-            (response) => {callback(response.url, response);}
-            ,   (error) => {callback(null, error);}
+            (response) => { callback(response.url, response); }
+            , (error) => { callback(null, error); }
         );
     }
 
