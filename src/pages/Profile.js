@@ -1,4 +1,4 @@
-import '../App.css';
+import './../css/App.css';
 import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
@@ -33,11 +33,11 @@ class Profile extends Component {
                 <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>Edit profile</Button>
 
                 <h1>Last routes done</h1>
-                <CardDeck style={{ margin: "1%" }}>
+                {/* <CardDeck style={{ margin: "1%" }}>
                     <RouteCard
                         route={this.routeManager.getRoutes()[0]}
                     />
-                </CardDeck>
+                </CardDeck> */}
             </div>
         );
     }

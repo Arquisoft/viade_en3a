@@ -1,4 +1,4 @@
-import '../App.css';
+import './../css/App.css';
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import FriendCard from '../components/friendCard/FriendCard';

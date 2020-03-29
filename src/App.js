@@ -1,9 +1,11 @@
 import React from 'react';
-import './App.css';
+import "./css/App.css";
 import MyNavBar from './components/navBar/navBar';
 import NavBarNotAuthenticated from './components/navBar/navBarNotAuthenticated';
 import { LoggedIn, LoggedOut } from '@solid/react';
 import { HashRouter } from "react-router-dom";
+
+// const routeManager = new RouteManager();
 
 function App() {
   return (

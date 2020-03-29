@@ -1,4 +1,4 @@
-import '../App.css';
+import './../css/App.css';
 import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
 
