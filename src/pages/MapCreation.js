@@ -8,6 +8,10 @@ import './../css/App.css';
 
 const auth = require('solid-auth-client');
 
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -42,8 +46,7 @@ class MapCreation extends Component {
 	createRoute() {
 		let name = this.routeName.current.value;
 		let waypoints = this.points.current.state.points;
-		let memoiser = this.routeManager.getMemoiser();
-		let route = new MyRoute(name, "Temp author", "Temp description", waypoints, memoiser);
+		let route = new MyRoute(name, "Temp author", "Temp description", waypoints);
 		return route;
 	}
 
@@ -64,10 +67,11 @@ class MapCreation extends Component {
 		let storageHandler = new PodStorageHandler(session);
 		storageHandler.storeRoute(route.getFileName(), route.toJsonLd(), (filePodUrl, podResponse) => {
 			let alertText = "";
-			if (filePodUrl == null) {
+			if (filePodUrl === null) {
 				alertText = "We are sorry!! Something went wrong while uploading your brand new route to your POD";
 			} else {
 				alertText = "Your brand new shiny route has been successfully uploaded to your pod";
+				this.routeManager.syncRoutesWithPod();
 			}
 			alert(alertText);
 		});

@@ -19,6 +19,7 @@ import viadeText from './../../assets/logo/logo_letters.jpeg';
 import RouteManager from "../../model/RouteManager";
 
 const routeManager = new RouteManager();
+routeManager.syncRoutesWithPod();
 
 function MyNavBar(props) {
   return (

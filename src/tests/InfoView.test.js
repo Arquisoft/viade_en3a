@@ -16,8 +16,7 @@ test('Test create route', async () => {
         "Fuso de la Reina",
         "María santísima",
         "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
-        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }],
-        routeManager.getMemoiser()
+        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }]
     );
     const match = { params: { id: myRoute.getId() } };
     await sleep(2000);
@@ -25,8 +24,7 @@ test('Test create route', async () => {
         "Fuso de la Reina",
         "María santísima",
         "Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust.",
-        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }],
-        routeManager.getMemoiser()
+        [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }]
     );
     routeManager.addRoute(myRoute);
     routeManager.addRoute(myRoute2);

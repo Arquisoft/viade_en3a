@@ -29,7 +29,7 @@ class InfoView extends React.Component {
                 <h1>Route Info</h1>
                 <div id="routeInfoContent">
                     <div id="ircInfoTable">
-                        <Button variant="primary" onClick={() => this.downloadToClient()}>Export route in json format</Button>
+                        <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>Export route in json format</Button>
                         <div>
                             <Table striped bordered>
                                 <thead>
