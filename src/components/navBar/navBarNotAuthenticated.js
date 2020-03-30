@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route } from 'react-router-dom';
-import RegisterWindow from '../registerWindow/registerWindow';
+import SignUp from "../../pages/SignUp";
 import WelcomeCarousel from '../carousel/WelcomeCarousel';
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
@@ -51,7 +51,7 @@ function NavBarNotAuthenticated(props) {
         </Navbar.Collapse>
       </Navbar>
       <div id="container" style={{ backgroundColor: "#282c34" }}>
-        <Route exact path="/register" component={RegisterWindow} />
+        <Route exact path="/register" component={SignUp} />
         <Route exact path="/" component={WelcomeCarousel} />
       </div>
     </HashRouter >

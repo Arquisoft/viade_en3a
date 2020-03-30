@@ -24,19 +24,21 @@ class RouteManager {
 
     async syncRoutesWithPod() {
         let session = await auth.currentSession();
-        let storageHandler = new PodStorageHandler(session);
-        storageHandler.getRoutes((rawJsonRoutes, error) => {
-            if (rawJsonRoutes === null) {
-                alert("There was an error trying to fetch your routes from the POD");
-            } else {
-                this.routes = [];
-                rawJsonRoutes.forEach(rawRoute => {
-                    let tempRoute = new MyRoute("", "", "", []);
-                    tempRoute.modifyFromJsonLd(rawRoute);
-                    this.routes.push(tempRoute);
-                });
-            }
-        });
+        if (session !== null && session !== undefined) {
+            let storageHandler = new PodStorageHandler(session);
+            storageHandler.getRoutes((rawJsonRoutes, error) => {
+                if (rawJsonRoutes === null) {
+                    alert("There was an error trying to fetch your routes from the POD");
+                } else {
+                    this.routes = [];
+                    rawJsonRoutes.forEach(rawRoute => {
+                        let tempRoute = new MyRoute("", "", "", []);
+                        tempRoute.modifyFromJsonLd(rawRoute);
+                        this.routes.push(tempRoute);
+                    });
+                }
+            });
+        }
     }
 
 }

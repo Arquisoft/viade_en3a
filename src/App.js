@@ -5,8 +5,6 @@ import NavBarNotAuthenticated from './components/navBar/navBarNotAuthenticated';
 import { LoggedIn, LoggedOut } from '@solid/react';
 import { HashRouter } from "react-router-dom";
 
-// const routeManager = new RouteManager();
-
 function App() {
   return (
     <div className="App">

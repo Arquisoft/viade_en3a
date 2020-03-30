@@ -1,6 +1,8 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Polyline, FeatureGroup } from 'react-leaflet';
 
+import "./../../css/MyMap.css";
+
 class MyMap extends React.Component {
 
 	constructor(props) {
