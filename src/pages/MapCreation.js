@@ -47,7 +47,6 @@ class MapCreation extends Component {
 	}
 
 	checkRouteChanged(newRoute) {
-		console.log(newRoute.getComparableString());
 		if ((this.tempRoute === undefined) || (this.tempRoute !== undefined && (this.tempRoute.getComparableString() !== newRoute.getComparableString()))) {
 			this.tempRoute = newRoute;
 			this.routeManager.addRoute(this.tempRoute);
