@@ -11,7 +11,7 @@ export default class PodStorageHandler {
         this.repository = "https://" + (currentSession).webId.split('/')[2];
         this.defaultFolder = "/viade/";
 
-        this.routesDirectory = "routes/";
+        this.routesDirectory = "routesTesting2/";
         this.resourcesDirectory = "resources/";
         this.commentsDirectory = "comments/";
     }
@@ -27,19 +27,12 @@ export default class PodStorageHandler {
      */
     async storeRoute(routeFileName, data, callback = () => { }) {
         let url = this.repository + this.defaultFolder + this.routesDirectory + routeFileName;
-        this.storeFile(url, data, callback)
-
-        /*
-        let response = fc.createFile(url, data);
-        response.then(
-            (response) => {callback(response.url, response)}
-        ,   (error) => {callback(null, error)}
-        );
-        */
+        this.storeFile(url, data, callback);
     }
 
     /**
      * Gets an Array<String> with all the files stored in the routes directory
+     * Will automatically generate the default storage folders if not present
      *
      * @param {Function} callback - 2 Parameter function,
      *                             + the first is {Array<String>} or null if there was an error. Array with all the routes
@@ -47,16 +40,27 @@ export default class PodStorageHandler {
      */
     async getRoutes(callback) {
         let result = [];
+        let folder = null;
 
-        let folder = await this.getFolder(this.repository + this.defaultFolder + this.routesDirectory);
-        for (let i = 0; i < folder.files.length; i++) {
-            await this.getFile(folder.files[i].url).then(
-                function (file) {
-                    result.push(file);
-                },
-                (error) => { callback(null, error); }
-            );
+        await this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
+            (directory) => {folder = directory},
+            (error) => {folder = null;}
+        );
+        if (folder) {
+            // Get files from directory
+            for (let i = 0; i < folder.files.length; i++) {
+                await this.getFile(folder.files[i].url).then(
+                    function (file) {
+                        result.push(file);
+                    },
+                    (error) => { callback(null, error); }
+                );
+            }
+        } else {
+            // Create viade/routes folder
+            this.createBasicFolders();
         }
+
         callback(result, null);
     }
 
@@ -88,5 +92,11 @@ export default class PodStorageHandler {
 
     async getFile(url) {
         return fc.readFile(url);
+    }
+
+    async createBasicFolders(){
+        fc.createFolder(this.repository + this.defaultFolder + this.routesDirectory);
+        fc.createFolder(this.repository + this.defaultFolder + this.resourcesDirectory);
+        fc.createFolder(this.repository + this.defaultFolder + this.commentsDirectory);
     }
 }
