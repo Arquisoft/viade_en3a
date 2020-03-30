@@ -7,6 +7,7 @@ class RouteManager {
 
     constructor() {
         this.routes = [];
+        this.syncRoutesWithPod();
     }
 
     getRoutes() {

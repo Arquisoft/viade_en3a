@@ -8,10 +8,6 @@ import './../css/App.css';
 
 const auth = require('solid-auth-client');
 
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -51,7 +47,8 @@ class MapCreation extends Component {
 	}
 
 	checkRouteChanged(newRoute) {
-		if ((this.tempRoute === undefined) || (this.tempRoute.toJsonLd() !== newRoute.toJsonLd())) {
+		console.log(newRoute.getComparableString());
+		if ((this.tempRoute === undefined) || (this.tempRoute !== undefined && (this.tempRoute.getComparableString() !== newRoute.getComparableString()))) {
 			this.tempRoute = newRoute;
 			this.routeManager.addRoute(this.tempRoute);
 			return newRoute;
@@ -71,7 +68,6 @@ class MapCreation extends Component {
 				alertText = "We are sorry!! Something went wrong while uploading your brand new route to your POD";
 			} else {
 				alertText = "Your brand new shiny route has been successfully uploaded to your pod";
-				this.routeManager.syncRoutesWithPod();
 			}
 			alert(alertText);
 		});

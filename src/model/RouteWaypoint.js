@@ -7,15 +7,12 @@ class RouteWaypoint {
      * <https://api.airmap.com>
      * @param {Number} latitude The latitude of the point this object represents.
      * @param {Number} longitude The longitude of the point this object represents.
-     * @param {Number} altitude The altitude of the point this object represents.
      */
-    constructor(latitude, longitude, altitude) {
+    constructor(latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.altitude = altitude;
-        if (this.altitude === -1) {
-            this.askForAltitude();
-        }
+        this.altitude = -1;
+        this.askForAltitude();
     }
 
     getAltitude() {
@@ -33,14 +30,11 @@ class RouteWaypoint {
     toJson() {
         return {
             "latitude": this.latitude,
-            "longitude": this.longitude,
-            "altitude": this.altitude
+            "longitude": this.longitude
         };
     }
 
     async askForAltitude() {
-        console.log(this.latitude);
-        console.log(this.longitude);
         await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
             .then((response) => {
                 if (response.status === 200) {

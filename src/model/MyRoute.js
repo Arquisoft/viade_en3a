@@ -9,7 +9,7 @@ import RouteWaypoint from "./RouteWaypoint";
  */
 function processPoints(waypoints) {
 	let list = [];
-	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng, point.alt === undefined ? -1 : point.alt)));
+	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng)));
 	return list;
 }
 
@@ -57,6 +57,13 @@ class MyRoute {
 		return this.name + "_" + this.id + ".json";
 	}
 
+	getComparableString() {
+		let parsedRoute = JSON.parse(this.toJsonLd());
+		parsedRoute["@context"] = "";
+		parsedRoute["id"] = "";
+		return JSON.stringify(parsedRoute);
+	}
+
 	modifyFromJsonLd(stringData) {
 		let parsedRoute = JSON.parse(stringData);
 		this.id = parsedRoute["id"];
@@ -67,8 +74,7 @@ class MyRoute {
 		rawPoints = rawPoints.map((jsonPoint) => {
 			return {
 				lat: jsonPoint["latitude"],
-				lng: jsonPoint["longitude"],
-				alt: jsonPoint["altitude"]
+				lng: jsonPoint["longitude"]
 			};
 		});
 		this.waypoints = processPoints(rawPoints);
