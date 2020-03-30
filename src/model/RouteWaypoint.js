@@ -7,13 +7,10 @@ class RouteWaypoint {
      * <https://api.airmap.com>
      * @param {Number} latitude The latitude of the point this object represents.
      * @param {Number} longitude The longitude of the point this object represents.
-     * @param {Map<String, Number>} memoiser The memoiser dictionary keeping 
-     * track of already calculated points.
      */
-    constructor(latitude, longitude, memoiser) {
+    constructor(latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.memoiser = memoiser;
         this.altitude = -1;
         this.askForAltitude();
     }
@@ -38,19 +35,19 @@ class RouteWaypoint {
     }
 
     async askForAltitude() {
-        let memoAltitude = this.memoiser[JSON.stringify(this.toJson())];
-        if (memoAltitude !== undefined) {
-            this.altitude = memoAltitude;
-        } else {
-            await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
-                .then(
-                    (res) => res.json()
-                ).then(
-                    (json) => {
-                        this.altitude = parseInt(json["data"], 10);
-                        this.memoiser[JSON.stringify(this.toJson())] = this.altitude;
+        await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
+            .then((response) => {
+                if (response.status === 200) {
+                    response.json().then((data) => {
+                        this.altitude = parseInt(data["data"], 10);
+                        if (isNaN(this.altitude)) {
+                            this.altitude = -1;
+                        }
                     });
-        }
+                }
+            }).catch((err) => {
+                this.altitude = -1;
+            });
     }
 
 }

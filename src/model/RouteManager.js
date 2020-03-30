@@ -1,9 +1,13 @@
+import PodStorageHandler from "./../components/podService/podStoreHandler";
+import MyRoute from "./MyRoute";
+
+const auth = require('solid-auth-client');
 
 class RouteManager {
 
     constructor() {
-        this.memoiser = {};
         this.routes = [];
+        this.syncRoutesWithPod();
     }
 
     getRoutes() {
@@ -14,12 +18,25 @@ class RouteManager {
         return this.routes.find((route) => route.getId() === id);
     }
 
-    getMemoiser() {
-        return this.memoiser;
-    }
-
     addRoute(route) {
         this.routes.push(route);
+    }
+
+    async syncRoutesWithPod() {
+        let session = await auth.currentSession();
+        let storageHandler = new PodStorageHandler(session);
+        storageHandler.getRoutes((rawJsonRoutes, error) => {
+            if (rawJsonRoutes === null) {
+                alert("There was an error trying to fetch your routes from the POD");
+            } else {
+                this.routes = [];
+                rawJsonRoutes.forEach(rawRoute => {
+                    let tempRoute = new MyRoute("", "", "", []);
+                    tempRoute.modifyFromJsonLd(rawRoute);
+                    this.routes.push(tempRoute);
+                });
+            }
+        });
     }
 
 }

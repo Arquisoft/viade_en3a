@@ -29,6 +29,7 @@ class InfoView extends React.Component {
                 <h1>Route Info</h1>
                 <div id="routeInfoContent">
                     <div id="ircInfoTable">
+                        <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>Export route in json format</Button>
                         <div>
                             <Table striped bordered>
                                 <thead>
@@ -88,6 +89,16 @@ class InfoView extends React.Component {
                 </div>
             </div >
         );
+    }
+
+    downloadToClient() {
+        const fileData = this.route.toJsonLd();
+        const blob = new Blob([fileData], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = this.route.getName() + "_" + this.route.getId() + ".json";
+        link.href = url;
+        link.click();
     }
 
 }
