@@ -1,4 +1,26 @@
 [[section-runtime-view]]
 == Runtime View
 
-TBD
+=== Route Creation
+image::RuntimeViewRouteCreation.png[RouteCreation]
+
+The user creates a route using the map in the UI. Once it presses save,
+using the data it defined (name, description, route points), the route 
+is created. In this point the altitude for each of the points is calculated
+calling an external API. Once created the route is added to the list mantained
+in the Route Manager. Asynchronously the new route is added to the POD.
+
+=== Route Listing
+image::RuntimeViewRouteDetailed.png[RouteListing]
+
+Once the user clicks in route listing the following process is executed.
+
+[arabic]
+. The Route Manager is called to get the user's routes.
+. The routes are showng as independent cards, one for each with a button
+on each one allowing you to display the more info view.
+. The more info view contains:
+.. The route image
+.. More information about the route (description, name, ...)
+.. MyMap React component showing the points.
+.. MyElevationChart React component showing the altitude for each of the points.

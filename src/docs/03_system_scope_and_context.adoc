@@ -7,25 +7,23 @@ The stakeholders of the application are described in the next lines and how the 
 
 image::BusinessContext.png[BusiContext]
 
-User:: The user can see in the application his stored routes.
-User Friends:: Users can share their routes with other friends and make groups. They can also share videos, photos and
-information about them.
-Other Apps:: Interoperability with other apps is also provided. Routes can be loaded from other applications in multiple formats
-such as KML. 
-
+User:: The user creates routes on our application or in other compatible aplications that use viadeSpec standard.
+User Friends:: User SOLID friends can also create routes in their favourite application following the standard.
+Applications:: Both applications will communicate between them and show the created routes.
 
 
 === Technical Context
 
 image:TechnicalContext.png[TechContext]
 
-==== FrontEnd:
+==== Internally Controlled:
 
-React:: 
+Application Front End:: 
+	We use React to design it and Bootstrap to ease the design of the interface.
 	It is our framework of choice for the frontend of the application, so this part will be developed in javascript and HTML.
 	Its task is to build the HTMLs views which the user interacts with.
 
-==== BackEnd:
+Application Back End::
 
 RDFLib.js::
     It's a library used to communicate with the Pods (where the information is stored); to fetch and update data whenever necessary.
@@ -38,3 +36,9 @@ solid-auth-client::
 
 The application is based on the SOLID project for the re-decentralization of the web, therefore
 each user is the owner of its own data through the mentioned Pods.
+
+=== Externally Controlled:
+
+On the above graph we show how would be the communication when creating a route and being shown
+in another application. Information always goes through the POD and once there compatible applications
+will manage to show the routes in the way they do.
