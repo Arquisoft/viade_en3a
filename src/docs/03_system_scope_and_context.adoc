@@ -37,7 +37,7 @@ solid-auth-client::
 The application is based on the SOLID project for the re-decentralization of the web, therefore
 each user is the owner of its own data through the mentioned Pods.
 
-=== Externally Controlled:
+==== Externally Controlled:
 
 On the above graph we show how would be the communication when creating a route and being shown
 in another application. Information always goes through the POD and once there compatible applications

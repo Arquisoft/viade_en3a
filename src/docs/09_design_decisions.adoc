@@ -1,16 +1,21 @@
 [[section-design-decisions]]
 == Design Decisions
 
-=== _Use of React Native_
+=== _Not Use React Native_
+
+We decided to postpone the use of React Native.
 
 .Pros
 
-* Will allow creating apps for Android and iOS with the same code than the web application.
+* Allows creating apps for Android and iOS with the same code than the web application.
 * Dynamic HTML pages can be easily created.
 
 .Cons
 
 * Will take time to learn the language.
+* Less pre-created components available.
+* Not much advantage in using it, as the main functions can be emulated
+using a web browser for mobile phones.
 
 
 === _KML Format for Routes_
@@ -38,8 +43,40 @@ Map, Marker or Polyline. They came already implemented.
 
 * None of us has previously worked with this tool, so it's another thing to learn.
 
+=== _Chart.js_
 
-=== _Other Decisions_
-This part will be done in the future. Some decisions haven't been taken yet, for example:
+We chose chart_js as our plotting tool. 
 
-* Features that the app will have
+.Pros
+
+* Has react suport to ease the task of developing the charts
+* It's free.
+* It's well documented.
+
+.Cons
+
+* Needs a lot of code to configure the charts.
+
+=== _Storing altitude for points in the POD_
+
+.Pros
+
+* Reduces latency when displaying points as it only checks the altitude of each point once.
+* ViadeSpec points seem to follow this approach.
+
+.Cons
+
+* More space occupied
+
+=== AirMap Elevation API
+
+.Pros
+
+* It's free
+* Doesn't need API Key
+* Easy to use (just a single GET request)
+
+.Cons
+
+* For some points, such as seas, lakes or oceans may not give a response.
+
