@@ -4,19 +4,19 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
-import RegisterWindow from '../registerWindow/registerWindow';
+import SignUp from '../../pages/SignUp';
 import MapCreation from '../../pages/MapCreation';
 import RouteList from '../routeList/RouteList';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
 import EditProfile from '../../pages/EditProfile';
-import InfoView from "../../pages/InfoView";
+import InfoView from "./../../pages/InfoView";
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
 import viadeText from './../../assets/logo/logo_letters.jpeg';
-import RouteManager from "../../model/RouteManager";
+import RouteManager from "./../../model/RouteManager";
 
 const routeManager = new RouteManager();
 
@@ -70,7 +70,7 @@ function MyNavBar(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Route exact path="/register" component={RegisterWindow} />
+      <Route exact path="/register" component={SignUp} />
       <Route exact path="/routes/add" render={() => <MapCreation routeManager={routeManager} />} />
       <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
       <Route exact path="/home" component={Home} />
