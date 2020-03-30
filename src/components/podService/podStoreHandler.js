@@ -11,7 +11,7 @@ export default class PodStorageHandler {
         this.repository = "https://" + (currentSession).webId.split('/')[2];
         this.defaultFolder = "/viade/";
 
-        this.routesDirectory = "routesTesting2/";
+        this.routesDirectory = "routes/";
         this.resourcesDirectory = "resources/";
         this.commentsDirectory = "comments/";
     }
@@ -76,6 +76,35 @@ export default class PodStorageHandler {
     storeResource(resourceFileName, data, callback = () => { }) {
         let url = this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
         this.storeFile(url, data, callback);
+    }
+
+    /**
+     * Gets an Array<Blob> with all the files stored in the resources directory
+     * Will automatically generate the default storage folders if not present
+     *
+     * @param {Function} callback - 2 Parameter function,
+     *                             + the first is {Array<Blob>} or null if there was an error. Array with all the resources
+     *                             + the second null or the error found.
+     */
+    async getResources(callback) {
+        let result = [];
+        let folder = null;
+        // Not yet implemented
+
+        callback(null, null);
+    }
+
+    /**
+     * Deletes all routes, comments and resources as well as folders regarding viade from the pod
+     *
+     * @param callback - 1 parameter function,
+     *                      + String "OK" if the process finished, null if there was an error
+     */
+    async deleteAll(callback = () => {}){
+        fc.deleteFolderRecursively(this.repository + this.defaultFolder).then(
+            (res) => { callback("OK"); },
+            (error) => { callback(null); }
+        );
     }
 
     storeFile(url, data, callback) {
