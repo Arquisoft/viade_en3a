@@ -1,6 +1,10 @@
 import React from "react";
 import RouteCard from "./RouteCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import PodStorageHandler from "./../podService/podStoreHandler";
+import MyRoute from "./../../model/MyRoute";
+
+const auth = require('solid-auth-client');
 
 class RouteList extends React.Component {
 
@@ -8,17 +12,20 @@ class RouteList extends React.Component {
         super(props);
         this.routeManager = props.routeManager;
         this.cardDeckSize = 4;
+        this.state = {
+            routes: []
+        };
+        this.syncRoutesWithPod();
     }
 
     render() {
-        let routes = this.routeManager.getRoutes();
         let routesForCardDecks = [];
         let counter = 0;
-        while (counter <= routes.length) {
+        while (counter <= this.state.routes.length) {
             routesForCardDecks.push(
                 <CardDeck style={{ margin: "2%", width: "100%" }}>
                     {
-                        routes.slice(counter, counter + this.cardDeckSize).map(
+                        this.state.routes.slice(counter, counter + this.cardDeckSize).map(
                             (r) => <RouteCard route={r} />)
                     }
                 </CardDeck>
@@ -32,6 +39,28 @@ class RouteList extends React.Component {
                 {routesForCardDecks}
             </div >
         );
+    }
+
+    async syncRoutesWithPod() {
+        this.routeManager.resetRoutes();
+        let routeList = [];
+        let session = await auth.currentSession();
+        if (session !== null && session !== undefined) {
+            let storageHandler = new PodStorageHandler(session);
+            storageHandler.getRoutes((rawJsonRoutes, error) => {
+                if (rawJsonRoutes === null) {
+                    alert("There was an error trying to fetch your routes from the POD");
+                } else {
+                    rawJsonRoutes.forEach(rawRoute => {
+                        let tempRoute = new MyRoute("", "", "", []);
+                        tempRoute.modifyFromJsonLd(rawRoute);
+                        routeList.push(tempRoute);
+                        this.routeManager.addRoute(tempRoute);
+                    });
+                }
+                this.setState({ routes: routeList });
+            });
+        }
     }
 
 }
