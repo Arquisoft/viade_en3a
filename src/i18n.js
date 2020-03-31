@@ -28,7 +28,14 @@ const resources = {
         "pageNotFoundText1": "You can return to homepage ",
         "pageNotFoundText2": "here.",
         "registerFormTitle": "Get your own SOLID pod",
-        "registerFormText": "Get your SOLID pod from one of these identity providers"
+        "registerFormText": "Get your SOLID pod from one of these identity providers",
+        "editProfileTitle":"Edit profile info",
+        "editProfileChangeName":"Change name",
+        "editProfileNewName":"New name",
+        "editProfileMinChar":"Min of 8 characters",
+        "editProfileChangePass":"Change password",
+        "editProfileNewPass":"New password",
+        "editProfileSave":"Save"
     }
   },
   es: {
@@ -56,7 +63,15 @@ const resources = {
         "pageNotFoundText1": "Puedes volver a la página principal ",
         "pageNotFoundText2": "aquí.",
         "registerFormTitle": "Obtén tu pod SOLID",
-        "registerFormText": "Obtén tu identidad solid de uno de los siguientes proveedores"
+        "registerFormText": "Obtén tu identidad solid de uno de los siguientes proveedores",
+        "editProfileTitle":"Editar información de perfil",
+        "editProfileChangeName":"Cambiar nombre",
+        "editProfileNewName":"Nuevo nombre",
+        "editProfileMinChar":"Mínimo de 8 caracteres",
+        "editProfileChangePass":"Cambiar contraseña",
+        "editProfileNewPass":"Nueva contraseña",
+        "editProfileSave":"Guardar"
+
     }
   }
 };

@@ -3,13 +3,13 @@ import RouteCard from "./RouteCard";
 import CardDeck from "react-bootstrap/CardDeck";
 
 class RouteList extends React.Component {
-
+    
     constructor(props) {
         super(props);
         this.routeManager = props.routeManager;
         this.cardDeckSize = 4;
     }
-
+    
     render() {
         let routes = this.routeManager.getRoutes();
         let routesForCardDecks = [];
@@ -28,7 +28,7 @@ class RouteList extends React.Component {
 
         return (
             <div className="App-header">
-                <h1>Route list</h1>
+                <h1>Route List</h1>
                 {routesForCardDecks}
             </div >
         );
