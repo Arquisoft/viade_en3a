@@ -25,4 +25,8 @@
 | Software design pattern commonly used for developing user interfaces which divides the related program logic into three interconnected elements
 | link:https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller[Model-View-Controller]
 
+| Viade Specification
+| An specification to follow in order to manage the way in which the routes will be uploaded to the user's PODs
+| link:https://github.com/Arquisoft/viadeSpec[Viade Specification]
+
 |===

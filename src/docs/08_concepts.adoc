@@ -1,9 +1,6 @@
 [[section-concepts]]
 == Cross-cutting Concepts
 
-To be done (This point refers mainly to implementation decisions, rules and conventions followed
-that haven't been done yet)
-
 === Package Structure
 The package structure followed during the development of the proyect is this one.
 Inside src folder we can find the following.
@@ -30,4 +27,5 @@ image::DataClassDiagram.png[ClassDiagram]
 
 image::NavMap.png[NavMap]
 
-
+=== Viade Specification
+With the creation of this specification we can follow a standart, making sure we can communicate with other applications and therefore creating a network of route management systems available to the users.

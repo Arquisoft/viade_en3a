@@ -9,7 +9,7 @@ image::BusinessContext.png[BusiContext]
 
 User:: The user creates routes on our application or in other compatible aplications that use viadeSpec standard.
 User Friends:: User SOLID friends can also create routes in their favourite application following the standard.
-Applications:: Both applications will communicate between them and show the created routes.
+Applications:: Both applications will communicate between each other, showing and editing the routes or creating them. For an application to be considered compatible it must follow link:https://github.com/Arquisoft/viadeSpec[ViadeSpec].
 
 
 === Technical Context
@@ -39,6 +39,8 @@ each user is the owner of its own data through the mentioned Pods.
 
 ==== Externally Controlled:
 
-On the above graph we show how would be the communication when creating a route and being shown
-in another application. Information always goes through the POD and once there compatible applications
+On the above graph we show an example on how would the communication be when creating a route and being shown
+in another compatible application. Information always goes through the POD, following the order marked by the numbers, and once there, compatible applications
 will manage to show the routes in the way they do.
+
+Although not depicted by the example, it can also be possible for both applications to swap roles and for our application to correctly display the routes the other application has created.

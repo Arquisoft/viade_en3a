@@ -18,15 +18,17 @@ We decided to postpone the use of React Native.
 using a web browser for mobile phones.
 
 
-=== _KML Format for Routes_
+=== _JSON-LD Format for Routes_
 
 .Pros
 
 * The use of a standard makes it easy for the application to communicate with other services.
+* We follow Viade Specification, therefore making sure we can exchange information with other compatible applications.
+* JSON notation which is already known by us.
 
 .Cons
 
-* The XML notation may result in more cumbersome processing than with JSON.
+* PODs dont have yet a way to view the files in this format.
 
 === _Leaflet_
 
@@ -80,3 +82,32 @@ We chose chart_js as our plotting tool.
 
 * For some points, such as seas, lakes or oceans may not give a response.
 
+=== Sharing of routes
+
+There are two ways to do so:
+
+1.- Storing them on a public directory, so ANY user can see them (therefore sharing among users is easily done).
+
+.Pros
+
+* Easy implementation.
+
+.Cons
+
+* No privacy.
+
+
+2.- Storing them on a private directory, then giving the user's friends rights to view the files (may result on problems with permissions such as user not being able to view its own files).
+
+.Pros
+
+* Privacy and sharing for particular users is allowed.
+* A user can have his own private routes.
+
+.Cons
+
+* Harder to implement.
+* If not careful may result in loss of rights on files.
+* A need of learning a library or method to edit the permissions of the POD.
+
+The approach to be followed is still a work in progress and needs further investigation.

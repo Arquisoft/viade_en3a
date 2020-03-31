@@ -38,3 +38,38 @@ _<explanation in text form>_
 
 Mapping of Building Blocks to Infrastructure::
 _<description of the mapping>_
+
+=== Test Environment
+Tests of the application are a relevant aspect of Viade.
+
+|===
+| *Test Framework* | *Explanation*
+
+| Travis
+| Thanks to Travis we can assure the continuous integration of Viade whenever a new feature is added. Travis takes care of running all the Jest tests as well as running code coverage revisions. Finally, if everything is correct, the application is built and updated.
+
+| Jest-Dom Testing Library
+| Tests whether the intended React components load correctly in the application.
+
+| Code Coverage
+| Checks for the amount of code that was run when performing the tests, useful to know precisely how deep the tests performed.
+
+| Codacy
+| Codacy checks for code quality. With it, we can easily create good quality code that follows the standards.
+
+| Cucumber
+| Helps with the simulation of the user's experience when using the app. It acts as if a user was using the application, and doing so, tests it for errors that may be present.
+
+| POD in Docker
+| As connection with the remote POD across the internet is not reliable, Docker can be configured to act as a server where a POD is stored. Doing so, the connection is ensured and all POD access tests can be performed risk-free.
+|===
+
+
+Motivation::
+
+Testing increases code quality and assures Viade's viability and security.
+
+Quality and/or Performance Features::
+
+Repairing errors and mistakes increases every aspect of quality.
+All the testing will also ensure we understand where are the most used parts of the application and what should be optimised.
