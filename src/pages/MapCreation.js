@@ -81,8 +81,9 @@ class MapCreation extends Component {
 
 	async uploadToPod() {
 		let route = this.createRoute();
-		if(route === undefined)
+		if(route === undefined) {
 			return;
+		}
 		route = this.checkRouteChanged(route);
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
