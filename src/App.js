@@ -7,16 +7,16 @@ import { HashRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <HashRouter basename='/'>
-        <LoggedOut>
-          <NavBarNotAuthenticated />
-        </LoggedOut>
-        <LoggedIn>
-          <MyNavBar />
-        </LoggedIn>
-      </HashRouter>
-    </div>
+      <div className="App">
+        <HashRouter basename='/'>
+          <LoggedOut>
+            <NavBarNotAuthenticated />
+          </LoggedOut>
+          <LoggedIn>
+            <MyNavBar />
+          </LoggedIn>
+        </HashRouter>
+      </div>
   );
 }
 
