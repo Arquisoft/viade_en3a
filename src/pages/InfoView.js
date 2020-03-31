@@ -125,7 +125,7 @@ class InfoView extends React.Component {
                     if (rawJsonRoutes === null) {
                         alert("There was an error trying to show the information for this route");
                     } else {
-                        let routeToInfoString = rawJsonRoutes.filter((routeString) => { return routeString.includes(this.id) });
+                        let routeToInfoString = rawJsonRoutes.filter((routeString) => { return routeString.includes(this.id); });
                         let tempRoute = new MyRoute("", "", "", []);
                         tempRoute.modifyFromJsonLd(routeToInfoString);
                         this.setState({ route: tempRoute });
