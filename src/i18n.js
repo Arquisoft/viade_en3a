@@ -22,7 +22,8 @@ const resources = {
         "navBarRoutes": "Route management",
         "navBarMyRoutes": "My routes",
         "navBarCreateRoute": "Create a new route",
-        "navBarRouteHelp": "How do routes work?"
+        "navBarRouteHelp": "How do routes work?",
+        "friendCardDelete": "Delete"
     }
   },
   es: {
@@ -44,7 +45,8 @@ const resources = {
         "navBarRoutes": "Gestión de rutas",
         "navBarMyRoutes": "Mis rutas",
         "navBarCreateRoute": "Crear una nueva ruta",
-        "navBarRouteHelp": "¿Cómo funcionan las rutas?"
+        "navBarRouteHelp": "¿Cómo funcionan las rutas?",
+        "friendCardDelete": "Borrar"
     }
   }
 };
