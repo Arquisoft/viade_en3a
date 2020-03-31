@@ -78,6 +78,7 @@ function MyNavBar(props) {
       <Route exact path="/friends" component={Friends} />
       <Route exact path="/editProfile" component={EditProfile} />
       <Route exact path="/routes/info/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
+      <Route exact path="/routes/share/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
       <Redirect path="/" exact to="/home" />
     </HashRouter>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import MyMap from './../myMap/MyMap';
+import ShareView from '../../pages/ShareView';
 
 function RouteCard(props) {
     return (
@@ -15,6 +16,7 @@ function RouteCard(props) {
                 <Card.Title style={{ fontSize: "24px" }}>{props.route.name}</Card.Title>
                 <Card.Text style={{ fontSize: "18px" }}>{props.route.description}</Card.Text>
                 <Button variant="dark" href={`#routes/info/${props.route.id}`}>Info</Button>
+                <Button variant="dark" href={`#routes/share/${props.route.id}`}>Share</Button>
             </Card.Body>
         </Card>
     );
