@@ -23,7 +23,10 @@ const resources = {
         "navBarMyRoutes": "My routes",
         "navBarCreateRoute": "Create a new route",
         "navBarRouteHelp": "How do routes work?",
-        "friendCardDelete": "Delete"
+        "friendCardDelete": "Delete",
+        "pageNotFoundHeader": "Oops! The page you are trying to access does not exist.",
+        "pageNotFoundText1": "You can return to homepage ",
+        "pageNotFoundText2": "here."
     }
   },
   es: {
@@ -46,7 +49,10 @@ const resources = {
         "navBarMyRoutes": "Mis rutas",
         "navBarCreateRoute": "Crear una nueva ruta",
         "navBarRouteHelp": "¿Cómo funcionan las rutas?",
-        "friendCardDelete": "Borrar"
+        "friendCardDelete": "Borrar",
+        "pageNotFoundHeader": "Vaya! La página a la que estás intentando acceder no existe.",
+        "pageNotFoundText1": "Puedes volver a la página principal ",
+        "pageNotFoundText2": "aquí."
     }
   }
 };
