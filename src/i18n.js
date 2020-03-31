@@ -26,7 +26,9 @@ const resources = {
         "friendCardDelete": "Delete",
         "pageNotFoundHeader": "Oops! The page you are trying to access does not exist.",
         "pageNotFoundText1": "You can return to homepage ",
-        "pageNotFoundText2": "here."
+        "pageNotFoundText2": "here.",
+        "registerFormTitle": "Get your own SOLID pod",
+        "registerFormText": "Get your SOLID pod from one of these identity providers"
     }
   },
   es: {
@@ -52,7 +54,9 @@ const resources = {
         "friendCardDelete": "Borrar",
         "pageNotFoundHeader": "Vaya! La página a la que estás intentando acceder no existe.",
         "pageNotFoundText1": "Puedes volver a la página principal ",
-        "pageNotFoundText2": "aquí."
+        "pageNotFoundText2": "aquí.",
+        "registerFormTitle": "Obtén tu pod SOLID",
+        "registerFormText": "Obtén tu identidad solid de uno de los siguientes proveedores"
     }
   }
 };
@@ -63,9 +67,6 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-
-    
-
     interpolation: {
       escapeValue: false 
     }
