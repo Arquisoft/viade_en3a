@@ -51,7 +51,7 @@ class RouteList extends React.Component {
                 if (rawJsonRoutes === null) {
                     alert("There was an error trying to fetch your routes from the POD");
                 } else {
-                    rawJsonRoutes.forEach(rawRoute => {
+                    rawJsonRoutes.forEach((rawRoute) => {
                         let tempRoute = new MyRoute("", "", "", []);
                         tempRoute.modifyFromJsonLd(rawRoute);
                         routeList.push(tempRoute);
