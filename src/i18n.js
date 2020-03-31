@@ -14,7 +14,15 @@ const resources = {
         "navBarLanguage": "Language",
         "navBarSignUp": "Sign up",
         "navBarSignIn": "Sign in",
-        "navBarSignOut": "Sign out"
+        "navBarSignOut": "Sign out",
+        "navBarProfile": "Profile",
+        "navBarMyProfile": "My profile",
+        "navBarFriends": "Friends",
+        "navBarSettings": "Settings",
+        "navBarRoutes": "Route management",
+        "navBarMyRoutes": "My routes",
+        "navBarCreateRoute": "Create a new route",
+        "navBarRouteHelp": "How do routes work?"
     }
   },
   es: {
@@ -28,7 +36,15 @@ const resources = {
         "navBarLanguage": "Idioma",
         "navBarSignUp": "Registrarse",
         "navBarSignIn": "Identificarse",
-        "navBarSignOut": "Cerrar sesión"
+        "navBarSignOut": "Cerrar sesión",
+        "navBarProfile": "Perfil",
+        "navBarMyProfile": "Mi perfil",
+        "navBarFriends": "Amigos",
+        "navBarSettings": "Ajustes",
+        "navBarRoutes": "Gestión de rutas",
+        "navBarMyRoutes": "Mis rutas",
+        "navBarCreateRoute": "Crear una nueva ruta",
+        "navBarRouteHelp": "¿Cómo funcionan las rutas?"
     }
   }
 };

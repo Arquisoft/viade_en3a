@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import SignUp from '../../pages/SignUp';
@@ -12,6 +14,7 @@ import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
 import EditProfile from '../../pages/EditProfile';
 import InfoView from "./../../pages/InfoView";
+import { useTranslation } from 'react-i18next';
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
@@ -21,6 +24,11 @@ import RouteManager from "./../../model/RouteManager";
 const routeManager = new RouteManager();
 
 function MyNavBar(props) {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
@@ -43,21 +51,25 @@ function MyNavBar(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <NavDropdown title="Profile" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#profile">My profile</NavDropdown.Item>
-              <NavDropdown.Item href="#friends">Friends</NavDropdown.Item>
+            <NavDropdown title={t('navBarProfile')} id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
+              <NavDropdown.Item href="#friends">{t('navBarFriends')}</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item disabled="true" href="#setting">Settings</NavDropdown.Item>
+              <NavDropdown.Item disabled="true" href="#setting">{t('navBarSettings')}</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Route management" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#routes/list">My routes</NavDropdown.Item>
-              <NavDropdown.Item href="#routes/add">Create a new route</NavDropdown.Item>
+            <NavDropdown title={t('navBarRoutes')} id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#routes/list">{t('navBarMyRoutes')}</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/add">{t('navBarCreateRoute')}</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#routes/example">How do routes work?</NavDropdown.Item>
+              <NavDropdown.Item href="#routes/example">{t('navBarRouteHelp')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <DropdownButton id="dropdown-item-button" title={t('navBarLanguage')}>
+            <Dropdown.Item as="button" onClick={() => changeLanguage('en')}>{t('navBarLanguageEn')}</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={() => changeLanguage('es')}>{t('navBarLanguageEs')}</Dropdown.Item>
+          </DropdownButton>
           <Nav>
-            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out" />
+            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login={t('navBarSignIn')} logout={t('navBarSignOut')} />
             <Nav.Link href="https://github.com/Arquisoft/viade_en3a" target="_blank">
               <img
                 src={gitHubLogo}
