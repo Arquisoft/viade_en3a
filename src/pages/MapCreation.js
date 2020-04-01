@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import PodStorageHandler from "./../components/podService/podStoreHandler";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
 import './../css/App.css';
 
-const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 
@@ -84,18 +82,16 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		let session = await auth.currentSession();
-		let storageHandler = new PodStorageHandler(session);
-		storageHandler.storeRoute(route.getFileName(), route.toJsonLd(), (filePodUrl, podResponse) => {
+		route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {
-				alertText = "We are sorry!! Something went wrong while uploading your brand new route to your POD";
+				alertText = "We are sorry!! Something went wrong while connecting to your POD";
 			} else {
-				alertText = "Your brand new shiny route has been successfully uploaded to your pod";
-				window.location.href = "#routes/list";
+				alertText = "Route updated in your POD";
 			}
-			alert(alertText);
 		});
+		alert("Uploading route to SOLID POD");
+		window.location.href = "#routes/list";
 	}
 
 }

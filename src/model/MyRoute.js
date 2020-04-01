@@ -1,5 +1,8 @@
 import { v4 as uuid } from "uuid";
 import RouteWaypoint from "./RouteWaypoint";
+import PodStorageHandler from "./../components/podService/podStoreHandler";
+
+const auth = require('solid-auth-client');
 
 /**
  * Returns an Array<RouteWaypoint> that represent the same set of points 
@@ -7,9 +10,9 @@ import RouteWaypoint from "./RouteWaypoint";
  * @param {Array<{lat:"", lng:"", elv:""}>} waypoints The list of waypoints to 
  * transform.
  */
-function processPoints(waypoints) {
+function processPoints(waypoints, route) {
 	let list = [];
-	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng/*, point.elv === undefined ? -1 : point.elv*/)));
+	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng, point.elv === undefined ? -1 : point.elv, route)));
 	return list;
 }
 
@@ -18,7 +21,7 @@ class MyRoute {
 	/**
 	 * Constructor for new Route objects. Will be represented by an id 
 	 * (uuid generation), an array of RouteWaypoint objects holding latitude, 
-	 * longitude and elevation, a name, an author and a description.
+	 * longitude and altitude, a name, an author and a description.
 	 * 
 	 * @param {String} name The name of the route.
 	 * @param {String} author The creator of the route.
@@ -30,7 +33,8 @@ class MyRoute {
 		this.name = name;
 		this.author = author;
 		this.description = description;
-		this.waypoints = processPoints(waypoints);
+		this.waypoints = processPoints(waypoints, this);
+		this.updates = 0;
 	}
 
 	getId() {
@@ -57,6 +61,25 @@ class MyRoute {
 		return this.name + "_" + this.id + ".json";
 	}
 
+	async update() {
+		this.waypoints.forEach((point) => {
+			if (point.getElevation() === -1) {
+				this.updates++;
+			}
+		});
+		console.log(this.waypoints);
+		console.log(this.updates);
+		// if (!missingPoints) {
+		// 	this.uploadToPod();
+		// }
+	}
+
+	async uploadToPod(callback) {
+		let session = await auth.currentSession();
+		let storageHandler = new PodStorageHandler(session);
+		storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+	}
+
 	getComparableString() {
 		let parsedRoute = JSON.parse(this.toJsonLd());
 		parsedRoute["@context"] = "";
@@ -78,7 +101,7 @@ class MyRoute {
 				elv: jsonPoint["elevation"]
 			};
 		});
-		this.waypoints = processPoints(rawPoints);
+		this.waypoints = processPoints(rawPoints, this);
 	}
 
 	toJsonLd() {
@@ -89,12 +112,12 @@ class MyRoute {
 				"@context": {
 					"@version": 1.1,
 					"comments": {
-						"@container": "@list",
-						"@id": "viade:comments"
+						"@id": "viade:comments",
+						"@type": "@id"
 					},
 					"description": {
 						"@id": "schema:description",
-						"@type": "xs:string"
+						"@type": "xsd:string"
 					},
 					"media": {
 						"@container": "@list",
@@ -102,7 +125,7 @@ class MyRoute {
 					},
 					"name": {
 						"@id": "schema:name",
-						"@type": "xs:string"
+						"@type": "xsd:string"
 					},
 					"points": {
 						"@container": "@list",
@@ -110,11 +133,19 @@ class MyRoute {
 					},
 					"latitude": {
 						"@id": "schema:latitude",
-						"@type": "xs:double"
+						"@type": "xsd:double"
 					},
 					"longitude": {
 						"@id": "schema:longitude",
-						"@type": "xs:double"
+						"@type": "xsd:double"
+					},
+					"elevation": {
+						"@id": "schema:elevation",
+						"@type": "xsd:double"
+					},
+					"author": {
+						"@id": "schema:author",
+						"@type": "@id"
 					},
 					"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 					"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -122,12 +153,13 @@ class MyRoute {
 					"viade": "http://arquisoft.github.io/viadeSpec/",
 					"xsd": "http://www.w3.org/2001/XMLSchema#"
 				},
-				"comments": [],
-				"media": [],
 				"id": this.id,
 				"name": this.name,
 				"author": this.author,
 				"description": this.description,
+				"comments": "",
+				"media": [],
+				"waypoints": [],
 				"points": poinstInJson
 			}
 		);

@@ -37,6 +37,7 @@ class RouteList extends React.Component {
             <div className="App-header">
                 <h1>Route list</h1>
                 {routesForCardDecks}
+                {this.state.message}
             </div >
         );
     }
@@ -51,14 +52,24 @@ class RouteList extends React.Component {
                 if (rawJsonRoutes === null) {
                     alert("There was an error trying to fetch your routes from the POD");
                 } else {
-                    rawJsonRoutes.forEach((rawRoute) => {
-                        let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(rawRoute);
-                        routeList.push(tempRoute);
-                        this.routeManager.addRoute(tempRoute);
-                    });
+                    if (rawJsonRoutes.length !== 0) {
+                        rawJsonRoutes.forEach((rawRoute) => {
+                            let tempRoute = new MyRoute("", "", "", []);
+                            tempRoute.modifyFromJsonLd(rawRoute);
+                            routeList.push(tempRoute);
+                            this.routeManager.addRoute(tempRoute);
+                        });
+                        this.setState({ routes: routeList });
+                    } else {
+                        this.setState({
+                            message:
+                                <div>
+                                    <h3>Oops! We didn't find any route in your POD</h3>
+                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                </div>
+                        });
+                    }
                 }
-                this.setState({ routes: routeList });
             });
         }
     }
