@@ -14,7 +14,7 @@ class Home extends Component {
                 <h2>welcome to</h2>
                 <img
                     src={viadeLogo}
-                    width="280"
+                    width="255"
                     height="300"
                     className="d-inline-block align-top"
                     alt="Viade logo"
