@@ -30,13 +30,15 @@ const resources = {
         "pageNotFoundText2": "here.",
         "registerFormTitle": "Get your own SOLID pod",
         "registerFormText": "Get your SOLID pod from one of these identity providers",
-        "editProfileTitle":"Edit profile info",
-        "editProfileChangeName":"Change name",
-        "editProfileNewName":"New name",
-        "editProfileMinChar":"Min of 8 characters",
-        "editProfileChangePass":"Change password",
-        "editProfileNewPass":"New password",
-        "editProfileSave":"Save"
+        "editProfileTitle": "Edit profile info",
+        "editProfileChangeName": "Change name",
+        "editProfileNewName": "New name",
+        "editProfileMinChar": "Min of 8 characters",
+        "editProfileChangePass": "Change password",
+        "editProfileNewPass": "New password",
+        "editProfileSave": "Save",
+        "homeWelcome": "Hi,",
+        "homeWelcome2": "welcome to"
     }
   },
   es: {
@@ -66,13 +68,15 @@ const resources = {
         "pageNotFoundText2": "aquí.",
         "registerFormTitle": "Obtén tu pod SOLID",
         "registerFormText": "Obtén tu identidad solid de uno de los siguientes proveedores",
-        "editProfileTitle":"Editar información de perfil",
-        "editProfileChangeName":"Cambiar nombre",
-        "editProfileNewName":"Nuevo nombre",
-        "editProfileMinChar":"Mínimo de 8 caracteres",
-        "editProfileChangePass":"Cambiar contraseña",
-        "editProfileNewPass":"Nueva contraseña",
-        "editProfileSave":"Guardar"
+        "editProfileTitle": "Editar información de perfil",
+        "editProfileChangeName": "Cambiar nombre",
+        "editProfileNewName": "Nuevo nombre",
+        "editProfileMinChar": "Mínimo de 8 caracteres",
+        "editProfileChangePass": "Cambiar contraseña",
+        "editProfileNewPass": "Nueva contraseña",
+        "editProfileSave": "Guardar",
+        "homeWelcome": "Hola,",
+        "homeWelcome2": "bienvenido a"
 
     }
   }
