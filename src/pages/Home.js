@@ -28,7 +28,7 @@ class Home extends Component {
                     className="d-inline-block align-top"
                     alt="Viade logo"
                 />
-                <h3>V 0.1</h3>
+                <h3>V 1.0</h3>
             </div>
         );
     }
