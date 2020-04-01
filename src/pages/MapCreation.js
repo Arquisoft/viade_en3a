@@ -3,7 +3,6 @@ import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 
 import './../css/App.css';
 
@@ -51,17 +50,17 @@ class MapCreation extends Component {
 
 	createRoute() {
 		let name = this.routeName.current.value;
-		if(name===''){
+		if (name === '') {
 			alert("Name can't be empty");
 			return undefined;
 		}
 		let waypoints = this.points.current.state.points;
-		if(waypoints.length<2){
+		if (waypoints.length < 2) {
 			alert("You should have at least two points");
 			return undefined;
 		}
 		let description = this.routeDescription.current.value;
-		if(description==='') {
+		if (description === '') {
 			alert("Description can not be empty");
 			return undefined;
 		}
@@ -81,7 +80,7 @@ class MapCreation extends Component {
 
 	async uploadToPod() {
 		let route = this.createRoute();
-		if(route === undefined) {
+		if (route === undefined) {
 			return;
 		}
 		route = this.checkRouteChanged(route);
@@ -96,8 +95,6 @@ class MapCreation extends Component {
 				window.location.href = "#routes/list";
 			}
 			alert(alertText);
-			
-			
 		});
 	}
 

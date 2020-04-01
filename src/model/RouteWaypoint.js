@@ -3,7 +3,7 @@ class RouteWaypoint {
 
     /**
      * Creates a new route waypoint given a latitude and a longitude. 
-     * The altitude of such two-tuple will be obtained from an online service.
+     * The elevation of such two-tuple will be obtained from an online service.
      * <https://api.airmap.com>
      * @param {Number} latitude The latitude of the point this object represents.
      * @param {Number} longitude The longitude of the point this object represents.
@@ -11,12 +11,12 @@ class RouteWaypoint {
     constructor(latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.altitude = -1;
-        this.askForAltitude();
+        this.elevation = -1;
+        this.askForElevation();
     }
 
-    getAltitude() {
-        return this.altitude;
+    getElevation() {
+        return this.elevation;
     }
 
     getLatitude() {
@@ -30,23 +30,24 @@ class RouteWaypoint {
     toJson() {
         return {
             "latitude": this.latitude,
-            "longitude": this.longitude
+            "longitude": this.longitude,
+            "elevation": this.elevation
         };
     }
 
-    async askForAltitude() {
+    async askForElevation() {
         await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
             .then((response) => {
                 if (response.status === 200) {
                     response.json().then((data) => {
-                        this.altitude = parseInt(data["data"], 10);
-                        if (isNaN(this.altitude)) {
-                            this.altitude = -1;
+                        this.elevation = parseInt(data["data"], 10);
+                        if (isNaN(this.elevation)) {
+                            this.elevation = -1;
                         }
                     });
                 }
             }).catch((err) => {
-                this.altitude = -1;
+                this.elevation = -1;
             });
     }
 

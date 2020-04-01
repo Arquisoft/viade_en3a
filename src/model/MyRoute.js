@@ -4,12 +4,12 @@ import RouteWaypoint from "./RouteWaypoint";
 /**
  * Returns an Array<RouteWaypoint> that represent the same set of points 
  * received as a parameter.
- * @param {Array<{lat:"", lng:""}>} waypoints The list of waypoints to 
+ * @param {Array<{lat:"", lng:"", elv:""}>} waypoints The list of waypoints to 
  * transform.
  */
 function processPoints(waypoints) {
 	let list = [];
-	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng)));
+	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng/*, point.elv === undefined ? -1 : point.elv*/)));
 	return list;
 }
 
@@ -18,7 +18,7 @@ class MyRoute {
 	/**
 	 * Constructor for new Route objects. Will be represented by an id 
 	 * (uuid generation), an array of RouteWaypoint objects holding latitude, 
-	 * longitude and altitude, a name, an author and a description.
+	 * longitude and elevation, a name, an author and a description.
 	 * 
 	 * @param {String} name The name of the route.
 	 * @param {String} author The creator of the route.
@@ -74,7 +74,8 @@ class MyRoute {
 		rawPoints = rawPoints.map((jsonPoint) => {
 			return {
 				lat: jsonPoint["latitude"],
-				lng: jsonPoint["longitude"]
+				lng: jsonPoint["longitude"],
+				elv: jsonPoint["elevation"]
 			};
 		});
 		this.waypoints = processPoints(rawPoints);
