@@ -1,6 +1,7 @@
 import React from "react";
 import RouteCard from "./RouteCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import { Translation } from 'react-i18next';
 
 class RouteList extends React.Component {
     
@@ -28,7 +29,11 @@ class RouteList extends React.Component {
 
         return (
             <div className="App-header">
-                <h1>Route List</h1>
+                <Translation>
+                    {
+                        (t, { i18n }) => <h1>{t('routeListText')}</h1>
+                    }  
+                </Translation>
                 {routesForCardDecks}
             </div >
         );
