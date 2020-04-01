@@ -62,16 +62,18 @@ class MyRoute {
 	}
 
 	async update() {
+		this.updates = 0;
 		this.waypoints.forEach((point) => {
 			if (point.getElevation() === -1) {
 				this.updates++;
 			}
 		});
-		console.log(this.waypoints);
 		console.log(this.updates);
-		// if (!missingPoints) {
-		// 	this.uploadToPod();
-		// }
+		if (this.updates === 0) {
+			this.uploadToPod((filePodUrl, podResponse) => {
+				console.log(filePodUrl);
+			});
+		}
 	}
 
 	async uploadToPod(callback) {

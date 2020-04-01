@@ -40,6 +40,7 @@ class RouteWaypoint {
     }
 
     async askForElevation() {
+        console.log(this.elevation === -1 || this.elevation === undefined);
         if (this.elevation === -1 || this.elevation === undefined) {
             await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
                 .then((response) => {
