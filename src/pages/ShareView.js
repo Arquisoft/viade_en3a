@@ -1,8 +1,8 @@
 import React from "react";
 import * as auth from 'solid-auth-client';
-import SolidFileClient from 'solid-file-client';
 import data from '@solid/query-ldflex';
-import Table from 'react-bootstrap/Table';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 class ShareView extends React.Component {
 
@@ -18,15 +18,31 @@ class ShareView extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="App-header">
+            <div style={{backgroundColor: "#282c34", 
+            display:"flex", 
+            flexDirection: "row",
+            justifyContent:"center",
+            color:"black"}}>
                 {
                     this.state.friends.map((friend) => {
-                        return <div>
-                            <h3>{friend.name}</h3>
-                            <button className="btn-primary" onClick={() => {this.send(friend.inbox)}}>Share</button>
-                        </div>;
+                        return <div> 
+                        <Card style={{ width: '18rem' , margin: "10px"}}>
+                            <Card.Img variant="top" src={friend.image} />
+                            <Card.Body>
+                                <Card.Title>{friend.name}</Card.Title>
+                                <Button variant="primary" 
+                                onClick={() => {this.send(friend.inbox)}}>Share</Button>
+                            </Card.Body>
+                        </Card>
+                        </div>
+                        //<div>
+                        //    <h3>{friend.name}</h3>
+                        //    <button className="btn-primary" onClick={() => {this.send(friend.inbox)}}>Share</button>
+                        //</div>;
                     })
                 }
+            </div>
             </div>
         );
     }
@@ -34,16 +50,23 @@ class ShareView extends React.Component {
     async readFriends() {
         let session = await auth.currentSession(); 
         this.webId = session.webId;
-        var app = this;
         let friends = [];
         for await (const friend of data.user.friends) {
             const f = {}
             const n = await data[friend].vcard$fn;
             const inbox = await data[friend].inbox;
+            const imageLd = await data[friend].vcard_hasPhoto;
+
+            if (imageLd && imageLd.value) {
+                f.image = imageLd.value;
+            } else {
+                f.image = "";
+            }
+
             f.webId = `${friend}`
             f.name = `${n}`
             f.inbox = `${inbox}`
-            if (n == undefined) {
+            if (n === undefined) {
                 f.name = `${friend}`
             }
             friends = [...friends, f]
@@ -67,6 +90,7 @@ class ShareView extends React.Component {
         message.url = message.recipient + message.id + ".json";
 
         await this.buildMessage(message);
+        alert ("Your friend has received a notification with your route!");
         
     }
 
