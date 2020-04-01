@@ -61,7 +61,7 @@ class MyRoute {
 	}
 
 	getFileName() {
-		return this.name + "_" + this.id + ".json";
+		return this.id + ".json";
 	}
 
 	async uploadToPod(callback) {
