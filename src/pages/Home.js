@@ -23,7 +23,7 @@ class Home extends Component {
                 </Translation>
                 <img
                     src={viadeLogo}
-                    width="280"
+                    width="255"
                     height="300"
                     className="d-inline-block align-top"
                     alt="Viade logo"
