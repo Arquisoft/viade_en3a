@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import PodStorageHandler from "./../components/podService/podStoreHandler";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
@@ -9,7 +8,6 @@ import { Redirect } from 'react-router-dom';
 
 import './../css/App.css';
 
-const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 
@@ -66,21 +64,21 @@ class MapCreation extends Component {
 
 	createRoute() {
 		let name = this.routeName.current.value;
-		if(name===''){
+		if (name === '') {
 			alert("Name can't be empty");
 			return undefined;
 		}
-		let waypoints = this.points.current.state.points;
-		if(waypoints.length<2){
+		let points = this.points.current.state.points;
+		if (points.length < 2) {
 			alert("You should have at least two points");
 			return undefined;
 		}
 		let description = this.routeDescription.current.value;
-		if(description==='') {
+		if (description === '') {
 			alert("Description can not be empty");
 			return undefined;
 		}
-		let route = new MyRoute(name, "Temp author", description, waypoints);
+		let route = new MyRoute(name, "Temp author", description, points);
 		return route;
 	}
 
@@ -96,23 +94,19 @@ class MapCreation extends Component {
 
 	async uploadToPod() {
 		let route = this.createRoute();
-		if(route === undefined) {
+		if (route === undefined) {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		let session = await auth.currentSession();
-		let storageHandler = new PodStorageHandler(session);
-		storageHandler.storeRoute(route.getFileName(), route.toJsonLd(), (filePodUrl, podResponse) => {
+		await route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {
-				alertText = "We are sorry!! Something went wrong while uploading your brand new route to your POD";
+				alertText = "We are sorry!! Something went wrong while connecting to your POD";
 			} else {
-				alertText = "Your brand new shiny route has been successfully uploaded to your pod";
-				window.location.href = "#routes/list";
+				alertText = "Your fresh new shiny route has been correctly uploaded to your POD";
 			}
 			alert(alertText);
-			
-			
+			window.location.href = "#routes/list";
 		});
 	}
 

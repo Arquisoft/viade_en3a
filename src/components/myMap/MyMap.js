@@ -17,7 +17,7 @@ class MyMap extends React.Component {
 
 	render() {
 		let points = [];
-		this.route.getWaypoints().forEach((waypoint) => {
+		this.route.getPoints().forEach((waypoint) => {
 			points.push([waypoint.getLatitude(), waypoint.getLongitude()]);
 		});
 		return (

@@ -7,11 +7,12 @@ class MyElevationChart extends React.Component {
     constructor(props) {
         super(props);
         this.route = props.route;
+        let index = 1;
         this.data = {
-            labels: this.route.getWaypoints().map((p) => ""),
+            labels: this.route.getPoints().map((p) => `P${index++}`),
             datasets: [
                 {
-                    label: 'Altitude',
+                    label: 'Elevation',
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',
@@ -29,7 +30,7 @@ class MyElevationChart extends React.Component {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: this.route.getWaypoints().map((p) => p.getAltitude()),
+                    data: this.route.getPoints().map((p) => p.getElevation()),
                 }
             ]
         };
