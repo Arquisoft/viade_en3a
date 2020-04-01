@@ -1,6 +1,7 @@
-import '../App.css';
+import './../css/App.css';
 import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
+import { Translation } from 'react-i18next';
 
 const auth = require('solid-auth-client');
 var session = null;
@@ -10,11 +11,19 @@ class Home extends Component {
     render() {
         return (
             <div className="App-header" onLoad={() => this.getName()}>
-                <h1 id="name">Hi,</h1>
-                <h2>welcome to</h2>
+                <Translation>
+                    {
+                        (t) => <h1 id="name">{t('homeWelcome')}</h1>
+                    }
+                </Translation>
+                <Translation>
+                    {
+                        (t) => <h2>{t('homeWelcome2')}</h2>
+                    }
+                </Translation>
                 <img
                     src={viadeLogo}
-                    width="280"
+                    width="255"
                     height="300"
                     className="d-inline-block align-top"
                     alt="Viade logo"

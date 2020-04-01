@@ -1,79 +1,115 @@
-import '../App.css';
-import EditableMap from '../components/editableMap/EditableMap';
 import React, { Component } from 'react';
+import EditableMap from '../components/editableMap/EditableMap';
+import MyRoute from "./../model/MyRoute";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-import StorageHandler from "../components/podService/storageHandler";
+import { Translation } from 'react-i18next';
+import { Redirect } from 'react-router-dom';
+
+
+import './../css/App.css';
+
 
 class MapCreation extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.routeName = React.createRef();
+		this.routeDescription = React.createRef();
 		this.points = React.createRef();
+		this.routeManager = props.routeManager;
+		this.tempRoute = undefined;
 	}
 
 	render() {
 		return (
-			<div className="App-header" style={{ height: "80%" }} >
-				<h1>Create your own Route</h1>
+			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
+				<Translation>
+					{
+						(t) => <h1>{t('mapCreationTitle')}</h1>
+					}
+				</Translation>
+				
 				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1">Route Name</InputGroup.Text>
+						<Translation>
+							{
+								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>
+							}
+						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
 						ref={this.routeName}
 						aria-describedby="basic-addon1"
 						role='title'
 					/>
+					<InputGroup.Prepend>
+						<InputGroup.Text id="basic-addon1">Route Description</InputGroup.Text>
+					</InputGroup.Prepend>
+					<FormControl
+						ref={this.routeDescription}
+						aria-describedby="basic-addon1"
+						role='description'
+					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
-				<Button variant="primary" onClick={() => this.save()} style={{ margin: "1.5vh" }}>Save as json file</Button>
-				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Upload To Pod</Button>
-				<Button variant="primary" onClick={() => this.viewRoutes()} style={{ margin: "1.5vh" }}>View Pod</Button>
+				<Translation>
+					{
+						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
+					}
+				</Translation>
+				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler} />
 			</div>
 		);
 	}
 
-	save() {
-		const jsonData = {
-			routeName: this.routeName.current.value,
-			coordinates: this.points.current.getPoints()
-		};
-		const fileData = JSON.stringify(jsonData);
-		const blob = new Blob([fileData], { type: "text/plain" });
-		const url = URL.createObjectURL(blob);
-		const link = document.createElement('a');
-		link.download = jsonData['routeName'] + ".json";
-		link.href = url;
-		link.click();
+	createRoute() {
+		let name = this.routeName.current.value;
+		if (name === '') {
+			alert("Name can't be empty");
+			return undefined;
+		}
+		let points = this.points.current.state.points;
+		if (points.length < 2) {
+			alert("You should have at least two points");
+			return undefined;
+		}
+		let description = this.routeDescription.current.value;
+		if (description === '') {
+			alert("Description can not be empty");
+			return undefined;
+		}
+		let route = new MyRoute(name, "Temp author", description, points);
+		return route;
 	}
 
-	uploadToPod() {
-		const jsonData = {
-			routeName: this.routeName.current.value,
-			coordinates: this.points.current.getPoints()
-		};
-		const fileData = JSON.stringify(jsonData);
-		new StorageHandler().storeFileAtUrl(null, this.routeName.current.value + ".json", fileData);
+	checkRouteChanged(newRoute) {
+		if ((this.tempRoute === undefined) || (this.tempRoute !== undefined && (this.tempRoute.getComparableString() !== newRoute.getComparableString()))) {
+			this.tempRoute = newRoute;
+			this.routeManager.addRoute(this.tempRoute);
+			return newRoute;
+		} else {
+			return this.tempRoute;
+		}
 	}
 
-	viewRoutes() {
-		let store = new StorageHandler();
-		let files = store.getFolder(null);
-		files.then(function (folder) {
-			for(let i = 0; i < folder.files.length; i++){
-				store.getFile(folder.files[i].url).then(
-					function(file){
-						console.log(file)
-					},
-					()=>{console.log("Error retrieving Data!")}
-				)
+	async uploadToPod() {
+		let route = this.createRoute();
+		if (route === undefined) {
+			return;
+		}
+		route = this.checkRouteChanged(route);
+		await route.uploadToPod((filePodUrl, podResponse) => {
+			let alertText = "";
+			if (filePodUrl === null) {
+				alertText = "We are sorry!! Something went wrong while connecting to your POD";
+			} else {
+				alertText = "Your fresh new shiny route has been correctly uploaded to your POD";
 			}
-
-		}, () => { console.log("Error retrieving Data!") });
+			alert(alertText);
+			window.location.href = "#routes/list";
+		});
 	}
+
 }
-
-
 
 export default MapCreation;

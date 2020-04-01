@@ -25,10 +25,8 @@ ifdef::basebackend-html[]
 ++++
 endif::basebackend-html[]
 
-
 // horizontal line
 ***
-
 // numbering from here on
 :numbered:
 

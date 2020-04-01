@@ -3,8 +3,8 @@
 
 
 ****
-The objective of this application is to connect users that want to share the routes they make with other users, as other commercialized apps do,
-but adding a step further in the level of security of their data, thanks to SOLID specifications. The app is aimed to contact with the pod of each user, 
+The objective of this application is to connect users that want to share the routes they make with other people, as other commercialized apps do,
+but adding a step further in the level of control of their data, thanks to SOLID specifications. The app is aimed to contact with the pod of each user, 
 allowing them to manage the permissions over their information. 
 ****
 
@@ -17,7 +17,7 @@ In this application we aim to develop a decentralized routes social network. We 
 [options="header",cols="1"]
 |===
 |Requirements
-| The system will be based on a decentralized architecture where data stored inside the pod of each user.
+| The system will be based on a decentralized architecture where data is stored inside the pod of each user.
 | Users can see their routes in a map, as well as sharing them via multimedia or information with their friends.
 | The application will provide a notification system.
 | Users can have groups of friends with whom they may want to share a route.
@@ -35,10 +35,9 @@ In this application we aim to develop a decentralized routes social network. We 
 | _1_ | _Usability_ | _It must be a simple application to ensure that any user, independently of their expertise, can use it to its full potential._
 | _2_ | _Performance_ | _Ensure that our app runs fluently and that access to data is fast to avoid loading screens._
 | _3_ | _Testability_ | _The app must be tested exhaustively, so bugs and programming errors are minimized._
-| _4_ | _Quality_ | _Both code and interface of the app must accomplish profesional feeling. A well designed architecture of the sofware must be priorized._
-| _5_ | _Portability_ | _The app must be available both in the navigator and in a mobile device where it is installed._
-| _6_ | _Security_ | _Although the app must have some security measures, performance and usability limits strict security, so it will not be as important to avoid loosing these other attributes as a tradeoff._
-| _7_ | _Reliability_ | _The number of errors should be minimized to achieve consistency and increase the level of confidence of our users. A good degree of testability should help improve reliance_
+| _4_ | _Portability_ | _The app must be available both in the navigator and in a mobile device where it is installed._
+| _5_ | _Security_ | _Although the app must have some security measures, performance and usability limits strict security, so it will not be as important to avoid loosing these other attributes as a tradeoff._
+| _6_ | _Reliability_ | _The number of errors should be minimized to achieve consistency and increase the level of confidence of our users. A good degree of testability should help improve reliance_
 
 |===
 
@@ -60,7 +59,9 @@ Diego Ramírez Amandi,
 Pablo Fernandez Martínez | A well designed architecture to acomplish SOLID specifications and fulfill all the requirements planned.
 | _Teachers_ | José Emilio Labra Gayo, Pablo González González | Obtention of a robust application that shows off everything learned in the course and that proves a well organized team that know how to adapt to new technologies. 
 | _Inrupt & Solid community_ | Sir Tim Berners-Lee, info@inrupt.com | A decentralized product that provides an alternative to massive centralized databases of nowadays companies.
-| _End users_ | Clients | A usable app  that allows them to share their hiking adventures and experiences with their friends.
+| _Ana_ | Client | She works in an office and wants to share with her colleagues the routes she does in the weekend
+| _Michael_ | Client | He has just retired and wants to look for routes to do in his free time. He can look for it asking to his friends, but they cant explain him everything about some route in a conversation.
+| _Helen_ | Client | She is worried about sharing her data in a centralized application and prefers to have control over it over time instead of uploading it to a centralized database.
 |===
 
 ****

@@ -1,26 +1,28 @@
-import '../App.css';
+import './../css/App.css';
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 function EditProfile() {
+    const { t } = useTranslation();
     return (
         <div className="App-header">
-            <h1>Edit profile info</h1>
+            <h1>{t('editProfileTitle')}</h1>
             <Form>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Change name</Form.Label>
-                    <Form.Control type="name" placeholder="New name" />
+                    <Form.Label>{t('editProfileChangeName')}</Form.Label>
+                    <Form.Control type="name" placeholder={t('editProfileNewName')} />
                     <Form.Text className="text-muted">
-                        Min of 8 characters
+                        {t('editProfileMinChar')}
                     </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Change password</Form.Label>
-                    <Form.Control type="password" placeholder="New password" />
+                    <Form.Label>{t('editProfileChangePass')}</Form.Label>
+                    <Form.Control type="password" placeholder={t('editProfileNewPass')} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Save
+                    {t('editProfileSave')}
                 </Button>
             </Form>
         </div>

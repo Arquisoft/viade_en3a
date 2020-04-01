@@ -8,8 +8,7 @@ In this section we expand and go into more detail in our quality goals, already 
 === Quality Tree
 
 ****
-Here our quality tree is represented, showing the most important quality goals beside their requirements.
-Their are prioritized from I to III, being I the highest and III the lowest. 
+Here our quality tree is represented, showing the most important quality goals beside their requirements, linked with its quality scenario related
 
 image::10_qualityTree.png[QualityTree]
 ****
@@ -18,16 +17,14 @@ image::10_qualityTree.png[QualityTree]
 
 ****
 |===
-|*Ref*|*Quality Attribute*|*Quality Scenario*|*Priority*
-|1|Usability - Seamless UI|UI is easy and intuitive to use, no need of a guide for any user to understand it|HIGH
-|2|Usability - Compliance|UI complies with EU internet accessibility standards|HIGH
-|3|Performance - Responsive|User interaction must be reflected with a low response time, less than 1 second|HIGH
-|4|Performance - Loading times|Loading times don't have to be a bother to the user, at max 30 seconds waiting|HIGH
-|5|Testability - Fully tested UI|All the most important aspects of the app must be implemented with a high degree of testing|HIGH
-|6|Quality - Code quality|The code has to maintain a quality level expeted from a software engineer|MEDIUM
-|7|Portability - Platforms|The app must be available both in the navigator and in a mobile device|MEDIUM
-|8|Security - Data control|Users must have complete control over their data flow|LOW
-|9|Security - Data security|Unauthorized user access must be reported|LOW
-|10|Reliability - Error handling|Small errors shouldn't result in a system crash, fatal errors must be minimized|LOW
+|*Ref*|*Quality Attribute*|*Quality Scenario*
+|1|Usability - Seamless UI|Ana, Michael and Helen must be able to learn how to use, without external help, our application 
+|2|Usability - Compliance|UI complies with the WCAG level AA
+|3|Performance - Responsive|User interaction must be reflected with a low response time, with a maximum acceptable limit of 1 second
+|4|Performance - Loading times|Loading times don't have to be a bother to the user, with an average of 2 seconds
+|5|Testability - Fully tested UI|We must reach a suitable coverage percentage, 50% at minimum
+|6|Portability - Platforms|The app must be available both in the navigator and in a mobile device
+|7|Security - Data security|If an unauthorized user access is detected it must be reported
+|8|Reliability - Error handling|95% of the errors have to be handled by the program, not leading to a system crash
 |===
 ****
