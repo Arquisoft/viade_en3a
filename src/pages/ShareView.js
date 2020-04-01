@@ -13,7 +13,7 @@ class ShareView extends React.Component {
         };
         this.readFriends();
         this.webId = null;
-        this.messages = [];
+        this.id = props.match.params.id;
     }
 
     render() {
@@ -60,9 +60,10 @@ class ShareView extends React.Component {
         message.sender = this.webId;
         message.recipient = destination;
 
-        message.content = "Holaa, esto es una prueba";
+        let folder = "/viade/routes/"
+        message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
-        message.title = "Check out this route shared to you by " + await this.getSessionName();
+        message.title = "Check out this route shared to you by " + this.getSessionName();
         message.url = message.recipient + message.id + ".json";
 
         await this.buildMessage(message);
@@ -80,11 +81,20 @@ class ShareView extends React.Component {
         await data[mess].schema$sender.add(namedNode(this.webId));
     } 
 
-    async getSessionName(){
+    getSessionName(){
         var session = this.webId;
         var tmp = session.split(".")[0];
         return tmp.split("//")[1];
     }
+
+    getWebIdWithoutProfile(){
+        let wId = this.webId;
+        let tmp = wId.split("profile")[0];
+        console.log(tmp);
+        return tmp;
+
+    }
+
 }
 
 export default ShareView;
