@@ -32,14 +32,10 @@ class ShareView extends React.Component {
                             <Card.Body>
                                 <Card.Title>{friend.name}</Card.Title>
                                 <Button variant="primary" 
-                                onClick={() => {this.send(friend.inbox)}}>Share</Button>
+                                onClick={() => {this.send(friend.inbox)}}>Share</Button>;
                             </Card.Body>
                         </Card>
-                        </div>
-                        //<div>
-                        //    <h3>{friend.name}</h3>
-                        //    <button className="btn-primary" onClick={() => {this.send(friend.inbox)}}>Share</button>
-                        //</div>;
+                        </div>;
                     })
                 }
             </div>
@@ -52,7 +48,7 @@ class ShareView extends React.Component {
         this.webId = session.webId;
         let friends = [];
         for await (const friend of data.user.friends) {
-            const f = {}
+            const f = {};
             const n = await data[friend].vcard$fn;
             const inbox = await data[friend].inbox;
             const imageLd = await data[friend].vcard_hasPhoto;
@@ -63,16 +59,15 @@ class ShareView extends React.Component {
                 f.image = "";
             }
 
-            f.webId = `${friend}`
-            f.name = `${n}`
-            f.inbox = `${inbox}`
+            f.webId = `${friend}`;
+            f.name = `${n}`;
+            f.inbox = `${inbox}`;
             if (n === undefined) {
-                f.name = `${friend}`
+                f.name = `${friend}`;
             }
             friends = [...friends, f]
         }
         this.setState({ friends: friends });
-        console.log(this.webId)
     }
 
 
@@ -83,7 +78,7 @@ class ShareView extends React.Component {
         message.sender = this.webId;
         message.recipient = destination;
 
-        let folder = "/viade/routes/"
+        let folder = "/viade/routes/";
         message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
         message.title = "Check out this route shared to you by " + this.getSessionName();
@@ -95,7 +90,6 @@ class ShareView extends React.Component {
     }
 
     async buildMessage(message) {
-        console.log(message);
         var mess = message.url;
         //message
         await data[mess].schema$text.add(message.content);
