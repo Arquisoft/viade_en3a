@@ -19,6 +19,6 @@ test('Test create route', () => {
 
 	const btn = getByText(/save/i);
 
-	expect(getByText("Create your own Route")).toBeTruthy();
+	expect(getByText('mapCreationTitle')).toBeTruthy();
 	expect(btn).toBeTruthy();
 });

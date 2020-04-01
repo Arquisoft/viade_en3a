@@ -7,6 +7,6 @@ const routeManager = new RouteManager();
 
 test("renders learn react link", () => {
   const { getByText } = render(<RouteList routeManager={routeManager} />);
-  const route1 = getByText(/Route list/i);
+  const route1 = getByText('routeListText');
   expect(route1).toBeInTheDocument();
 });
