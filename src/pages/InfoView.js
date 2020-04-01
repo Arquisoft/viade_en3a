@@ -115,37 +115,22 @@ class InfoView extends React.Component {
                         </div>
                         <div id="ircTabs">
                             <Tabs>
-                                <Translation>
-                                    {
-                                        (t) => 
-                                        <Tab eventKey="routeMap" title={t('infoViewMap')}>
-                                            <MyMap route={this.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
-                                        </Tab>
-                                    }
-                                </Translation>
-                                <Translation>
-                                    {
-                                        (t) =>
-                                        <Tab eventKey="elevationChart" title={t('infoViewElevation')}>
-                                            <MyElevationChart route={this.route} style={{ width: "100%" }} />
-                                        </Tab>
-                                    }
-                                </Translation>
-                                <Translation>
-                                    {
-                                        (t) =>
-                                        <Tab eventKey="imageCarousel" title={t('infoViewImg')}>
-                                            <Carousel>
-                                                <Carousel.Item>
-                                                    <Image src={logo1} fluid />
-                                                </Carousel.Item>
-                                                <Carousel.Item>
-                                                    <Image src={logo2} fluid />
-                                                </Carousel.Item>
-                                            </Carousel>
-                                        </Tab>
-                                    }
-                                </Translation>
+                                <Tab eventKey="routeMap" title="Map view">
+                                    <MyMap route={this.state.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
+                                </Tab>
+                                <Tab eventKey="elevationChart" title="Elevation chart">
+                                    <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
+                                </Tab>
+                                <Tab eventKey="imageCarousel" title="Image gallery">
+                                    <Carousel>
+                                        <Carousel.Item>
+                                            <Image src={logo1} fluid />
+                                        </Carousel.Item>
+                                        <Carousel.Item>
+                                            <Image src={logo2} fluid />
+                                        </Carousel.Item>
+                                    </Carousel>
+                                </Tab>
                             </Tabs>
                         </div>
                     </div>
