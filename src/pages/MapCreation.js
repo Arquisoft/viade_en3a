@@ -52,8 +52,8 @@ class MapCreation extends Component {
 			alert("Name can't be empty");
 			return undefined;
 		}
-		let waypoints = this.points.current.state.points;
-		if (waypoints.length < 2) {
+		let points = this.points.current.state.points;
+		if (points.length < 2) {
 			alert("You should have at least two points");
 			return undefined;
 		}
@@ -62,7 +62,7 @@ class MapCreation extends Component {
 			alert("Description can not be empty");
 			return undefined;
 		}
-		let route = new MyRoute(name, "Temp author", description, waypoints);
+		let route = new MyRoute(name, "Temp author", description, points);
 		return route;
 	}
 
@@ -82,16 +82,16 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		route.uploadToPod((filePodUrl, podResponse) => {
+		await route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {
 				alertText = "We are sorry!! Something went wrong while connecting to your POD";
 			} else {
-				alertText = "Route updated in your POD";
+				alertText = "Your fresh new shiny route has been correctly uploaded to your POD";
 			}
+			alert(alertText);
+			window.location.href = "#routes/list";
 		});
-		alert("Uploading route to SOLID POD");
-		window.location.href = "#routes/list";
 	}
 
 }

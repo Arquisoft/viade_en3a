@@ -1,40 +1,43 @@
 import { v4 as uuid } from "uuid";
-import RouteWaypoint from "./RouteWaypoint";
+import RoutePoint from "./RoutePoint";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
 
 const auth = require('solid-auth-client');
 
 /**
- * Returns an Array<RouteWaypoint> that represent the same set of points 
+ * Returns an Array<RoutePoint> that represent the same set of points 
  * received as a parameter.
- * @param {Array<{lat:"", lng:"", elv:""}>} waypoints The list of waypoints to 
+ * @param {Array<{lat:"", lng:"", elv:""}>} points The list of points to 
  * transform.
  */
-function processPoints(waypoints, route) {
+function processPoints(points) {
 	let list = [];
-	waypoints.forEach((point) => list.push(new RouteWaypoint(point.lat, point.lng, point.elv === undefined ? -1 : point.elv, route)));
+	points.forEach((point) => list.push(new RoutePoint(point.lat, point.lng, point.elv)));
 	return list;
+}
+
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 class MyRoute {
 
 	/**
 	 * Constructor for new Route objects. Will be represented by an id 
-	 * (uuid generation), an array of RouteWaypoint objects holding latitude, 
+	 * (uuid generation), an array of RoutePoint objects holding latitude, 
 	 * longitude and altitude, a name, an author and a description.
 	 * 
 	 * @param {String} name The name of the route.
 	 * @param {String} author The creator of the route.
 	 * @param {String} description A description of the route.
- 	 * @param {Array<{lat:"", lng:""}>} points The list of waypoints of this rule.
+ 	 * @param {Array<{lat:"", lng:""}>} points The list of points of this rule.
 	 */
-	constructor(name, author, description, waypoints) {
+	constructor(name, author, description, points) {
 		this.id = uuid().toString();
 		this.name = name;
 		this.author = author;
 		this.description = description;
-		this.waypoints = processPoints(waypoints, this);
-		this.updates = 0;
+		this.points = processPoints(points);
 	}
 
 	getId() {
@@ -53,33 +56,42 @@ class MyRoute {
 		return this.description;
 	}
 
-	getWaypoints() {
-		return this.waypoints;
+	getPoints() {
+		return this.points;
 	}
 
 	getFileName() {
 		return this.name + "_" + this.id + ".json";
 	}
 
-	async update() {
-		this.updates = 0;
-		this.waypoints.forEach((point) => {
-			if (point.getElevation() === -1) {
-				this.updates++;
-			}
-		});
-		console.log(this.updates);
-		if (this.updates === 0) {
-			this.uploadToPod((filePodUrl, podResponse) => {
-				console.log(filePodUrl);
-			});
-		}
-	}
-
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
+		await this.askForElevation();
+		await sleep(1000);
 		storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+	}
+
+	async askForElevation() {
+		for (let i = 0; i <= this.points.length - 1; i++) {
+			let point = this.points[i];
+			if (point.getElevation() === -1 || point.getElevation() === undefined) {
+				await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + point.getLatitude() + "," + point.getLongitude())
+					.then((response) => {
+						if (response.status === 200) {
+							response.json()
+								.then((data) => {
+									point.setElevation(parseInt(data["data"], 10));
+									if (isNaN(point.getElevation())) {
+										point.setElevation(-1);
+									}
+								});
+						}
+					}).catch((err) => {
+						point.setElevation(-1);
+					});
+			}
+		}
 	}
 
 	getComparableString() {
@@ -103,12 +115,12 @@ class MyRoute {
 				elv: jsonPoint["elevation"]
 			};
 		});
-		this.waypoints = processPoints(rawPoints, this);
+		this.points = processPoints(rawPoints);
 	}
 
 	toJsonLd() {
 		let poinstInJson = [];
-		this.waypoints.forEach((point) => poinstInJson.push(point.toJson()));
+		this.points.forEach((point) => poinstInJson.push(point.toJson()));
 		return JSON.stringify(
 			{
 				"@context": {

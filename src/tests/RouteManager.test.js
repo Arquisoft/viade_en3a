@@ -19,8 +19,8 @@ test('Test add route to manager', () => {
 
     assert.equal(created.getName(), myRoute.getName(), "Route not equal");
     assert.notEqual(myRoute.getDescription(), undefined, "Description is undefined");
-    assert.notEqual(myRoute.getWaypoints(), undefined, "Points are undefined");
-    assert.notEqual(myRoute.getWaypoints()[0].getElevation(), undefined, "Some point elevation is undefined");
+    assert.notEqual(myRoute.getPoints(), undefined, "Points are undefined");
+    assert.notEqual(myRoute.getPoints()[0].getElevation(), undefined, "Some point elevation is undefined");
 
     //check also getRouteById
     const found = routeManager.getRouteById(created.getId());
