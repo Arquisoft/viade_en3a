@@ -1,27 +1,34 @@
 [[section-design-decisions]]
 == Design Decisions
 
-=== _Use of React Native_
+=== _Not Use React Native_
+
+We decided to postpone the use of React Native.
 
 .Pros
 
-* Will allow creating apps for Android and iOS with the same code than the web application.
+* Allows creating apps for Android and iOS with the same code than the web application.
 * Dynamic HTML pages can be easily created.
 
 .Cons
 
 * Will take time to learn the language.
+* Less pre-created components available.
+* Not much advantage in using it, as the main functions can be emulated
+using a web browser for mobile phones.
 
 
-=== _KML Format for Routes_
+=== _JSON-LD Format for Routes_
 
 .Pros
 
 * The use of a standard makes it easy for the application to communicate with other services.
+* We follow Viade Specification, therefore making sure we can exchange information with other compatible applications.
+* JSON notation which is already known by us.
 
 .Cons
 
-* The XML notation may result in more cumbersome processing than with JSON.
+* PODs dont have yet a way to view the files in this format.
 
 === _Leaflet_
 
@@ -38,8 +45,69 @@ Map, Marker or Polyline. They came already implemented.
 
 * None of us has previously worked with this tool, so it's another thing to learn.
 
+=== _Chart.js_
 
-=== _Other Decisions_
-This part will be done in the future. Some decisions haven't been taken yet, for example:
+We chose chart_js as our plotting tool. 
 
-* Features that the app will have
+.Pros
+
+* Has react suport to ease the task of developing the charts
+* It's free.
+* It's well documented.
+
+.Cons
+
+* Needs a lot of code to configure the charts.
+
+=== _Storing altitude for points in the POD_
+
+.Pros
+
+* Reduces latency when displaying points as it only checks the altitude of each point once.
+* ViadeSpec points seem to follow this approach.
+
+.Cons
+
+* More space occupied
+
+=== AirMap Elevation API
+
+.Pros
+
+* It's free
+* Doesn't need API Key
+* Easy to use (just a single GET request)
+
+.Cons
+
+* For some points, such as seas, lakes or oceans may not give a response.
+
+=== Sharing of routes
+
+There are two ways to do so:
+
+1.- Storing them on a public directory, so ANY user can see them (therefore sharing among users is easily done).
+
+.Pros
+
+* Easy implementation.
+
+.Cons
+
+* No privacy.
+
+
+2.- Storing them on a private directory, then giving the user's friends rights to view the files (may result on problems with permissions such as user not being able to view its own files).
+
+.Pros
+
+* Privacy and sharing for particular users is allowed.
+* A user can have his own private routes.
+
+.Cons
+
+* Harder to implement.
+* If not careful may result in loss of rights on files.
+* A need of learning a library or method to edit the permissions of the POD.
+
+The approach to be followed is still a work in progress and needs further investigation.
