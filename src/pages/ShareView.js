@@ -93,7 +93,7 @@ class ShareView extends React.Component {
         var mess = message.url;
         //message
         await data[mess].schema$text.add(message.content);
-        await data[mess].rdfs$label.add("routeShared: message.title");
+        await data[mess].rdfs$label.add("routeShared: " + message.title);
         await data[mess].schema$dateSent.add(message.date.toISOString());
         await data[mess].rdf$type.add(namedNode('https://schema.org/Message'));
         await data[mess].schema$sender.add(namedNode(this.webId));
