@@ -23,7 +23,7 @@ class ShareView extends React.Component {
                     this.state.friends.map((friend) => {
                         return <div>
                             <h3>{friend.name}</h3>
-                            <button className="btn-primary" onclick={this.send(friend.inbox)}>Share</button>
+                            <button className="btn-primary" onClick={() => {this.send(friend.inbox)}}>Share</button>
                         </div>;
                     })
                 }
@@ -32,7 +32,8 @@ class ShareView extends React.Component {
     }
 
     async readFriends() {
-        this.webId = await auth.currentSession();
+        let session = await auth.currentSession(); 
+        this.webId = session.webId;
         var app = this;
         let friends = [];
         for await (const friend of data.user.friends) {
@@ -48,6 +49,7 @@ class ShareView extends React.Component {
             friends = [...friends, f]
         }
         this.setState({ friends: friends });
+        console.log(this.webId)
     }
 
 
@@ -55,12 +57,12 @@ class ShareView extends React.Component {
         var message = {};
         message.date = new Date(Date.now());
         message.id = message.date.getTime();
-        message.sender = await auth.currentSession();
+        message.sender = this.webId;
         message.recipient = destination;
 
         message.content = "Holaa, esto es una prueba";
 
-        message.title = "Check out this route shared to you by " + this.getSessionName();
+        message.title = "Check out this route shared to you by " + await this.getSessionName();
         message.url = message.recipient + message.id + ".json";
 
         await this.buildMessage(message);
@@ -68,18 +70,19 @@ class ShareView extends React.Component {
     }
 
     async buildMessage(message) {
-        var mess = message.url
+        console.log(message);
+        var mess = message.url;
         //message
         await data[mess].schema$text.add(message.content);
-        await data[mess].rdfs$label.add(message.title);
+        await data[mess].rdfs$label.add("routeShared: message.title");
         await data[mess].schema$dateSent.add(message.date.toISOString());
         await data[mess].rdf$type.add(namedNode('https://schema.org/Message'));
         await data[mess].schema$sender.add(namedNode(this.webId));
-    }
+    } 
 
     async getSessionName(){
-        var session = await auth.currentSession();
-        var tmp = session.webId.split(".")[0];
+        var session = this.webId;
+        var tmp = session.split(".")[0];
         return tmp.split("//")[1];
     }
 }
