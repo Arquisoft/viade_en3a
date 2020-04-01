@@ -32,7 +32,7 @@ class ShareView extends React.Component {
                             <Card.Body>
                                 <Card.Title>{friend.name}</Card.Title>
                                 <Button variant="primary" 
-                                onClick={() => {this.send(friend.inbox)}}>Share</Button>;
+                                onClick={() => {this.send(friend.inbox);}}>Share</Button>
                             </Card.Body>
                         </Card>
                         </div>;
@@ -65,9 +65,9 @@ class ShareView extends React.Component {
             if (n === undefined) {
                 f.name = `${friend}`;
             }
-            friends = [...friends, f]
+            friends = [...friends, f];
         }
-        this.setState({ friends: friends });
+        this.setState({ friends });
     }
 
 
@@ -108,7 +108,6 @@ class ShareView extends React.Component {
     getWebIdWithoutProfile(){
         let wId = this.webId;
         let tmp = wId.split("profile")[0];
-        console.log(tmp);
         return tmp;
 
     }
