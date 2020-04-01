@@ -10,6 +10,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Translation } from 'react-i18next';
 
 import logo1 from "../assets/logo/logo.jpeg";
 import logo2 from "../assets/logo/logo_alt.jpeg";
@@ -34,29 +35,57 @@ class InfoView extends React.Component {
         if (this.state.route !== undefined) {
             return (
                 <div id="routeInfoContainer">
-                    <h1>Route Info</h1>
+                    <Translation>
+                        {
+                            (t) => <h1>{t('infoViewTitle')}</h1>
+                        }
+                    </Translation>
                     <div id="routeInfoContent">
                         <div id="ircInfoTable">
-                            <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>Export route in json format</Button>
+                            <Translation>
+                                {
+                                    (t) => <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>{t('infoViewExportJSON')}</Button>
+                                }
+                            </Translation>
                             <div>
                                 <Table striped bordered>
                                     <thead>
                                         <tr>
-                                            <th>Info</th>
-                                            <th>Data</th>
+                                            <Translation>
+                                                {
+                                                    (t) => <th>{t('infoViewTh1')}</th>
+                                                }
+                                            </Translation>
+                                            <Translation>
+                                                {
+                                                    (t) => <th>{t('infoViewTh2')}</th>
+                                                }
+                                            </Translation>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Name:</td>
+                                            <Translation>
+                                                {
+                                                    (t) => <td>{t('infoViewTd1')}</td>
+                                                }
+                                            </Translation>
                                             <td>{this.state.route.getName()}</td>
                                         </tr>
                                         <tr>
-                                            <td>Author:</td>
+                                            <Translation>
+                                                {
+                                                    (t) => <td>{t('infoViewTd2')}</td>
+                                                }
+                                            </Translation>
                                             <td>{this.state.route.getAuthor()}</td>
                                         </tr>
                                         <tr>
-                                            <td>Description:</td>
+                                            <Translation>
+                                                {
+                                                    (t) => <td>{t('infoViewTd3')}</td>
+                                                }
+                                            </Translation>
                                             <td>{this.state.route.getDescription()}</td>
                                         </tr>
                                     </tbody>
@@ -65,31 +94,58 @@ class InfoView extends React.Component {
                             <div>
                                 <Form>
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Comment section</Form.Label>
-                                        <Form.Control as="textarea" rows="3" placeholder="Write your comment here" />
+                                        <Translation>
+                                            {
+                                                (t) => <Form.Label>{t('infoViewComments')}</Form.Label>
+                                            }
+                                        </Translation>
+                                        <Translation>
+                                            {
+                                                (t) => <Form.Control as="textarea" rows="3" placeholder={t('infoViewWriteComments')} />
+                                            }
+                                        </Translation>
                                     </Form.Group>
-                                    <Button variant="primary" type="submit"> Submit </Button>
+                                    <Translation>
+                                        {
+                                            (t) => <Button variant="primary" type="submit"> {t('infoViewSubmit')} </Button>
+                                        }
+                                    </Translation>
                                 </Form>
                             </div>
                         </div>
                         <div id="ircTabs">
                             <Tabs>
-                                <Tab eventKey="routeMap" title="Map view">
-                                    <MyMap route={this.state.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
-                                </Tab>
-                                <Tab eventKey="elevationChart" title="Elevation chart">
-                                    <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
-                                </Tab>
-                                <Tab eventKey="imageCarousel" title="Image gallery">
-                                    <Carousel>
-                                        <Carousel.Item>
-                                            <Image src={logo1} fluid />
-                                        </Carousel.Item>
-                                        <Carousel.Item>
-                                            <Image src={logo2} fluid />
-                                        </Carousel.Item>
-                                    </Carousel>
-                                </Tab>
+                                <Translation>
+                                    {
+                                        (t) => 
+                                        <Tab eventKey="routeMap" title={t('infoViewMap')}>
+                                            <MyMap route={this.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
+                                        </Tab>
+                                    }
+                                </Translation>
+                                <Translation>
+                                    {
+                                        (t) =>
+                                        <Tab eventKey="elevationChart" title={t('infoViewElevation')}>
+                                            <MyElevationChart route={this.route} style={{ width: "100%" }} />
+                                        </Tab>
+                                    }
+                                </Translation>
+                                <Translation>
+                                    {
+                                        (t) =>
+                                        <Tab eventKey="imageCarousel" title={t('infoViewImg')}>
+                                            <Carousel>
+                                                <Carousel.Item>
+                                                    <Image src={logo1} fluid />
+                                                </Carousel.Item>
+                                                <Carousel.Item>
+                                                    <Image src={logo2} fluid />
+                                                </Carousel.Item>
+                                            </Carousel>
+                                        </Tab>
+                                    }
+                                </Translation>
                             </Tabs>
                         </div>
                     </div>
@@ -100,7 +156,11 @@ class InfoView extends React.Component {
         } else {
             return (
                 <div id="routeInfoContainer">
-                    <h1>Route Info</h1>
+                     <Translation>
+                        {
+                            (t) => <h1>{t('infoViewTitle')}</h1>
+                        }
+                    </Translation>
                 </div >
             );
         }

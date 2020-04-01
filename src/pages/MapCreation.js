@@ -3,7 +3,9 @@ import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Translation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
+
 
 import './../css/App.css';
 
@@ -23,10 +25,19 @@ class MapCreation extends Component {
 	render() {
 		return (
 			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
-				<h1>Create your own Route</h1>
+				<Translation>
+					{
+						(t) => <h1>{t('mapCreationTitle')}</h1>
+					}
+				</Translation>
+				
 				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1">Route Name</InputGroup.Text>
+						<Translation>
+							{
+								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>
+							}
+						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
 						ref={this.routeName}
@@ -43,7 +54,11 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
-				<Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>Save route in pod</Button>
+				<Translation>
+					{
+						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
+					}
+				</Translation>
 				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler} />
 			</div>
 		);
