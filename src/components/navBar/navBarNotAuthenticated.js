@@ -1,16 +1,24 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route } from 'react-router-dom';
 import SignUp from "../../pages/SignUp";
 import WelcomeCarousel from '../carousel/WelcomeCarousel';
+import { useTranslation } from 'react-i18next';
 
 import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
 import viadeText from './../../assets/logo/logo_letters.jpeg';
 
 function NavBarNotAuthenticated(props) {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <HashRouter basename='/'>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
@@ -34,10 +42,14 @@ function NavBarNotAuthenticated(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-          </Nav>
+          </Nav>  
+          <DropdownButton id="dropdown-item-button" title={t('navBarLanguage')}>
+            <Dropdown.Item as="button" onClick={() => changeLanguage('en')}>{t('navBarLanguageEn')}</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={() => changeLanguage('es')}>{t('navBarLanguageEs')}</Dropdown.Item>
+          </DropdownButton>
           <Nav>
-            <Nav.Link className="mt-1 mr-2" href="#/register">Sign up</Nav.Link>
-            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login="Sign in" logout="Sign out" />
+            <Nav.Link className="mt-1 mr-2" href="#/register">{t('navBarSignUp')}</Nav.Link>
+            <AuthButton className="btn btn-outline-light" popup="https://solid.community/common/popup.html" login={t('navBarSignIn')} logout={t('navBarSignOut')} />
             <Nav.Link href="https://github.com/Arquisoft/viade_en3a" target="_blank">
               <img
                 src={gitHubLogo}

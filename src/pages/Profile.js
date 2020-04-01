@@ -2,6 +2,7 @@ import './../css/App.css';
 import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
+import { Translation } from 'react-i18next';
 
 const auth = require('solid-auth-client');
 var session = null;
@@ -16,7 +17,11 @@ class Profile extends Component {
     render() {
         return (
             <div className="App-header" onLoad={() => this.loadInfo()}>
-                <h1>Profile</h1>
+                <Translation>
+                    {
+                        (t) => <h1>{t('profileTitle')}</h1>
+                    }
+                </Translation>
                 <img
                     src={profileImg}
                     width="180"
@@ -24,13 +29,28 @@ class Profile extends Component {
                     className="d-inline-block align-top"
                     alt="Viade logo"
                 />
-                <h2>Username:</h2>
+                <Translation>
+                    {
+                        (t) => <h2>{t('profileUsername')}</h2>
+                    }
+                </Translation>
                 <h3 id="username">username</h3>
-                <h2>Locality:</h2>
+                <Translation>
+                    {
+                        (t) => <h2>{t('profileLocality')}</h2>
+                    }
+                </Translation>
                 <h3 id="locality">locality</h3>
-                <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>Edit profile</Button>
-
-                <h1>Last routes done</h1>
+                <Translation>
+                    {
+                        (t) => <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>{t('profileEditButton')}</Button>
+                    }
+                </Translation>
+                <Translation>
+                    {
+                        (t) => <h1>{t('profileLastRoutes')}</h1>
+                    }
+                </Translation>
             </div>
         );
     }

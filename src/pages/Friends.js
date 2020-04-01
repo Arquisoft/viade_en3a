@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import FriendCard from '../components/friendCard/FriendCard';
 import ProfileA from './../assets/friends/friend_profile_A.png';
 import ProfileB from './../assets/friends/friend_profile_B.png';
+import { Translation } from 'react-i18next';
 
 const routeFriendsStyle = {
     flexWrap: "wrap",
@@ -31,8 +32,16 @@ function Friends() {
 
     return (
         <div className="App-header">
-            <h1>Friends</h1>
-            <h2>Add a friend</h2>
+            <Translation>
+                {
+                    (t) => <h1>{t('friendsTitle')}</h1>
+                }
+            </Translation>
+            <Translation>
+                {
+                    (t) => <h2>{t('friendsAdd')}</h2>
+                }
+            </Translation>
             <Form inline="true" class="forms-inline">
                 <Form.Control type="text" placeholder="Friend username" />
                 <Button variant="primary" disabled={isLoading}
@@ -40,7 +49,11 @@ function Friends() {
                     {isLoading ? 'Adding…' : 'Add'}
                 </Button>
             </Form>
-            <h2>List of friends</h2>
+            <Translation>
+                {
+                    (t) => <h2>{t('friendsList')}</h2>
+                }
+            </Translation>
             <div style={routeFriendsStyle}>
                 <FriendCard
                     friendImage={ProfileA}

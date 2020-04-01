@@ -1,13 +1,15 @@
 import React from "react";
 import RouteCard from "./RouteCard";
 import CardDeck from "react-bootstrap/CardDeck";
+import { Translation } from 'react-i18next';
+
 import PodStorageHandler from "./../podService/podStoreHandler";
 import MyRoute from "./../../model/MyRoute";
 
 const auth = require('solid-auth-client');
 
 class RouteList extends React.Component {
-
+    
     constructor(props) {
         super(props);
         this.routeManager = props.routeManager;
@@ -17,7 +19,7 @@ class RouteList extends React.Component {
         };
         this.syncRoutesWithPod();
     }
-
+    
     render() {
         let routesForCardDecks = [];
         let counter = 0;
@@ -35,7 +37,11 @@ class RouteList extends React.Component {
 
         return (
             <div className="App-header">
-                <h1>Route list</h1>
+                <Translation>
+                    {
+                        (t) => <h1>{t('routeListText')}</h1>
+                    }  
+                </Translation>
                 {routesForCardDecks}
                 {this.state.message}
             </div >
