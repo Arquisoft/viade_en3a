@@ -31,7 +31,7 @@ class RouteList extends React.Component {
             <div className="App-header">
                 <Translation>
                     {
-                        (t, { i18n }) => <h1>{t('routeListText')}</h1>
+                        (t) => <h1>{t('routeListText')}</h1>
                     }  
                 </Translation>
                 {routesForCardDecks}

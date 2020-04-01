@@ -13,12 +13,12 @@ class Home extends Component {
             <div className="App-header" onLoad={() => this.getName()}>
                 <Translation>
                     {
-                        (t, { i18n }) => <h1 id="name">{t('homeWelcome')}</h1>
+                        (t) => <h1 id="name">{t('homeWelcome')}</h1>
                     }
                 </Translation>
                 <Translation>
                     {
-                        (t, { i18n }) => <h2>{t('homeWelcome2')}</h2>
+                        (t) => <h2>{t('homeWelcome2')}</h2>
                     }
                 </Translation>
                 <img
