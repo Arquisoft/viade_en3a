@@ -26,7 +26,7 @@ const routeManager = new RouteManager();
 function MyNavBar(props) {
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = lng => {
+  const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
   return (

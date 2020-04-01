@@ -16,7 +16,7 @@ import viadeText from './../../assets/logo/logo_letters.jpeg';
 function NavBarNotAuthenticated(props) {
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = lng => {
+  const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
   return (
