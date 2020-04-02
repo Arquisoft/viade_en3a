@@ -56,7 +56,6 @@ class MapCreation extends Component {
 						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
 					}
 				</Translation>
-				<input id="pictureUploader" type="file" name="file" onChange={this.onChangeHandler} />
 			</div>
 		);
 	}
