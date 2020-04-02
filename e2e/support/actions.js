@@ -7,8 +7,8 @@ const scope = require('./scope');
 let headless = true;
 let slowMo = 0;
 // Chrome is set to run headlessly and with no slowdown in CircleCI
-if (process.env.CIRCLECI) {headless = true}
-if (process.env.CIRCLECI) {slowMo = 0}
+if (process.env.CIRCLECI) {headless = true;}
+if (process.env.CIRCLECI) {slowMo = 0;}
 
 const pending = (callback) => {
   callback(null, 'pending');
