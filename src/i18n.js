@@ -107,7 +107,7 @@ const resources = {
         "profileEditButton": "Editar perfil",
         "profileLastRoutes": "Últimas rutas realizadas",
         "infoViewTitle": "Información de la ruta",
-        "infoViewExportJSON": "Exportar ruta en formatp json",
+        "infoViewExportJSON": "Exportar ruta en formato json",
         "infoViewTh1": "Info",
         "infoViewTh2": "Datos",
         "infoViewTd1": "Nombre:",
