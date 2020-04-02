@@ -3,7 +3,6 @@ import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
 
 
 import './../css/App.css';

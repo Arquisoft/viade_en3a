@@ -87,8 +87,8 @@ export default class PodStorageHandler {
      *                             + the second null or the error found.
      */
     async getResources(callback) {
-        let result = [];
-        let folder = null;
+        //let result = [];
+        //let folder = null;
         // Not yet implemented
 
         callback(null, null);
