@@ -1,56 +1,85 @@
-import React from 'react';
-import RouteCard from './RouteCard';
+import React from "react";
+import RouteCard from "./RouteCard";
+import CardDeck from "react-bootstrap/CardDeck";
+import { Translation } from 'react-i18next';
 
-import { caresRoutePoints, xanasRoutePoints, boldRoutePoints } from './Points';
+import PodStorageHandler from "./../podService/podStoreHandler";
+import MyRoute from "./../../model/MyRoute";
 
-const routeListStyle = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    padding: "2%"
-};
+const auth = require('solid-auth-client');
 
-function RouteList(props) {
-    return (
-        <div className="App-header">
-            <h1>Route list</h1>
-            <div style={routeListStyle}>
-                <RouteCard
-                    routeName="Las Xanas"
-                    routeAuthor="Miguel Menéndez"
-                    routeDescription="Really beautiful landscape but not wise to traverse with kids. They might fall off of some cliff."
-                    routeImageSource="https://www.senditur.com/multimedia/uploads/images/Rutas/Espa%C3%B1a/Asturias/Ruta%20de%20Las%20Xanas/Ruta_de_Las_Xanas.jpg"
-                    routePoints={xanasRoutePoints}
-                />
-                <RouteCard
-                    routeName="Fuso de la Reina"
-                    routeAuthor="María santísima"
-                    routeDescription="Easy to complete, mostly straight lines. Concrete does its job turning your knees into dust."
-                    routeImageSource="http://www.senderismoenasturias.es/ovimolin.jpg"
-                    routePoints={boldRoutePoints}
-                />
-                <RouteCard
-                    routeName="Cares"
-                    routeAuthor="Aventura"
-                    routeDescription="Medium difficulty, a little bit steep in some parts but still worth to witness."
-                    routeImageSource="https://www.desnivel.com/images/2012/04/roberto-colmenero.-mi-padre-y-hermano-960x1280.jpg"
-                    routePoints={caresRoutePoints}
-                />
-                <RouteCard
-                    routeName="Picos de Europa"
-                    routeAuthor="Viade"
-                    routeDescription="Interesting passages make this route unique on its own. Visit worthy."
-                    routeImageSource="http://soyrural.es/wp-content/uploads/2017/07/ruta-del-Cares.jpg"
-                    routePoints={boldRoutePoints}
-                />
-            </div>
-        </div >
-    );
+class RouteList extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.routeManager = props.routeManager;
+        this.cardDeckSize = 4;
+        this.state = {
+            routes: []
+        };
+        this.syncRoutesWithPod();
+    }
+    
+    render() {
+        let routesForCardDecks = [];
+        let counter = 0;
+        while (counter <= this.state.routes.length) {
+            routesForCardDecks.push(
+                <CardDeck style={{ margin: "2%", width: "100%" }}>
+                    {
+                        this.state.routes.slice(counter, counter + this.cardDeckSize).map(
+                            (r) => <RouteCard route={r} />)
+                    }
+                </CardDeck>
+            );
+            counter += this.cardDeckSize;
+        }
+
+        return (
+            <div className="App-header">
+                <Translation>
+                    {
+                        (t) => <h1>{t('routeListText')}</h1>
+                    }  
+                </Translation>
+                {routesForCardDecks}
+                {this.state.message}
+            </div >
+        );
+    }
+
+    async syncRoutesWithPod() {
+        this.routeManager.resetRoutes();
+        let routeList = [];
+        let session = await auth.currentSession();
+        if (session !== null && session !== undefined) {
+            let storageHandler = new PodStorageHandler(session);
+            storageHandler.getRoutes((rawJsonRoutes, error) => {
+                if (rawJsonRoutes === null) {
+                    alert("There was an error trying to fetch your routes from the POD");
+                } else {
+                    if (rawJsonRoutes.length !== 0) {
+                        rawJsonRoutes.forEach((rawRoute) => {
+                            let tempRoute = new MyRoute("", "", "", []);
+                            tempRoute.modifyFromJsonLd(rawRoute);
+                            routeList.push(tempRoute);
+                            this.routeManager.addRoute(tempRoute);
+                        });
+                        this.setState({ routes: routeList });
+                    } else {
+                        this.setState({
+                            message:
+                                <div>
+                                    <h3>Oops! We didn't find any route in your POD</h3>
+                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                </div>
+                        });
+                    }
+                }
+            });
+        }
+    }
+
 }
-
-// function fetchRoutesFromPod() {
-//     // TODO
-// }
 
 export default RouteList;

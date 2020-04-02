@@ -1,5 +1,31 @@
 [[section-concepts]]
 == Cross-cutting Concepts
 
-To be done (This point refers mainly to implementation decisions, rules and conventions followed
-that haven't been done yet)
+=== Package Structure
+The package structure followed during the development of the proyect is this one.
+Inside src folder we can find the following.
+
+image::PackageStructure.png[PackageStructure]
+
+Assets:: Contains the images to be displayed, as logos or the main window photos.
+Components:: Reusable components used in many parts of the application. For example,
+the maps, elevation chart...
+CSS:: Some parts need special CSS rules. The files that defined them are here.
+Docs:: The folder where this documentation is stored.
+Model:: Contains the classes that define the data model (MyRoute) and also the 
+classes that manage them.
+Pages:: Has inside those views that are directly shown to the user. It's the final
+arrangement of the individual React components.
+Tests:: Contains all the tests of the application.
+
+=== Route Management Model
+Class diagram containing the classes that manage routes
+
+image::DataClassDiagram.png[ClassDiagram]
+
+=== Navigation Map
+
+image::NavMap.png[NavMap]
+
+=== Viade Specification
+With the creation of this specification we can follow a standart, making sure we can communicate with other applications and therefore creating a network of route management systems available to the users.

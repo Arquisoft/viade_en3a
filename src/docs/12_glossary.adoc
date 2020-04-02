@@ -1,9 +1,32 @@
 [[section-glossary]]
 == Glossary
 
-[options="header"]
+.Terms
+[options="header", cols="1, 5, 2"]
 |===
-| Term         | Definition                                                                         | More Information
-| Solid        | Solid (Social Linked Data) a web decentralization project led by Tim Berners-Lee   | link:https://solid.inrupt.com[Solid Website]
-| Pods         | Personal Online Data Stores, used to store the person's data                       | link:https://solid.inrupt.com/get-a-solid-pod[Get Your Pod]
+
+| *Term*
+| *Definition*
+| *More Information*
+
+| Solid
+| Solid (Social Linked Data) a web decentralization project led by Tim Berners-Lee
+| link:https://solid.inrupt.com[Solid Website]
+
+| Pods
+| Personal Online Data Stores, used to deposit the person's data
+| link:https://solid.inrupt.com/get-a-solid-pod[Get Your Pod]
+
+| GPX
+| XML schema designed as a common GPS data format for software applications
+| link:https://en.wikipedia.org/wiki/GPS_Exchange_Format[GPS exchange format]
+
+| MVC
+| Software design pattern commonly used for developing user interfaces which divides the related program logic into three interconnected elements
+| link:https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller[Model-View-Controller]
+
+| Viade Specification
+| An specification to follow in order to manage the way in which the routes will be uploaded to the user's PODs
+| link:https://github.com/Arquisoft/viadeSpec[Viade Specification]
+
 |===

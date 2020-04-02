@@ -1,6 +1,88 @@
 [[section-building-block-view]]
 
-
 == Building Block View
 
-TBD
+=== Whitebox overall system
+
+This application has a very simple top level design. This is introduced by <<section-system-scope-and-context>>.
+
+image::BusinessContext.png[BusiContext]
+
+Our application:: 
+Manages the user's routes. Some actions possible are:
+
+*  Creating new routes.
+*  Displaying information of existing routes.
+*  Sending notifications to some friend to initiate route sharing process.
+
+Other applications:: 
+Applications that use some data format to represent routes. The supported data formats are specified in the standard described in link:https://github.com/Arquisoft/viadeSpec[ViadeSpec] GitHub repository.
+
+Contained blackboxes::
+[cols="1,4", options="header"]
+|===
+| *Name* | *Responsibility*
+
+| Viade application
+| Main blackbox, contains every key component. Manages routes in every possible way allowed in our application. As well as with the user's pod. Also manages connections with other dependencies that will be explained down below. 
+
+| Other applications
+| Generation of route serialisation in supported formats to be processed by Viade applications. Blackbox decomposition out of the scope of this documentation.
+
+|===
+
+=== Whitebox: Our application - Viade
+
+This whitebox contains several blackboxes that depend on a series of interfaces to external sources of information. These modules can be seen in the diagram image shown below.
+
+image::viadeWhiteBoxLevel1.png[ViadeWhiteBoxLevel1]
+
+This representation focuses on functionality. Hence some components wont match their corresponding file or might be represented by more than one file. Some other functionalities weren't represented since they were considered as non-relevant.
+
+Contained blackboxes::
+[cols="1,4", options="header"]
+|===
+| *Name* | *Responsibility*
+
+| RouteCreation
+| Contains the functionalities that can be used by the users to create new routes. Once created, provided a list of values with some requirements, the route is stored inside the user's POD.
+
+| Profile
+| Provides the users with the ability to inspect their profile.
+
+| RouteList
+| Lists the set of routes stored inside the user's POD. Gives the option to learn more about the route, such as its points, altitude of them or media related to them.
+
+| PODService
+| Helper module to stablish a connection with the user's POD. Provides an interface with a series of operations commonly used to manage information such as routes.
+
+| ElevationChart
+| Wraps an interface component in charge of the display of the route points' altitudes.
+
+| RouteModel
+| This blackbox contains the whole model used to represent and manage routes inside Viade. This module is one of the keys of this application.
+
+| RouteInfo
+| This component (yet another interface one) displays information about the route in a fancy way. Some things like its name, description, author, points on a map, altitude of those points and a gallery of images.
+
+|===
+
+Interfaces::
+
+[cols="1,4", options="header"]
+|===
+| *Interface* | *Description*
+
+| Solid-file-client
+| This one allows the application to manage files when using the POD storage. More on this one link:https://github.com/jeff-zucker/solid-file-client[here].
+
+| Solid-auth-client
+| This one is needed to obtain and manage user session details with regards to SOLID POD and account. More information about this API link:https://github.com/solid/solid-auth-client[here].
+
+| Airmap elevation
+| This API provides a result for the elevation of a couple of coordinates given latitude and longitude. More info link:https://developers.airmap.com/docs/elevation-api[here].
+
+| Leaflet
+| This API is needed to mainpulate the map components that React-Leaflet provides. More on that link:https://react-leaflet.js.org/[here].
+
+|===

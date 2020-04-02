@@ -1,0 +1,24 @@
+#routeInfoContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#routeInfoContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "infoTable infoTabs";
+    width: 100%;
+}
+
+#ircInfoTable {
+    grid-area: infoTable;
+    margin: 15px;
+}
+
+#ircTabs {
+    grid-area: infoTabs;
+    margin: 15px;
+}
