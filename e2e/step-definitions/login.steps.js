@@ -1,8 +1,8 @@
 const {defineFeature, loadFeature}=require('jest-cucumber');
 const feature = loadFeature('./e2e/features/login.feature');
 //const podUtils = require('../../src/scripts/podUtils');
-const actions = require('../support/actions')
-const selectors = require('../support/selectors')
+const actions = require('../support/actions');
+const selectors = require('../support/selectors');
 
 defineFeature(feature, test => {
 
@@ -11,7 +11,7 @@ defineFeature(feature, test => {
         jest.setTimeout(30000);
 
         beforeEach(async () => {
-            await page.goto('http://localhost:3000/#/profile')
+            await page.goto('http://localhost:3000/#/profile');
           })
         
 
@@ -27,4 +27,4 @@ defineFeature(feature, test => {
             //await expect(page).toMatchElement('h1', { text: 'Edit profile info'})
         });
     });
-})
+});

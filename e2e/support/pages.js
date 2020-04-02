@@ -3,7 +3,7 @@ const pages = {
   profile: '#/profile',
   friends: '#/friends',
   routesList: '#/routes/list',
-  routesList: '#/routes/list',
+  routesAdd: '#/routes/add',
   routesExample: '#/routes/example',
   editProfile: '#/editProfile'
 };

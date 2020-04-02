@@ -7,16 +7,17 @@ const scope = require('./scope');
 let headless = true;
 let slowMo = 0;
 // Chrome is set to run headlessly and with no slowdown in CircleCI
-if (process.env.CIRCLECI) headless = true;
-if (process.env.CIRCLECI) slowMo = 0;
+if (process.env.CIRCLECI) {headless = true};
+if (process.env.CIRCLECI) {slowMo = 0};
 
 const pending = callback => {
   callback(null, 'pending');
 };
 
 const visitHomepage = async () => {
-  if (!scope.browser)
+  if (!scope.browser) {
     scope.browser = await scope.driver.launch({ headless, slowMo });
+  }
   scope.context.currentPage = await scope.browser.newPage();
   scope.context.currentPage.setViewport({ width: 1280, height: 1024 });
   const url = scope.host + pages.home;
@@ -45,11 +46,6 @@ const pressButton = async button => {
   return await currentPage.click(selectors.buttons[button]);
 };
 
-const wait = async timeInSeconds => {
-  const time = parseInt(timeInSeconds) * 1000;
-  await delay(time);
-};
-
 
 module.exports = {
   pending,
@@ -57,6 +53,5 @@ module.exports = {
   visitHomepage,
   clickOnItem,
   takenToPage,
-  pressButton,
-  wait
+  pressButton
 };
