@@ -43,7 +43,7 @@ export default class PodStorageHandler {
         let folder = null;
 
         await this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
-            (directory) => {folder = directory},
+            (directory) => {folder = directory;},
             (error) => {folder = null;}
         );
         if (folder) {

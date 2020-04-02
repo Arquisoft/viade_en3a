@@ -4,7 +4,7 @@ const feature = loadFeature('./e2e/features/login.feature');
 const actions = require('../support/actions');
 const selectors = require('../support/selectors');
 
-defineFeature(feature, test => {
+defineFeature((feature, test) => {
 
     test('Edit profile info', ({ given, when, then }) => {
     
@@ -12,7 +12,7 @@ defineFeature(feature, test => {
 
         beforeEach(async () => {
             await page.goto('http://localhost:3000/#/profile');
-          })
+        });
         
 
         given('An already registered user on the profile page', () => {
