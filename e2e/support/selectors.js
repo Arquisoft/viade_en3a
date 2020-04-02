@@ -1,11 +1,12 @@
 // These are ways of being able to identify HTML elements to interact with and check.
 const selectors = {
   links: {
-    Signup: 'a[href="/signup"]',
-    Login: 'a[href="/login"]',
+    Github: 'a[href="https://github.com/Arquisoft/viade_en3a"]'
   },
   buttons: {
-    EditProfile: 'button'
+    EditProfile: 'button',
+    SignIn: 'button',
+    SignUp: 'button'
   }
 };
 
