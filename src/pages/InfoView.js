@@ -19,6 +19,11 @@ import "./../css/infoView.css";
 
 const auth = require('solid-auth-client');
 
+const containerStyle = {
+    backgroundColor: "white",
+    color: "black"
+};
+
 class InfoView extends React.Component {
 
     constructor(props) {
@@ -34,7 +39,7 @@ class InfoView extends React.Component {
     render() {
         if (this.state.route !== undefined) {
             return (
-                <div id="routeInfoContainer">
+                <div id="routeInfoContainer" style={containerStyle}>
                     <Translation>
                         {
                             (t) => <h1>{t('infoViewTitle')}</h1>
@@ -140,8 +145,8 @@ class InfoView extends React.Component {
             );
         } else {
             return (
-                <div id="routeInfoContainer">
-                     <Translation>
+                <div id="routeInfoContainer" style={containerStyle}>
+                    <Translation>
                         {
                             (t) => <h1>{t('infoViewTitle')}</h1>
                         }
