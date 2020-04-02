@@ -15,10 +15,10 @@
     3.  Create a route
     4.  View a route    
     
+
 4.  Miscellaneous Information
 
 5.  Developers Names
-
 
 ## Introduction
 Viade is an Application whose task is to manage routes.
