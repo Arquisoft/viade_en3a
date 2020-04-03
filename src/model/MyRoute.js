@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import RoutePoint from "./RoutePoint";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
+import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
 const auth = require('solid-auth-client');
 
@@ -18,6 +19,19 @@ function processPoints(points) {
 
 function sleep(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function loadMedia(mediaURIs) {
+	let list = [];
+	let store = new PodStorageHandler(await auth.currentSession());
+	for (let i = 0; i < mediaURIs.length; i++) {
+		await store.getFile(mediaURIs[i]).then(
+			f => list.push(f), err => console.log()
+		)
+	}
+	console.log("Media:");
+	console.log(list);
+	return list;
 }
 
 class MyRoute {
@@ -38,6 +52,8 @@ class MyRoute {
 		this.author = author;
 		this.description = description;
 		this.points = processPoints(points);
+		this.media = new Array();
+		this.mediaURIs = new Array();
 	}
 
 	getId() {
@@ -64,12 +80,25 @@ class MyRoute {
 		return this.id + ".json";
 	}
 
+	addMedia(file){
+		this.media.push(file);
+	}
+
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
 		await this.askForElevation();
 		await sleep(1000);
-		storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+		await this.storeMedia(storageHandler, this.mediaURIs,(res) => {
+			if (res) {
+				// Was uploaded correctly
+			} else {
+				// TODO; some media was not uploaded, this part may be called many times (once per wrong upload).
+				console.log("Error at upload of media");
+			}
+		});
+		await sleep(1000);
+		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
 	async askForElevation() {
@@ -101,6 +130,32 @@ class MyRoute {
 		return JSON.stringify(parsedRoute);
 	}
 
+	async storeMedia(storage, array, callback){
+		console.log("Start Function!");
+
+		let allOk = true;
+		await this.media.forEach(async function (file) {
+			let filename = this.id + "_" + file.name;
+			await storage.storeResource(filename, file, function (url, error) {
+
+				console.log("this:");
+				console.log(this);
+				console.log(url);
+
+				if (url) {
+					array.push(url);
+
+					console.log("pushed");
+
+				} else {
+					allOk = false;
+					callback(false);
+				}
+			}.bind(this));
+		}.bind(this));
+		if (allOk) callback(true);
+	}
+
 	modifyFromJsonLd(stringData) {
 		let parsedRoute = JSON.parse(stringData);
 		this.id = parsedRoute["id"];
@@ -116,11 +171,20 @@ class MyRoute {
 			};
 		});
 		this.points = processPoints(rawPoints);
+		let mediaURIs = parsedRoute["media"];
+		this.mediaURIs = mediaURIs.map( j => j["@id"]);
+		this.media = loadMedia(this.mediaURIs);
 	}
 
 	toJsonLd() {
 		let poinstInJson = [];
+		let mediaInJson = [];
 		this.points.forEach((point) => poinstInJson.push(point.toJson()));
+		this.mediaURIs.forEach( url => mediaInJson.push(
+			{
+				"@id" : url
+			}
+		));
 		return JSON.stringify(
 			{
 				"@context": {
@@ -172,7 +236,7 @@ class MyRoute {
 				"author": this.author,
 				"description": this.description,
 				"comments": "",
-				"media": [],
+				"media": mediaInJson,
 				"waypoints": [],
 				"points": poinstInJson
 			}

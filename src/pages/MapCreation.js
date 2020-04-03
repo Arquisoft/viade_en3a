@@ -6,7 +6,9 @@ import { Translation } from 'react-i18next';
 
 
 import './../css/App.css';
+import PodStorageHandler from "../components/podService/podStoreHandler";
 
+const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 
@@ -51,11 +53,13 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
+				<input type="file" id="fileUpload" name="files" multiple/>
 				<Translation>
 					{
 						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
 					}
 				</Translation>
+				<Button variant="primary" onClick={() => this.deleteAll()} style={{ margin: "1.5vh" }}>Delete</Button>
 			</div>
 		);
 	}
@@ -96,6 +100,7 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
+		document.getElementById("fileUpload").files.forEach( f => route.addMedia(f));
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {
@@ -108,6 +113,11 @@ class MapCreation extends Component {
 		});
 	}
 
+	async deleteAll(){
+		let session = await auth.currentSession();
+		let storageHandler = new PodStorageHandler(session);
+		storageHandler.deleteAll();
+	}
 }
 
 export default MapCreation;
