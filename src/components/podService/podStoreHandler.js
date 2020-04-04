@@ -74,8 +74,12 @@ export default class PodStorageHandler {
      *                            + the second is the actual response or error of the POD
      */
     storeResource(resourceFileName, data, callback = () => { }) {
-        let url = this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
+        let url = this.getExpectedPathForResource(resourceFileName);
         this.storeFile(url, data, callback);
+    }
+
+    getExpectedPathForResource(resourceFileName){
+        return this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
     }
 
     /**

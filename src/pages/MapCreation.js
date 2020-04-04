@@ -7,7 +7,6 @@ import { Translation } from 'react-i18next';
 
 import './../css/App.css';
 
-
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -51,6 +50,7 @@ class MapCreation extends Component {
 					/>
 				</InputGroup>
 				<EditableMap ref={this.points} role='map' />
+				<input type="file" id="fileUpload" name="files" multiple/>
 				<Translation>
 					{
 						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
@@ -96,6 +96,7 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
+		document.getElementById("fileUpload").files.forEach( (f) => {route.addMedia(f);});
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {
@@ -107,7 +108,6 @@ class MapCreation extends Component {
 			window.location.href = "#routes/list";
 		});
 	}
-
 }
 
 export default MapCreation;

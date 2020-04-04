@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import RoutePoint from "./RoutePoint";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
+import RouteMedia from "./RouteMedia";
 
 const auth = require('solid-auth-client');
 
@@ -38,6 +39,7 @@ class MyRoute {
 		this.author = author;
 		this.description = description;
 		this.points = processPoints(points);
+		this.media = [];
 	}
 
 	getId() {
@@ -64,12 +66,17 @@ class MyRoute {
 		return this.id + ".json";
 	}
 
+	addMedia(file){
+		this.media.push( new RouteMedia(this, file) );
+	}
+
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
+		this.media.forEach( (m) => {m.uploadToPod();} );
 		await this.askForElevation();
 		await sleep(1000);
-		storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
 	async askForElevation() {
@@ -116,11 +123,26 @@ class MyRoute {
 			};
 		});
 		this.points = processPoints(rawPoints);
+
+		this.media = [];
+		let mediaURIs = parsedRoute["media"];
+		mediaURIs.map( (j) => {return j["@id"];}).forEach(function (url) {
+			let newMedia = new RouteMedia(this);
+			newMedia.isInPod = true;
+			newMedia.podURL = url;
+			this.media.push(newMedia);
+		}.bind(this));
 	}
 
 	toJsonLd() {
 		let poinstInJson = [];
+		let mediaInJson = [];
 		this.points.forEach((point) => poinstInJson.push(point.toJson()));
+		this.media.map( (media) => {return media.podURL;} ).forEach( (url) => {mediaInJson.push(
+			{
+				"@id" : url
+			}
+		)});
 		return JSON.stringify(
 			{
 				"@context": {
@@ -172,7 +194,7 @@ class MyRoute {
 				"author": this.author,
 				"description": this.description,
 				"comments": "",
-				"media": [],
+				"media": mediaInJson,
 				"waypoints": [],
 				"points": poinstInJson
 			}

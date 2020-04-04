@@ -127,14 +127,7 @@ class InfoView extends React.Component {
                                     <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
                                 </Tab>
                                 <Tab eventKey="imageCarousel" title="Image gallery">
-                                    <Carousel>
-                                        <Carousel.Item>
-                                            <Image src={logo1} fluid />
-                                        </Carousel.Item>
-                                        <Carousel.Item>
-                                            <Image src={logo2} fluid />
-                                        </Carousel.Item>
-                                    </Carousel>
+                                    {this.getCarousel()}
                                 </Tab>
                             </Tabs>
                         </div>
@@ -185,6 +178,32 @@ class InfoView extends React.Component {
         }
     }
 
+    getCarousel() {
+        let pics = [];
+        this.state.route.media.map( (m) => {return m.podURL;}).forEach( (url) => {pics.push(
+            <Carousel.Item key={url}>
+                <Image src={url} fluid />
+            </Carousel.Item>)
+        });
+
+        // Placeholder
+        if (pics.length === 0) {
+            pics.push(
+                <Carousel.Item key={"logo1"}>
+                    <Image src={logo1} fluid />
+                </Carousel.Item>
+            );
+            pics.push(
+                <Carousel.Item key={"logo2"}>
+                    <Image src={logo2} fluid />
+                </Carousel.Item>
+            );
+        }
+
+        return <Carousel>
+                {pics}
+            </Carousel>;
+    }
 }
 
 export default InfoView;
