@@ -179,8 +179,8 @@ class InfoView extends React.Component {
     }
 
     getCarousel() {
-        let pics = []
-        this.state.route.media.map( m => m.podURL).forEach( url => pics.push(
+        let pics = [];
+        this.state.route.media.map( (m) => {return m.podURL;}).forEach( url => pics.push(
             <Carousel.Item key={url}>
                 <Image src={url} fluid />
             </Carousel.Item>)
@@ -202,7 +202,7 @@ class InfoView extends React.Component {
 
         return <Carousel>
                 {pics}
-            </Carousel>
+            </Carousel>;
     }
 }
 

@@ -99,7 +99,7 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		document.getElementById("fileUpload").files.forEach( f => route.addMedia(f));
+		document.getElementById("fileUpload").files.forEach( (f) => {route.addMedia(f);});
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			let alertText = "";
 			if (filePodUrl === null) {

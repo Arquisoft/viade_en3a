@@ -15,8 +15,9 @@ class RouteMedia {
         this.name = null;
         if (file) {
             this.isInLocal = true;
-            if (file.name)
+            if (file.name) {
                 this.name = file.name;
+            }
         }
         this.calculateExpectedPodUrl();
     }
@@ -36,8 +37,8 @@ class RouteMedia {
         if (this.podURL) {
             let store = new PodStorageHandler(await auth.currentSession());
             store.getFile(this.podURL).then(
-                (f) => {this.fileData = f; this.isInLocal = true}, err => console.log(err)
-            )
+                (f) => {this.fileData = f; this.isInLocal = true;}, (err) => {console.log(err);} //TODO;
+            );
         }
     }
 
