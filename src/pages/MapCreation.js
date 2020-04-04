@@ -6,9 +6,6 @@ import { Translation } from 'react-i18next';
 
 
 import './../css/App.css';
-import PodStorageHandler from "../components/podService/podStoreHandler";
-
-const auth = require('solid-auth-client');
 
 class MapCreation extends Component {
 

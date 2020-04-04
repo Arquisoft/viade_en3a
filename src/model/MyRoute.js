@@ -138,11 +138,11 @@ class MyRoute {
 		let poinstInJson = [];
 		let mediaInJson = [];
 		this.points.forEach((point) => poinstInJson.push(point.toJson()));
-		this.media.map( (media) => {return media.podURL;} ).forEach( url => mediaInJson.push(
+		this.media.map( (media) => {return media.podURL;} ).forEach( (url) => {mediaInJson.push(
 			{
 				"@id" : url
 			}
-		));
+		)});
 		return JSON.stringify(
 			{
 				"@context": {
