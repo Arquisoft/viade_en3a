@@ -6,6 +6,7 @@ import { Translation } from 'react-i18next';
 
 
 import './../css/App.css';
+import PodPermissionHandler from "../components/podService/podPermissionHandler";
 
 class MapCreation extends Component {
 
@@ -56,6 +57,7 @@ class MapCreation extends Component {
 						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
 					}
 				</Translation>
+				<Button variant="primary" onClick={() => this.changePermissions()} style={{ margin: "1.5vh" }}>"Permissions"</Button>
 			</div>
 		);
 	}
@@ -107,6 +109,10 @@ class MapCreation extends Component {
 			alert(alertText);
 			window.location.href = "#routes/list";
 		});
+	}
+
+	changePermissions(){
+		new PodPermissionHandler().test();
 	}
 }
 
