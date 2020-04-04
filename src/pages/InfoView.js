@@ -180,21 +180,21 @@ class InfoView extends React.Component {
 
     getCarousel() {
         let pics = []
-        this.state.route.mediaURIs.forEach( url => pics.push(
-            <Carousel.Item>
+        this.state.route.media.map( m => m.podURL).forEach( url => pics.push(
+            <Carousel.Item key={url}>
                 <Image src={url} fluid />
             </Carousel.Item>)
         );
 
         // Placeholder
-        if (pics.length == 0) {
+        if (pics.length === 0) {
             pics.push(
-                <Carousel.Item>
+                <Carousel.Item key={"logo1"}>
                     <Image src={logo1} fluid />
                 </Carousel.Item>
             );
             pics.push(
-                <Carousel.Item>
+                <Carousel.Item key={"logo2"}>
                     <Image src={logo2} fluid />
                 </Carousel.Item>
             );

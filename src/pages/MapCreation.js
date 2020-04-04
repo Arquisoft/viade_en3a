@@ -59,7 +59,6 @@ class MapCreation extends Component {
 						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
 					}
 				</Translation>
-				<Button variant="primary" onClick={() => this.deleteAll()} style={{ margin: "1.5vh" }}>Delete</Button>
 			</div>
 		);
 	}
@@ -111,12 +110,6 @@ class MapCreation extends Component {
 			alert(alertText);
 			window.location.href = "#routes/list";
 		});
-	}
-
-	async deleteAll(){
-		let session = await auth.currentSession();
-		let storageHandler = new PodStorageHandler(session);
-		storageHandler.deleteAll();
 	}
 }
 
