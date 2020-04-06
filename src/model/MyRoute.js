@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid";
 import RoutePoint from "./RoutePoint";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
 import RouteMedia from "./RouteMedia";
+import { latLng } from "leaflet" ;
 
 const auth = require('solid-auth-client');
 
@@ -15,6 +16,21 @@ function processPoints(points) {
 	let list = [];
 	points.forEach((point) => list.push(new RoutePoint(point.lat, point.lng, point.elv)));
 	return list;
+}
+
+/**
+ * Calculates in meters the length of the route.
+ * @param points - A set of points containing lat and lng
+ * @returns {number} - a float with the total distance in meters
+ */
+function calculateRouteLength(points) {
+	var distance = 0;
+	for (var i=1; i<points.length; i++) {
+		let thisPoint = latLng(points[i].lat,points[i].lng);
+		let previousPoint = latLng(points[i-1].lat,points[i-1].lng);
+		distance+= thisPoint.distanceTo(previousPoint);
+	}
+	return distance;
 }
 
 function sleep(ms) {
@@ -40,6 +56,7 @@ class MyRoute {
 		this.description = description;
 		this.points = processPoints(points);
 		this.media = [];
+		this.routeLength = calculateRouteLength(points);
 	}
 
 	getId() {
@@ -64,6 +81,15 @@ class MyRoute {
 
 	getFileName() {
 		return this.id + ".json";
+	}
+
+	/**
+	 * Returns the route length in kilometers and with two decimals.
+	 * @returns {number} - Route length with format -> "###.## km"
+	 */
+	getRouteLength(){
+		let value = this.routeLength/1000;
+		return value.toFixed(2) + " km";
 	}
 
 	addMedia(file){
@@ -110,7 +136,11 @@ class MyRoute {
 
 	modifyFromJsonLd(stringData) {
 		let parsedRoute = JSON.parse(stringData);
-		this.id = parsedRoute["id"];
+		if(parsedRoute["id"] === undefined) {
+			this.id=uuid().toString();
+		} else {
+			this.id = parsedRoute["id"];
+		}
 		this.name = parsedRoute["name"];
 		this.author = parsedRoute["author"];
 		this.description = parsedRoute["description"];
@@ -132,6 +162,8 @@ class MyRoute {
 			newMedia.podURL = url;
 			this.media.push(newMedia);
 		}.bind(this));
+
+		this.routeLength = calculateRouteLength(rawPoints);
 	}
 
 	toJsonLd() {

@@ -93,6 +93,14 @@ class InfoView extends React.Component {
                                             </Translation>
                                             <td>{this.state.route.getDescription()}</td>
                                         </tr>
+                                        <tr>
+                                            <Translation>
+                                                {
+                                                    (t) => <td>{t('infoViewTd4')}</td>
+                                                }
+                                            </Translation>
+                                            <td>{this.state.route.getRouteLength()}</td>
+                                        </tr>
                                     </tbody>
                                 </Table>
                             </div>
