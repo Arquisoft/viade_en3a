@@ -3,6 +3,7 @@ import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
+import UserDetails from "./../model/Util";
 
 
 import './../css/App.css';
@@ -40,10 +41,17 @@ class MapCreation extends Component {
 						aria-describedby="basic-addon1"
 						role='title'
 					/>
+				</InputGroup>
+				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1">Route Description</InputGroup.Text>
+						<Translation>
+							{
+								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationRouteDescription')}</InputGroup.Text>
+							}
+						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
+						as="textarea"
 						ref={this.routeDescription}
 						aria-describedby="basic-addon1"
 						role='description'
@@ -60,7 +68,7 @@ class MapCreation extends Component {
 		);
 	}
 
-	createRoute() {
+	async createRoute() {
 		let name = this.routeName.current.value;
 		if (name === '') {
 			alert("Name can't be empty");
@@ -72,12 +80,13 @@ class MapCreation extends Component {
 			return undefined;
 		}
 		let description = this.routeDescription.current.value;
-		if (description === '') {
-			alert("Description can not be empty");
-			return undefined;
-		}
-		let route = new MyRoute(name, "Temp author", description, points);
+		let route=undefined;
+		await UserDetails.getName().then(function(username) {
+				route = new MyRoute(name, username, description, points);
+			}
+		);
 		return route;
+
 	}
 
 	checkRouteChanged(newRoute) {
@@ -91,7 +100,7 @@ class MapCreation extends Component {
 	}
 
 	async uploadToPod() {
-		let route = this.createRoute();
+		let route = await this.createRoute();
 		if (route === undefined) {
 			return;
 		}

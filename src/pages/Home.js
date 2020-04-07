@@ -2,15 +2,14 @@ import './../css/App.css';
 import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
 import { Translation } from 'react-i18next';
+import UserDetails from "../model/Util";
 
-const auth = require('solid-auth-client');
-var session = null;
 
 class Home extends Component {
 
     render() {
         return (
-            <div className="App-header" onLoad={() => this.getName()}>
+            <div className="App-header" onLoad={() => this.printName()}>
                 <Translation>
                     {
                         (t) => <h1 id="name">{t('homeWelcome')}</h1>
@@ -33,12 +32,8 @@ class Home extends Component {
         );
     }
 
-    async getName() {
-        session = await auth.currentSession();
-        var username = session.webId;
-        username = username.replace('https://', '');
-        username = username.replace('.solid.community/profile/card#me', '');
-        document.getElementById("name").innerHTML = "Hi " + username + ",";
+    async printName() {
+        document.getElementById("name").innerHTML = "Hi " + await UserDetails.getName()+ ",";
     }
 
 }
