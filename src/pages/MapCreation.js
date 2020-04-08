@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import {Button, InputGroup, FormControl, ListGroup} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import UserDetails from "./../model/Util";
-
+import {search} from 'nominatim';
 
 import './../css/App.css';
 
@@ -14,7 +14,8 @@ class MapCreation extends Component {
 		super(props);
 		this.routeName = React.createRef();
 		this.routeDescription = React.createRef();
-		this.points = React.createRef();
+		this.map = React.createRef();
+		this.search = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
 	}
@@ -57,7 +58,19 @@ class MapCreation extends Component {
 						role='description'
 					/>
 				</InputGroup>
-				<EditableMap ref={this.points} role='map' />
+				<InputGroup className="mb-3" style={{ width: "50vw" }}>
+					<InputGroup.Prepend>
+						<InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
+					</InputGroup.Prepend>
+					<FormControl
+						onKeyPress={this.handleEnter}
+						ref={this.search}
+						aria-describedby="basic-addon1"
+					/>
+				</InputGroup>
+				<Button variant="primary" onClick={() => this.lookFor(this.search.current.value)} style={{ margin: "1.5vh" }}>Search</Button>
+				<p id={"destino"}></p>
+				<EditableMap ref={this.map} role='map' />
 				<input type="file" id="fileUpload" name="files" multiple/>
 				<Translation>
 					{
@@ -68,13 +81,38 @@ class MapCreation extends Component {
 		);
 	}
 
+	handleEnter = (event) => {
+
+		if (event.charCode === 13) {
+			this.lookFor(this.search.current.value);
+		}
+	}
+
+	lookFor(text){
+		document.getElementById("destino").innerText = "searching..."
+		search({q: text}, function (err,opts,results) {
+			if(results.length>0) {
+				let coordinates = results[0]['boundingbox'];
+				let lat = (parseFloat(coordinates[0]) + parseFloat(coordinates[1])) / 2;
+				let lng = (parseFloat(coordinates[2]) + parseFloat(coordinates[3])) / 2;
+				this.map.current.setState({editablePosition: [lat, lng]});
+				this.map.current.setState({boundingbox: results[0]["boundingbox"]});
+				document.getElementById("destino").innerText = results[0]['display_name'];
+			}
+			else {
+				document.getElementById("destino").innerText = "not found";
+			}
+
+			}.bind(this));
+	}
+
 	async createRoute() {
 		let name = this.routeName.current.value;
 		if (name === '') {
 			alert("Name can't be empty");
 			return undefined;
 		}
-		let points = this.points.current.state.points;
+		let points = this.map.current.state.points;
 		if (points.length < 2) {
 			alert("You should have at least two points");
 			return undefined;

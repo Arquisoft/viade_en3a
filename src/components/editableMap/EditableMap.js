@@ -5,7 +5,7 @@ class EditableMap extends React.Component {
 
 	constructor() {
 		super();
-		this.state = { points: [[0, 0]] };
+		this.state = { points: [[0, 0]] , editablePosition: [43,-5] , boundingbox: [43,-5,43.1,-4.9] };
 		this.initial = true;
 	}
 
@@ -32,20 +32,22 @@ class EditableMap extends React.Component {
 	}
 
 	remove = (event) => {
-		if (event.originalEvent.key === 'Backspace') {
 			var id = event.target.options.marker_index;
 			const { points } = this.state;
 			points.splice(id, 1);
 			this.setState({ points: points.slice() });
-		}
+	}
+
+	setPositionScaled = (e) => {
+		this.map.current.leafletElement.fitBounds(this.state.boundingbox);
 	}
 
 	render() {
-		const position = [43, -5];
 
 		return (
+
 			<Map
-				center={position}
+				center={this.state.editablePosition}
 				zoom={12}
 				style={{ width: "50vw", height: "50vh" }}
 				onClick={this.addPoint}
@@ -63,11 +65,12 @@ class EditableMap extends React.Component {
 						position={position}
 						draggable={true}
 						ondrag={this.updatePoint}
-						onkeydown={this.remove}
+						onClick={this.remove}
 					>
 					</Marker>
 				)}
 			</Map>
+
 		);
 	}
 }
