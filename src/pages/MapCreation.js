@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import {Button, InputGroup, FormControl} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
-
+import UserDetails from "./../model/Util";
 
 import './../css/App.css';
+import SearchBar from "../components/searchBar/SearchBar";
 
 class MapCreation extends Component {
 
@@ -13,7 +14,7 @@ class MapCreation extends Component {
 		super(props);
 		this.routeName = React.createRef();
 		this.routeDescription = React.createRef();
-		this.points = React.createRef();
+		this.map = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
 	}
@@ -40,16 +41,24 @@ class MapCreation extends Component {
 						aria-describedby="basic-addon1"
 						role='title'
 					/>
+				</InputGroup>
+				<InputGroup className="mb-3" style={{ width: "50vw" }}>
 					<InputGroup.Prepend>
-						<InputGroup.Text id="basic-addon1">Route Description</InputGroup.Text>
+						<Translation>
+							{
+								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationRouteDescription')}</InputGroup.Text>
+							}
+						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
+						as="textarea"
 						ref={this.routeDescription}
 						aria-describedby="basic-addon1"
 						role='description'
 					/>
 				</InputGroup>
-				<EditableMap ref={this.points} role='map' />
+				<SearchBar map={this.map}/>
+				<EditableMap ref={this.map} role='map' />
 				<input type="file" id="fileUpload" name="files" multiple/>
 				<Translation>
 					{
@@ -60,28 +69,30 @@ class MapCreation extends Component {
 		);
 	}
 
-	createRoute() {
+
+	async createRoute() {
 		let name = this.routeName.current.value;
 		if (name === '') {
 			alert("Name can't be empty");
 			return undefined;
 		}
-		let points = this.points.current.state.points;
+		let points = this.map.current.state.points;
 		if (points.length < 2) {
 			alert("You should have at least two points");
 			return undefined;
 		}
 		let description = this.routeDescription.current.value;
-		if (description === '') {
-			alert("Description can not be empty");
-			return undefined;
-		}
-		let route = new MyRoute(name, "Temp author", description, points);
+		let route=undefined;
+		await UserDetails.getName().then(function(username) {
+				route = new MyRoute(name, username, description, points);
+			}
+		);
 		return route;
+
 	}
 
 	checkRouteChanged(newRoute) {
-		if ((this.tempRoute === undefined) || (this.tempRoute !== undefined && (this.tempRoute.getComparableString() !== newRoute.getComparableString()))) {
+		if ((this.tempRoute === undefined) || ((this.tempRoute.getComparableString() !== newRoute.getComparableString()))) {
 			this.tempRoute = newRoute;
 			this.routeManager.addRoute(this.tempRoute);
 			return newRoute;
@@ -91,7 +102,7 @@ class MapCreation extends Component {
 	}
 
 	async uploadToPod() {
-		let route = this.createRoute();
+		let route = await this.createRoute();
 		if (route === undefined) {
 			return;
 		}
