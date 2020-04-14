@@ -8,6 +8,9 @@ import UserDetails from "./../model/Util";
 import './../css/App.css';
 import SearchBar from "../components/searchBar/SearchBar";
 
+import {ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -22,6 +25,10 @@ class MapCreation extends Component {
 	render() {
 		return (
 			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
+				<ToastContainer
+					position={toast.POSITION.TOP_CENTER}
+					autoClose={false}
+				/>
 				<Translation>
 					{
 						(t) => <h1>{t('mapCreationTitle')}</h1>
@@ -71,16 +78,22 @@ class MapCreation extends Component {
 
 
 	async createRoute() {
+		toast.dismiss();
+		let valid = true;
 		let name = this.routeName.current.value;
 		if (name === '') {
-			alert("Name can't be empty");
-			return undefined;
+			valid = false;
+			toast.error("Name can't be empty");
 		}
 		let points = this.map.current.state.points;
 		if (points.length < 2) {
-			alert("You should have at least two points");
-			return undefined;
+			valid = false;
+			toast.error("Routes must have at least two points");
 		}
+
+		if(!valid)
+			return undefined;
+
 		let description = this.routeDescription.current.value;
 		let route=undefined;
 		await UserDetails.getName().then(function(username) {
@@ -109,16 +122,15 @@ class MapCreation extends Component {
 		route = this.checkRouteChanged(route);
 		document.getElementById("fileUpload").files.forEach( (f) => {route.addMedia(f);});
 		await route.uploadToPod((filePodUrl, podResponse) => {
-			let alertText = "";
 			if (filePodUrl === null) {
-				alertText = "We are sorry!! Something went wrong while connecting to your POD";
+				toast.error("We can't access your POD. Please, review its permissions");
 			} else {
-				alertText = "Your fresh new shiny route has been correctly uploaded to your POD";
+				window.location.href = "#routes/list";
 			}
-			alert(alertText);
-			window.location.href = "#routes/list";
+
 		});
 	}
 }
+
 
 export default MapCreation;
