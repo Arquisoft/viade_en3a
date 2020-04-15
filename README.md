@@ -5,23 +5,20 @@
 # VIADE EN3A
 
 ## Index
-:toc:
 
-1.  Index
+1.  Introduction [Introduction](#introduction)
 
-2.  Introduction
-
-3.  To Start
+2.  To Start
     1.  Create a POD
     2.  Login
     3.  Create a route
     4.  View a route    
     
 
-4.  Miscellaneous Information
+3.  Miscellaneous Information
 
 
-5.  Developers Names
+4.  Developers Names
 
 ## Introduction
 Viade is an Application whose task is to manage routes.
