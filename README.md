@@ -5,6 +5,8 @@
 # VIADE EN3A
 
 ## Index
+:toc:
+
 1.  Index
 
 2.  Introduction
