@@ -8,17 +8,15 @@
 
 1.  [Introduction](#introduction)
 
-2.  [To Start](#tostart)
-    1.  Create a POD
-    2.  Login
-    3.  Create a route
-    4.  View a route    
+2.  [To Start](#to-start)
+    1.  [Create a POD](#to-start)
+    2.  [Login](#login)
+    3.  [Create a route](#create-a-route)
+    4.  [View a route](#view-a-route)
     
+3.  [Miscellaneous information](#miscellaneous-information)
 
-3.  Miscellaneous Information
-
-
-4.  Developers Names
+4.  [Developers names](#developers-names)
 
 ## Introduction
 Viade is an Application whose task is to manage routes.
@@ -69,7 +67,7 @@ This will list all friends and when clicking share, a message with the route wil
     <img class="fullPic" src="./public/img/sample/shareRoutes.png">
 </p>
 
-## Miscellaneous Information
+## Miscellaneous information
 
 This project is an assignment for the [Software Architecture course](https://arquisoft.github.io/) following [these requirements](https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/).
 
