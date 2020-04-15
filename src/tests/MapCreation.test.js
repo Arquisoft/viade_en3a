@@ -23,7 +23,7 @@ test('Test create route', () => {
 	expect(btn).toBeTruthy();
 });
 
-test('Test wrong route creation', () =>{
+test('Test wrong route creation', () => {
 	const { getByText, getByRole } = render(<MapCreation routeManager={routeManager} />);
 
 	const map = getByRole('presentation');

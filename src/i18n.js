@@ -64,7 +64,8 @@ const resources = {
         "mapCreationSaveButton": "Save route in pod",
         "friendsTitle": "Friends",
         "friendsAdd": "Add a friend",
-        "friendsList": "List of friends"
+        "friendsList": "List of friends",
+        "routeListLoadingMessage": "We're downloading your routes. Next time will be faster."
     }
   },
   es: {
@@ -128,7 +129,9 @@ const resources = {
         "mapCreationSaveButton": "Guardar ruta en pod",
         "friendsTitle": "Amigos",
         "friendsAdd": "Añadir un amigo",
-        "friendsList": "Lista de amigos"
+        "friendsList": "Lista de amigos",
+        "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos."
+
 
     }
   }

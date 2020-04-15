@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import {Button, InputGroup, FormControl} from 'react-bootstrap';
+import {Button, InputGroup, FormControl, Spinner} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import UserDetails from "./../model/Util";
 
@@ -67,17 +67,26 @@ class MapCreation extends Component {
 				<SearchBar map={this.map}/>
 				<EditableMap ref={this.map} role='map' />
 				<input type="file" id="fileUpload" name="files" multiple/>
-				<Translation>
-					{
-						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
-					}
-				</Translation>
+				<div>
+					<Translation>
+						{
+							(t) => <Button id={"btnSave"} variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
+						}
+					</Translation>
+					<Spinner id={"spinner"} hidden animation="border" />
+				</div>
 			</div>
 		);
 	}
 
+	toggleSpinner(){
+		let spinner = document.getElementById("spinner");
+		spinner.hidden=!spinner.hidden;
+	}
 
 	async createRoute() {
+		this.toggleSpinner();
+		document.getElementById("btnSave").disabled=true;
 		toast.dismiss();
 		let valid = true;
 		let name = this.routeName.current.value;
@@ -91,8 +100,11 @@ class MapCreation extends Component {
 			toast.error("Routes must have at least two points");
 		}
 
-		if(!valid)
+		if(!valid) {
+			this.toggleSpinner();
+			document.getElementById("btnSave").disabled=false;
 			return undefined;
+		}
 
 		let description = this.routeDescription.current.value;
 		let route=undefined;
@@ -125,6 +137,7 @@ class MapCreation extends Component {
 			if (filePodUrl === null) {
 				toast.error("We can't access your POD. Please, review its permissions");
 			} else {
+				this.toggleSpinner();
 				window.location.href = "#routes/list";
 			}
 
