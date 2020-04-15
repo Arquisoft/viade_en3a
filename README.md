@@ -9,7 +9,7 @@
 1.  [Introduction](#introduction)
 
 2.  [To Start](#to-start)
-    1.  [Create a POD](#to-start)
+    1.  [Create a POD](#create-a-pod)
     2.  [Login](#login)
     3.  [Create a route](#create-a-route)
     4.  [View a route](#view-a-route)
