@@ -7,28 +7,42 @@
 ## Index
 
 1. [How-to-use](#how-to-use)
+
     1. [Installation](#installation)
+
     2. [Starting](#starting)
+
     3. [Testing](#testing)
+
         1. [Unit tests](#unit-tests)
+
         2. [Cucumber tests](#cucumber-tests)
+
 
 2. [Introduction](#introduction)
 
+
 3. [To Start](#to-start)
+
     1. [Create a POD](#create-a-pod)
+
     2. [Login](#login)
+
     3. [Create a route](#create-a-route)
+
     4. [View a route](#view-a-route)
+
     
 4. [Miscellaneous information](#miscellaneous-information)
 
+
 5. [Developers names](#developers-names)
+
 
 ## How-to-use
 ### Installation
 In order to install the packages needed for the app to work run:
-```
+```shell
 npm install
 ```
 
@@ -37,7 +51,7 @@ The app can be run as:
 ```
 npm install
 ```
-Once executed, it should be available at: http://localhost:3000
+Once executed, it should be available at [http://localhost:3000](http://localhost:3000)
 
 ### Testing
 #### Unit tests
