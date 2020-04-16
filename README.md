@@ -6,33 +6,33 @@
 
 ## Index
 
-1. [How-to-use] (#how-to-use)
+1.  [How-to-use](#how-to-use)
 
-    1. [Installation](#installation)
+    1.  [Installation](#installation)
 
-    2. [Starting](#starting)
+    2.  [Starting](#starting)
 
-    3. [Testing](#testing)
+    3.  [Testing](#testing)
 
-        1. [Unit tests](#unit-tests)
+        1.  [Unit tests](#unit-tests)
 
-        2. [Cucumber tests](#cucumber-tests)
+        2.  [Cucumber tests](#cucumber-tests)
 
-2. [Introduction](#introduction)
+2.  [Introduction](#introduction)
 
-3. [To Start](#to-start)
+3.  [To Start](#to-start)
 
-    1. [Create a POD](#create-a-pod)
+    1.  [Create a POD](#create-a-pod)
 
-    2. [Login](#login)
+    2.  [Login](#login)
 
-    3. [Create a route](#create-a-route)
+    3.  [Create a route](#create-a-route)
 
-    4. [View a route](#view-a-route)
+    4.  [View a route](#view-a-route)
     
-4. [Miscellaneous information](#miscellaneous-information)
+4.  [Miscellaneous information](#miscellaneous-information)
 
-5. [Developers names](#developers-names)
+5.  [Developers names](#developers-names)
 
 ## How-to-use
 ### Installation
