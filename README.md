@@ -6,17 +6,50 @@
 
 ## Index
 
-1.  [Introduction](#introduction)
+1. [How-to-use](#how-to-use)
+    1. [Installation](#installation)
+    2. [Starting](#starting)
+    3. [Testing](#testing)
+        1. [Unit tests](#unit-tests)
+        2. [Cucumber tests](#cucumber-tests)
 
-2.  [To Start](#to-start)
-    1.  [Create a POD](#create-a-pod)
-    2.  [Login](#login)
-    3.  [Create a route](#create-a-route)
-    4.  [View a route](#view-a-route)
+2. [Introduction](#introduction)
+
+3. [To Start](#to-start)
+    1. [Create a POD](#create-a-pod)
+    2. [Login](#login)
+    3. [Create a route](#create-a-route)
+    4. [View a route](#view-a-route)
     
-3.  [Miscellaneous information](#miscellaneous-information)
+4. [Miscellaneous information](#miscellaneous-information)
 
-4.  [Developers names](#developers-names)
+5. [Developers names](#developers-names)
+
+## How-to-use
+### Installation
+In order to install the packages needed for the app to work run:
+```
+npm install
+```
+
+### Starting
+The app can be run as:
+```
+npm install
+```
+Once executed, it should be available at: http://localhost:3000
+
+### Testing
+#### Unit tests
+For executing the unit tests run:
+```
+npm test
+```
+#### Cucumber tests
+For executing the [Cucumber](https://cucumber.io/) tests run:
+```
+npm run-script test:e2e
+```
 
 ## Introduction
 Viade is an Application whose task is to manage routes.
