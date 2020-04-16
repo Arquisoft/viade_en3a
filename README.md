@@ -27,7 +27,7 @@
     2.  [Login](#login)
 
     3.  [Create a route](#create-a-route)
-    
+
     4.  [View a route](#view-a-route)
     
 4.  [Miscellaneous information](#miscellaneous-information)
