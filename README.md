@@ -6,7 +6,7 @@
 
 ## Index
 
-1. [How-to-use](#how-to-use)
+1. [How-to-use] (#how-to-use)
 
     1. [Installation](#installation)
 
@@ -18,9 +18,7 @@
 
         2. [Cucumber tests](#cucumber-tests)
 
-
 2. [Introduction](#introduction)
-
 
 3. [To Start](#to-start)
 
@@ -31,13 +29,10 @@
     3. [Create a route](#create-a-route)
 
     4. [View a route](#view-a-route)
-
     
 4. [Miscellaneous information](#miscellaneous-information)
 
-
 5. [Developers names](#developers-names)
-
 
 ## How-to-use
 ### Installation
@@ -48,7 +43,7 @@ npm install
 
 ### Starting
 The app can be run as:
-```
+```shell
 npm install
 ```
 Once executed, it should be available at [http://localhost:3000](http://localhost:3000)
@@ -56,12 +51,12 @@ Once executed, it should be available at [http://localhost:3000](http://localhos
 ### Testing
 #### Unit tests
 For executing the unit tests run:
-```
+```shell
 npm test
 ```
 #### Cucumber tests
 For executing the [Cucumber](https://cucumber.io/) tests run:
-```
+```shell
 npm run-script test:e2e
 ```
 
