@@ -32,6 +32,7 @@
     "react-leaflet-geosearch": "^0.3.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
+    "react-toastify": "^5.5.0",
     "shx": "0.3.2",
     "solid-auth-client": "^2.4.1",
     "solid-file-client": "^1.0.2",

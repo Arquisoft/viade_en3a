@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import {Button, InputGroup, FormControl} from 'react-bootstrap';
+import {Button, InputGroup, FormControl, Spinner} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import UserDetails from "./../model/Util";
 
 import './../css/App.css';
 import SearchBar from "../components/searchBar/SearchBar";
+
+import {ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 class MapCreation extends Component {
 
@@ -22,6 +25,10 @@ class MapCreation extends Component {
 	render() {
 		return (
 			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
+				<ToastContainer
+					position={toast.POSITION.TOP_CENTER}
+					autoClose={false}
+				/>
 				<Translation>
 					{
 						(t) => <h1>{t('mapCreationTitle')}</h1>
@@ -60,27 +67,45 @@ class MapCreation extends Component {
 				<SearchBar map={this.map}/>
 				<EditableMap ref={this.map} role='map' />
 				<input type="file" id="fileUpload" name="files" multiple/>
-				<Translation>
-					{
-						(t) => <Button variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
-					}
-				</Translation>
+				<div>
+					<Translation>
+						{
+							(t) => <Button id={"btnSave"} variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
+						}
+					</Translation>
+					<Spinner id={"spinner"} hidden animation="border" />
+				</div>
 			</div>
 		);
 	}
 
+	toggleSpinner(){
+		let spinner = document.getElementById("spinner");
+		spinner.hidden=!spinner.hidden;
+	}
 
 	async createRoute() {
+		this.toggleSpinner();
+		document.getElementById("btnSave").disabled=true;
+		toast.dismiss();
+		let valid = true;
 		let name = this.routeName.current.value;
 		if (name === '') {
-			alert("Name can't be empty");
-			return undefined;
+			valid = false;
+			toast.error("Name can't be empty");
 		}
 		let points = this.map.current.state.points;
 		if (points.length < 2) {
-			alert("You should have at least two points");
+			valid = false;
+			toast.error("Routes must have at least two points");
+		}
+
+		if(!valid) {
+			this.toggleSpinner();
+			document.getElementById("btnSave").disabled=false;
 			return undefined;
 		}
+
 		let description = this.routeDescription.current.value;
 		let route=undefined;
 		await UserDetails.getName().then(function(username) {
@@ -109,16 +134,16 @@ class MapCreation extends Component {
 		route = this.checkRouteChanged(route);
 		document.getElementById("fileUpload").files.forEach( (f) => {route.addMedia(f);});
 		await route.uploadToPod((filePodUrl, podResponse) => {
-			let alertText = "";
 			if (filePodUrl === null) {
-				alertText = "We are sorry!! Something went wrong while connecting to your POD";
+				toast.error("We can't access your POD. Please, review its permissions");
 			} else {
-				alertText = "Your fresh new shiny route has been correctly uploaded to your POD";
+				this.toggleSpinner();
+				window.location.href = "#routes/list";
 			}
-			alert(alertText);
-			window.location.href = "#routes/list";
+
 		});
 	}
 }
+
 
 export default MapCreation;

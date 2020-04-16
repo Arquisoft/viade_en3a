@@ -5,7 +5,7 @@ class EditableMap extends React.Component {
 
 	constructor() {
 		super();
-		this.state = { points: [[0, 0]] , editablePosition: [43,-5] , boundingbox: [43,-5,43.1,-4.9] };
+		this.state = { points: [[0, 0]] , editablePosition: [43.354834, -5.851405] , boundingbox: [43.254834, -5.751405,43.454834, -5.951405] };
 		this.initial = true;
 	}
 
