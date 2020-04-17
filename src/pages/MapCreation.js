@@ -7,8 +7,9 @@ import { Translation } from 'react-i18next';
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
 import UserDetails from "./../model/Util";
-import SearchBar from "../components/searchBar/SearchBar";
-import RouteCreationForm from "./../components/routeCreationForm/RouteCreationForm";
+import SearchBar from "../components/routeCreation/SearchBar";
+import RouteCreationForm from "../components/routeCreation/RouteCreationForm";
+import PointList from '../components/routeCreation/PointList';
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./../css/routeCreation.css"
@@ -36,33 +37,10 @@ class MapCreation extends Component {
 					{(t) => <h1>{t('mapCreationTitle')}</h1>}
 				</Translation>
 
-				{/* <InputGroup className="mb-3">
-					<InputGroup.Prepend>
-						<Translation>
-							{(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>}
-						</Translation>
-					</InputGroup.Prepend>
-					<FormControl
-						ref={this.routeName}
-						aria-describedby="basic-addon1"
-						role='title'
-					/>
-				</InputGroup>
-				<InputGroup className="mb-3">
-					<InputGroup.Prepend>
-						<Translation>
-							{(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationRouteDescription')}</InputGroup.Text>}
-						</Translation>
-					</InputGroup.Prepend>
-					<FormControl
-						as="textarea"
-						ref={this.routeDescription}
-						aria-describedby="basic-addon1"
-						role='description'
-					/>
-				</InputGroup> */}
-
-				<RouteCreationForm />
+				<RouteCreationForm
+					routeNameRef={this.routeName}
+					routeDescriptionRef={this.routeDescription}
+				/>
 
 				<div id="mapPointsContainer">
 					<div id="mapAndSearch">
@@ -70,7 +48,7 @@ class MapCreation extends Component {
 						<SearchBar map={this.map} />
 					</div>
 					<div id="pointManager">
-
+						<PointList />
 					</div>
 				</div>
 
@@ -115,9 +93,10 @@ class MapCreation extends Component {
 
 		let description = this.routeDescription.current.value;
 		let route = undefined;
-		await UserDetails.getName().then(function (username) {
-			route = new MyRoute(name, username, description, points);
-		}
+		await UserDetails.getName().then(
+			function (username) {
+				route = new MyRoute(name, username, description, points);
+			}
 		);
 		return route;
 
