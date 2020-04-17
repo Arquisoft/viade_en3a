@@ -1,33 +1,30 @@
 import React from 'react';
-import {Button, FormControl, InputGroup} from "react-bootstrap";
-import {search} from "nominatim";
+import { Form, Row, Col, Button, FormControl, InputGroup } from "react-bootstrap";
+import { search } from "nominatim";
 
 class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.map=props.map;
-        this.search=React.createRef();
+        this.map = props.map;
+        this.search = React.createRef();
     }
 
-
     handleEnter = (event) => {
-
         if (event.charCode === 13) {
             this.lookFor(this.search.current.value);
         }
     };
 
-    lookFor(text){
-
+    lookFor(text) {
         document.getElementById("destination").innerText = "searching...";
 
-        search({q: text}, function (err,opts,results) {
-            if(results.length>0) {
+        search({ q: text }, function (err, opts, results) {
+            if (results.length > 0) {
                 let firstFound = results[0];
 
-                this.map.current.setState({editablePosition: [firstFound.lat, firstFound.lon]});
-                this.map.current.setState({boundingbox: firstFound.boundingBox});
+                this.map.current.setState({ editablePosition: [firstFound.lat, firstFound.lon] });
+                this.map.current.setState({ boundingbox: firstFound.boundingBox });
 
                 document.getElementById("destination").innerText = firstFound.display_name;
             }
@@ -42,18 +39,20 @@ class SearchBar extends React.Component {
     render() {
         return (
             <div>
-                <InputGroup className="mb-3" style={{ width: "50vw" }}>
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                        id="txtSearch"
-                        onKeyPress={this.handleEnter}
-                        ref={this.search}
-                        aria-describedby="basic-addon1"
-                    />
-                </InputGroup>
-                <Button id= "btnSearch" variant="primary" onClick={() => this.lookFor(this.search.current.value)} style={{ margin: "1.5vh" }}>Search</Button>
+                <Form>
+                    <Form.Group as={Row} controlId="routeNameField">
+                        {(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>}
+                        <Form.Label as={Col} column sm={2}>Route name</Form.Label>
+                        <Form.Control
+                            as={Col}
+                            id="txtSearch"
+                            onKeyPress={this.handleEnter}
+                            ref={this.search}
+                            aria-describedby="basic-addon1"
+                        />
+                        <Button as={Col} sm={1} id="btnSearch" variant="primary" onClick={() => this.lookFor(this.search.current.value)}>Search</Button>
+                    </Form.Group>
+                </Form>
                 <p id={"destination"}></p>
             </div>
         );

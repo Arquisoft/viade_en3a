@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import Button from "react-bootstrap/Button";
+import { Spinner } from 'react-bootstrap';
+import { ToastContainer, toast } from "react-toastify";
+import { Translation } from 'react-i18next';
+
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "./../model/MyRoute";
-import {Button, InputGroup, FormControl, Spinner} from 'react-bootstrap';
-import { Translation } from 'react-i18next';
 import UserDetails from "./../model/Util";
-
-import './../css/App.css';
 import SearchBar from "../components/searchBar/SearchBar";
+import RouteCreationForm from "./../components/routeCreationForm/RouteCreationForm";
 
-import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import "./../css/routeCreation.css"
+import './../css/App.css';
 
 class MapCreation extends Component {
 
@@ -24,23 +27,19 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div id="routeCreationContainer" className="App-header" style={{ height: "80%" }} >
+			<div id="routeCreationContainer" className="" >
 				<ToastContainer
 					position={toast.POSITION.TOP_CENTER}
-					autoClose={false}
+					autoClose={3000}
 				/>
 				<Translation>
-					{
-						(t) => <h1>{t('mapCreationTitle')}</h1>
-					}
+					{(t) => <h1>{t('mapCreationTitle')}</h1>}
 				</Translation>
-				
-				<InputGroup className="mb-3" style={{ width: "50vw" }}>
+
+				{/* <InputGroup className="mb-3">
 					<InputGroup.Prepend>
 						<Translation>
-							{
-								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>
-							}
+							{(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationName')}</InputGroup.Text>}
 						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
@@ -49,12 +48,10 @@ class MapCreation extends Component {
 						role='title'
 					/>
 				</InputGroup>
-				<InputGroup className="mb-3" style={{ width: "50vw" }}>
+				<InputGroup className="mb-3">
 					<InputGroup.Prepend>
 						<Translation>
-							{
-								(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationRouteDescription')}</InputGroup.Text>
-							}
+							{(t) => <InputGroup.Text id="basic-addon1">{t('mapCreationRouteDescription')}</InputGroup.Text>}
 						</Translation>
 					</InputGroup.Prepend>
 					<FormControl
@@ -63,15 +60,25 @@ class MapCreation extends Component {
 						aria-describedby="basic-addon1"
 						role='description'
 					/>
-				</InputGroup>
-				<SearchBar map={this.map}/>
-				<EditableMap ref={this.map} role='map' />
-				<input type="file" id="fileUpload" name="files" multiple/>
+				</InputGroup> */}
+
+				<RouteCreationForm />
+
+				<div id="mapPointsContainer">
+					<div id="mapAndSearch">
+						<EditableMap ref={this.map} role='map' />
+						<SearchBar map={this.map} />
+					</div>
+					<div id="pointManager">
+
+					</div>
+				</div>
+
+				<input type="file" id="fileUpload" name="files" multiple />
+
 				<div>
 					<Translation>
-						{
-							(t) => <Button id={"btnSave"} variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>
-						}
+						{(t) => <Button id={"btnSave"} variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>}
 					</Translation>
 					<Spinner id={"spinner"} hidden animation="border" />
 				</div>
@@ -79,14 +86,14 @@ class MapCreation extends Component {
 		);
 	}
 
-	toggleSpinner(){
+	toggleSpinner() {
 		let spinner = document.getElementById("spinner");
-		spinner.hidden=!spinner.hidden;
+		spinner.hidden = !spinner.hidden;
 	}
 
 	async createRoute() {
 		this.toggleSpinner();
-		document.getElementById("btnSave").disabled=true;
+		document.getElementById("btnSave").disabled = true;
 		toast.dismiss();
 		let valid = true;
 		let name = this.routeName.current.value;
@@ -100,17 +107,17 @@ class MapCreation extends Component {
 			toast.error("Routes must have at least two points");
 		}
 
-		if(!valid) {
+		if (!valid) {
 			this.toggleSpinner();
-			document.getElementById("btnSave").disabled=false;
+			document.getElementById("btnSave").disabled = false;
 			return undefined;
 		}
 
 		let description = this.routeDescription.current.value;
-		let route=undefined;
-		await UserDetails.getName().then(function(username) {
-				route = new MyRoute(name, username, description, points);
-			}
+		let route = undefined;
+		await UserDetails.getName().then(function (username) {
+			route = new MyRoute(name, username, description, points);
+		}
 		);
 		return route;
 
@@ -132,7 +139,7 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		document.getElementById("fileUpload").files.forEach( (f) => {route.addMedia(f);});
+		document.getElementById("fileUpload").files.forEach((f) => { route.addMedia(f); });
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			if (filePodUrl === null) {
 				toast.error("We can't access your POD. Please, review its permissions");
@@ -140,7 +147,6 @@ class MapCreation extends Component {
 				this.toggleSpinner();
 				window.location.href = "#routes/list";
 			}
-
 		});
 	}
 }

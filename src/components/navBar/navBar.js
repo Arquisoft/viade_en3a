@@ -65,7 +65,7 @@ function MyNavBar(props) {
               <NavDropdown.Item href="#routes/example">{t('navBarRouteHelp')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <DropdownButton style={{margin: "16px"}} id="dropdown-item-button" variant="secondary" title={t('navBarLanguage')}>
+          <DropdownButton style={{ margin: "16px" }} id="dropdown-item-button" variant="secondary" title={t('navBarLanguage')}>
             <Dropdown.Item as="button" onClick={() => changeLanguage('en')}>{t('navBarLanguageEn')}</Dropdown.Item>
             <Dropdown.Item as="button" onClick={() => changeLanguage('es')}>{t('navBarLanguageEs')}</Dropdown.Item>
           </DropdownButton>
