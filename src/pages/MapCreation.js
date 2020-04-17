@@ -9,7 +9,7 @@ import MyRoute from "./../model/MyRoute";
 import UserDetails from "./../model/Util";
 import SearchBar from "../components/routeCreation/SearchBar";
 import RouteCreationForm from "../components/routeCreation/RouteCreationForm";
-import PointList from '../components/routeCreation/PointList';
+import MyElevationChart from "./../components/myElevationChart/MyElevationChart";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./../css/routeCreation.css"
@@ -24,6 +24,7 @@ class MapCreation extends Component {
 		this.map = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
+		this.state = {}
 	}
 
 	render() {
@@ -48,7 +49,7 @@ class MapCreation extends Component {
 						<SearchBar map={this.map} />
 					</div>
 					<div id="pointManager">
-						<PointList />
+						{/* <MyElevationChart route={this.state.route} style={{ width: "100%" }} /> */}
 					</div>
 				</div>
 
