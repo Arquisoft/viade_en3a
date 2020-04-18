@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import SignUp from '../../pages/SignUp';
-import MapCreation from '../../pages/MapCreation';
+import RouteCreation from '../../pages/RouteCreation';
 import RouteList from '../routeList/RouteList';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
@@ -84,7 +84,7 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={SignUp} />
-      <Route exact path="/routes/add" render={() => <MapCreation routeManager={routeManager} />} />
+      <Route exact path="/routes/add" render={() => <RouteCreation routeManager={routeManager} />} />
       <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />

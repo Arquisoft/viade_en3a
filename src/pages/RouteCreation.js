@@ -5,17 +5,17 @@ import { ToastContainer, toast } from "react-toastify";
 import { Translation } from 'react-i18next';
 
 import EditableMap from '../components/editableMap/EditableMap';
-import MyRoute from "./../model/MyRoute";
-import UserDetails from "./../model/Util";
+import MyRoute from "../model/MyRoute";
+import UserDetails from "../model/Util";
 import SearchBar from "../components/routeCreation/SearchBar";
 import RouteCreationForm from "../components/routeCreation/RouteCreationForm";
-import MyElevationChart from "./../components/myElevationChart/MyElevationChart";
+import MyElevationChart from "../components/myElevationChart/MyElevationChart";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./../css/routeCreation.css"
 import './../css/App.css';
 
-class MapCreation extends Component {
+class RouteCreation extends Component {
 
 	constructor(props) {
 		super(props);
@@ -29,7 +29,7 @@ class MapCreation extends Component {
 
 	render() {
 		return (
-			<div id="routeCreationContainer" className="" >
+			<div id="routeCreationContainer" >
 				<ToastContainer
 					position={toast.POSITION.TOP_CENTER}
 					autoClose={3000}
@@ -43,17 +43,15 @@ class MapCreation extends Component {
 					routeDescriptionRef={this.routeDescription}
 				/>
 
-				<div id="mapPointsContainer">
+				<div id="mapPointsContainer" style={{ padding: "1% 0%" }}>
 					<div id="mapAndSearch">
-						<EditableMap ref={this.map} role='map' />
 						<SearchBar map={this.map} />
+						<EditableMap ref={this.map} role='map' />
 					</div>
 					<div id="pointManager">
 						{/* <MyElevationChart route={this.state.route} style={{ width: "100%" }} /> */}
 					</div>
 				</div>
-
-				<input type="file" id="fileUpload" name="files" multiple />
 
 				<div>
 					<Translation>
@@ -119,7 +117,7 @@ class MapCreation extends Component {
 			return;
 		}
 		route = this.checkRouteChanged(route);
-		document.getElementById("fileUpload").files.forEach((f) => { route.addMedia(f); });
+		document.getElementById("routeFileUpload").files.forEach((f) => { route.addMedia(f); });
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			if (filePodUrl === null) {
 				toast.error("We can't access your POD. Please, review its permissions");
@@ -132,4 +130,4 @@ class MapCreation extends Component {
 }
 
 
-export default MapCreation;
+export default RouteCreation;

@@ -1,12 +1,13 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { Row, Col } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function RouteCreationForm(props) {
     return (
-        <div id="routeCreationFormDiv" style={{ padding: "0% 10%" }}>
+        <div id="routeCreationFormDiv" style={{ padding: "0% 10% 0% 5%" }}>
             <Form>
-                <Form.Group as={Row} controlId="routeNameField" >
+                <Form.Group as={Row}>
                     <Col sm={2}>
                         <Form.Label>Route name:</Form.Label>
                     </Col>
@@ -18,7 +19,7 @@ export default function RouteCreationForm(props) {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="routeDescriptionField" >
+                <Form.Group as={Row}>
                     <Col sm={2}>
                         <Form.Label>Route description:</Form.Label>
                     </Col>
@@ -32,7 +33,28 @@ export default function RouteCreationForm(props) {
                         />
                     </Col>
                 </Form.Group>
-            </Form>
+                <Form.Group as={Row}>
+                    <Col sm={2}>
+                        <Form.Label>File upload:</Form.Label>
+                    </Col>
+                    <Col>
+                        <div className="input-group">
+                            <div className="custom-file">
+                                <label className="custom-file-label" htmlFor="routeFileUpload">
+                                    Choose several files
+                                </label>
+                                <input
+                                    id="routeFileUpload"
+                                    type="file"
+                                    multiple
+                                    accept="image/*"
+                                    className="custom-file-input"
+                                />
+                            </div>
+                        </div>
+                    </Col>
+                </Form.Group>
+            </Form >
         </div >
     );
 }

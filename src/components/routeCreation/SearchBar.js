@@ -45,7 +45,7 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <Form style={{ margin: "1%" }}>
-                    <Form.Group as={Row} controlId="routeNameField">
+                    <Form.Group as={Row} /* controlId="routeNameField" */>
                         <Col sm={2}>
                             <Form.Label>Search for a place:</Form.Label>
                         </Col>
@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
                                 id="btnSearch"
                                 variant="primary"
                                 onClick={() => this.lookFor(this.search.current.value)}
-                            >Search
+                            ><i className="fa fa-search"></i>
                             </Button>
                         </Col>
                     </Form.Group>
