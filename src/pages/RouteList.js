@@ -1,18 +1,18 @@
 import React from "react";
 import RouteCard from "./RouteCard";
-import {CardDeck, Spinner }from "react-bootstrap";
+import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
 
 import PodStorageHandler from "./../podService/podStoreHandler";
 import MyRoute from "./../../model/MyRoute";
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const auth = require('solid-auth-client');
 
 class RouteList extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.routeManager = props.routeManager;
@@ -22,10 +22,10 @@ class RouteList extends React.Component {
             spinnerHidden: false
         };
         this.syncRoutesWithPod().then(() =>
-            this.state.spinnerHidden=true
+            this.state.spinnerHidden = true
         );
     }
-    
+
     render() {
         let routesForCardDecks = [];
         let counter = 0;
@@ -42,15 +42,15 @@ class RouteList extends React.Component {
         }
 
         return (
-            <div className="App-header">
+            <div>
                 <ToastContainer
                     position={toast.POSITION.TOP_CENTER}
                     autoClose={false}
                 />
                 <Translation>
                     {
-                        (t) => <h1>{t('routeListText')}</h1>
-                    }  
+                        (t) => <h1 style={{ padding: "1%" }}>{t('routeListText')}</h1>
+                    }
                 </Translation>
                 <Translation>
                     {
@@ -61,7 +61,7 @@ class RouteList extends React.Component {
                 <Spinner id={"spinner"} hidden={this.state.spinnerHidden} animation="border" />
                 {routesForCardDecks}
                 {this.state.message}
-            </div >
+            </div>
         );
     }
 

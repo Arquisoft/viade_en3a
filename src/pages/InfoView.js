@@ -39,110 +39,112 @@ class InfoView extends React.Component {
     render() {
         if (this.state.route !== undefined) {
             return (
-                <div id="routeInfoContainer" style={containerStyle}>
+                <div>
                     <Translation>
                         {
-                            (t) => <h1>{t('infoViewTitle')}</h1>
+                            (t) => <h1 style={{ padding: "1%" }}>{t('infoViewTitle')}</h1>
                         }
-                    </Translation>
-                    <div id="routeInfoContent">
-                        <div id="ircInfoTable">
-                            <Translation>
-                                {
-                                    (t) => <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>{t('infoViewExportJSON')}</Button>
-                                }
-                            </Translation>
-                            <div>
-                                <Table striped bordered>
-                                    <thead>
-                                        <tr>
-                                            <Translation>
-                                                {
-                                                    (t) => <th>{t('infoViewTh1')}</th>
-                                                }
-                                            </Translation>
-                                            <Translation>
-                                                {
-                                                    (t) => <th>{t('infoViewTh2')}</th>
-                                                }
-                                            </Translation>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <Translation>
-                                                {
-                                                    (t) => <td>{t('infoViewTd1')}</td>
-                                                }
-                                            </Translation>
-                                            <td>{this.state.route.getName()}</td>
-                                        </tr>
-                                        <tr>
-                                            <Translation>
-                                                {
-                                                    (t) => <td>{t('infoViewTd2')}</td>
-                                                }
-                                            </Translation>
-                                            <td>{this.state.route.getAuthor()}</td>
-                                        </tr>
-                                        <tr>
-                                            <Translation>
-                                                {
-                                                    (t) => <td>{t('infoViewTd3')}</td>
-                                                }
-                                            </Translation>
-                                            <td>{this.state.route.getDescription()}</td>
-                                        </tr>
-                                        <tr>
-                                            <Translation>
-                                                {
-                                                    (t) => <td>{t('infoViewTd4')}</td>
-                                                }
-                                            </Translation>
-                                            <td>{this.state.route.getRouteLength()}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </div>
-                            <div>
-                                <Form>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Translation>
-                                            {
-                                                (t) => <Form.Label>{t('infoViewComments')}</Form.Label>
-                                            }
-                                        </Translation>
-                                        <Translation>
-                                            {
-                                                (t) => <Form.Control as="textarea" rows="3" placeholder={t('infoViewWriteComments')} />
-                                            }
-                                        </Translation>
-                                    </Form.Group>
+                    </Translation >
+                    <div id="routeInfoContainer">
+                        <div id="routeInfoContent">
+                            <div id="ircInfoTable">
+                                <div>
+                                    <Table striped bordered style={{ margin: "0%" }}>
+                                        <thead>
+                                            <tr>
+                                                <Translation>
+                                                    {
+                                                        (t) => <th>{t('infoViewTh1')}</th>
+                                                    }
+                                                </Translation>
+                                                <Translation>
+                                                    {
+                                                        (t) => <th>{t('infoViewTh2')}</th>
+                                                    }
+                                                </Translation>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <Translation>
+                                                    {
+                                                        (t) => <td>{t('infoViewTd1')}</td>
+                                                    }
+                                                </Translation>
+                                                <td>{this.state.route.getName()}</td>
+                                            </tr>
+                                            <tr>
+                                                <Translation>
+                                                    {
+                                                        (t) => <td>{t('infoViewTd2')}</td>
+                                                    }
+                                                </Translation>
+                                                <td>{this.state.route.getAuthor()}</td>
+                                            </tr>
+                                            <tr>
+                                                <Translation>
+                                                    {
+                                                        (t) => <td>{t('infoViewTd3')}</td>
+                                                    }
+                                                </Translation>
+                                                <td>{this.state.route.getDescription()}</td>
+                                            </tr>
+                                            <tr>
+                                                <Translation>
+                                                    {
+                                                        (t) => <td>{t('infoViewTd4')}</td>
+                                                    }
+                                                </Translation>
+                                                <td>{this.state.route.getRouteLength()}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
                                     <Translation>
                                         {
-                                            (t) => <Button variant="primary" type="submit"> {t('infoViewSubmit')} </Button>
+                                            (t) => <Button variant="primary" onClick={() => this.downloadToClient()} style={{ margin: "2%" }}>{t('infoViewExportJSON')}</Button>
                                         }
                                     </Translation>
-                                </Form>
+                                </div>
+                                <div style={{ marginTop: "2%" }}>
+                                    <Form>
+                                        <Form.Group>
+                                            <Translation>
+                                                {
+                                                    (t) => <Form.Label>{t('infoViewComments')}</Form.Label>
+                                                }
+                                            </Translation>
+                                            <Translation>
+                                                {
+                                                    (t) => <Form.Control as="textarea" rows="3" placeholder={t('infoViewWriteComments')} />
+                                                }
+                                            </Translation>
+                                        </Form.Group>
+                                        <Translation>
+                                            {
+                                                (t) => <Button variant="primary" type="submit"> {t('infoViewSubmit')} </Button>
+                                            }
+                                        </Translation>
+                                    </Form>
+                                </div>
+                            </div>
+                            <div id="ircTabs">
+                                <Tabs>
+                                    <Tab eventKey="routeMap" title="Map view">
+                                        <MyMap route={this.state.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
+                                    </Tab>
+                                    <Tab eventKey="elevationChart" title="Elevation chart">
+                                        <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
+                                    </Tab>
+                                    <Tab eventKey="imageCarousel" title="Image gallery">
+                                        {this.getCarousel()}
+                                    </Tab>
+                                </Tabs>
                             </div>
                         </div>
-                        <div id="ircTabs">
-                            <Tabs>
-                                <Tab eventKey="routeMap" title="Map view">
-                                    <MyMap route={this.state.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
-                                </Tab>
-                                <Tab eventKey="elevationChart" title="Elevation chart">
-                                    <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
-                                </Tab>
-                                <Tab eventKey="imageCarousel" title="Image gallery">
-                                    {this.getCarousel()}
-                                </Tab>
-                            </Tabs>
+                        <div id="routeCommentsList">
                         </div>
                     </div>
-                    <div id="routeCommentsList">
-                    </div>
-                </div >
+                </div>
             );
         } else {
             return (

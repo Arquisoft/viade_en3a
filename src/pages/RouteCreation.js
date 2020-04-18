@@ -29,13 +29,13 @@ class RouteCreation extends Component {
 
 	render() {
 		return (
-			<div id="routeCreationContainer" >
+			<div className="App-Black-LightGray" id="routeCreationContainer" >
 				<ToastContainer
 					position={toast.POSITION.TOP_CENTER}
 					autoClose={5000}
 				/>
 				<Translation>
-					{(t) => <h1>{t('mapCreationTitle')}</h1>}
+					{(t) => <h1 style={{ padding: "1%" }}>{t('mapCreationTitle')}</h1>}
 				</Translation>
 
 				<RouteCreationForm
