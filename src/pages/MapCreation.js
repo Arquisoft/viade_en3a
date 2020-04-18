@@ -7,7 +7,8 @@ import { Translation } from 'react-i18next';
 
 import './../css/App.css';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
-
+import PodStorageHandler from "../components/podService/podStoreHandler";
+const auth = require('solid-auth-client');
 class MapCreation extends Component {
 
 	constructor(props) {
@@ -111,8 +112,9 @@ class MapCreation extends Component {
 		});
 	}
 
-	changePermissions(){
-		new PodPermissionHandler().test();
+	async changePermissions(){
+		let session = await auth.currentSession();
+		new PodStorageHandler(session).deleteAll((s) => {});
 	}
 }
 
