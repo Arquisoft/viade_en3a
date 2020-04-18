@@ -20,24 +20,29 @@ class SearchBar extends React.Component {
     };
 
     lookFor(text) {
-        toast.info("Searching...");
+        toast.dismiss();
+        if (this.search.current.value.length == 0) {
+            toast.error("Oopss... At least try to search for some place :D");
+        } else {
+            toast.info("Searching...");
 
-        search({ q: text }, function (err, opts, results) {
-            if (results.length > 0) {
-                let firstFound = results[0];
+            search({ q: text }, function (err, opts, results) {
+                if (results.length > 0) {
+                    let firstFound = results[0];
 
-                this.map.current.setState({ editablePosition: [firstFound.lat, firstFound.lon] });
-                this.map.current.setState({ boundingbox: firstFound.boundingBox });
+                    this.map.current.setState({ editablePosition: [firstFound.lat, firstFound.lon] });
+                    this.map.current.setState({ boundingbox: firstFound.boundingBox });
 
-                toast.dismiss();
-                toast.success("mapCreationSearchBarFound " + firstFound.display_name);
-            }
-            else {
-                toast.dismiss();
-                toast.error("mapCreationSearchBarError");
-            }
+                    toast.dismiss();
+                    toast.success("mapCreationSearchBarFound " + firstFound.display_name);
+                }
+                else {
+                    toast.dismiss();
+                    toast.error("mapCreationSearchBarError");
+                }
 
-        }.bind(this));
+            }.bind(this));
+        }
     }
 
 
@@ -56,7 +61,7 @@ class SearchBar extends React.Component {
                                 ref={this.search}
                             />
                         </Col>
-                        <Col sm={2}>
+                        <Col sm={0.5}>
                             <Button
                                 id="btnSearch"
                                 variant="primary"

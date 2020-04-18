@@ -41,7 +41,7 @@ export default function RouteCreationForm(props) {
                         <div className="input-group">
                             <div className="custom-file">
                                 <label className="custom-file-label" htmlFor="routeFileUpload">
-                                    Choose several files
+                                    You can upload more than one file
                                 </label>
                                 <input
                                     id="routeFileUpload"

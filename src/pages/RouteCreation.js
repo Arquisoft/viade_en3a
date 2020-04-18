@@ -32,7 +32,7 @@ class RouteCreation extends Component {
 			<div id="routeCreationContainer" >
 				<ToastContainer
 					position={toast.POSITION.TOP_CENTER}
-					autoClose={3000}
+					autoClose={5000}
 				/>
 				<Translation>
 					{(t) => <h1>{t('mapCreationTitle')}</h1>}
