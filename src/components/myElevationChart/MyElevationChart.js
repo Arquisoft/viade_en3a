@@ -68,8 +68,6 @@ class MyElevationChart extends React.Component {
     }
 
     update(newPoints) {
-        console.log("hello");
-        console.log(newPoints);
         this.init(newPoints);
         this.setState({ points: this.state.points });
     }

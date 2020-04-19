@@ -12,7 +12,7 @@ import RouteCreationForm from "../components/routeCreation/RouteCreationForm";
 import MyElevationChart from "../components/myElevationChart/MyElevationChart";
 
 import 'react-toastify/dist/ReactToastify.css';
-import "./../css/routeCreation.css"
+import "./../css/routeCreation.css";
 import './../css/App.css';
 
 class RouteCreation extends Component {
@@ -135,7 +135,7 @@ class RouteCreation extends Component {
 							<Button
 								id="btnSave"
 								variant="primary"
-								onClick={() => { this.uploadToPod() }}
+								onClick={() => { this.uploadToPod(); }}
 								style={{ margin: "1.5vh" }}
 							>{t('mapCreationSaveButton')}
 							</Button>

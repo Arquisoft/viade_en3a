@@ -183,7 +183,7 @@ class MyRoute {
 				{
 					"@id": url
 				}
-			)
+			);
 		});
 		return JSON.stringify(
 			{
