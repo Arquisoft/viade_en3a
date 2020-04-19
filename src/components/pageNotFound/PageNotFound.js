@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-function PageNotFound(props) {
+function PageNotFound() {
     const { t } = useTranslation();
     return (
         <div>
