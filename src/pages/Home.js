@@ -34,7 +34,7 @@ class Home extends Component {
 
     async printName() {
         var name = document.getElementById("name");
-        name.appendChild(document.createTextNode(await UserDetails.getName()+ ","));
+        name.appendChild(document.createTextNode(await UserDetails.getName() + ","));
     }
 
 }

@@ -7,8 +7,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { AuthButton } from '@solid/react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import SignUp from '../../pages/SignUp';
-import MapCreation from '../../pages/MapCreation';
-import RouteList from '../routeList/RouteList';
+import RouteCreation from '../../pages/RouteCreation';
+import RouteList from '../../pages/RouteList';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
@@ -65,7 +65,7 @@ function MyNavBar(props) {
               <NavDropdown.Item href="#routes/example">{t('navBarRouteHelp')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <DropdownButton style={{margin: "16px"}} id="dropdown-item-button" variant="secondary" title={t('navBarLanguage')}>
+          <DropdownButton style={{ margin: "16px" }} id="dropdown-item-button" variant="secondary" title={t('navBarLanguage')}>
             <Dropdown.Item as="button" onClick={() => changeLanguage('en')}>{t('navBarLanguageEn')}</Dropdown.Item>
             <Dropdown.Item as="button" onClick={() => changeLanguage('es')}>{t('navBarLanguageEs')}</Dropdown.Item>
           </DropdownButton>
@@ -84,7 +84,7 @@ function MyNavBar(props) {
         </Navbar.Collapse>
       </Navbar>
       <Route exact path="/register" component={SignUp} />
-      <Route exact path="/routes/add" render={() => <MapCreation routeManager={routeManager} />} />
+      <Route exact path="/routes/add" render={() => <RouteCreation routeManager={routeManager} />} />
       <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
