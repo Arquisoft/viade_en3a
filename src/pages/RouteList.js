@@ -1,10 +1,10 @@
 import React from "react";
-import RouteCard from "./RouteCard";
+import RouteCard from "../components/routeList/RouteCard";
 import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
 
-import PodStorageHandler from "./../podService/podStoreHandler";
-import MyRoute from "./../../model/MyRoute";
+import PodStorageHandler from "../components/podService/podStoreHandler";
+import MyRoute from "../model/MyRoute";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from "react-toastify";
 
@@ -45,7 +45,7 @@ class RouteList extends React.Component {
             <div>
                 <ToastContainer
                     position={toast.POSITION.TOP_CENTER}
-                    autoClose={false}
+                    autoClose={5000}
                 />
                 <Translation>
                     {
@@ -54,7 +54,7 @@ class RouteList extends React.Component {
                 </Translation>
                 <Translation>
                     {
-                        (t) => <h2 hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
+                        (t) => <h2 style={{ padding: "1%" }} hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
                     }
                 </Translation>
 

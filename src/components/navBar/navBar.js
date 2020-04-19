@@ -8,7 +8,7 @@ import { AuthButton } from '@solid/react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 import SignUp from '../../pages/SignUp';
 import RouteCreation from '../../pages/RouteCreation';
-import RouteList from '../routeList/RouteList';
+import RouteList from '../../pages/RouteList';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
