@@ -44,7 +44,7 @@ function Friends() {
             </Translation>
             <Form inline="true" class="forms-inline">
                 <Form.Control type="text" placeholder="Friend username" />
-                <Button variant="primary" disabled={isLoading}
+                <Button id="addBtn" variant="primary" disabled={isLoading}
                     onClick={!isLoading ? handleClick : null}>
                     {isLoading ? 'Adding…' : 'Add'}
                 </Button>

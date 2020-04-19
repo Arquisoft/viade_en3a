@@ -4,7 +4,7 @@ import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
 class EditableMap extends React.Component {
 
 	constructor(props) {
-		super();
+		super(props);
 		this.state = {
 			points: [[0, 0]],
 			editablePosition: [43.354834, -5.851405],
