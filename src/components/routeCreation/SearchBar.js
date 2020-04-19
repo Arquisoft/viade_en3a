@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
 
     lookFor(text) {
         toast.dismiss();
-        if (this.search.current.value.length == 0) {
+        if (this.search.current.value.length === 0) {
             toast.error("Oopss... At least try to search for some place :D");
         } else {
             toast.info("Searching...");
@@ -50,7 +50,7 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <Form style={{ margin: "1%" }}>
-                    <Form.Group as={Row} /* controlId="routeNameField" */>
+                    <Form.Group as={Row}>
                         <Col sm={2}>
                             <Form.Label>Search for a place:</Form.Label>
                         </Col>

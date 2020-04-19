@@ -3,10 +3,15 @@ import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
 
 class EditableMap extends React.Component {
 
-	constructor() {
+	constructor(props) {
 		super();
-		this.state = { points: [[0, 0]] , editablePosition: [43.354834, -5.851405] , boundingbox: [43.254834, -5.751405,43.454834, -5.951405] };
+		this.state = {
+			points: [[0, 0]],
+			editablePosition: [43.354834, -5.851405],
+			boundingbox: [43.254834, -5.751405, 43.454834, -5.951405]
+		};
 		this.initial = true;
+		this.onChange = props.onChange;
 	}
 
 	addPoint = (e) => {
@@ -16,6 +21,7 @@ class EditableMap extends React.Component {
 		}
 		this.state.points.push(e.latlng);
 		this.setState({ points: this.state.points.slice() });
+		this.onChange(this.state.points);
 	}
 
 	getPoints() {
@@ -29,13 +35,15 @@ class EditableMap extends React.Component {
 
 		points[id] = newPosition;
 		this.setState({ points: points.slice() });
+		this.onChange(this.state.points);
 	}
 
 	remove = (event) => {
-			var id = event.target.options.marker_index;
-			const { points } = this.state;
-			points.splice(id, 1);
-			this.setState({ points: points.slice() });
+		var id = event.target.options.marker_index;
+		const { points } = this.state;
+		points.splice(id, 1);
+		this.setState({ points: points.slice() });
+		this.onChange(this.state.points);
 	}
 
 	setPositionScaled = (e) => {

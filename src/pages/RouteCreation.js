@@ -22,46 +22,12 @@ class RouteCreation extends Component {
 		this.routeName = React.createRef();
 		this.routeDescription = React.createRef();
 		this.map = React.createRef();
+		this.elevationChart = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
-		this.state = {}
+		this.newRoute = new MyRoute("", "", "", []);
 	}
 
-	render() {
-		return (
-			<div className="App-Black-LightGray" id="routeCreationContainer" >
-				<ToastContainer
-					position={toast.POSITION.TOP_CENTER}
-					autoClose={5000}
-				/>
-				<Translation>
-					{(t) => <h1 style={{ padding: "1%" }}>{t('mapCreationTitle')}</h1>}
-				</Translation>
-
-				<RouteCreationForm
-					routeNameRef={this.routeName}
-					routeDescriptionRef={this.routeDescription}
-				/>
-
-				<div id="mapPointsContainer" style={{ padding: "1% 0%" }}>
-					<div id="mapAndSearch">
-						<SearchBar map={this.map} />
-						<EditableMap ref={this.map} role='map' />
-					</div>
-					<div id="pointManager">
-						{/* <MyElevationChart route={this.state.route} style={{ width: "100%" }} /> */}
-					</div>
-				</div>
-
-				<div>
-					<Translation>
-						{(t) => <Button id={"btnSave"} variant="primary" onClick={() => this.uploadToPod()} style={{ margin: "1.5vh" }}>{t('mapCreationSaveButton')}</Button>}
-					</Translation>
-					<Spinner id={"spinner"} hidden animation="border" />
-				</div>
-			</div>
-		);
-	}
 
 	toggleSpinner() {
 		let spinner = document.getElementById("spinner");
@@ -126,6 +92,59 @@ class RouteCreation extends Component {
 				window.location.href = "#routes/list";
 			}
 		});
+	}
+
+	render() {
+		return (
+			<div className="App-Black-LightGray" id="routeCreationContainer" >
+				<ToastContainer
+					position={toast.POSITION.TOP_CENTER}
+					autoClose={5000}
+				/>
+				<Translation>
+					{(t) => <h1 style={{ padding: "1%" }}>{t('mapCreationTitle')}</h1>}
+				</Translation>
+
+				<RouteCreationForm
+					routeNameRef={this.routeName}
+					routeDescriptionRef={this.routeDescription}
+				/>
+
+				<div id="mapPointsContainer" style={{ padding: "1% 0%" }}>
+					<div id="mapAndSearch">
+						<SearchBar map={this.map} />
+						<EditableMap
+							ref={this.map}
+							role='map'
+							onChange={(points, elevationChart = this.elevationChart) => {
+								this.newRoute.setPoints(points, (updatedPoints, chart = elevationChart) => {
+									chart.current.update(updatedPoints);
+								});
+							}}
+						/>
+					</div>
+					<div id="pointManager">
+						<h2 style={{ padding: "3% 1% 2% 1%" }}>Route elevation preview</h2>
+						<MyElevationChart ref={this.elevationChart} route={this.newRoute} />
+					</div>
+				</div>
+
+				<div>
+					<Translation>
+						{(t) =>
+							<Button
+								id="btnSave"
+								variant="primary"
+								onClick={() => { this.uploadToPod() }}
+								style={{ margin: "1.5vh" }}
+							>{t('mapCreationSaveButton')}
+							</Button>
+						}
+					</Translation>
+					<Spinner id={"spinner"} hidden animation="border" />
+				</div>
+			</div >
+		);
 	}
 }
 
