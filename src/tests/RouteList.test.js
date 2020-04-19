@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import RouteManager from "./../model/RouteManager";
-import RouteList from "../components/routeList/RouteList";
+import RouteList from "./../pages/RouteList";
 
 const routeManager = new RouteManager();
 
