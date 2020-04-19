@@ -16,7 +16,7 @@ test("render edit profile", () => {
     expect(title).toBeInTheDocument();
 });
 
-test("render friends", ()=>{
+test("render friends", ()=> {
     const { getByText } = render(<Friends/>);
     const title = getByText("friendsTitle");
     expect(title).toBeInTheDocument();
@@ -24,29 +24,29 @@ test("render friends", ()=>{
     fireEvent.click(button,leftClick);
 });
 
-test("render home", ()=>{
+test("render home", ()=> {
     const { getByText, findByText } = render(<Home/>);
     const title = getByText("homeWelcome");
     expect(title).toBeInTheDocument();
 });
 
-test("render profile", ()=>{
+test("render profile", ()=> {
     const { getByText } = render(<Profile/>);
     const title = getByText("profileUsername");
     expect(title).toBeInTheDocument();
 });
 
-test("render sign up", ()=>{
+test("render sign up", ()=> {
     render(<SignUp/>);
 });
 
-test("render pagenotfound", ()=>{
+test("render pagenotfound", ()=> {
     const { getByText,  } = render(<PageNotFound/>);
     const title = getByText("pageNotFoundHeader");
     expect(title).toBeInTheDocument();
 });
 
-test("render navBar", ()=>{
+test("render navBar", ()=> {
     const { getByText, findByText } = render(<MyNavBar/>);
     let btn = getByText("navBarProfile");
     expect(btn).toBeInTheDocument();
