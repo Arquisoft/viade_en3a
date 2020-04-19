@@ -37,7 +37,7 @@ const resources = {
         "editProfileChangePass": "Change password",
         "editProfileNewPass": "New password",
         "editProfileSave": "Save",
-        "homeWelcome": "Hi,",
+        "homeWelcome": "Hi ",
         "homeWelcome2": "welcome to",
         "profileTitle": "Profile",
         "profileUsername": "Username:",
@@ -51,6 +51,7 @@ const resources = {
         "infoViewTd1": "Name:",
         "infoViewTd2": "Author:",
         "infoViewTd3": "Description:",
+        "infoViewTd4": "Distance:",
         "infoViewComments": "Comment section",
         "infoViewWriteComments": "Write your comment here",
         "infoViewSubmit": "Submit",
@@ -59,10 +60,12 @@ const resources = {
         "infoViewImg": "Image gallery",
         "mapCreationTitle": "Create your own Route",
         "mapCreationName": "Route Name",
+        "mapCreationRouteDescription": "Route Description",
         "mapCreationSaveButton": "Save route in pod",
         "friendsTitle": "Friends",
         "friendsAdd": "Add a friend",
-        "friendsList": "List of friends"
+        "friendsList": "List of friends",
+        "routeListLoadingMessage": "We're downloading your routes. Next time will be faster."
     }
   },
   es: {
@@ -99,7 +102,7 @@ const resources = {
         "editProfileChangePass": "Cambiar contraseña",
         "editProfileNewPass": "Nueva contraseña",
         "editProfileSave": "Guardar",
-        "homeWelcome": "Hola,",
+        "homeWelcome": "Hola ",
         "homeWelcome2": "bienvenido a",
         "profileTitle": "Perfil",
         "profileUsername": "Usuario:",
@@ -113,6 +116,7 @@ const resources = {
         "infoViewTd1": "Nombre:",
         "infoViewTd2": "Autor:",
         "infoViewTd3": "Descripción:",
+        "infoViewTd4": "Distancia:",
         "infoViewComments": "Comentarios",
         "infoViewWriteComments": "Escribe tu comentario aquí",
         "infoViewSubmit": "Publicar",
@@ -121,10 +125,13 @@ const resources = {
         "infoViewImg": "Galería de imágenes",
         "mapCreationTitle": "Crea tu propia ruta",
         "mapCreationName": "Nombre de ruta",
+        "mapCreationRouteDescription": "Descripción",
         "mapCreationSaveButton": "Guardar ruta en pod",
         "friendsTitle": "Amigos",
         "friendsAdd": "Añadir un amigo",
-        "friendsList": "Lista de amigos"
+        "friendsList": "Lista de amigos",
+        "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos."
+
 
     }
   }

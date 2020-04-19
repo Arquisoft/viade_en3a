@@ -1,10 +1,13 @@
 import React from "react";
 import RouteCard from "./RouteCard";
-import CardDeck from "react-bootstrap/CardDeck";
+import {CardDeck, Spinner }from "react-bootstrap";
 import { Translation } from 'react-i18next';
 
 import PodStorageHandler from "./../podService/podStoreHandler";
 import MyRoute from "./../../model/MyRoute";
+import 'react-toastify/dist/ReactToastify.css';
+import {toast, ToastContainer} from "react-toastify";
+
 
 const auth = require('solid-auth-client');
 
@@ -15,9 +18,12 @@ class RouteList extends React.Component {
         this.routeManager = props.routeManager;
         this.cardDeckSize = 4;
         this.state = {
-            routes: []
+            routes: [],
+            spinnerHidden: false
         };
-        this.syncRoutesWithPod();
+        this.syncRoutesWithPod().then(() =>
+            this.state.spinnerHidden=true
+        );
     }
     
     render() {
@@ -37,11 +43,22 @@ class RouteList extends React.Component {
 
         return (
             <div className="App-header">
+                <ToastContainer
+                    position={toast.POSITION.TOP_CENTER}
+                    autoClose={false}
+                />
                 <Translation>
                     {
                         (t) => <h1>{t('routeListText')}</h1>
                     }  
                 </Translation>
+                <Translation>
+                    {
+                        (t) => <h2 hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
+                    }
+                </Translation>
+
+                <Spinner id={"spinner"} hidden={this.state.spinnerHidden} animation="border" />
                 {routesForCardDecks}
                 {this.state.message}
             </div >
@@ -56,7 +73,7 @@ class RouteList extends React.Component {
             let storageHandler = new PodStorageHandler(session);
             storageHandler.getRoutes((rawJsonRoutes, error) => {
                 if (rawJsonRoutes === null) {
-                    alert("There was an error trying to fetch your routes from the POD");
+                    toast.error("We can't access your POD. Please, review its permissions");
                 } else {
                     if (rawJsonRoutes.length !== 0) {
                         rawJsonRoutes.forEach((rawRoute) => {

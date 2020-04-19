@@ -22,3 +22,15 @@ test('Test create route', () => {
 	expect(getByText('mapCreationTitle')).toBeTruthy();
 	expect(btn).toBeTruthy();
 });
+
+test('Test wrong route creation', () => {
+	const { getByText, getByRole } = render(<MapCreation routeManager={routeManager} />);
+
+	const map = getByRole('presentation');
+	const leftClick = { button: 1 };
+	fireEvent.click(map, leftClick);
+
+	const btn = getByText(/save/i);
+	fireEvent.click(btn,leftClick);
+
+});
