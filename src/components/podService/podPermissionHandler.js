@@ -1,4 +1,4 @@
-import podStoreHandler from "./podStoreHandler";
+import PodStoreHandler from "./podStoreHandler";
 import PodHandler from "./podHandler";
 
 const SolidAclUtils = require('solid-acl-utils');
@@ -16,7 +16,7 @@ export default class PodPermissionHandler extends PodHandler{
      */
     constructor(currentSession) {
         super(currentSession);
-        this.podStoreHandler = new podStoreHandler(currentSession);
+        this.podStoreHandler = new PodStoreHandler(currentSession);
     }
 
     /**
@@ -69,11 +69,11 @@ export default class PodPermissionHandler extends PodHandler{
 
         try {
             await acl.addRule(permissions, agents);
-            console.log("updated acl");
+            //console.log("updated acl");
         } catch (e) {
-            console.error('Error while adding rule');
-            console.error(e);
-            throw e
+            //console.error('Error while adding rule');
+            //onsole.error(e);
+            throw e;
         }
     }
 
