@@ -69,7 +69,14 @@ const resources = {
       "friendsTitle": "Friends",
       "friendsAdd": "Add a friend",
       "friendsList": "List of friends",
-      "routeListLoadingMessage": "We're downloading your routes. Next time will be faster."
+      "routeListLoadingMessage": "We're downloading your routes. Next time will be faster.",
+      "routeHelpIndex" : "Index",
+      "routeHelpIntro" : "Introduction",
+      "routeHelpCreatePOD" : "Create a POD",
+      "routeHelpLogin" : "Login",
+      "routeHelpCreateRoutes" : "Create a Route",
+      "routeHelpViewRoutes" : "View your Routes",
+      "routeHelpShareRoutes" : "Share with Friends",
     }
   },
   es: {
@@ -138,7 +145,14 @@ const resources = {
       "friendsTitle": "Amigos",
       "friendsAdd": "Añadir un amigo",
       "friendsList": "Lista de amigos",
-      "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos."
+      "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos.",
+      "routeHelpIndex" : "Index",
+      "routeHelpIntro" : "Introduction",
+      "routeHelpCreatePOD" : "Create a POD",
+      "routeHelpLogin" : "Login",
+      "routeHelpCreateRoutes" : "Create a Route",
+      "routeHelpViewRoutes" : "View your Routes",
+      "routeHelpShareRoutes" : "Share with Friends",
     }
   }
 };

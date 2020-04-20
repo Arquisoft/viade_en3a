@@ -9,6 +9,7 @@ import { HashRouter, Route, Redirect } from 'react-router-dom';
 import SignUp from '../../pages/SignUp';
 import RouteCreation from '../../pages/RouteCreation';
 import RouteList from '../../pages/RouteList';
+import RouteHelp from "../../pages/RouteHelp";
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Friends from '../../pages/Friends';
@@ -86,6 +87,7 @@ function MyNavBar(props) {
       <Route exact path="/register" component={SignUp} />
       <Route exact path="/routes/add" render={() => <RouteCreation routeManager={routeManager} />} />
       <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
+      <Route exact path="/routes/example" render={() => <RouteHelp/>} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
       <Route exact path="/friends" component={Friends} />
