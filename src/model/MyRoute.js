@@ -111,10 +111,7 @@ class MyRoute {
 		let newListOfPoints = [];
 		newPoints.forEach((newPoint) => {
 			let found = this.points.find(
-				(each) => {
-					console.log(each);
-					return each.getLatitude() === newPoint.lat && each.getLongitude() === newPoint.lng;
-				}
+				(each) => each.getLatitude() === newPoint.lat && each.getLongitude() === newPoint.lng
 			);
 			if (found === undefined) {
 				let tempPoint = new RoutePoint(newPoint.lat, newPoint.lng);
