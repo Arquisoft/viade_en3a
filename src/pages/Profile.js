@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
 import { Button } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
+import UserDetails from "../model/Util";
 
 const auth = require('solid-auth-client');
 var session = null;
@@ -34,7 +35,7 @@ class Profile extends Component {
                         (t) => <h2>{t('profileUsername')}</h2>
                     }
                 </Translation>
-                <h3 id="username">username</h3>
+                <h3 id="username"></h3>
                 <Translation>
                     {
                         (t) => <h2>{t('profileLocality')}</h2>
@@ -56,14 +57,8 @@ class Profile extends Component {
     }
 
     async loadInfo() {
-        session = await auth.currentSession();
-        var username = session.webId;
-        username = username.replace('https://', '');
-        username = username.replace('.solid.community/profile/card#me', '');
-
-        //document.getElementById("name").innerHTML = "Juan Martínez";
-        document.getElementById("username").innerHTML = username;
-        document.getElementById("locality").innerHTML = "Oviedo, Asturias";
+        var name = document.getElementById("username");
+        name.appendChild(document.createTextNode(await UserDetails.getName()));
     }
 
 }
