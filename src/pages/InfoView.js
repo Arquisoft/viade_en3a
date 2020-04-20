@@ -175,7 +175,7 @@ class InfoView extends React.Component {
                     } else {
                         let routeToInfoString = rawJsonRoutes.filter((routeString) => { return routeString.includes(this.id); });
                         let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(routeToInfoString);
+                        tempRoute.modifyFromJsonLd(JSON.parse(routeToInfoString));
                         this.setState({ route: tempRoute });
                     }
                 });
