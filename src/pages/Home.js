@@ -12,7 +12,12 @@ class Home extends Component {
             <div className="App-header" onLoad={() => this.printName()}>
                 <Translation>
                     {
-                        (t) => <h1 id="name">{t('homeWelcome')}</h1>
+                        (t) => {
+                            if (this.username)
+                                return <h1 id="name">{t('homeWelcome') + this.username + ","}</h1>
+                            else
+                                return <h1 id="name">{t('homeWelcome')}</h1>
+                        }
                     }
                 </Translation>
                 <Translation>
@@ -34,7 +39,8 @@ class Home extends Component {
 
     async printName() {
         var name = document.getElementById("name");
-        name.appendChild(document.createTextNode(await UserDetails.getName() + ","));
+        if (!this.username) this.username = await UserDetails.getName();
+        name.appendChild(document.createTextNode(this.username + ","));
     }
 
 }
