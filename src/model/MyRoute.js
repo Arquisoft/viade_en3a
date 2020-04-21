@@ -37,10 +37,6 @@ function calculateRouteLength(points) {
 	return distance;
 }
 
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 class MyRoute {
 
 	/**

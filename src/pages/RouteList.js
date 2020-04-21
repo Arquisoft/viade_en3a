@@ -24,15 +24,6 @@ class RouteList extends React.Component {
         };
         this.syncRoutesWithPod().then(() => {
             this.state.spinnerHidden = true;
-            if (this.state.routes.length === 0) {
-                this.setState({
-                    message:
-                        <div>
-                            <h3>Oops! We didn't find any route in your POD</h3>
-                            <p>You can move to "Route management >> Create a new route" to add a new route!</p>
-                        </div>
-                });
-            }
         });
         this.processedRoutes = 0;
         this.retrievedRoutes = 0;
@@ -93,26 +84,29 @@ class RouteList extends React.Component {
                         this.routeManager.addRoute(tempRoute);
                         let tempList = this.state.routes;
                         tempList.push(tempRoute);
-                        $("#messageArea").empty();
                         this.processedRoutes += 1;
-                        this.setState(
-                            { routes: tempList },
-                            (routeList = this, rtrR = this.retrievedRoutes, proR = this.processedRoutes) => {
-                                if (rtrR === proR) {
-                                    routeList.updateMaps();
-                                }
-                            }
-                        );
+                        if (this.processedRoutes === this.retrievedRoutes) {
+                            this.setState({ routes: tempList });
+                            $("#messageArea").empty();
+                        }
                     }
                 }
             }).then(
-                (result) => { this.retrievedRoutes = result; }
+                (result) => {
+                    if (result === 0) {
+                        this.setState({
+                            message:
+                                <div>
+                                    <h3>Oops! We didn't find any route in your POD</h3>
+                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                </div>
+                        });
+                    } else {
+                        this.retrievedRoutes = result;
+                    }
+                }
             );
         }
-    }
-
-    updateMaps() {
-        // Here goes the code to execute when all the routes are on the screen
     }
 
 }

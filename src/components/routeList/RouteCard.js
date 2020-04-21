@@ -2,7 +2,6 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import MyMap from './../myMap/MyMap';
-import $ from "jquery";
 
 class RouteCard extends React.Component {
 
