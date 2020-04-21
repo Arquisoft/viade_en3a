@@ -7,6 +7,8 @@ import viadeCreateRoute from '../assets/howRoutesWork/createRoute.png'; // TODO;
 import viadeDetailsRoute from '../assets/howRoutesWork/routeDetails.png';
 import viadeShareRoute from '../assets/howRoutesWork/shareRoutes.png';
 
+import '../css/routeHelp.css';
+
 export default class RouteHelp extends React.Component {
 
     constructor(props){
@@ -42,7 +44,7 @@ export default class RouteHelp extends React.Component {
                 );
         }
 
-        return <div>
+        return <div class="index">
             <Translation role="title">
                 {(t) => <h2>{t("routeHelpIndex")}</h2>}
             </Translation>
@@ -51,7 +53,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getIntroduction(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpIntro')}</h2>}
             </Translation>
@@ -63,7 +65,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getCreateAPod(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpCreatePOD')}</h2>}
             </Translation>
@@ -72,7 +74,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getLogin(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpLogin')}</h2>}
             </Translation>
@@ -81,7 +83,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getCreateARoute(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpCreateRoutes')}</h2>}
             </Translation>
@@ -91,7 +93,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getViewARoute(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpCreateRoutes')}</h2>}
             </Translation>
@@ -101,7 +103,7 @@ export default class RouteHelp extends React.Component {
     }
 
     getShareWithFiends(){
-        return <div>
+        return <div class="helpElement">
             <Translation role="title">
                 {(t) => <h2>{t('routeHelpCreateRoutes')}</h2>}
             </Translation>
