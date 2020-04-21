@@ -8,3 +8,7 @@
     font-size: 1.5rem;
     margin: 5%;
 }
+
+.helpElement > img {
+    margin: 2%;
+}

@@ -70,13 +70,22 @@ const resources = {
       "friendsAdd": "Add a friend",
       "friendsList": "List of friends",
       "routeListLoadingMessage": "We're downloading your routes. Next time will be faster.",
+
       "routeHelpIndex" : "Index",
       "routeHelpIntro" : "Introduction",
+      "routeHelpIntro_1" : "Viade is an Application whose task is to manage routes.",
+      "routeHelpIntro_2" : "It allows you to store your favourite scenic routes on your Solid Pod and to share it with your friends and family as well as comment on those of your friends'.",
       "routeHelpCreatePOD" : "Create a POD",
+      "routeHelpCreatePOD_1" : "If you are not an owner of a POD you can create one by pressing the register button. This will redirect you to a provider, where you can create your POD.",
       "routeHelpLogin" : "Login",
+      "routeHelpLogin_1" : "Once the POD is created, press the login button and a popup will ask you for credentials. Once logged in you will have access to new options.",
       "routeHelpCreateRoutes" : "Create a Route",
+      "routeHelpCreateRoutes_1" : "From \"Route Management > Create a new Route\" you can create a new route. Just set a title, description, select the waypoints of the route and press \"Save route in POD\".",
       "routeHelpViewRoutes" : "View your Routes",
+      "routeHelpViewRoutes_1" : "We can now navigate to \"Route Management > My Routes\", where the routes you have created are listed. When clicking on \"Info\" of the new route a new window will display all the information recorded, as well as comments posted and a elevation chart of the waypoints.",
       "routeHelpShareRoutes" : "Share with Friends",
+      "routeHelpShareRoutes_1" : "When displaying all routes \"Route Management > My Routes\", you can click on the share option. This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.",
+
     }
   },
   es: {
@@ -146,13 +155,21 @@ const resources = {
       "friendsAdd": "Añadir un amigo",
       "friendsList": "Lista de amigos",
       "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos.",
-      "routeHelpIndex" : "Index",
-      "routeHelpIntro" : "Introduction",
-      "routeHelpCreatePOD" : "Create a POD",
-      "routeHelpLogin" : "Login",
-      "routeHelpCreateRoutes" : "Create a Route",
-      "routeHelpViewRoutes" : "View your Routes",
-      "routeHelpShareRoutes" : "Share with Friends",
+
+      "routeHelpIndex" : "Índice",
+      "routeHelpIntro" : "Introducción",
+      "routeHelpIntro_1" : "Viade es una aplicación de Administración de Rutas.",
+      "routeHelpIntro_2" : "Te permite almacenar tus rutas de montaña favoritas en tu POD de Solid y compartirlas con tus amigos y familia a la par que comentar sobre ellas.",
+      "routeHelpCreatePOD" : "Crear un POD",
+      "routeHelpCreatePOD_1" : "Si todavía no tienes un POD, puedes hacerte a uno pulsando el botón de registrar. Esto te redirigirá a un proveedor, donde podrás crear tu POD.",
+      "routeHelpLogin" : "Iniciar Sesión",
+      "routeHelpLogin_1" : "Una vez tengas un POD, pulsa el botón 'Identificarse' y una ventana te pedirá credenciales. Una vez tengas la sesión uniciada dispondrás de más opciones.",
+      "routeHelpCreateRoutes" : "Crear una Ruta",
+      "routeHelpCreateRoutes_1" : "Desde \"Gestión de Rutas > Crear una Nueva Ruta\" puedes crear rutas nuevas. Escoge un título, descripción, los puntos por donde pasa y pulsa \"Guardar ruta en POD\".",
+      "routeHelpViewRoutes" : "Ver tus Rutas",
+      "routeHelpViewRoutes_1" : "Puedes navegar a \"Gestión de Rutas > Mis rutas\", donde se mostrará un listado de las rutas que hayas creado. Cuando se seleccione \"Info\" de la nueva ruta una ventana mostrará toda la información guardada, así como comentarios de la ruta o un gráfica de elevación de los puntos por donde pasa.",
+      "routeHelpShareRoutes" : "Compartir con los Amigos",
+      "routeHelpShareRoutes_1" : "Cuando se muestran todas tus rutas \"Gestión de Rutas > Mis rutas\", puedes pulsar en la opción de compartir. Esto listará a todos tus amigos y al pulsar sobre uno de ellos se les enviará un mensaje a \"Inbox\".",
     }
   }
 };
