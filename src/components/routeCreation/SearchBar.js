@@ -15,6 +15,7 @@ class SearchBar extends React.Component {
 
     handleEnter = (event) => {
         if (event.charCode === 13) {
+            event.preventDefault();
             this.lookFor(this.search.current.value);
         }
     };
