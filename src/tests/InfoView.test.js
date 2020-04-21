@@ -23,7 +23,7 @@ test('Test create route', async () => {
     assert.equal(author, "María santísima");
     const jsonLd = myRoute.toJsonLd();
     const temproute = new MyRoute("", "", "", []);
-    temproute.modifyFromJsonLd(jsonLd);
+    temproute.modifyFromJsonLd(JSON.parse(jsonLd));
     myRoute.getId();
     const match = { params: { id: myRoute.getId() } };
     await sleep(2000);
