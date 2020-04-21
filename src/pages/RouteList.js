@@ -33,8 +33,9 @@ class RouteList extends React.Component {
                         </div>
                 });
             }
-            this.setState({ routes: this.state.routes });
         });
+        this.processedRoutes = 0;
+        this.retrievedRoutes = 0;
     }
 
     render() {
@@ -43,10 +44,9 @@ class RouteList extends React.Component {
         while (counter <= this.state.routes.length) {
             routesForCardDecks.push(
                 <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
-                    {
-                        this.state.routes.slice(counter, counter + this.cardDeckSize).map(
-                            (r) => <RouteCard route={r} />)
-                    }
+                    {this.state.routes.slice(counter, counter + this.cardDeckSize).map(
+                        (r) => <RouteCard route={r} />
+                    )}
                 </CardDeck>
             );
             counter += this.cardDeckSize;
@@ -93,12 +93,26 @@ class RouteList extends React.Component {
                         this.routeManager.addRoute(tempRoute);
                         let tempList = this.state.routes;
                         tempList.push(tempRoute);
-                        this.setState({ routes: tempList });
                         $("#messageArea").empty();
+                        this.processedRoutes += 1;
+                        this.setState(
+                            { routes: tempList },
+                            (routeList = this, rtrR = this.retrievedRoutes, proR = this.processedRoutes) => {
+                                if (rtrR === proR) {
+                                    routeList.updateMaps();
+                                }
+                            }
+                        );
                     }
                 }
-            });
+            }).then(
+                (result) => { this.retrievedRoutes = result; }
+            );
         }
+    }
+
+    updateMaps() {
+        // Here goes the code to execute when all the routes are on the screen
     }
 
 }

@@ -40,7 +40,7 @@ export default class PodStorageHandler {
      * The second receives null if everything went fine or the error found as an object.
      */
     async getRoutes(callbackPerFile = (file, error) => { }) {
-        this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
+        return this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
             (directory) => {
                 for (let i = 0; i < directory.files.length; i++) {
                     this.getFile(directory.files[i].url).then(
@@ -48,8 +48,14 @@ export default class PodStorageHandler {
                         (error) => { callbackPerFile(null, error); }
                     );
                 }
+                return directory.files.length;
             },
-            (error) => { this.createBasicFolders(); }
+            (error) => {
+                this.createBasicFolders();
+                return 0;
+            }
+        ).then(
+            (value) => { return value; }
         );
     }
 
