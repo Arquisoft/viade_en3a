@@ -22,7 +22,7 @@ import viadeText from './../../assets/logo/logo_letters.jpeg';
 import RouteManager from "./../../model/RouteManager";
 import ShareView from '../../pages/ShareView';
 
-const routeManager = new RouteManager();
+const routeManager = RouteManager;
 
 function MyNavBar(props) {
   const { t, i18n } = useTranslation();

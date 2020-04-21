@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import RouteManager from "./../model/RouteManager";
 
-const routeManager = new RouteManager();
+const routeManager = RouteManager;
 
 test('Test create route', () => {
 	const { getByText, getByRole } = render(<RouteCreation routeManager={routeManager} />);
@@ -31,6 +31,6 @@ test('Test wrong route creation', () => {
 	fireEvent.click(map, leftClick);
 
 	const btn = getByText(/save/i);
-	fireEvent.click(btn,leftClick);
+	fireEvent.click(btn, leftClick);
 
 });

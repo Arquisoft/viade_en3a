@@ -6,7 +6,7 @@ import RouteManager from "./../model/RouteManager";
 import MyRoute from "./../model/MyRoute";
 import assert from 'assert';
 
-const routeManager = new RouteManager();
+const routeManager = RouteManager;
 
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -20,9 +20,9 @@ test('Test create route', async () => {
         [{ lat: 0, lng: 2 }, { lat: 1, lng: 1 }]
     );
     const author = myRoute.getAuthor();
-    assert.equal(author,"María santísima");
+    assert.equal(author, "María santísima");
     const jsonLd = myRoute.toJsonLd();
-    const temproute = new MyRoute("","","",[]);
+    const temproute = new MyRoute("", "", "", []);
     temproute.modifyFromJsonLd(jsonLd);
     myRoute.getId();
     const match = { params: { id: myRoute.getId() } };

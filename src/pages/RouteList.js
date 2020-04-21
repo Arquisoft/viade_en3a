@@ -1,13 +1,14 @@
 import React from "react";
-import RouteCard from "../components/routeList/RouteCard";
+import { toast, ToastContainer } from "react-toastify";
 import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
 
 import PodStorageHandler from "../components/podService/podStoreHandler";
+import RouteCard from "../components/routeList/RouteCard";
 import MyRoute from "../model/MyRoute";
-import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from "react-toastify";
+import $ from "jquery";
 
+import 'react-toastify/dist/ReactToastify.css';
 
 const auth = require('solid-auth-client');
 
@@ -21,9 +22,19 @@ class RouteList extends React.Component {
             routes: [],
             spinnerHidden: false
         };
-        this.syncRoutesWithPod().then(() =>
-            this.state.spinnerHidden = true
-        );
+        this.syncRoutesWithPod().then(() => {
+            this.state.spinnerHidden = true;
+            if (this.state.routes.length === 0) {
+                this.setState({
+                    message:
+                        <div>
+                            <h3>Oops! We didn't find any route in your POD</h3>
+                            <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                        </div>
+                });
+            }
+            this.setState({ routes: this.state.routes });
+        });
     }
 
     render() {
@@ -31,7 +42,7 @@ class RouteList extends React.Component {
         let counter = 0;
         while (counter <= this.state.routes.length) {
             routesForCardDecks.push(
-                <CardDeck style={{ margin: "2%", width: "100%" }}>
+                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
                     {
                         this.state.routes.slice(counter, counter + this.cardDeckSize).map(
                             (r) => <RouteCard route={r} />)
@@ -60,37 +71,30 @@ class RouteList extends React.Component {
 
                 <Spinner id={"spinner"} hidden={this.state.spinnerHidden} animation="border" />
                 {routesForCardDecks}
-                {this.state.message}
+                <div id="messageArea">
+                    {this.state.message}
+                </div>
             </div>
         );
     }
 
     async syncRoutesWithPod() {
         this.routeManager.resetRoutes();
-        let routeList = [];
         let session = await auth.currentSession();
         if (session !== null && session !== undefined) {
             let storageHandler = new PodStorageHandler(session);
-            storageHandler.getRoutes((rawJsonRoutes, error) => {
-                if (rawJsonRoutes === null) {
+            storageHandler.getRoutes((routeJson, error) => {
+                if (routeJson === null) {
                     toast.error("We can't access your POD. Please, review its permissions");
                 } else {
-                    if (rawJsonRoutes.length !== 0) {
-                        rawJsonRoutes.forEach((rawRoute) => {
-                            let tempRoute = new MyRoute("", "", "", []);
-                            tempRoute.modifyFromJsonLd(JSON.parse(rawRoute));
-                            routeList.push(tempRoute);
-                            this.routeManager.addRoute(tempRoute);
-                        });
-                        this.setState({ routes: routeList });
-                    } else {
-                        this.setState({
-                            message:
-                                <div>
-                                    <h3>Oops! We didn't find any route in your POD</h3>
-                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
-                                </div>
-                        });
+                    if (routeJson.length !== 0) {
+                        let tempRoute = new MyRoute("", "", "", []);
+                        tempRoute.modifyFromJsonLd(JSON.parse(routeJson));
+                        this.routeManager.addRoute(tempRoute);
+                        let tempList = this.state.routes;
+                        tempList.push(tempRoute);
+                        this.setState({ routes: tempList });
+                        $("#messageArea").empty();
                     }
                 }
             });
