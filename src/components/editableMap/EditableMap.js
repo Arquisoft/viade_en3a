@@ -40,15 +40,21 @@ class EditableMap extends React.Component {
 			this.state.points.pop();
 			this.initial = false;
 		}
-		this.state.points.push(new TempPoint(e.latlng.lat,e.latlng.lng,this.state.points.length,undefined));
+		this.state.points.push(new TempPoint(e.latlng.lat,e.latlng.lng,this.state.points.length,undefined,undefined));
 		this.setState({ points: this.state.points.slice() });
 		this.onChange(this.getPoints());
-	}
+	};
 
 	getPoints() {
 		var returnList = [];
 		this.state.points.forEach((tempPoint) => returnList.push({ lat: tempPoint.lat, lng: tempPoint.lng}))
 		return returnList;
+	}
+
+	updatePointNameDescription(oldPoint,name,description){
+		let pointInList = this.state.points.find((p) => p.index===oldPoint.index);
+		pointInList.name=name;
+		pointInList.description=description;
 	}
 
 	updatePoint = (event) => {
@@ -61,13 +67,18 @@ class EditableMap extends React.Component {
 
 		this.setState({ points: points.slice() });
 		this.onChange(this.getPoints());
-	}
+	};
 
-	remove (id) {
+	remove (point) {
 		const { points } = this.state;
-		points.splice(id, 1);
+		let toRemove = points.find( (p) => p.index===point.index);
+		let position = points.indexOf(toRemove);
+		points.splice(position, 1);
 		this.setState({ points: points.slice() });
 		this.onChange(this.getPoints());
+
+		this.pointInfo.current.setPoint(undefined);
+		this.selected=undefined;
 	}
 
 	setPositionScaled = (e) => {
@@ -78,7 +89,7 @@ class EditableMap extends React.Component {
 		const id = e.target.options.marker_index;
 		e.target.setIcon(this.selectedIcon);
 		this.selected = id;
-		this.pointInfo.current.setPoint(this.state.points[id]);
+		this.pointInfo.current.setPoint(Object.assign({},this.state.points[id]));
 		this.setState({ points: this.state.points.slice() });
 	}
 
@@ -128,17 +139,25 @@ export default EditableMap;
 
 class TempPoint {
 
-	constructor(lat,lng,index,name) {
+	constructor(lat,lng,index,name,description) {
 		this.lat=lat;
 		this.lng=lng;
 		this.index=index;
 		this.name=name;
+		this.description=description;
 	}
 	printLat() {
 		return this.lat.toFixed(2);
 	}
 	printLng() {
 		return this.lng.toFixed(2);
+	}
+
+	setName(name){
+		this.name=name;
+	}
+	setDescription(description){
+		this.description=description;
 	}
 
 	toString(){
