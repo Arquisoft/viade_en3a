@@ -48,6 +48,12 @@ class Profile extends Component {
                 <h3 id="email"></h3>
                 <Translation>
                     {
+                        (t) => <h2>{t('profileRole')}</h2>
+                    }
+                </Translation>
+                <h3 id="role"></h3>
+                <Translation>
+                    {
                         (t) => <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>{t('profileEditButton')}</Button>
                     }
                 </Translation>
@@ -64,6 +70,7 @@ class Profile extends Component {
 
         this.loadName();
         this.loadEmail();
+        this.loadRole();
     }
 
     async loadName() {
@@ -74,6 +81,11 @@ class Profile extends Component {
     async loadEmail() {
         var name = document.getElementById("email");
         name.appendChild(document.createTextNode(await UserDetails.getEmail()));
+    }
+
+    async loadRole() {
+        var name = document.getElementById("role");
+        name.appendChild(document.createTextNode(await UserDetails.getRole()));
     }
 
 }
