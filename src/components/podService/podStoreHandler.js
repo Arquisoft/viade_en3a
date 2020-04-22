@@ -1,4 +1,6 @@
 import PodHandler from "./podHandler";
+import RouteMedia from "../../model/RouteMedia";
+import MyRoute from "../../model/MyRoute";
 
 const auth = require('solid-auth-client');
 const FC = require('solid-file-client');
@@ -88,11 +90,64 @@ export default class PodStorageHandler extends PodHandler{
      *                             + the second null or the error found.
      */
     async getResources(callback) {
-        //let result = [];
-        //let folder = null;
         // Not yet implemented
-
         callback(null, null);
+    }
+
+
+    async _getSharedFolder(forEachFile = () => {}){
+        let result = [];
+        let directory = null;
+        await this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
+            (folder) => {directory = folder},
+            (error) => { result = null; }
+        );
+        if (directory) {
+            for(let i = 0; i < directory.files.length; i++) {
+                await this.getFile(directory.files[i].url).then(
+                    function (file) {
+                        forEachFile(file);
+                        result.push(file);
+                    },
+                    (error) => { forEachFile(null); }
+                );
+            }
+        } else {
+            this.createBasicFolders();
+        }
+        return result;
+    }
+
+    async getRoutesSharedToMe(forEachRoute = () => {}){
+        let result = [];
+        await this._getSharedFolder(function (file) {
+            // Transform file to JSON
+            let fileAsJSON = JSON.parse(file);
+            let sharedRoutes = fileAsJSON["routes"];
+
+            // get all routes files
+            sharedRoutes.map((j) => { return j["@id"]; }).forEach(async function (url) {
+                let routeString = await this.getFile(url);
+
+                // Create routes from JSON
+                let routeObject = new MyRoute();
+                routeObject.modifyFromJsonLd(routeString);
+                forEachRoute(routeObject);
+                result.push(routeObject);
+
+            }.bind(this));
+
+        });
+        return result;
+    }
+
+    async checkInbox(){
+        await this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
+            function (folder) {
+                let files = folder.files();
+            },
+            (error) => {  }
+        );
     }
 
     /**
@@ -125,8 +180,10 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     async createBasicFolders(){
+        await fc.createFolder(this.repository + this.defaultFolder);
         fc.createFolder(this.repository + this.defaultFolder + this.routesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.resourcesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.commentsDirectory);
+        fc.createFolder(this.repository + this.defaultFolder + this.sharedDirectory);
     }
 }

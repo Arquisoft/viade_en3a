@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
+import PodStorageHandler from "../components/podService/podStoreHandler";
 
+const auth = require('solid-auth-client');
 
 class Home extends Component {
 
@@ -33,8 +35,15 @@ class Home extends Component {
                     alt="Viade logo"
                 />
                 <h3>V 1.0</h3>
+                <button onClick={this.getSharedToMe}>Click ME!</button>
             </div>
         );
+    }
+
+    async getSharedToMe(){
+        let routes = await new PodStorageHandler(await auth.currentSession()).getRoutesSharedToMe((r) => {console.log("Callback called:"); console.log(r);});
+        console.log("Functioned finished");
+        console.log(routes);
     }
 
     async printName() {
