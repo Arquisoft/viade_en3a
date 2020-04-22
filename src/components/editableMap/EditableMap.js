@@ -33,6 +33,15 @@ class EditableMap extends React.Component {
 			shadowSize: null,
 			shadowAnchor: null
 		});
+		this.editedIcon = L.icon({
+			iconUrl: require("../../assets/mapIcons/iconEdited.svg"),
+			iconSize: [64,64],
+			iconAnchor: [32, 54],
+			popupAnchor: null,
+			shadowUrl: null,
+			shadowSize: null,
+			shadowAnchor: null
+		});
 	}
 
 	addPoint = (e) => {
@@ -55,6 +64,7 @@ class EditableMap extends React.Component {
 		let pointInList = this.state.points.find((p) => p.index===oldPoint.index);
 		pointInList.name=name;
 		pointInList.description=description;
+		pointInList.edited=true;
 	}
 
 	updatePoint = (event) => {
@@ -99,7 +109,11 @@ class EditableMap extends React.Component {
 			return this.selectedIcon;
 		}
 		else{
-			return  this.normalIcon;
+			if(this.state.points[index].edited){
+				return this.editedIcon;
+			} else {
+				return this.normalIcon;
+			}
 		}
 	}
 
@@ -145,6 +159,7 @@ class TempPoint {
 		this.index=index;
 		this.name=name;
 		this.description=description;
+		this.edited=false;
 	}
 	printLat() {
 		return this.lat.toFixed(2);

@@ -15,6 +15,7 @@ const auth = require('solid-auth-client');
 function processPoints(points) {
 	let list = [];
 	points.forEach((point) => {
+		console.log(point);
 		let routePoint = new RoutePoint(point.lat, point.lng, point.elv);
 		routePoint.askForElevation(() => { });
 		list.push(routePoint);
