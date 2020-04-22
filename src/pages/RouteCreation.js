@@ -116,9 +116,8 @@ class RouteCreation extends Component {
 						<SearchBar map={this.map} />
 						<EditableMap
 							ref={this.map}
-							role='map'
 							onChange={(points, elevationChart = this.elevationChart) => {
-								this.newRoute.setPoints(points, (updatedPoints, chart = elevationChart) => {
+								this.newRoute.updatePoints(points, (updatedPoints, chart = elevationChart) => {
 									chart.current.update(updatedPoints);
 								});
 							}}

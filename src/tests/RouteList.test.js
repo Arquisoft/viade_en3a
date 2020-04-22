@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import RouteManager from "./../model/RouteManager";
 import RouteList from "./../pages/RouteList";
 
-const routeManager = new RouteManager();
+const routeManager = RouteManager;
 
 test("renders learn react link", () => {
   const { getByText } = render(<RouteList routeManager={routeManager} />);
