@@ -5,8 +5,6 @@ import { Button } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
 
-const auth = require('solid-auth-client');
-var session = null;
 
 class Profile extends Component {
 
@@ -41,7 +39,13 @@ class Profile extends Component {
                         (t) => <h2>{t('profileLocality')}</h2>
                     }
                 </Translation>
-                <h3 id="locality">locality</h3>
+                <h3 id="locality"></h3>
+                <Translation>
+                    {
+                        (t) => <h2>{t('profileEmail')}</h2>
+                    }
+                </Translation>
+                <h3 id="email"></h3>
                 <Translation>
                     {
                         (t) => <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>{t('profileEditButton')}</Button>
@@ -57,8 +61,19 @@ class Profile extends Component {
     }
 
     async loadInfo() {
+
+        this.loadName();
+        this.loadEmail();
+    }
+
+    async loadName() {
         var name = document.getElementById("username");
         name.appendChild(document.createTextNode(await UserDetails.getName()));
+    }
+
+    async loadEmail() {
+        var name = document.getElementById("email");
+        name.appendChild(document.createTextNode(await UserDetails.getEmail()));
     }
 
 }
