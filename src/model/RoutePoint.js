@@ -8,10 +8,10 @@ class RoutePoint {
      * @param {Number} longitude The longitude of the point this object represents.
      * @param {Number} elevation The elevation of the terrain at this coordinate pair.
      */
-    constructor(latitude, longitude, elevation) {
+    constructor(latitude, longitude, elevation = -1) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.elevation = elevation === undefined ? -1 : elevation;
+        this.elevation = elevation;
     }
 
     getElevation() {
@@ -28,6 +28,28 @@ class RoutePoint {
 
     setElevation(elevation) {
         this.elevation = elevation;
+    }
+
+    async askForElevation(callback = (params) => { }) {
+        if (this.elevation === -1) {
+            fetch("https://api.airmap.com/elevation/v1/ele/?points=" + this.latitude + "," + this.longitude)
+                .then((response) => {
+                    if (response.status === 200) {
+                        response.json().then((data) => {
+                            this.elevation = parseInt(data["data"], 10);
+                            if (isNaN(this.elevation)) {
+                                this.elevation = -1;
+                                callback(null);
+                            } else {
+                                callback(this.elevation);
+                            }
+                        });
+                    }
+                }).catch((err) => {
+                    this.elevation = -1;
+                    callback(null);
+                });
+        }
     }
 
     toJson() {

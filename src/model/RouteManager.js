@@ -22,4 +22,5 @@ class RouteManager {
 
 }
 
-export default RouteManager;
+const routeManager = new RouteManager();
+export default routeManager;

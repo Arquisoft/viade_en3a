@@ -14,7 +14,11 @@ const auth = require('solid-auth-client');
  */
 function processPoints(points) {
 	let list = [];
-	points.forEach((point) => list.push(new RoutePoint(point.lat, point.lng, point.elv)));
+	points.forEach((point) => {
+		let routePoint = new RoutePoint(point.lat, point.lng, point.elv);
+		routePoint.askForElevation(() => { });
+		list.push(routePoint);
+	});
 	return list;
 }
 
@@ -31,10 +35,6 @@ function calculateRouteLength(points) {
 		distance += thisPoint.distanceTo(previousPoint);
 	}
 	return distance;
-}
-
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 class MyRoute {
@@ -99,40 +99,33 @@ class MyRoute {
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
-		this.media.forEach(await async function(m){ await m.uploadToPod(); });
-		await this.askForElevation();
-		await sleep(1000);
+        this.media.forEach(await async function(m){ await m.uploadToPod(); });
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
-	async askForElevation(callback = (points) => { }) {
-		for (let i = 0; i <= this.points.length - 1; i++) {
-			let point = this.points[i];
-			if (point.getElevation() === -1 || point.getElevation() === undefined) {
-				await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + point.getLatitude() + "," + point.getLongitude())
-					.then((response) => {
-						if (response.status === 200) {
-							response.json()
-								.then((data) => {
-									point.setElevation(parseInt(data["data"], 10));
-									if (i === this.points.length - 1) {
-										callback(this.points);
-									}
-									if (isNaN(point.getElevation())) {
-										point.setElevation(-1);
-									}
-								});
+	updatePoints(newPoints, callback) {
+		let newListOfPoints = [];
+		newPoints.forEach((newPoint) => {
+			let found = this.points.find(
+				(each) => each.getLatitude() === newPoint.lat && each.getLongitude() === newPoint.lng
+			);
+			if (found === undefined) {
+				let tempPoint = new RoutePoint(newPoint.lat, newPoint.lng);
+				tempPoint.askForElevation(
+					(elevationResult, pointsList = newListOfPoints) => {
+						if (elevationResult !== null) {
+							callback(pointsList);
 						}
-					}).catch((err) => {
-						point.setElevation(-1);
-					});
+					}
+				);
+				newListOfPoints.push(tempPoint);
+			} else {
+				newListOfPoints.push(found);
+				callback(newListOfPoints);
 			}
-		}
-	}
-
-	setPoints(newPoints, callback) {
-		this.points = processPoints(newPoints);
-		this.askForElevation(callback);
+		});
+		this.points = newListOfPoints;
+		callback(this.points);
 	}
 
 	getComparableString() {
@@ -142,16 +135,17 @@ class MyRoute {
 		return JSON.stringify(parsedRoute);
 	}
 
-	modifyFromJsonLd(stringData) {
-		let parsedRoute = JSON.parse(stringData);
+	modifyFromJsonLd(parsedRoute) {
 		if (parsedRoute["id"] === undefined) {
 			this.id = uuid().toString();
 		} else {
 			this.id = parsedRoute["id"];
 		}
+
 		this.name = parsedRoute["name"];
 		this.author = parsedRoute["author"];
 		this.description = parsedRoute["description"];
+
 		let rawPoints = parsedRoute["points"];
 		rawPoints = rawPoints.map((jsonPoint) => {
 			return {
