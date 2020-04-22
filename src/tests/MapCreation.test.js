@@ -9,8 +9,7 @@ const routeManager = RouteManager;
 test('Test create route', () => {
 	const { getByText, getByRole } = render(<RouteCreation routeManager={routeManager} />);
 
- 	getByRole('presentation');
-
+	getByRole('presentation');
 
 	const title = getByRole('title');
 	const leftClick = { button: 1 };
