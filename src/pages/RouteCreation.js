@@ -14,6 +14,7 @@ import MyElevationChart from "../components/myElevationChart/MyElevationChart";
 import 'react-toastify/dist/ReactToastify.css';
 import "./../css/routeCreation.css";
 import './../css/App.css';
+import PointInfo from "../components/pointInfo/PointInfo";
 
 class RouteCreation extends Component {
 
@@ -23,6 +24,7 @@ class RouteCreation extends Component {
 		this.routeDescription = React.createRef();
 		this.map = React.createRef();
 		this.elevationChart = React.createRef();
+		this.pointInfo = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
 		this.newRoute = new MyRoute("", "", "", []);
@@ -116,6 +118,7 @@ class RouteCreation extends Component {
 						<SearchBar map={this.map} />
 						<EditableMap
 							ref={this.map}
+							pointInfo={this.pointInfo}
 							onChange={(points, elevationChart = this.elevationChart) => {
 								this.newRoute.updatePoints(points, (updatedPoints, chart = elevationChart) => {
 									chart.current.update(updatedPoints);
@@ -127,6 +130,10 @@ class RouteCreation extends Component {
 						<h2 style={{ padding: "3% 1% 2% 1%" }}>Route elevation preview</h2>
 						<MyElevationChart ref={this.elevationChart} route={this.newRoute} />
 					</div>
+				</div>
+
+				<div>
+					<PointInfo map={this.map} ref={this.pointInfo}/>
 				</div>
 
 				<div>

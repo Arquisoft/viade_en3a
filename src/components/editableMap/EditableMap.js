@@ -1,17 +1,38 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
+import L from 'leaflet';
 
 class EditableMap extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			points: [[0, 0]],
+			points: [new TempPoint(0,0,0,undefined)],
 			editablePosition: [43.354834, -5.851405],
 			boundingbox: [43.254834, -5.751405, 43.454834, -5.951405]
 		};
 		this.initial = true;
 		this.onChange = props.onChange;
+		this.pointInfo = props.pointInfo;
+		this.selected = undefined;
+		this.normalIcon = L.icon({
+			iconUrl: require("../../assets/mapIcons/iconNormal.svg"),
+			iconSize: [64,64],
+			iconAnchor: [32, 54],
+			popupAnchor: null,
+			shadowUrl: null,
+			shadowSize: null,
+			shadowAnchor: null
+		});
+		this.selectedIcon = L.icon({
+			iconUrl: require("../../assets/mapIcons/iconSelected.svg"),
+			iconSize: [64,64],
+			iconAnchor: [32, 54],
+			popupAnchor: null,
+			shadowUrl: null,
+			shadowSize: null,
+			shadowAnchor: null
+		});
 	}
 
 	addPoint = (e) => {
@@ -19,13 +40,15 @@ class EditableMap extends React.Component {
 			this.state.points.pop();
 			this.initial = false;
 		}
-		this.state.points.push(e.latlng);
+		this.state.points.push(new TempPoint(e.latlng.lat,e.latlng.lng,this.state.points.length,undefined));
 		this.setState({ points: this.state.points.slice() });
-		this.onChange(this.state.points);
+		this.onChange(this.getPoints());
 	}
 
 	getPoints() {
-		return this.state.points.slice();
+		var returnList = [];
+		this.state.points.forEach((tempPoint) => returnList.push({ lat: tempPoint.lat, lng: tempPoint.lng}))
+		return returnList;
 	}
 
 	updatePoint = (event) => {
@@ -33,21 +56,40 @@ class EditableMap extends React.Component {
 		var newPosition = event.target.getLatLng();
 		const { points } = this.state;
 
-		points[id] = newPosition;
+		points[id].lat = newPosition.lat;
+		points[id].lng = newPosition.lng;
+
 		this.setState({ points: points.slice() });
-		this.onChange(this.state.points);
+		this.onChange(this.getPoints());
 	}
 
-	remove = (event) => {
-		var id = event.target.options.marker_index;
+	remove (id) {
 		const { points } = this.state;
 		points.splice(id, 1);
 		this.setState({ points: points.slice() });
-		this.onChange(this.state.points);
+		this.onChange(this.getPoints());
 	}
 
 	setPositionScaled = (e) => {
 		this.map.current.leafletElement.fitBounds(this.state.boundingbox);
+	}
+
+	showPoint = (e) => {
+		const id = e.target.options.marker_index;
+		e.target.setIcon(this.selectedIcon);
+		this.selected = id;
+		this.pointInfo.current.setPoint(this.state.points[id]);
+		this.setState({ points: this.state.points.slice() });
+	}
+
+	getIcon(index){
+
+		if(this.selected===index){
+			return this.selectedIcon;
+		}
+		else{
+			return  this.normalIcon;
+		}
 	}
 
 	render() {
@@ -70,12 +112,12 @@ class EditableMap extends React.Component {
 				{this.state.points.map((position, index) =>
 					<Marker
 						marker_index={index}
-						position={position}
+						position={{lat: position.lat, lng:position.lng}}
 						draggable={true}
 						ondrag={this.updatePoint}
-						onClick={this.remove}
-					>
-					</Marker>
+						onClick={this.showPoint}
+						icon={this.getIcon(index)}
+					/>
 				)}
 			</Map>
 
@@ -84,3 +126,23 @@ class EditableMap extends React.Component {
 }
 export default EditableMap;
 
+class TempPoint {
+
+	constructor(lat,lng,index,name) {
+		this.lat=lat;
+		this.lng=lng;
+		this.index=index;
+		this.name=name;
+	}
+	printLat() {
+		return this.lat.toFixed(2);
+	}
+	printLng() {
+		return this.lng.toFixed(2);
+	}
+
+	toString(){
+		return this.lat+" "+this.lng+" "+this.index+" "+this.name;
+	}
+
+}
