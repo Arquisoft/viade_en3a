@@ -99,7 +99,7 @@ class MyRoute {
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
-		this.media.forEach((m) => { m.uploadToPod(); });
+		this.media.forEach(await async function(m){ await m.uploadToPod(); });
 		await this.askForElevation();
 		await sleep(1000);
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
