@@ -49,7 +49,7 @@ class MyRoute {
 	 * @param {String} description A description of the route.
  	 * @param {Array<{lat:"", lng:""}>} points The list of points of this rule.
 	 */
-	constructor(name, author, description, points) {
+	constructor(name, author, description, points = []) {
 		this.id = uuid().toString();
 		this.name = name;
 		this.author = author;

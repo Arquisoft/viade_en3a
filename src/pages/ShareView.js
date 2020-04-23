@@ -79,7 +79,7 @@ class ShareView extends React.Component {
         message.sender = this.webId;
         message.recipient = destination;
 
-        let folder = "/viade/routes/";
+        let folder = "viade/routes/";
         message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
         message.title = "Check out this route shared to you by " + this.getSessionName();
