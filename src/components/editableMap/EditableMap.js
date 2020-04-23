@@ -2,6 +2,38 @@ import React from 'react';
 import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 
+class TempPoint {
+
+	constructor(lat, lng, index, name, description) {
+		this.lat = lat;
+		this.lng = lng;
+		this.index = index;
+		this.name = name;
+		this.description = description;
+		this.edited = false;
+	}
+
+	printLat() {
+		return this.lat.toFixed(2);
+	}
+
+	printLng() {
+		return this.lng.toFixed(2);
+	}
+
+	setName(name) {
+		this.name = name;
+	}
+
+	setDescription(description) {
+		this.description = description;
+	}
+
+	toString() {
+		return this.lat + " " + this.lng + " " + this.index + " " + this.name;
+	}
+}
+
 class EditableMap extends React.Component {
 
 	constructor(props) {
@@ -56,7 +88,7 @@ class EditableMap extends React.Component {
 
 	getPoints() {
 		var returnList = [];
-		this.state.points.forEach((tempPoint) => returnList.push({ lat: tempPoint.lat, lng: tempPoint.lng}))
+		this.state.points.forEach((tempPoint) => returnList.push({ lat: tempPoint.lat, lng: tempPoint.lng}));
 		return returnList;
 	}
 
@@ -151,32 +183,4 @@ class EditableMap extends React.Component {
 }
 export default EditableMap;
 
-class TempPoint {
 
-	constructor(lat,lng,index,name,description) {
-		this.lat=lat;
-		this.lng=lng;
-		this.index=index;
-		this.name=name;
-		this.description=description;
-		this.edited=false;
-	}
-	printLat() {
-		return this.lat.toFixed(2);
-	}
-	printLng() {
-		return this.lng.toFixed(2);
-	}
-
-	setName(name){
-		this.name=name;
-	}
-	setDescription(description){
-		this.description=description;
-	}
-
-	toString(){
-		return this.lat+" "+this.lng+" "+this.index+" "+this.name;
-	}
-
-}

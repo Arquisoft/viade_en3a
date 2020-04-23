@@ -21,7 +21,7 @@ test('Test add route to manager', () => {
 
     const string1 = myRoute.getComparableString();
     const string2 = route.getComparableString();
-    assert.equal(string1,string2,"Route comparable string equal")
+    assert.equal(string1,string2,"Route comparable string equal");
 
     routeManager.addRoute(myRoute);
     routeManager.addRoute(myRoute);

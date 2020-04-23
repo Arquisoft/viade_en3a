@@ -6,7 +6,7 @@ class PointInfo extends React.Component {
     constructor(props) {
         super(props);
         this.map = props.map;
-        this.state = {point: undefined, disabled:true}
+        this.state = {point: undefined, disabled:true};
         this.nameForm = React.createRef();
         this.descriptionForm = React.createRef();
     }
@@ -59,7 +59,7 @@ class PointInfo extends React.Component {
 
     printPoint(){
         if(this.state.point===undefined){
-            return <tr><td colSpan={5}>Click over a point to edit it</td></tr>
+            return <tr><td colSpan={5}>Click over a point to edit it</td></tr>;
         }
         else {
          return(this.isEditing());

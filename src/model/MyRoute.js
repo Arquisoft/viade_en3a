@@ -98,17 +98,15 @@ class MyRoute {
 
 	addSimplePoints(points){
 
-		points.forEach((point) =>{
+		points.forEach((point) => {
 			let exists = this.points.find((p) => p.getLatitude()===point.lat || p.getLongitude()===point.lng);
-			console.log("point",point)
-			console.log(exists===undefined)
+
 			if(exists===undefined){ //point not exists in waypoints
 				let newPoint = new RoutePoint(point.lat,point.lng,point.elv);
 				newPoint.askForElevation();
 				this.points.push(newPoint);
 			}
 		});
-		console.log("actual",this.points)
 
 	}
 
@@ -178,8 +176,8 @@ class MyRoute {
 
 
 		let rawPoints = parsedRoute["points"];
-		rawPoints = rawPoints.map((jsonPoint) =>{
-			return{
+		rawPoints = rawPoints.map((jsonPoint) => {
+			return {
 				lat: jsonPoint["latitude"],
 				lng: jsonPoint["longitude"],
 				elv: jsonPoint["elevation"]
@@ -205,7 +203,7 @@ class MyRoute {
 		let waypointsInJson = [];
 		let mediaInJson = [];
 		this.points.forEach((point) => pointsInJson.push(point.toJson()));
-		this.points.forEach(point => waypointsInJson.push(point.toWaypointJson()));
+		this.points.forEach((point) => waypointsInJson.push(point.toWaypointJson()));
 		this.media.map((media) => { return media.podURL; }).forEach((url) => {
 			mediaInJson.push(
 				{
