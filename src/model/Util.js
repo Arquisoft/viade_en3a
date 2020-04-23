@@ -15,7 +15,7 @@ class UserDetails {
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
               .then((addressCard) => {
-                resolve(data[addressCard].vcard_locality.value)
+                resolve(data[addressCard].vcard_locality.value);
               })
               .catch((error) => reject(error));
         });
@@ -25,7 +25,7 @@ class UserDetails {
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
               .then((addressCard) => {
-                resolve(data[addressCard].vcard_region.value)
+                resolve(data[addressCard].vcard_region.value);
               })
               .catch((error) => reject(error));
         });
