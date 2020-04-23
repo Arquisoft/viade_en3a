@@ -11,6 +11,7 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Translation } from 'react-i18next';
+import { ToastContainer, toast } from "react-toastify";
 
 import logo1 from "../assets/logo/logo.jpeg";
 import logo2 from "../assets/logo/logo_alt.jpeg";
@@ -35,6 +36,11 @@ class InfoView extends React.Component {
         if (this.state.route !== undefined) {
             return (
                 <div>
+                    <ToastContainer
+                        id="toastContainer"
+                        position={toast.POSITION.TOP_CENTER}
+                        autoClose={5000}
+                    />
                     <Translation>
                         {
                             (t) => <h1 style={{ padding: "1%" }}>{t('infoViewTitle')}</h1>
@@ -169,14 +175,15 @@ class InfoView extends React.Component {
             let session = await auth.currentSession();
             if (session !== null && session !== undefined) {
                 let storageHandler = new PodStorageHandler(session);
-                storageHandler.getRoutes((rawJsonRoutes, error) => {
-                    if (rawJsonRoutes === null) {
-                        alert("There was an error trying to show the information for this route");
+                storageHandler.getRoutes((jsonRoute, error) => {
+                    if (jsonRoute === null) {
+                        toast.error("There was an error trying to show the information for this route");
                     } else {
-                        let routeToInfoString = rawJsonRoutes.filter((routeString) => { return routeString.includes(this.id); });
-                        let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(routeToInfoString);
-                        this.setState({ route: tempRoute });
+                        if (jsonRoute.includes(this.id)) {
+                            let tempRoute = new MyRoute("", "", "", []);
+                            tempRoute.modifyFromJsonLd(JSON.parse(jsonRoute));
+                            this.setState({ route: tempRoute });
+                        }
                     }
                 });
             }
