@@ -79,7 +79,7 @@ class ShareView extends React.Component {
         message.sender = this.webId;
         message.recipient = destination;
 
-        let folder = "/viade/routes/";
+        let folder = "viade/routes/";
         message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
         message.title = "Check out this route shared to you by " + this.getSessionName();
@@ -88,7 +88,7 @@ class ShareView extends React.Component {
         await this.buildMessage(message);
         alert ("Your friend has received a notification with your route!");
 
-        this.changePermissions(this.id + ".json", [destination.split("inbox")[0]]);
+        this.changePermissions(this.id + ".json", [destination.split("inbox")[0] + "profile/card#me"]);
     }
 
     async changePermissions(routeName, webIds){

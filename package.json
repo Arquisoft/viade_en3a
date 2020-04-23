@@ -25,6 +25,7 @@
     "leaflet-geosearch": "^2.7.0",
     "mdbootstrap": "^4.14.0",
     "mdbreact": "^4.25.3",
+    "n3": "^1.3.6",
     "nominatim": "^0.1.0",
     "rdflib": "^1.1.0",
     "react": "^16.12.0",

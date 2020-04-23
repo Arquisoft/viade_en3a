@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
+import PodStorageHandler from "../components/podService/podStoreHandler";
 
+const auth = require('solid-auth-client');
 
 class Home extends Component {
 
@@ -35,6 +37,19 @@ class Home extends Component {
                 <h3>V 1.0</h3>
             </div>
         );
+
+        // <!-- <button onClick={this.getEmail}>Check EMAIL!</button> -->
+        // <!-- <button onClick={this.getSharedToMe}>You were shared:</button> -->
+    }
+
+    async getEmail(){
+        await new PodStorageHandler(await auth.currentSession()).checkInbox((r) => {}); // console.log("Callback called:"); console.log(r);
+    }
+
+    async getSharedToMe(){
+        let routes = await new PodStorageHandler(await auth.currentSession()).getRoutesSharedToMe((r) => {console.log("Callback called:"); console.log(r);});
+        console.log("Function finished");
+        console.log(routes);
     }
 
     async printName() {
