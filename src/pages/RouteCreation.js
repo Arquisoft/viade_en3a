@@ -128,11 +128,11 @@ class RouteCreation extends Component {
 					</div>
 					<div id="pointManager">
 						<h2 style={{ padding: "3% 1% 2% 1%" }}>Route elevation preview</h2>
-						<MyElevationChart ref={this.elevationChart} route={this.newRoute} />
+						<MyElevationChart style={{ padding: "3% 1% 2% 1%" }} ref={this.elevationChart} route={this.newRoute} />
 					</div>
 				</div>
 
-				<div>
+				<div style={{margin: "1.5vh"}}>
 					<PointInfo map={this.map} ref={this.pointInfo}/>
 				</div>
 

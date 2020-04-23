@@ -28,7 +28,7 @@ class EditableMap extends React.Component {
 			iconUrl: require("../../assets/mapIcons/iconSelected.svg"),
 			iconSize: [64,64],
 			iconAnchor: [32, 54],
-			popupAnchor: null,
+			popupAnchor: [64,64],
 			shadowUrl: null,
 			shadowSize: null,
 			shadowAnchor: null
@@ -37,7 +37,7 @@ class EditableMap extends React.Component {
 			iconUrl: require("../../assets/mapIcons/iconEdited.svg"),
 			iconSize: [64,64],
 			iconAnchor: [32, 54],
-			popupAnchor: null,
+			popupAnchor: [64,64],
 			shadowUrl: null,
 			shadowSize: null,
 			shadowAnchor: null

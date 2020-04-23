@@ -7,11 +7,15 @@ class RoutePoint {
      * @param {Number} latitude The latitude of the point this object represents.
      * @param {Number} longitude The longitude of the point this object represents.
      * @param {Number} elevation The elevation of the terrain at this coordinate pair.
+     * @param {String} Name of the waypoint.
+     * @param {String} Description of this waypoint.
      */
-    constructor(latitude, longitude, elevation = -1) {
+    constructor(latitude, longitude, elevation = -1, name="", description="") {
         this.latitude = latitude;
         this.longitude = longitude;
         this.elevation = elevation;
+        this.name=name;
+        this.description=description;
     }
 
     getElevation() {
@@ -59,6 +63,17 @@ class RoutePoint {
             "elevation": this.elevation
         };
     }
+
+    toWaypointJson(){
+        return {
+            "name": this.name,
+            "description": this.description,
+            "latitude": this.latitude,
+            "longitude": this.longitude,
+            "elevation": this.elevation
+        };
+    }
+
 
 }
 

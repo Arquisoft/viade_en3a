@@ -11,6 +11,7 @@ class RouteCard extends React.Component {
         this.state = {
             mapComponent: <MyMap
                 route={this.route}
+                movable={false}
                 zoom={12}
                 style={{ borderRadius: "5px", margin: "0", height: "100%", width: "100%" }}
             />
