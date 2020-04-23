@@ -134,8 +134,7 @@ export default class PodStorageHandler extends PodHandler{
                 await this.getFile(fileUrl).then( function(content) {
                         // Create routes from JSON
                         let routeObject = new MyRoute();
-                        console.log(content);
-                        //routeObject.modifyFromJsonLd(routeString);
+                        routeObject.modifyFromJsonLd(JSON.parse(content));
                         forEachRoute(routeObject);
                         result.push(routeObject);
                 }, (error) => {} );
@@ -162,7 +161,7 @@ export default class PodStorageHandler extends PodHandler{
                                         forEachMail(quad.object.id);
                                         console.log("PUSHED " + quad.object.id);
                                         //newRoutes.push(quad.object.id);
-                                        this.addRoutesAsShared([quad.object.id.replace('\"','')]);
+                                        this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
                                         this._markEmailAsRead(url);
                                     }
                                 }
