@@ -41,7 +41,9 @@ const resources = {
       "homeWelcome2": "welcome to",
       "profileTitle": "Profile",
       "profileUsername": "Username:",
-      "profileLocality": "Locality:",
+      "profileAddress": "Address:",
+      "profileEmail": "Email:",
+      "profilePhone": "Phone:",
       "profileEditButton": "Edit profile",
       "profileLastRoutes": "Last routes done",
       "infoViewTitle": "Route Info",
@@ -70,7 +72,6 @@ const resources = {
       "friendsAdd": "Add a friend",
       "friendsList": "List of friends",
       "routeListLoadingMessage": "We're downloading your routes. Next time will be faster.",
-
       "routeHelpIndex" : "Index",
       "routeHelpIntro" : "Introduction",
       "routeHelpIntro_1" : "Viade is an Application whose task is to manage routes.",
@@ -85,7 +86,6 @@ const resources = {
       "routeHelpViewRoutes_1" : "We can now navigate to \"Route Management > My Routes\", where the routes you have created are listed. When clicking on \"Info\" of the new route a new window will display all the information recorded, as well as comments posted and a elevation chart of the waypoints.",
       "routeHelpShareRoutes" : "Share with Friends",
       "routeHelpShareRoutes_1" : "When displaying all routes \"Route Management > My Routes\", you can click on the share option. This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.",
-
     }
   },
   es: {
@@ -126,7 +126,9 @@ const resources = {
       "homeWelcome2": "bienvenido a",
       "profileTitle": "Perfil",
       "profileUsername": "Usuario:",
-      "profileLocality": "Localidad:",
+      "profileAddress": "Dirección:",
+      "profileEmail": "Correo:",
+      "profilePhone": "Teléfono:",
       "profileEditButton": "Editar perfil",
       "profileLastRoutes": "Últimas rutas realizadas",
       "infoViewTitle": "Información de la ruta",
@@ -155,7 +157,6 @@ const resources = {
       "friendsAdd": "Añadir un amigo",
       "friendsList": "Lista de amigos",
       "routeListLoadingMessage": "Estamos descargando sus rutas. La próxima vez tardará menos.",
-
       "routeHelpIndex" : "Índice",
       "routeHelpIntro" : "Introducción",
       "routeHelpIntro_1" : "Viade es una aplicación de Administración de Rutas.",
