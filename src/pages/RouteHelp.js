@@ -9,7 +9,7 @@ import viadeShareRoute from '../assets/howRoutesWork/shareRoutes.png';
 import '../css/routeHelp.css';
 
 export default class RouteHelp extends React.Component {
-
+    // TODO; add h1 padding to style
     constructor(props){
         super(props);
         this.orderOfElements = [

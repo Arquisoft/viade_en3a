@@ -88,7 +88,7 @@ class ShareView extends React.Component {
         await this.buildMessage(message);
         alert ("Your friend has received a notification with your route!");
 
-        this.changePermissions(this.id + ".json", [destination.split("inbox")[0]]);
+        this.changePermissions(this.id + ".json", [destination.split("inbox")[0] + "profile/card#me"]);
     }
 
     async changePermissions(routeName, webIds){
