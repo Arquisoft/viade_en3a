@@ -35,8 +35,8 @@ class Home extends Component {
                     alt="Viade logo"
                 />
                 <h3>V 1.0</h3>
-                <button onClick={this.getEmail}>Check EMAIL!</button>
-                <button onClick={this.getSharedToMe}>You were shared:</button>
+                <!-- <button onClick={this.getEmail}>Check EMAIL!</button> -->
+                <!-- <button onClick={this.getSharedToMe}>You were shared:</button> -->
             </div>
         );
     }
