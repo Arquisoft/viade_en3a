@@ -2,7 +2,7 @@ import { v4 as uuid } from "uuid";
 import RoutePoint from "./RoutePoint";
 import PodStorageHandler from "./../components/podService/podStoreHandler";
 import RouteMedia from "./RouteMedia";
-import { latLng } from "leaflet" ;
+import { latLng } from "leaflet";
 
 const auth = require('solid-auth-client');
 
@@ -14,7 +14,11 @@ const auth = require('solid-auth-client');
  */
 function processPoints(points) {
 	let list = [];
-	points.forEach((point) => list.push(new RoutePoint(point.lat, point.lng, point.elv)));
+	points.forEach((point) => {
+		let routePoint = new RoutePoint(point.lat, point.lng, point.elv);
+		routePoint.askForElevation(() => { });
+		list.push(routePoint);
+	});
 	return list;
 }
 
@@ -25,16 +29,12 @@ function processPoints(points) {
  */
 function calculateRouteLength(points) {
 	var distance = 0;
-	for (var i=1; i<points.length; i++) {
-		let thisPoint = latLng(points[i].lat,points[i].lng);
-		let previousPoint = latLng(points[i-1].lat,points[i-1].lng);
-		distance+= thisPoint.distanceTo(previousPoint);
+	for (var i = 1; i < points.length; i++) {
+		let thisPoint = latLng(points[i].lat, points[i].lng);
+		let previousPoint = latLng(points[i - 1].lat, points[i - 1].lng);
+		distance += thisPoint.distanceTo(previousPoint);
 	}
 	return distance;
-}
-
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 class MyRoute {
@@ -87,44 +87,45 @@ class MyRoute {
 	 * Returns the route length in kilometers and with two decimals.
 	 * @returns {number} - Route length with format -> "###.## km"
 	 */
-	getRouteLength(){
-		let value = this.routeLength/1000;
+	getRouteLength() {
+		let value = this.routeLength / 1000;
 		return value.toFixed(2) + " km";
 	}
 
-	addMedia(file){
-		this.media.push( new RouteMedia(this, file) );
+	addMedia(file) {
+		this.media.push(new RouteMedia(this, file));
 	}
 
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
-		this.media.forEach( (m) => {m.uploadToPod();} );
-		await this.askForElevation();
-		await sleep(1000);
+        this.media.forEach(await async function(m){ await m.uploadToPod(); });
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
-	async askForElevation() {
-		for (let i = 0; i <= this.points.length - 1; i++) {
-			let point = this.points[i];
-			if (point.getElevation() === -1 || point.getElevation() === undefined) {
-				await fetch("https://api.airmap.com/elevation/v1/ele/?points=" + point.getLatitude() + "," + point.getLongitude())
-					.then((response) => {
-						if (response.status === 200) {
-							response.json()
-								.then((data) => {
-									point.setElevation(parseInt(data["data"], 10));
-									if (isNaN(point.getElevation())) {
-										point.setElevation(-1);
-									}
-								});
+	updatePoints(newPoints, callback) {
+		let newListOfPoints = [];
+		newPoints.forEach((newPoint) => {
+			let found = this.points.find(
+				(each) => each.getLatitude() === newPoint.lat && each.getLongitude() === newPoint.lng
+			);
+			if (found === undefined) {
+				let tempPoint = new RoutePoint(newPoint.lat, newPoint.lng);
+				tempPoint.askForElevation(
+					(elevationResult, pointsList = newListOfPoints) => {
+						if (elevationResult !== null) {
+							callback(pointsList);
 						}
-					}).catch((err) => {
-						point.setElevation(-1);
-					});
+					}
+				);
+				newListOfPoints.push(tempPoint);
+			} else {
+				newListOfPoints.push(found);
+				callback(newListOfPoints);
 			}
-		}
+		});
+		this.points = newListOfPoints;
+		callback(this.points);
 	}
 
 	getComparableString() {
@@ -134,16 +135,17 @@ class MyRoute {
 		return JSON.stringify(parsedRoute);
 	}
 
-	modifyFromJsonLd(stringData) {
-		let parsedRoute = JSON.parse(stringData);
-		if(parsedRoute["id"] === undefined) {
-			this.id=uuid().toString();
+	modifyFromJsonLd(parsedRoute) {
+		if (parsedRoute["id"] === undefined) {
+			this.id = uuid().toString();
 		} else {
 			this.id = parsedRoute["id"];
 		}
+
 		this.name = parsedRoute["name"];
 		this.author = parsedRoute["author"];
 		this.description = parsedRoute["description"];
+
 		let rawPoints = parsedRoute["points"];
 		rawPoints = rawPoints.map((jsonPoint) => {
 			return {
@@ -156,7 +158,7 @@ class MyRoute {
 
 		this.media = [];
 		let mediaURIs = parsedRoute["media"];
-		mediaURIs.map( (j) => {return j["@id"];}).forEach(function (url) {
+		mediaURIs.map((j) => { return j["@id"]; }).forEach(function (url) {
 			let newMedia = new RouteMedia(this);
 			newMedia.isInPod = true;
 			newMedia.podURL = url;
@@ -170,11 +172,13 @@ class MyRoute {
 		let poinstInJson = [];
 		let mediaInJson = [];
 		this.points.forEach((point) => poinstInJson.push(point.toJson()));
-		this.media.map( (media) => {return media.podURL;} ).forEach( (url) => {mediaInJson.push(
-			{
-				"@id" : url
-			}
-		)});
+		this.media.map((media) => { return media.podURL; }).forEach((url) => {
+			mediaInJson.push(
+				{
+					"@id": url
+				}
+			);
+		});
 		return JSON.stringify(
 			{
 				"@context": {

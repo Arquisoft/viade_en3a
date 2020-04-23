@@ -4,7 +4,7 @@ import MyRoute from "./../model/MyRoute";
 import assert from 'assert';
 
 test('Test add route to manager', () => {
-    const routeManager = new RouteManager();
+    const routeManager = RouteManager;
     const myRoute = new MyRoute(
         "Fuso de la Reina",
         "María santísima",

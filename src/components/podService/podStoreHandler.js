@@ -1,19 +1,16 @@
+import PodHandler from "./podHandler";
+
 const auth = require('solid-auth-client');
 const FC = require('solid-file-client');
 const fc = new FC(auth);
 
-export default class PodStorageHandler {
+export default class PodStorageHandler extends PodHandler{
 
     /**
      * @param {Session} currentSession - auth.currentSession()
      */
     constructor(currentSession) {
-        this.repository = "https://" + (currentSession).webId.split('/')[2];
-        this.defaultFolder = "/viade/";
-
-        this.routesDirectory = "routes/";
-        this.resourcesDirectory = "resources/";
-        this.commentsDirectory = "comments/";
+        super(currentSession);
     }
 
     /**
@@ -31,37 +28,32 @@ export default class PodStorageHandler {
     }
 
     /**
-     * Gets an Array<String> with all the files stored in the routes directory
-     * Will automatically generate the default storage folders if not present
+     * Retrieves every single file from the POD routes directory if present. Then executes the callback function
+     * passed as a parameter for each file retrieved. This operation will automatically generate the default 
+     * storage folders if not present.
      *
-     * @param {Function} callback - 2 Parameter function,
-     *                             + the first is {Array<String>} or null if there was an error. Array with all the routes
-     *                             + the second null or the error found.
+     * @param {Function} callbackPerFile - A callback function to execute when each single file is retrieved.
+     * It receives two parameters,the first is the file that just got retrieved or null if there was an error. 
+     * The second receives null if everything went fine or the error found as an object.
      */
-    async getRoutes(callback) {
-        let result = [];
-        let folder = null;
-
-        await this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
-            (directory) => {folder = directory;},
-            (error) => {folder = null;}
-        );
-        if (folder) {
-            // Get files from directory
-            for (let i = 0; i < folder.files.length; i++) {
-                await this.getFile(folder.files[i].url).then(
-                    function (file) {
-                        result.push(file);
-                    },
-                    (error) => { callback(null, error); }
-                );
+    async getRoutes(callbackPerFile = (file, error) => { }) {
+        return this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
+            (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    this.getFile(directory.files[i].url).then(
+                        (file) => { callbackPerFile(file, null); },
+                        (error) => { callbackPerFile(null, error); }
+                    );
+                }
+                return directory.files.length;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return 0;
             }
-        } else {
-            // Create viade/routes folder
-            this.createBasicFolders();
-        }
-
-        callback(result, null);
+        ).then(
+            (value) => { return value; }
+        );
     }
 
     /**
@@ -78,7 +70,7 @@ export default class PodStorageHandler {
         this.storeFile(url, data, callback);
     }
 
-    getExpectedPathForResource(resourceFileName){
+    getExpectedPathForResource(resourceFileName) {
         return this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
     }
 
@@ -104,7 +96,7 @@ export default class PodStorageHandler {
      * @param callback - 1 parameter function,
      *                      + String "OK" if the process finished, null if there was an error
      */
-    async deleteAll(callback = () => {}){
+    async deleteAll(callback = () => { }) {
         fc.deleteFolderRecursively(this.repository + this.defaultFolder).then(
             (res) => { callback("OK"); },
             (error) => { callback(null); }
@@ -127,7 +119,7 @@ export default class PodStorageHandler {
         return fc.readFile(url);
     }
 
-    async createBasicFolders(){
+    async createBasicFolders() {
         fc.createFolder(this.repository + this.defaultFolder + this.routesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.resourcesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.commentsDirectory);

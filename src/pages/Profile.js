@@ -15,10 +15,10 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="App-header" onLoad={() => this.loadInfo()}>
+            <div className="App-FlexCenterColumn" onLoad={() => this.loadInfo()}>
                 <Translation>
                     {
-                        (t) => <h1>{t('profileTitle')}</h1>
+                        (t) => <h1 style={{ padding: "1%" }}>{t('profileTitle')}</h1>
                     }
                 </Translation>
                 <img
@@ -30,25 +30,25 @@ class Profile extends Component {
                 />
                 <Translation>
                     {
-                        (t) => <h2>{t('profileUsername')}</h2>
+                        (t) => <h2 style={{ padding: "1%" }}>{t('profileUsername')}</h2>
                     }
                 </Translation>
                 <h3 id="username"></h3>
                 <Translation>
                     {
-                        (t) => <h2>{t('profileAddress')}</h2>
+                        (t) => <h2 style={{ padding: "1%" }}>{t('profileAddress')}</h2>
                     }
                 </Translation>
                 <h3 id="address"></h3>
                 <Translation>
                     {
-                        (t) => <h2>{t('profileEmail')}</h2>
+                        (t) => <h2 style={{ padding: "1%" }}>{t('profileEmail')}</h2>
                     }
                 </Translation>
                 <h3 id="email"></h3>
                 <Translation>
                     {
-                        (t) => <h2>{t('profilePhone')}</h2>
+                        (t) => <h2 style={{ padding: "1%" }}>{t('profilePhone')}</h2>
                     }
                 </Translation>
                 <h3 id="phone"></h3>
@@ -59,7 +59,7 @@ class Profile extends Component {
                 </Translation>
                 <Translation>
                     {
-                        (t) => <h1>{t('profileLastRoutes')}</h1>
+                        (t) => <h1 style={{ padding: "1%" }}>{t('profileLastRoutes')}</h1>
                     }
                 </Translation>
             </div>

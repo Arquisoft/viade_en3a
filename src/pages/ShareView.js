@@ -4,6 +4,7 @@ import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
+import PodPermissionHandler from "../components/podService/podPermissionHandler";
 class ShareView extends React.Component {
 
     constructor(props) {
@@ -86,7 +87,14 @@ class ShareView extends React.Component {
 
         await this.buildMessage(message);
         alert ("Your friend has received a notification with your route!");
-        
+
+        this.changePermissions(this.id + ".json", [destination.split("inbox")[0]]);
+    }
+
+    async changePermissions(routeName, webIds){
+        let session = await auth.currentSession();
+        let perm = new PodPermissionHandler(session);
+        await perm.shareRouteAndResources(routeName, webIds);
     }
 
     async buildMessage(message) {
