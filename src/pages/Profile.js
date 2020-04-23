@@ -36,10 +36,10 @@ class Profile extends Component {
                 <h3 id="username"></h3>
                 <Translation>
                     {
-                        (t) => <h2>{t('profileLocality')}</h2>
+                        (t) => <h2>{t('profileAddress')}</h2>
                     }
                 </Translation>
-                <h3 id="locality"></h3>
+                <h3 id="address"></h3>
                 <Translation>
                     {
                         (t) => <h2>{t('profileEmail')}</h2>
@@ -48,10 +48,10 @@ class Profile extends Component {
                 <h3 id="email"></h3>
                 <Translation>
                     {
-                        (t) => <h2>{t('profileRole')}</h2>
+                        (t) => <h2>{t('profilePhone')}</h2>
                     }
                 </Translation>
-                <h3 id="role"></h3>
+                <h3 id="phone"></h3>
                 <Translation>
                     {
                         (t) => <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>{t('profileEditButton')}</Button>
@@ -69,8 +69,9 @@ class Profile extends Component {
     async loadInfo() {
 
         this.loadName();
+        this.loadAddress();
         this.loadEmail();
-        this.loadRole();
+        this.loadPhone();
     }
 
     async loadName() {
@@ -78,14 +79,21 @@ class Profile extends Component {
         name.appendChild(document.createTextNode(await UserDetails.getName()));
     }
 
-    async loadEmail() {
-        var name = document.getElementById("email");
-        name.appendChild(document.createTextNode(await UserDetails.getEmail()));
+    async loadAddress() {
+        var role = document.getElementById("address");
+        role.appendChild(document.createTextNode(await UserDetails.getLocality()));
+        role.appendChild(document.createTextNode(", "));
+        role.appendChild(document.createTextNode(await UserDetails.getRegion()));
     }
 
-    async loadRole() {
-        var name = document.getElementById("role");
-        name.appendChild(document.createTextNode(await UserDetails.getRole()));
+    async loadEmail() {
+        var email = document.getElementById("email");
+        email.appendChild(document.createTextNode(await UserDetails.getEmail()));
+    }
+
+    async loadPhone() {
+        var phone = document.getElementById("phone");
+        phone.appendChild(document.createTextNode(await UserDetails.getPhone()));
     }
 
 }
