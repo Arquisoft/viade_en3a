@@ -2,6 +2,7 @@ import PodHandler from "./podHandler";
 import RouteMedia from "../../model/RouteMedia";
 import MyRoute from "../../model/MyRoute";
 
+const N3 = require('n3');
 const auth = require('solid-auth-client');
 const FC = require('solid-file-client');
 const fc = new FC(auth);
@@ -120,32 +121,60 @@ export default class PodStorageHandler extends PodHandler{
 
     async getRoutesSharedToMe(forEachRoute = () => {}){
         let result = [];
-        await this._getSharedFolder(function (file) {
+        await this._getSharedFolder(async function (file) {
             // Transform file to JSON
             let fileAsJSON = JSON.parse(file);
             let sharedRoutes = fileAsJSON["routes"];
 
             // get all routes files
-            sharedRoutes.map((j) => { return j["@id"]; }).forEach(async function (url) {
-                let routeString = await this.getFile(url);
-
-                // Create routes from JSON
-                let routeObject = new MyRoute();
-                routeObject.modifyFromJsonLd(routeString);
-                forEachRoute(routeObject);
-                result.push(routeObject);
-
-            }.bind(this));
-
-        });
+            sharedRoutes = sharedRoutes.map((j) => { return j["@id"]; });
+            for (let i = 0; i < sharedRoutes.length; i++){
+                let fileUrl = sharedRoutes[i];
+                console.log(fileUrl);
+                await this.getFile(fileUrl).then( function(content) {
+                        // Create routes from JSON
+                        let routeObject = new MyRoute();
+                        console.log(content);
+                        //routeObject.modifyFromJsonLd(routeString);
+                        forEachRoute(routeObject);
+                        result.push(routeObject);
+                }, (error) => {} );
+            }
+        }.bind(this));
         return result;
     }
 
-    async checkInbox(){
-        await this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
-            function (folder) {
-                let files = folder.files();
-            },
+    /**
+     * Checks for routes in the inbox, adding them onto a shared route file at /viade/shared/
+     * forEachMail is called for each new route
+     */
+    async checkInbox(forEachMail = () => {}){
+        await this.getFolder(this.repository + "/inbox/").then(
+            async function (folder) {
+                let newRoutes = [];
+
+                await folder.files.map( (file) => {return file.url}).forEach( async function(url) { // For each message
+                    await this.getFile(url).then( function(content){
+                            const parser = new N3.Parser();
+                            parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
+                                if (quad) {
+                                    if ( quad.predicate.id == "http://schema.org/text" ) { // If the quad is the url of the route
+                                        forEachMail(quad.object.id);
+                                        console.log("PUSHED " + quad.object.id);
+                                        //newRoutes.push(quad.object.id);
+                                        this.addRoutesAsShared([quad.object.id.replace('\"','')]);
+                                        this._markEmailAsRead(url);
+                                    }
+                                }
+                            }.bind(this));
+                    }.bind(this),
+                        (error) => {}
+                    );
+                }.bind(this));
+
+                //await this.addRoutesAsShared(newRoutes);
+
+            }.bind(this),
             (error) => {  }
         );
     }
@@ -163,12 +192,40 @@ export default class PodStorageHandler extends PodHandler{
         );
     }
 
-    storeFile(url, data, callback) {
+    storeFile(url, data, callback = () => {}) {
         let response = fc.createFile(url, data);
         response.then(
             (response) => { callback(response.url, response); }
             , (error) => { callback(null, error); }
         );
+    }
+
+    async addRoutesAsShared(urls){
+        console.log("HasBeenShared! " + urls);
+
+        let content = JSON.stringify(
+        {
+            "@context": {
+            "@version": 1.1,
+                "routes": {
+                "@container": "@list",
+                    "@id": "viade:routes"
+            },
+            "viade": "http://arquisoft.github.io/viadeSpec/"
+        },
+            "routes": urls.map((url) => {return {"@id": url.toString()}})
+        });
+
+        //console.log(urls);
+        //console.log(urls.map((url) => {return {"@id": url}}));
+        //console.log(content);
+
+        let filename = Date.now() + ".json";
+        this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, content);
+    }
+
+    _markEmailAsRead(url) {
+        //console.log("READ! " + url);
     }
 
     async getFolder(url) {
