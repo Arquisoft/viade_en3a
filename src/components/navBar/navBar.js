@@ -12,7 +12,7 @@ import RouteList from '../../pages/RouteList';
 import RouteHelp from "../../pages/RouteHelp";
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
-import Friends from '../../pages/Friends';
+import Groups from '../../pages/Groups';
 import EditProfile from '../../pages/EditProfile';
 import InfoView from "./../../pages/InfoView";
 import { useTranslation } from 'react-i18next';
@@ -55,9 +55,7 @@ function MyNavBar(props) {
           <Nav className="mr-auto">
             <NavDropdown title={t('navBarProfile')} id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
-              <NavDropdown.Item href="#friends">{t('navBarFriends')}</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item disabled="true" href="#setting">{t('navBarSettings')}</NavDropdown.Item>
+              <NavDropdown.Item href="#groups">{t('navBarGroups')}</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={t('navBarRoutes')} id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#routes/list">{t('navBarMyRoutes')}</NavDropdown.Item>
@@ -90,7 +88,7 @@ function MyNavBar(props) {
       <Route exact path="/routes/example" render={() => <RouteHelp/>} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
-      <Route exact path="/friends" component={Friends} />
+      <Route exact path="/groups" component={Groups} />
       <Route exact path="/editProfile" component={EditProfile} />
       <Route exact path="/routes/info/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
       <Route exact path="/routes/share/:id" render={(props) => <ShareView {...props} />} />
