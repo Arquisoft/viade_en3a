@@ -117,13 +117,11 @@ class MyRoute {
 
         //this.media.forEach(await async function(m){ await m.uploadToPod(); });
 		await this.uploadMedia();
-		console.log("Not waiting")
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
 	async uploadMedia(){
 		for(let i = 0; i < this.media.length; i++) {
-			console.log(i);
 			await this.media[i].uploadToPod();
 		}
 	}
