@@ -14,6 +14,7 @@ export default class PodStorageHandler extends PodHandler{
      */
     constructor(currentSession) {
         super(currentSession);
+        this.sharedRoutesToAdd = [];
     }
 
     /**
@@ -149,25 +150,22 @@ export default class PodStorageHandler extends PodHandler{
                             const parser = new N3.Parser();
                             parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
                                 if (quad) {
-                                    if ( quad.predicate.id == "http://schema.org/text" ) { // If the quad is the url of the route
+                                    if ( quad.predicate.id == "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
                                         forEachMail(quad.object.id);
                                         console.log("PUSHED " + quad.object.id);
-                                        //newRoutes.push(quad.object.id);
-                                        this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
-                                        this._markEmailAsRead(url);
+                                        this.sharedRoutesToAdd.push(quad.object.id.split("\"").join(""));
                                     }
                                 }
                             }.bind(this));
-                    }.bind(this),
-                        (error) => {}
+                        }.bind(this),
+                            (error) => {}
                     );
                 }.bind(this));
-
-                //await this.addRoutesAsShared(newRoutes);
 
             }.bind(this),
             (error) => {  }
         );
+        this.addRoutesAsShared(this.sharedRoutesToAdd);
     }
 
     /**
@@ -193,6 +191,43 @@ export default class PodStorageHandler extends PodHandler{
 
     async addRoutesAsShared(urls){
         console.log("HasBeenShared! " + urls);
+        let file = null;
+        let filename = "en3a.json";
+
+        // 1.- Get a shared File
+        try {
+            file = await this.getFile(this.repository + this.defaultFolder + this.sharedDirectory + filename);
+            file = JSON.parse(file);
+        } catch (e) {
+            if (e.status !== 404) {
+                throw e
+            } else {
+                file = {
+                    "@context": {
+                        "@version": 1.1,
+                        "routes": {
+                            "@container": "@list",
+                            "@id": "viade:routes"
+                        },
+                        "viade": "http://arquisoft.github.io/viadeSpec/"
+                    },
+                    "routes": []
+                }
+            }
+        }
+
+        // 2.- Remove duplicated routes
+        let alreadyRoutes = file["routes"].map((url) => {return url["@id"]});
+        console.log(alreadyRoutes);
+        urls.forEach((url) => {
+           if (alreadyRoutes.indexOf(url) == -1) {
+               alreadyRoutes.push( {"@id": url.toString()} );
+           }
+        });
+        urls = [];
+
+        // 3.- Rewrite file
+        file["routes"] = alreadyRoutes;
 
         let content = JSON.stringify(
         {
@@ -207,16 +242,7 @@ export default class PodStorageHandler extends PodHandler{
             "routes": urls.map((url) => {return {"@id": url.toString()}})
         });
 
-        //console.log(urls);
-        //console.log(urls.map((url) => {return {"@id": url}}));
-        //console.log(content);
-
-        let filename = Date.now() + ".json";
-        this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, content);
-    }
-
-    _markEmailAsRead(url) {
-        //console.log("READ! " + url);
+        this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, JSON.stringify(file));
     }
 
     async getFolder(url) {
