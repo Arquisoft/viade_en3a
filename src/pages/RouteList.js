@@ -10,6 +10,7 @@ import MyRoute from "../model/MyRoute";
 import $ from "jquery";
 
 import 'react-toastify/dist/ReactToastify.css';
+import RouteManager from "../model/RouteManager";
 
 const auth = require('solid-auth-client');
 
@@ -17,17 +18,20 @@ class RouteList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.routeManager = props.routeManager;
+        this.routeManager = RouteManager;
         this.cardDeckSize = 4;
         this.state = {
             routes: [],
-            spinnerHidden: false
+            sharedRoutes : [],
+            spinnerHidden: false,
         };
-        this.syncRoutesWithPod().then(() => {
-            this.state.spinnerHidden = true;
-        });
-        this.processedRoutes = 0;
-        this.retrievedRoutes = 0;
+        if (props.sync == undefined || props.sync == true) {
+            this.syncRoutesWithPod().then(() => {
+                this.state.spinnerHidden = true;
+            });
+            this.processedRoutes = 0;
+            this.retrievedRoutes = 0;
+        }
     }
 
     render() {
@@ -75,6 +79,8 @@ class RouteList extends React.Component {
         let session = await auth.currentSession();
         if (session !== null && session !== undefined) {
             let storageHandler = new PodStorageHandler(session);
+
+            // Handle my Routes
             storageHandler.getRoutes((routeJson, error) => {
                 if (routeJson === null) {
                     toast.error(i18n.t('alertAccessPOD'));
@@ -107,6 +113,19 @@ class RouteList extends React.Component {
                     }
                 }
             );
+
+            // Handle Shared Routes
+            storageHandler.getRoutesSharedToMe( (route) => {
+                if (route === undefined || route == null) {
+                    toast.error("We can't access your POD. Please, review its permissions");
+                } else {
+                    this.routeManager.addSharedRoute(route);
+                    let tempList = this.state.sharedRoutes;
+                    tempList.push(route);
+                    this.setState({ sharedRoutes: tempList });
+                    $("#messageArea").empty();
+                }
+            });
         }
     }
 

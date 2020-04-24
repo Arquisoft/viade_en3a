@@ -16,9 +16,24 @@ class RouteCard extends React.Component {
                 style={{ borderRadius: "5px", margin: "0", height: "100%", width: "100%" }}
             />
         };
+        this.showShareButton = true;
+        if (props.showShareButton !== undefined) {
+            this.showShareButton = props.showShareButton;
+        }
+
+        this.showInfoButton = true;
+        if (props.showInfoButton !== undefined) {
+            this.showInfoButton = props.showInfoButton;
+        }
     }
 
     render() {
+
+        let buttons = [
+            this.showInfoButton && <Button variant="dark" href={`#routes/info/${this.route.id}`}>Info</Button>,
+            this.showShareButton && <Button variant="dark" style={{ margin: "16px" }} href={`#routes/share/${this.route.id}`}>Share</Button>
+        ];
+
         return (
             <Card text="dark">
                 <Card.Header style={{ minHeight: "100px", height: "300px", padding: "0" }}>
@@ -29,8 +44,7 @@ class RouteCard extends React.Component {
                 <Card.Body>
                     <Card.Title style={{ fontSize: "24px" }}>{this.route.name}</Card.Title>
                     <Card.Text style={{ fontSize: "18px" }}>{this.route.description}</Card.Text>
-                    <Button variant="dark" href={`#routes/info/${this.route.id}`}>Info</Button>
-                    <Button variant="dark" style={{ margin: "16px" }} href={`#routes/share/${this.route.id}`}>Share</Button>
+                    {buttons}
                 </Card.Body>
             </Card >
         );
@@ -40,6 +54,9 @@ class RouteCard extends React.Component {
         this.setState({ mapComponent: this.state.mapComponent });
     }
 
+    toggleShareButton(){
+        this.showShareButton = !this.showShareButton;
+    }
 }
 
 
