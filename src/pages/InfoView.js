@@ -131,7 +131,7 @@ class InfoView extends React.Component {
                             <div id="ircTabs">
                                 <Tabs>
                                     <Tab eventKey="routeMap" title="Map view">
-                                        <MyMap route={this.state.route} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
+                                        <MyMap route={this.state.route} movable={true} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
                                     </Tab>
                                     <Tab eventKey="elevationChart" title="Elevation chart">
                                         <MyElevationChart route={this.state.route} style={{ width: "100%" }} />

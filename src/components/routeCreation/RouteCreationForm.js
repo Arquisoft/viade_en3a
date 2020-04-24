@@ -55,7 +55,7 @@ export default function RouteCreationForm(props) {
                         </div>
                     </Col>
                 </Form.Group>
-            </Form >
-        </div >
+            </Form>
+        </div>
     );
 }
