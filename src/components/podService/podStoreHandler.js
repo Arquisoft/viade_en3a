@@ -125,7 +125,6 @@ export default class PodStorageHandler extends PodHandler{
             sharedRoutes = sharedRoutes.map((j) => { return j["@id"]; });
             for (let i = 0; i < sharedRoutes.length; i++){
                 let fileUrl = sharedRoutes[i];
-                console.log(fileUrl);
                 await this.getFile(fileUrl).then( function(content) {
                         // Create routes from JSON
                         let routeObject = new MyRoute();
@@ -152,7 +151,6 @@ export default class PodStorageHandler extends PodHandler{
                                 if (quad) {
                                     if ( quad.predicate.id == "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
                                         forEachMail(quad.object.id);
-                                        console.log("PUSHED " + quad.object.id);
                                         this.sharedRoutesToAdd.push(quad.object.id.split("\"").join(""));
                                     }
                                 }
@@ -190,7 +188,6 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     async addRoutesAsShared(urls){
-        console.log("HasBeenShared! " + urls);
         let file = null;
         let filename = "en3a.json";
 
@@ -218,29 +215,15 @@ export default class PodStorageHandler extends PodHandler{
 
         // 2.- Remove duplicated routes
         let alreadyRoutes = file["routes"].map((url) => {return url["@id"]});
-        console.log(alreadyRoutes);
         urls.forEach((url) => {
            if (alreadyRoutes.indexOf(url) == -1) {
-               alreadyRoutes.push( {"@id": url.toString()} );
+               alreadyRoutes.push( url );
            }
         });
         urls = [];
 
         // 3.- Rewrite file
-        file["routes"] = alreadyRoutes;
-
-        let content = JSON.stringify(
-        {
-            "@context": {
-            "@version": 1.1,
-                "routes": {
-                "@container": "@list",
-                    "@id": "viade:routes"
-            },
-            "viade": "http://arquisoft.github.io/viadeSpec/"
-        },
-            "routes": urls.map((url) => {return {"@id": url.toString()}})
-        });
+        file["routes"] = alreadyRoutes.map((url) => {return {"@id": url.toString()}});
 
         this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, JSON.stringify(file));
     }

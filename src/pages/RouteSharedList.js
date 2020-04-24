@@ -8,11 +8,17 @@ import PodStorageHandler from "../components/podService/podStoreHandler";
 import MyRoute from "../model/MyRoute";
 import $ from "jquery";
 import RouteList from "./RouteList";
+const auth = require('solid-auth-client');
 
 export default class RouteSharedList extends RouteList {
 
     constructor(props) {
         super(props);
+        this.readInbox();
+    }
+
+    async readInbox() {
+        new PodStorageHandler(await auth.currentSession()).checkInbox();
     }
 
     render() {

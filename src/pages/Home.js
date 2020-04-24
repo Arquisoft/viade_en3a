@@ -35,23 +35,8 @@ class Home extends Component {
                     alt="Viade logo"
                 />
                 <h3>V 1.0</h3>
-                <button onClick={this.getEmail}>Check EMAIL!</button>
-                <button onClick={this.getSharedToMe}>You were shared:</button>
             </div>
         );
-
-        // <!-- <button onClick={this.getEmail}>Check EMAIL!</button> -->
-        // <!-- <button onClick={this.getSharedToMe}>You were shared:</button> -->
-    }
-
-    async getEmail(){
-        await new PodStorageHandler(await auth.currentSession()).checkInbox((r) => {}); // console.log("Callback called:"); console.log(r);
-    }
-
-    async getSharedToMe(){
-        let routes = await new PodStorageHandler(await auth.currentSession()).getRoutesSharedToMe((r) => {console.log("Callback called:"); console.log(r);});
-        console.log("Function finished");
-        console.log(routes);
     }
 
     async printName() {
