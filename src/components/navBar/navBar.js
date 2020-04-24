@@ -13,7 +13,7 @@ import RouteHelp from "../../pages/RouteHelp";
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Groups from '../../pages/Groups';
-import EditProfile from '../../pages/EditProfile';
+import CreateGroup from '../../pages/CreateGroup';
 import InfoView from "./../../pages/InfoView";
 import { useTranslation } from 'react-i18next';
 
@@ -89,7 +89,7 @@ function MyNavBar(props) {
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
       <Route exact path="/groups" component={Groups} />
-      <Route exact path="/editProfile" component={EditProfile} />
+      <Route exact path="/createGroup" component={CreateGroup} />
       <Route exact path="/routes/info/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
       <Route exact path="/routes/share/:id" render={(props) => <ShareView {...props} />} />
       <Redirect path="/" exact to="/home" />

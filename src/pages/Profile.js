@@ -54,11 +54,6 @@ class Profile extends Component {
                 <h3 id="phone"></h3>
                 <Translation>
                     {
-                        (t) => <Button variant="info" size="lg" href="#editProfile" style={{ margin: "2vh" }}>{t('profileEditButton')}</Button>
-                    }
-                </Translation>
-                <Translation>
-                    {
                         (t) => <h1 style={{ padding: "1%" }}>{t('profileLastRoutes')}</h1>
                     }
                 </Translation>

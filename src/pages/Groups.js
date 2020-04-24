@@ -6,7 +6,7 @@ import ProfileA from './../assets/friends/friend_profile_A.png';
 import ProfileB from './../assets/friends/friend_profile_B.png';
 import { Translation } from 'react-i18next';
 
-const routeFriendsStyle = {
+const groupsStyle = {
     flexWrap: "wrap",
     justifyContent: "space-between",
     padding: "2%"
@@ -19,34 +19,20 @@ class Groups extends Component {
             <div className="App-FlexCenterColumn">
             <Translation>
                 {
-                    (t) => <h1 style={{ padding: "1%" }}>{t('friendsTitle')}</h1>
+                    (t) => <h1 style={{ padding: "1%" }}>{t('groupsTitle')}</h1>
                 }
             </Translation>
             <Translation>
-                {
-                    (t) => <h2 style={{ padding: "1%" }}>{t('friendsAdd')}</h2>
-                }
+                    {
+                        (t) => <Button variant="primary" size="lg" href="#editProfile" 
+                        style={{ margin: "2vh" }}>{t('groupsCreate')}</Button>
+                    }
             </Translation>
-            <Form inline="true" class="forms-inline">
-                <Form.Control type="text" placeholder="Friend username" />
-                <Button id="addBtn" variant="primary">
-                </Button>
-            </Form>
-            <Translation>
-                {
-                    (t) => <h2 style={{ paddingTop: "1%" }}>{t('friendsList')}</h2>
-                }
-            </Translation>
-            <div style={routeFriendsStyle}>
+            <div style={groupsStyle}>
                 <FriendCard
                     friendImage={ProfileA}
                     friendName="María Rodríguez"
-                    friendUsername="marRo"
-                />
-                <FriendCard
-                    friendImage={ProfileB}
-                    friendName="Miguel Menéndez"
-                    friendUsername="miguelm85"
+                    friendLink="marRo"
                 />
             </div>
         </div >
