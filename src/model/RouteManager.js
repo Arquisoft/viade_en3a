@@ -20,7 +20,7 @@ class RouteManager {
         this.routesSharedToMe.push(route);
     }
 
-    getRouteById(id) {
+    getSharedRouteById(id) {
         return this.routesSharedToMe.find((route) => route.getId() === id);
     }
 
