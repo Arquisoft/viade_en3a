@@ -14,7 +14,8 @@ export default class RouteSharedList extends RouteList {
 
     constructor(props) {
         super(props);
-        this.readInbox();
+        if (props.sync == undefined || props.sync == true)
+            this.readInbox();
     }
 
     async readInbox() {

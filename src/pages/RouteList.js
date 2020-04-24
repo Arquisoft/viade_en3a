@@ -24,11 +24,13 @@ class RouteList extends React.Component {
             sharedRoutes : [],
             spinnerHidden: false,
         };
-        this.syncRoutesWithPod().then(() => {
-            this.state.spinnerHidden = true;
-        });
-        this.processedRoutes = 0;
-        this.retrievedRoutes = 0;
+        if (props.sync == undefined || props.sync == true) {
+            this.syncRoutesWithPod().then(() => {
+                this.state.spinnerHidden = true;
+            });
+            this.processedRoutes = 0;
+            this.retrievedRoutes = 0;
+        }
     }
 
     render() {
