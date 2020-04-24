@@ -113,8 +113,19 @@ class MyRoute {
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
-        this.media.forEach(await async function(m){ await m.uploadToPod(); });
+
+
+        //this.media.forEach(await async function(m){ await m.uploadToPod(); });
+		await this.uploadMedia();
+		console.log("Not waiting")
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+	}
+
+	async uploadMedia(){
+		for(let i = 0; i < this.media.length; i++) {
+			console.log(i);
+			await this.media[i].uploadToPod();
+		}
 	}
 
 	updatePoints(newPoints, callback) {
@@ -204,7 +215,7 @@ class MyRoute {
 		let mediaInJson = [];
 		this.points.forEach((point) => pointsInJson.push(point.toJson()));
 		this.points.forEach((point) => waypointsInJson.push(point.toWaypointJson()));
-		this.media.map((media) => { return media.podURL; }).forEach((url) => {
+		this.media.map((media) => { return media.getPodUrl(); }).forEach((url) => {
 			mediaInJson.push(
 				{
 					"@id": url

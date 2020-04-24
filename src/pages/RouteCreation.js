@@ -60,12 +60,14 @@ class RouteCreation extends Component {
 		}
 
 		let description = this.routeDescription.current.value;
-		let route = undefined;
-		await UserDetails.getName().then(
+		let route = new MyRoute(name, await UserDetails.getUsername(), description, points);
+
+		/*let route = undefined;
+		await UserDetails.getUser().then( // OLD, better way to do so, but its glitched
 			function (username) {
 				route = new MyRoute(name, username, description, points);
 			}
-		);
+		);*/
 		return route;
 
 	}
