@@ -14,7 +14,7 @@ export default class RouteSharedList extends RouteList {
 
     constructor(props) {
         super(props);
-        if (props.sync == undefined || props.sync == true)
+        if (props.sync === undefined || props.sync == true)
             this.readInbox();
     }
 
@@ -29,7 +29,7 @@ export default class RouteSharedList extends RouteList {
             routesForCardDecks.push(
                 <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
                     {this.state.sharedRoutes.slice(counter, counter + this.cardDeckSize).map(
-                        (r) => {return <RouteCard route={r} showShareButton={false} />}
+                        (r) => {return <RouteCard route={r} showShareButton={false} />;}
                     )}
                 </CardDeck>
             );

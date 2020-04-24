@@ -16,12 +16,14 @@ class RouteCard extends React.Component {
             />
         };
         this.showShareButton = true;
-        if (props.showShareButton !== undefined)
+        if (props.showShareButton !== undefined) {
             this.showShareButton = props.showShareButton;
+        }
 
         this.showInfoButton = true;
-        if (props.showInfoButton !== undefined)
+        if (props.showInfoButton !== undefined) {
             this.showInfoButton = props.showInfoButton;
+        }
     }
 
     render() {

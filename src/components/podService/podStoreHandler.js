@@ -130,7 +130,7 @@ export default class PodStorageHandler extends PodHandler{
                         let routeObject = new MyRoute();
                         routeObject.modifyFromJsonLd(JSON.parse(content));
                         forEachRoute(routeObject);
-                }, (error) => {forEachRoute(null)} );
+                }, (error) => {forEachRoute(null);} );
             }
         }.bind(this));
     }
@@ -149,7 +149,7 @@ export default class PodStorageHandler extends PodHandler{
                             const parser = new N3.Parser();
                             parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
                                 if (quad) {
-                                    if ( quad.predicate.id == "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
+                                    if ( quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
                                         forEachMail(quad.object.id);
                                         this.sharedRoutesToAdd.push(quad.object.id.split("\"").join(""));
                                     }
@@ -197,7 +197,7 @@ export default class PodStorageHandler extends PodHandler{
             file = JSON.parse(file);
         } catch (e) {
             if (e.status !== 404) {
-                throw e
+                throw e;
             } else {
                 file = {
                     "@context": {
@@ -209,14 +209,14 @@ export default class PodStorageHandler extends PodHandler{
                         "viade": "http://arquisoft.github.io/viadeSpec/"
                     },
                     "routes": []
-                }
+                };
             }
         }
 
         // 2.- Remove duplicated routes
-        let alreadyRoutes = file["routes"].map((url) => {return url["@id"]});
+        let alreadyRoutes = file["routes"].map((url) => {return url["@id"];});
         urls.forEach((url) => {
-           if (alreadyRoutes.indexOf(url) == -1) {
+           if (alreadyRoutes.indexOf(url) === -1) {
                alreadyRoutes.push( url );
            }
         });
