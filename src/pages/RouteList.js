@@ -2,6 +2,7 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
+import i18n from '../i18n'; 
 
 import PodStorageHandler from "../components/podService/podStoreHandler";
 import RouteCard from "../components/routeList/RouteCard";
@@ -76,7 +77,7 @@ class RouteList extends React.Component {
             let storageHandler = new PodStorageHandler(session);
             storageHandler.getRoutes((routeJson, error) => {
                 if (routeJson === null) {
-                    toast.error("We can't access your POD. Please, review its permissions");
+                    toast.error(i18n.t('alertAccessPOD'));
                 } else {
                     if (routeJson.length !== 0) {
                         let tempRoute = new MyRoute("", "", "", []);

@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Spinner } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import { Translation } from 'react-i18next';
+import i18n from '../i18n'; 
 
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "../model/MyRoute";
@@ -42,12 +43,12 @@ class RouteCreation extends Component {
 		let name = this.routeName.current.value;
 		if (name === '') {
 			valid = false;
-			toast.error("Name can't be empty");
+			toast.error(i18n.t('alertName'));
 		}
 		let points = this.map.current.state.points;
 		if (points.length < 2) {
 			valid = false;
-			toast.error("Routes must have at least two points");
+			toast.error(i18n.t('alertPoints'));
 		}
 
 		if (!valid) {
@@ -86,7 +87,7 @@ class RouteCreation extends Component {
 		document.getElementById("routeFileUpload").files.forEach((f) => { route.addMedia(f); });
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			if (filePodUrl === null) {
-				toast.error("We can't access your POD. Please, review its permissions");
+				toast.error(i18n.t('alertAccessPOD'));
 			} else {
 				this.toggleSpinner();
 				window.location.href = "#routes/list";
