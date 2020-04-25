@@ -2,7 +2,7 @@ import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Button, Form } from 'react-bootstrap';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { Translation } from 'react-i18next';
@@ -25,6 +25,12 @@ class CreateGroup extends React.Component {
     render() {
         return (
             <div className="App-header">
+                <Form>
+                    <Form.Group controlId="formGroupName">
+                        <Form.Label>Group name:</Form.Label>
+                        <Form.Control type="groupName" placeholder="Group name" />
+                    </Form.Group>
+                </Form>
             <div style={{backgroundColor: "#282c34", 
             display:"flex", 
             flexDirection: "row",
