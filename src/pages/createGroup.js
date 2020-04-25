@@ -5,6 +5,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
+import { Translation } from 'react-i18next';
+import UserDetails from "../model/Util";
+import FriendCard from '../components/friendCard/FriendCard';
+
 class CreateGroup extends React.Component {
 
     constructor(props) {
@@ -28,18 +32,30 @@ class CreateGroup extends React.Component {
                 {
                     this.state.friends.map((friend) => {
                         return <div> 
-                        <Card style={{ width: '18rem' , margin: "10px"}}>
+                        <Card style={{ flexWrap: "wrap",
+                            justifyContent: "space-between",
+                            padding: "2%"}}>
                             <Card.Img variant="top" src={friend.image} />
                             <Card.Body>
                                 <Card.Title>{friend.name}</Card.Title>
-                                <Button variant="primary" 
-                                onClick={() => {this.send(friend.inbox);}}>Share</Button>
+                                <Translation> 
+                                    {
+                                    (t) => <Button variant="primary" 
+                                    onClick={() => {this.annotateFriend(friend);}}>{t('groupsAdd')}</Button>
+                                    }
+                                </Translation>
                             </Card.Body>
                         </Card>
                         </div>;
                     })
                 }
-            </div>
+                <Translation> 
+                    {
+                        (t) => <Button variant="primary" href="#groups"
+                        onClick={() => {this.createGroup();}}>{t('groupsCreateBtn')}</Button>
+                    }
+                </Translation>
+                </div>
             </div>
         );
     }
@@ -71,6 +87,13 @@ class CreateGroup extends React.Component {
         this.setState({ friends });
     }
 
+    async createGroup(){
+
+    }
+    
+    async annotateFriend(friend){
+        
+    }
 
     async send(destination) {
         var message = {};
@@ -82,7 +105,7 @@ class CreateGroup extends React.Component {
         let folder = "viade/routes/";
         message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
-        message.title = "Check out this route shared to you by " + this.getSessionName();
+        message.title = "Check out this route shared to you by " + UserDetails.getName();
         message.url = message.recipient + message.id + ".json";
 
         await this.buildMessage(message);

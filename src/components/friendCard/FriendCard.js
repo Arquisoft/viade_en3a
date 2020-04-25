@@ -25,7 +25,7 @@ function FriendCard(props) {
                     }
                     `}
                 </style>
-                <Button variant="solid">{t('friendCardProfile')}</Button>
+                <Button variant="solid" href={props.friendLink}>{t('friendCardProfile')}</Button>
             </Card.Body>
         </Card>
     );

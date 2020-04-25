@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import FriendCard from '../components/friendCard/FriendCard';
 import ProfileA from './../assets/friends/friend_profile_A.png';
-import ProfileB from './../assets/friends/friend_profile_B.png';
 import { Translation } from 'react-i18next';
 
 const groupsStyle = {
@@ -24,7 +23,7 @@ class Groups extends Component {
             </Translation>
             <Translation>
                     {
-                        (t) => <Button variant="primary" size="lg" href="#editProfile" 
+                        (t) => <Button variant="primary" size="lg" href="#createGroup" 
                         style={{ margin: "2vh" }}>{t('groupsCreate')}</Button>
                     }
             </Translation>
@@ -32,7 +31,7 @@ class Groups extends Component {
                 <FriendCard
                     friendImage={ProfileA}
                     friendName="María Rodríguez"
-                    friendLink="marRo"
+                    friendLink="https://www.google.es"
                 />
             </div>
         </div >
