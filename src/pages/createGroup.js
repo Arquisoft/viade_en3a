@@ -2,7 +2,7 @@ import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, ToastHeader } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import i18n from '../i18n';
 import MyGroup from "../model/MyGroup";
@@ -21,7 +21,6 @@ class CreateGroup extends React.Component {
         this.groupName = "";
         this.readFriends();
         this.webId = null;
-        this.isAdded = false;
         this.newGroup = new MyGroup("", []);
         this.nameRef = React.createRef();
     }
@@ -78,7 +77,13 @@ class CreateGroup extends React.Component {
     }
     
     async annotateFriend(friend){
-        this.groupMembers.push(friend.webId);
+        var included = this.groupMembers.includes(friend.webId);
+        if (included){
+            toast.error(friend.name + i18n.t('alertAlreadyIncluded'));
+        } else {
+            this.groupMembers.push(friend.webId);
+            toast.success(friend.name + i18n.t('alertAddedSuccessfully'));
+        }
     }
 
     async uploadToPod(groupName) {
@@ -121,9 +126,9 @@ class CreateGroup extends React.Component {
                                     <Card.Title>{friend.name}</Card.Title>
                                     <Translation> 
                                         {
-                                        (t) => <Button variant="success" disabled={this.isAdded} 
+                                        (t) => <Button variant="success"
                                         onClick={() => {this.annotateFriend(friend);}}>
-                                            {this.isAdded ? t('groupsAdded') : t('groupsAdd')}</Button>
+                                            {t('groupsAdd')}</Button>
                                         }
                                     </Translation>
                                 </Card.Body>

@@ -96,6 +96,8 @@ const resources = {
       "alertPoints" : "Routes must have at least two points",
       "alertAccessPOD" : "We can't access your POD. Please, review its permissions",
       "alertMembers" : "A group must have at least one member",
+      "alertAlreadyIncluded" : " already included",
+      "alertAddedSuccessfully" : " added successfully",
     }
   },
   es: {
@@ -191,6 +193,8 @@ const resources = {
       "alertPoints" : "La ruta debe contener al menos dos puntos",
       "alertAccessPOD" : "No podemos acceder a su POD. Por favor, compruebe sus permisos",
       "alertMembers" : "El grupo debe tener al menos un miembro",
+      "alertAlreadyIncluded" : " ya está incluido",
+      "alertAddedSuccessfully" : " añadido correctamente",
     }
   }
 };
