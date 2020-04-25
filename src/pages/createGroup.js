@@ -7,18 +7,19 @@ import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
-import FriendCard from '../components/friendCard/FriendCard';
 
 class CreateGroup extends React.Component {
 
     constructor(props) {
         super();
         this.state = {
-            friends: []
+            friends: [],
+            groupMembers: []
         };
         this.readFriends();
         this.webId = null;
         this.id = props.match.params.id;
+        this.isAdded = false;
     }
 
     render() {
@@ -40,8 +41,9 @@ class CreateGroup extends React.Component {
                                 <Card.Title>{friend.name}</Card.Title>
                                 <Translation> 
                                     {
-                                    (t) => <Button variant="primary" 
-                                    onClick={() => {this.annotateFriend(friend);}}>{t('groupsAdd')}</Button>
+                                    (t) => <Button variant="success" disabled={this.isAdded} 
+                                    onClick={() => {this.annotateFriend(friend);}}>
+                                        {this.isAdded ? t('groupsAdded') : t('groupsAdd')}</Button>
                                     }
                                 </Translation>
                             </Card.Body>
@@ -88,11 +90,13 @@ class CreateGroup extends React.Component {
     }
 
     async createGroup(){
-
+        let folder = "viade/groups/";
+        //Iterate through groupMembers and add them to the group file, store this file in POD
     }
     
     async annotateFriend(friend){
-        
+        let groupMembers = [];
+        groupMembers.add(friend);
     }
 
     async send(destination) {
