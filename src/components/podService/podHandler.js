@@ -15,5 +15,6 @@ export default class PodHandler {
         this.commentsDirectory = "comments/";
         this.sharedDirectory = "shared/";
         this.inboxDirectory = "inbox/";
+        this.groupsDirectory = "groups/";
     }
 }

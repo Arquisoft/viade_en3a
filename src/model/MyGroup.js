@@ -37,8 +37,7 @@ class MyGroup {
 	async uploadToPod(callback) {
 		let session = await auth.currentSession();
 		let storageHandler = new PodStorageHandler(session);
-        this.media.forEach(await async function(m){ await m.uploadToPod(); });
-		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
+		await storageHandler.storeGroup(this.getFileName(), this.toJsonLd(), callback);
     }
     
 	getComparableString() {
@@ -49,8 +48,6 @@ class MyGroup {
 	}
 
 	toJsonLd() {
-        let friendsInJson = [];
-		this.friends.forEach((friend) => friendsInJson.push(friend.toJson()));
 		return JSON.stringify(
 			{
 				"@context": {
@@ -79,4 +76,4 @@ class MyGroup {
 
 }
 
-export default MyGroups;
+export default MyGroup;

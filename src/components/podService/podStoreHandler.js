@@ -60,6 +60,20 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     /**
+     * Stores a route under the /viade/routes/'routeFileName' URL
+     *
+     * @param {String} routeFileName - File name with extension, for example: myRoute.txt or LasXanas.json
+     * @param {Blob|String} data - The contents of the route
+     * @param {Function} callback - Calls the function with two parameters,
+     *                            + the first is the URL where the route is stored or null
+     *                            + the second is the actual response or error of the POD
+     */
+    async storeGroup(groupFileName, data, callback = () => { }) {
+        let url = this.repository + this.defaultFolder + this.groupsDirectory + groupFileName;
+        this.storeFile(url, data, callback);
+    }
+
+    /**
      * Stores a resource under the /viade/resources/'resourceFileName' URL
      *
      * @param {String} resourceFileName - File name with extension, for example: samplePic.png or LasXanas.jpeg
