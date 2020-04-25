@@ -3,12 +3,9 @@ import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
 import { Button, Form } from 'react-bootstrap';
-import { namedNode } from '@rdfjs/data-model';
-import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { Translation } from 'react-i18next';
-import UserDetails from "../model/Util";
 import MyGroup from "../model/MyGroup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 class CreateGroup extends React.Component {
 
