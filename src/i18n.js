@@ -92,6 +92,10 @@ const resources = {
       "routeHelpViewRoutes_1" : "We can now navigate to \"Route Management > My Routes\", where the routes you have created are listed. When clicking on \"Info\" of the new route a new window will display all the information recorded, as well as comments posted and a elevation chart of the waypoints.",
       "routeHelpShareRoutes" : "Share with Friends",
       "routeHelpShareRoutes_1" : "When displaying all routes \"Route Management > My Routes\", you can click on the share option. This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.",
+      "alertName" : "Name can't be empty",
+      "alertPoints" : "Routes must have at least two points",
+      "alertAccessPOD" : "We can't access your POD. Please, review its permissions",
+      "alertMembers" : "A group must have at least one member",
     }
   },
   es: {
@@ -183,6 +187,10 @@ const resources = {
       "routeHelpViewRoutes_1" : "Puedes navegar a \"Gestión de Rutas > Mis rutas\", donde se mostrará un listado de las rutas que hayas creado. Cuando se seleccione \"Info\" de la nueva ruta una ventana mostrará toda la información guardada, así como comentarios de la ruta o un gráfica de elevación de los puntos por donde pasa.",
       "routeHelpShareRoutes" : "Compartir con los Amigos",
       "routeHelpShareRoutes_1" : "Cuando se muestran todas tus rutas \"Gestión de Rutas > Mis rutas\", puedes pulsar en la opción de compartir. Esto listará a todos tus amigos y al pulsar sobre uno de ellos se les enviará un mensaje a \"Inbox\".",
+      "alertName" : "El nombre no puede estar vacío",
+      "alertPoints" : "La ruta debe contener al menos dos puntos",
+      "alertAccessPOD" : "No podemos acceder a su POD. Por favor, compruebe sus permisos",
+      "alertMembers" : "El grupo debe tener al menos un miembro",
     }
   }
 };

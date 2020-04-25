@@ -4,8 +4,11 @@ import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
 import { Button, Form } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
+import i18n from '../i18n';
 import MyGroup from "../model/MyGroup";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 class CreateGroup extends React.Component {
 
@@ -15,7 +18,7 @@ class CreateGroup extends React.Component {
             friends: [],
         };
         this.groupMembers = [];
-        this.groupName = null;
+        this.groupName = "";
         this.readFriends();
         this.webId = null;
         this.isAdded = false;
@@ -54,14 +57,14 @@ class CreateGroup extends React.Component {
 		document.getElementById("btnCreate").disabled = true;
 		toast.dismiss();
 		let valid = true;
-        
-		if (this.groupName === '') {
-			valid = false;
-			toast.error("Name can't be empty");
+
+		if (this.groupName === "") {
+            valid = false;
+            toast.error(i18n.t('alertName'));
 		}
 		if (this.groupMembers.length < 1) {
 			valid = false;
-			toast.error("A group has to have at least 1 member");
+			toast.error(i18n.t('alertMembers'));
         }
         if (!valid) {
 			document.getElementById("btnCreate").disabled = false;
@@ -86,7 +89,7 @@ class CreateGroup extends React.Component {
 		}
 		await group.uploadToPod((filePodUrl) => {
 			if (filePodUrl === null) {
-				toast.error("We can't access your POD. Please, review its permissions");
+				toast.error(i18n.t('alertAccessPOD'));
 			} else {
 				window.location.href = "#groups";
 			}
@@ -96,6 +99,11 @@ class CreateGroup extends React.Component {
     render() {
         return (
             <div className="App-header">
+                <ToastContainer
+					id="toastContainer"
+					position={toast.POSITION.TOP_CENTER}
+					autoClose={5000}
+				/>
                 <h1>Select the members</h1>
                 <div style={{backgroundColor: "#282c34", 
                 display:"flex", 
@@ -130,7 +138,7 @@ class CreateGroup extends React.Component {
                             <Form.Control type="groupName" placeholder="Group name" ref={this.nameRef}/>
                             <Translation> 
                                 {
-                                    (t) => <Button id="btnCreate" variant="primary" href="#groups"
+                                    (t) => <Button id="btnCreate" variant="primary"
                                     onClick={() => {this.uploadToPod(this.nameRef.current.value);}}>{t('groupsCreateBtn')}</Button>
                                 }
                             </Translation>
