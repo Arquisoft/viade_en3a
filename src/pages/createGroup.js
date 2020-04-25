@@ -23,6 +23,7 @@ class CreateGroup extends React.Component {
         this.webId = null;
         this.isAdded = false;
         this.newGroup = new MyGroup("", []);
+        this.nameRef = React.createRef();
     }
 
     async readFriends() {
@@ -57,8 +58,6 @@ class CreateGroup extends React.Component {
 		toast.dismiss();
 		let valid = true;
         
-        this.setGroupName();
-        
 		if (this.groupName === '') {
 			valid = false;
 			toast.error("Name can't be empty");
@@ -82,11 +81,8 @@ class CreateGroup extends React.Component {
         this.groupMembers.push(friend.webId);
     }
 
-    async setGroupName(){
-        this.groupName="Prueba";
-    }
-
-    async uploadToPod() {
+    async uploadToPod(groupName) {
+        this.groupName=groupName;
 		let group = await this.createGroup();
 		if (group === undefined) {
 			return;
@@ -103,45 +99,46 @@ class CreateGroup extends React.Component {
     render() {
         return (
             <div className="App-header">
-                <Form>
-                    <Form.Group controlId="formGroupName">
-                        <Form.Label>Group name:</Form.Label>
-                        <Form.Control type="groupName" placeholder="Group name" />
-                    </Form.Group>
-                </Form>
-            <div style={{backgroundColor: "#282c34", 
-            display:"flex", 
-            flexDirection: "row",
-            justifyContent:"center",
-            color:"black"}}>
-                {
-                    this.state.friends.map((friend) => {
-                        return <div> 
-                        <Card style={{ flexWrap: "wrap",
-                            justifyContent: "space-between",
-                            padding: "2%"}}>
-                            <Card.Img variant="top" src={friend.image} />
-                            <Card.Body>
-                                <Card.Title>{friend.name}</Card.Title>
-                                <Translation> 
-                                    {
-                                    (t) => <Button variant="success" disabled={this.isAdded} 
-                                    onClick={() => {this.annotateFriend(friend);}}>
-                                        {this.isAdded ? t('groupsAdded') : t('groupsAdd')}</Button>
-                                    }
-                                </Translation>
-                            </Card.Body>
-                        </Card>
-                        </div>;
-                    })
-                }
-                <Translation> 
+                <h1>Select the members</h1>
+                <div style={{backgroundColor: "#282c34", 
+                display:"flex", 
+                flexDirection: "row",
+                justifyContent:"center",
+                color:"black"}}>
                     {
-                        (t) => <Button id="btnCreate" variant="primary" href="#groups"
-                        onClick={() => {this.uploadToPod();}}>{t('groupsCreateBtn')}</Button>
+                        this.state.friends.map((friend) => {
+                            return <div> 
+                            <Card style={{ flexWrap: "wrap",
+                                justifyContent: "space-between",
+                                padding: "2%"}}>
+                                <Card.Img variant="top" src={friend.image} />
+                                <Card.Body>
+                                    <Card.Title>{friend.name}</Card.Title>
+                                    <Translation> 
+                                        {
+                                        (t) => <Button variant="success" disabled={this.isAdded} 
+                                        onClick={() => {this.annotateFriend(friend);}}>
+                                            {this.isAdded ? t('groupsAdded') : t('groupsAdd')}</Button>
+                                        }
+                                    </Translation>
+                                </Card.Body>
+                            </Card>
+                            </div>;
+                        })
                     }
-                </Translation>
                 </div>
+                    <Form style={{ margin: "1%" }}>
+                        <Form.Group>
+                            <Form.Label>Group name</Form.Label>
+                            <Form.Control type="groupName" placeholder="Group name" ref={this.nameRef}/>
+                            <Translation> 
+                                {
+                                    (t) => <Button id="btnCreate" variant="primary" href="#groups"
+                                    onClick={() => {this.uploadToPod(this.nameRef.current.value);}}>{t('groupsCreateBtn')}</Button>
+                                }
+                            </Translation>
+                        </Form.Group>
+                    </Form>
             </div>
         );
     }
