@@ -14,8 +14,8 @@ class CreateGroup extends React.Component {
         super();
         this.state = {
             friends: [],
-            groupMembers: []
         };
+        this.groupMembers = [];
         this.readFriends();
         this.webId = null;
         this.id = props.match.params.id;
@@ -91,12 +91,12 @@ class CreateGroup extends React.Component {
 
     async createGroup(){
         let folder = "viade/groups/";
+        console.log(this.groupMembers);
         //Iterate through groupMembers and add them to the group file, store this file in POD
     }
     
     async annotateFriend(friend){
-        let groupMembers = [];
-        groupMembers.add(friend);
+        this.groupMembers.push(friend.webId);
     }
 
     async send(destination) {
