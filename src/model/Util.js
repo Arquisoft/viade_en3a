@@ -11,6 +11,11 @@ class UserDetails {
         return username;
     }
 
+    static async getUsername(){
+        var session = await auth.currentSession();
+        return (session).webId.split('/')[2].split('.')[0];
+    }
+
     static async getLocality(){
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value

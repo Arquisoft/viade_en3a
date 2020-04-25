@@ -51,3 +51,4 @@ test("render navBar", ()=> {
     let btn = getByText("navBarProfile");
     expect(btn).toBeInTheDocument();
 });
+

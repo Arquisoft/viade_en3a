@@ -12,6 +12,17 @@ test('Test add route to manager', () => {
         [{ lat: 2, lng: 4 }, { lat: 24, lng: 13 }],
         {}
     );
+    myRoute.addMedia(null);
+
+    let jsonLd = myRoute.toJsonLd();
+
+    const route = new MyRoute("","","",[]);
+    route.modifyFromJsonLd(JSON.parse(jsonLd));
+
+    const string1 = myRoute.getComparableString();
+    const string2 = route.getComparableString();
+    assert.equal(string1,string2,"Route comparable string equal");
+
     routeManager.addRoute(myRoute);
     routeManager.addRoute(myRoute);
     const routes = routeManager.getRoutes();

@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Spinner } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import { Translation } from 'react-i18next';
+import i18n from '../i18n'; 
 
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "../model/MyRoute";
@@ -14,6 +15,7 @@ import MyElevationChart from "../components/myElevationChart/MyElevationChart";
 import 'react-toastify/dist/ReactToastify.css';
 import "./../css/routeCreation.css";
 import './../css/App.css';
+import PointInfo from "../components/pointInfo/PointInfo";
 
 class RouteCreation extends Component {
 
@@ -23,6 +25,7 @@ class RouteCreation extends Component {
 		this.routeDescription = React.createRef();
 		this.map = React.createRef();
 		this.elevationChart = React.createRef();
+		this.pointInfo = React.createRef();
 		this.routeManager = props.routeManager;
 		this.tempRoute = undefined;
 		this.newRoute = new MyRoute("", "", "", []);
@@ -42,12 +45,12 @@ class RouteCreation extends Component {
 		let name = this.routeName.current.value;
 		if (name === '') {
 			valid = false;
-			toast.error("Name can't be empty");
+			toast.error(i18n.t('alertName'));
 		}
 		let points = this.map.current.state.points;
 		if (points.length < 2) {
 			valid = false;
-			toast.error("Routes must have at least two points");
+			toast.error(i18n.t('alertPoints'));
 		}
 
 		if (!valid) {
@@ -57,12 +60,14 @@ class RouteCreation extends Component {
 		}
 
 		let description = this.routeDescription.current.value;
-		let route = undefined;
-		await UserDetails.getName().then(
+		let route = new MyRoute(name, await UserDetails.getUsername(), description, points);
+
+		/*let route = undefined;
+		await UserDetails.getUser().then( // OLD, better way to do so, but its glitched
 			function (username) {
 				route = new MyRoute(name, username, description, points);
 			}
-		);
+		);*/
 		return route;
 
 	}
@@ -86,7 +91,7 @@ class RouteCreation extends Component {
 		document.getElementById("routeFileUpload").files.forEach((f) => { route.addMedia(f); });
 		await route.uploadToPod((filePodUrl, podResponse) => {
 			if (filePodUrl === null) {
-				toast.error("We can't access your POD. Please, review its permissions");
+				toast.error(i18n.t('alertAccessPOD'));
 			} else {
 				this.toggleSpinner();
 				window.location.href = "#routes/list";
@@ -116,6 +121,7 @@ class RouteCreation extends Component {
 						<SearchBar map={this.map} />
 						<EditableMap
 							ref={this.map}
+							pointInfo={this.pointInfo}
 							onChange={(points, elevationChart = this.elevationChart) => {
 								this.newRoute.updatePoints(points, (updatedPoints, chart = elevationChart) => {
 									chart.current.update(updatedPoints);
@@ -125,8 +131,12 @@ class RouteCreation extends Component {
 					</div>
 					<div id="pointManager">
 						<h2 style={{ padding: "3% 1% 2% 1%" }}>Route elevation preview</h2>
-						<MyElevationChart ref={this.elevationChart} route={this.newRoute} />
+						<MyElevationChart style={{ padding: "3% 1% 2% 1%" }} ref={this.elevationChart} route={this.newRoute} />
 					</div>
+				</div>
+
+				<div style={{margin: "1.5vh"}}>
+					<PointInfo map={this.map} ref={this.pointInfo}/>
 				</div>
 
 				<div>
