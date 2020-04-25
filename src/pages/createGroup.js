@@ -91,7 +91,9 @@ class CreateGroup extends React.Component {
 
     async createGroup(){
         let folder = "viade/groups/";
-        console.log(this.groupMembers);
+        this.groupMembers.forEach(function(member){
+            console.log(member)
+        });
         //Iterate through groupMembers and add them to the group file, store this file in POD
     }
     
