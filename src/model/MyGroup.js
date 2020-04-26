@@ -47,6 +47,18 @@ class MyGroup {
 		return JSON.stringify(parsedRoute);
 	}
 
+	modifyFromJsonLd(parsedRoute) {
+		if (parsedRoute["id"] === undefined) {
+			this.id = uuid().toString();
+		} else {
+			this.id = parsedRoute["id"];
+		}
+
+		this.name = parsedRoute["name"];
+
+		this.friends = parsedRoute["users"];
+	}
+
 	toJsonLd() {
 		return JSON.stringify(
 			{
@@ -59,10 +71,6 @@ class MyGroup {
 					"users": {
                         "@container": "@list",
                         "@id": "schema:Person"
-                    },
-					"url": {
-                        "@id": "schema:url",
-                        "@type": "xs:string"
                     },
 					"schema": "http://schema.org/",
                     "xsd": "http://www.w3.org/2001/XMLSchema#"

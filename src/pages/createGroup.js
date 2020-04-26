@@ -72,16 +72,16 @@ class CreateGroup extends React.Component {
 
 		let group = undefined;
         group = new MyGroup(this.groupName, this.groupMembers);
-        console.log(group);
+
 		return group;
     }
     
     async annotateFriend(friend){
-        var included = this.groupMembers.includes(friend.webId);
+        var included = this.groupMembers.includes(friend);
         if (included){
             toast.error(friend.name + i18n.t('alertAlreadyIncluded'));
         } else {
-            this.groupMembers.push(friend.webId);
+            this.groupMembers.push(friend);
             toast.success(friend.name + i18n.t('alertAddedSuccessfully'));
         }
     }

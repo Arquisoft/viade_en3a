@@ -74,6 +74,35 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     /**
+     * Retrieves every single file from the POD routes directory if present. Then executes the callback function
+     * passed as a parameter for each file retrieved. This operation will automatically generate the default 
+     * storage folders if not present.
+     *
+     * @param {Function} callbackPerFile - A callback function to execute when each single file is retrieved.
+     * It receives two parameters,the first is the file that just got retrieved or null if there was an error. 
+     * The second receives null if everything went fine or the error found as an object.
+     */
+    async getGroups(callbackPerFile = (file, error) => { }) {
+        return this.getFolder(this.repository + this.defaultFolder + this.groupsDirectory).then(
+            (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    this.getFile(directory.files[i].url).then(
+                        (file) => { callbackPerFile(file, null); },
+                        (error) => { callbackPerFile(null, error); }
+                    );
+                }
+                return directory.files.length;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return 0;
+            }
+        ).then(
+            (value) => { return value; }
+        );
+    }
+
+    /**
      * Stores a resource under the /viade/resources/'resourceFileName' URL
      *
      * @param {String} resourceFileName - File name with extension, for example: samplePic.png or LasXanas.jpeg

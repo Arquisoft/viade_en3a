@@ -12,7 +12,7 @@ class GroupManager {
         return this.groups.find((group) => group.getId() === id);
     }
 
-    addGroups(group) {
+    addGroup(group) {
         this.groups.push(group);
     }
 

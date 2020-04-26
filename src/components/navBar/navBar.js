@@ -21,9 +21,11 @@ import gitHubLogo from './../../assets/githubLogo/github.png';
 import viadeLogo from './../../assets/logo/logo_alt.jpeg';
 import viadeText from './../../assets/logo/logo_letters.jpeg';
 import RouteManager from "./../../model/RouteManager";
+import GroupManager from "./../../model/GroupManager";
 import ShareView from '../../pages/ShareView';
 
 const routeManager = RouteManager;
+const groupManager = GroupManager;
 
 function MyNavBar(props) {
   const { t, i18n } = useTranslation();
@@ -88,7 +90,7 @@ function MyNavBar(props) {
       <Route exact path="/routes/example" render={() => <RouteHelp/>} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />
-      <Route exact path="/groups" component={Groups} />
+      <Route exact path="/groups" render={() => <Groups groupManager={groupManager} />} />
       <Route exact path="/createGroup" component={CreateGroup} />
       <Route exact path="/routes/info/:id" render={(props) => <InfoView routeManager={routeManager} {...props} />} />
       <Route exact path="/routes/share/:id" render={(props) => <ShareView {...props} />} />
