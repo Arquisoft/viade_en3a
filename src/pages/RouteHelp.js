@@ -120,7 +120,7 @@ export default class RouteHelp extends React.Component {
             <Translation>
                 {(t) => <p>{t("routeHelpShareRoutes_1")}</p>}
             </Translation>
-            <img src={viadeShareRoute} width="65%"/>
+            <img alt="Share route" src={viadeShareRoute} width="65%"/>
         </div>;
     }
 }

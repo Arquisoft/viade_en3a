@@ -13,7 +13,7 @@ import RouteHelp from "../../pages/RouteHelp";
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import Groups from '../../pages/Groups';
-import CreateGroup from '../../pages/createGroup';
+import CreateGroup from '../../pages/CreateGroup';
 import InfoView from "./../../pages/InfoView";
 import { useTranslation } from 'react-i18next';
 

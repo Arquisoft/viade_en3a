@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { toast, ToastContainer } from "react-toastify";
+import i18n from '../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,6 +25,10 @@ class ShareView extends React.Component {
     render() {
         return (
             <div className="App-header">
+                <ToastContainer
+                        position={toast.POSITION.TOP_CENTER}
+                        autoClose={5000}
+                    />
                 <div style={{
                     backgroundColor: "#282c34",
                     display: "flex",
@@ -31,10 +36,6 @@ class ShareView extends React.Component {
                     justifyContent: "center",
                     color: "black"
                 }}>
-                    <ToastContainer
-                        position={toast.POSITION.TOP_CENTER}
-                        autoClose={5000}
-                    />
                     {
                         this.state.friends.map((friend) => {
                             return <div>
@@ -98,7 +99,7 @@ class ShareView extends React.Component {
 
             await this.buildMessage(message);
         } catch (e) {
-            toast.error("Unable to share your route. Your friend does not allow sharing");
+            toast.error(i18n.t('alertErrorInPermissions'));
         }
         this.changePermissions(this.id + ".json", [destination.split("inbox")[0] + "profile/card#me"]);
     }
