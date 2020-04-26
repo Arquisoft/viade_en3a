@@ -99,7 +99,8 @@ const resources = {
       "alertMembers" : "A group must have at least one member",
       "alertAlreadyIncluded" : " already included",
       "alertAddedSuccessfully" : " added successfully",
-      "alertErrorInPermissions" : "Unable to share your route. Your friend does not allow sharing"
+      "alertErrorInPermissions" : "Unable to share your route. Your friend does not allow sharing",
+      "alertSuccessInPermissions" : "Your route was successfully shared!" 
     }
   },
   es: {
@@ -198,7 +199,8 @@ const resources = {
       "alertMembers" : "El grupo debe tener al menos un miembro",
       "alertAlreadyIncluded" : " ya está incluido",
       "alertAddedSuccessfully" : " añadido correctamente",
-      "alertErrorInPermissions" : "Imposible compartir la ruta. Tu amigo no permite esta acción"
+      "alertErrorInPermissions" : "Imposible compartir la ruta. Tu amigo no permite esta acción",
+      "alertSuccessInPermissions" : "Tu ruta ha sido compartida con éxito" 
     }
   }
 };

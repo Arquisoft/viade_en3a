@@ -98,6 +98,7 @@ class ShareView extends React.Component {
             message.url = message.recipient + message.id + ".json";
 
             await this.buildMessage(message);
+            toast.success(i18n.t('alertSuccessInPermissions'));
         } catch (e) {
             toast.error(i18n.t('alertErrorInPermissions'));
         }
@@ -130,7 +131,6 @@ class ShareView extends React.Component {
         let wId = this.webId;
         let tmp = wId.split("profile")[0];
         return tmp;
-
     }
 
 }
