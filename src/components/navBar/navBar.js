@@ -23,6 +23,7 @@ import viadeText from './../../assets/logo/logo_letters.jpeg';
 import RouteManager from "./../../model/RouteManager";
 import GroupManager from "./../../model/GroupManager";
 import ShareView from '../../pages/ShareView';
+import RouteSharedList from "../../pages/RouteSharedList";
 
 const routeManager = RouteManager;
 const groupManager = GroupManager;
@@ -63,6 +64,8 @@ function MyNavBar(props) {
               <NavDropdown.Item href="#routes/list">{t('navBarMyRoutes')}</NavDropdown.Item>
               <NavDropdown.Item href="#routes/add">{t('navBarCreateRoute')}</NavDropdown.Item>
               <NavDropdown.Divider />
+              <NavDropdown.Item href="#routes/shared">{t('navBarSharedRoutes')}</NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="#routes/example">{t('navBarRouteHelp')}</NavDropdown.Item>
             </NavDropdown>
           </Nav>
@@ -87,6 +90,7 @@ function MyNavBar(props) {
       <Route exact path="/register" component={SignUp} />
       <Route exact path="/routes/add" render={() => <RouteCreation routeManager={routeManager} />} />
       <Route exact path="/routes/list" render={() => <RouteList routeManager={routeManager} />} />
+      <Route exact path="/routes/shared" render={() => <RouteSharedList routeManager={routeManager} />} />
       <Route exact path="/routes/example" render={() => <RouteHelp/>} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/profile" render={() => <Profile routeManager={routeManager} />} />

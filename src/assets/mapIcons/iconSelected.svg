@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   style="enable-background:new 0 0 64 64;"
+   version="1.1"
+   viewBox="0 0 64 64"
+   xml:space="preserve"
+   sodipodi:docname="iconSelected.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
+     id="metadata841"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs839" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview837"
+     showgrid="false"
+     inkscape:zoom="13.28125"
+     inkscape:cx="34.759808"
+     inkscape:cy="24.664881"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" /><style
+     type="text/css"
+     id="style829">
+	.st0{fill:#134563;}
+</style><path
+     style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:26.64104652;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 32 8.4003906 A 16.799999 16.768776 0 0 0 15.199219 25.167969 A 16.799999 16.768776 0 0 0 17.294922 33.271484 L 17.226562 33.271484 L 32 55.699219 L 46.771484 33.271484 L 46.6875 33.271484 A 16.799999 16.768776 0 0 0 48.800781 25.167969 A 16.799999 16.768776 0 0 0 32 8.4003906 z M 32 19.935547 A 5.2329412 5.2329412 0 0 1 37.232422 25.167969 A 5.2329412 5.2329412 0 0 1 32 30.402344 A 5.2329412 5.2329412 0 0 1 26.767578 25.167969 A 5.2329412 5.2329412 0 0 1 32 19.935547 z "
+     id="path833" /></svg>

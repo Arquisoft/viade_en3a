@@ -26,6 +26,10 @@ class RouteMedia {
         return this.route.getId() + "_" + this.name;
     }
 
+    getPodUrl(){
+        return this.podURL || this.podExpectedPath;
+    }
+
     async calculateExpectedPodUrl(){
         if (this.name) {
             let store = new PodStorageHandler(await auth.currentSession());
@@ -47,7 +51,7 @@ class RouteMedia {
             this.name = this.fileData.name;
             this.calculateExpectedPodUrl();
             let store = new PodStorageHandler(await auth.currentSession());
-            store.storeResource(this.getUploadFileName(), this.fileData, function (url, error) {
+            await store.storeResource(this.getUploadFileName(), this.fileData, function (url, error) {
                 if (url) {
                     this.isInPod = true;
                     this.podURL = url;
