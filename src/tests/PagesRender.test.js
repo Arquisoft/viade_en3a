@@ -7,18 +7,19 @@ import Profile from "../pages/Profile";
 import SignUp from "../pages/SignUp";
 import PageNotFound from "../components/pageNotFound/PageNotFound";
 import MyNavBar from "../components/navBar/navBar";
+import i18n from '../i18n';
 
 const leftClick = { button: 1 };
 
 test("render edit profile", () => {
     const { getByText } = render(<EditProfile/>);
-    const title = getByText("editProfileTitle");
+    const title = getByText(i18n.t("editProfileTitle"));
     expect(title).toBeInTheDocument();
 });
 
 test("render friends", ()=> {
     const { getByText } = render(<Friends/>);
-    const title = getByText("friendsTitle");
+    const title = getByText(i18n.t("friendsTitle"));
     expect(title).toBeInTheDocument();
     const button = document.getElementById("addBtn");
     fireEvent.click(button,leftClick);
@@ -26,13 +27,13 @@ test("render friends", ()=> {
 
 test("render home", ()=> {
     const { getByText, findByText } = render(<Home/>);
-    const title = getByText("homeWelcome");
+    const title = getByText(i18n.t("homeWelcome"));
     expect(title).toBeInTheDocument();
 });
 
 test("render profile", ()=> {
     const { getByText } = render(<Profile/>);
-    const title = getByText("profileUsername");
+    const title = getByText(i18n.t("profileUsername"));
     expect(title).toBeInTheDocument();
 });
 
@@ -42,13 +43,13 @@ test("render sign up", ()=> {
 
 test("render pagenotfound", ()=> {
     const { getByText,  } = render(<PageNotFound/>);
-    const title = getByText("pageNotFoundHeader");
+    const title = getByText(i18n.t("pageNotFoundHeader"));
     expect(title).toBeInTheDocument();
 });
 
 test("render navBar", ()=> {
     const { getByText, findByText } = render(<MyNavBar/>);
-    let btn = getByText("navBarProfile");
+    let btn = getByText(i18n.t("navBarProfile"));
     expect(btn).toBeInTheDocument();
 });
 

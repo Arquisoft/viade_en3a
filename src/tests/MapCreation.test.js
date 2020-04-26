@@ -4,6 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import RouteManager from "./../model/RouteManager";
 
+import i18n from '../i18n';
 const routeManager = RouteManager;
 
 test('Test create route', () => {
@@ -18,7 +19,7 @@ test('Test create route', () => {
 
 	const btn = getByText(/save/i);
 
-	expect(getByText('mapCreationTitle')).toBeTruthy();
+	expect(getByText(i18n.t('mapCreationTitle'))).toBeTruthy();
 	expect(btn).toBeTruthy();
 });
 
