@@ -25,7 +25,7 @@ class RouteList extends React.Component {
             sharedRoutes : [],
             spinnerHidden: false,
         };
-        if (props.sync == undefined || props.sync == true) { // avoid sync with pod, used for RouteList.test.js
+        if (props.sync === undefined || props.sync === true) { // avoid sync with pod, used for RouteList.test.js
             this.syncRoutesWithPod().then(() => {
                 this.state.spinnerHidden = true;
             });

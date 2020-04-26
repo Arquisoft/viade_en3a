@@ -9,6 +9,8 @@ import MyRoute from "../model/MyRoute";
 import $ from "jquery";
 import RouteList from "./RouteList";
 import Button from "react-bootstrap/Button";
+import i18next from "i18next";
+import i18n from '../i18n';
 const auth = require('solid-auth-client');
 
 export default class RouteSharedList extends RouteList {
@@ -57,16 +59,15 @@ export default class RouteSharedList extends RouteList {
                     position={toast.POSITION.TOP_CENTER}
                     autoClose={5000}
                 />
-                <Translation>
-                    {
-                        (t) => <h1 style={{ padding: "1%" }}>{t('routeListText')}</h1>
-                    }
-                </Translation>
-                <Button onClick = {() => {
+                <div id = "title" style={{display:"inline"}}>
+                    <h1 style={{ margin: "2%", display:"inline" }}>{i18n.t('routeListText')}</h1>
+                    <Button style={{display:"inline", float:"right", margin:"2%"}} variant ="danger" onClick = {() => {
 
                     if (window.confirm("Are you sure?"))
                         this.cleanSharedFolder();
-                }}>Exterminate Shared Folder</Button>
+                    }}>Clean files shared to you</Button>
+                </div>
+
                 <Translation>
                     {
                         (t) => <h2 style={{ padding: "1%" }} hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
