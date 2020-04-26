@@ -29,6 +29,9 @@ class RouteManager {
         this.routesSharedToMe = [];
     }
 
+    getAnyRouteById(id) {
+        return this.getRouteById(id) || this.getSharedRouteById(id);
+    }
 }
 
 const routeManager = new RouteManager();

@@ -23,11 +23,11 @@ const auth = require('solid-auth-client');
 class InfoView extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
         this.id = props.match.params.id;
         this.routeManager = props.routeManager;
         this.state = {
-            route: this.routeManager.getRouteById(this.id)
+            route: this.routeManager.getAnyRouteById(this.id)
         };
         this.fetchRouteIfNecessary();
     }
