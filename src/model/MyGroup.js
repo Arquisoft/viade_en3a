@@ -10,12 +10,12 @@ class MyGroup {
 	 * Constructor for new Group objects.
 	 * 
 	 * @param {String} name The name of the group.
- 	 * @param {Array<friendURL>} friends The list of friends of this group.
+ 	 * @param {Array<usersURL>} users The list of users of this group.
 	 */
-	constructor(name, friends = []) {
+	constructor(name, users = []) {
 		this.id = uuid().toString();
 		this.name = name;
-        this.friends = friends;
+        this.users = users;
 	}
 
 	getId() {
@@ -26,8 +26,8 @@ class MyGroup {
 		return this.name;
 	}
 
-	getFriends() {
-		return this.friends;
+	getUsers() {
+		return this.users;
     }
     
     getFileName() {
@@ -56,7 +56,7 @@ class MyGroup {
 
 		this.name = parsedRoute["name"];
 
-		this.friends = parsedRoute["users"];
+		this.users = parsedRoute["users"];
 	}
 
 	toJsonLd() {
@@ -77,7 +77,7 @@ class MyGroup {
 				},
 				"id": this.id,
 				"name": this.name,
-				"users": this.friends
+				"users": this.users
 			}
 		);
 	}

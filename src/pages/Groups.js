@@ -97,7 +97,7 @@ class Groups extends Component {
                             <h2>{group.name}</h2>
                             <div>
                                 {
-                                    group.friends.map((user) => {
+                                    group.users.map((user) => {
                                         return <div style={groupsStyle}>
                                             <FriendCard
                                                 friendImage={user.image}
