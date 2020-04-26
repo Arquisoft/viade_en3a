@@ -94,7 +94,7 @@ class Groups extends Component {
                 {
                     this.state.groups.map((group) => {
                         return <div>
-                            <h1>{group.name}</h1>
+                            <h2>{group.name}</h2>
                             <div>
                                 {
                                     group.friends.map((user) => {
