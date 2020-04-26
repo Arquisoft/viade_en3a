@@ -104,10 +104,10 @@ class Groups extends Component {
                                                 friendName={user.name}
                                                 friendLink={user.webId}
                                                 />
-                                        </div>
+                                        </div>;
                                     })
                                 }
-                            </div>
+                            </div>;
                         </div>;
                     })
                 }
