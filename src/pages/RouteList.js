@@ -114,9 +114,9 @@ class RouteList extends React.Component {
                 }
             );
 
+
             // Handle Shared Routes
             storageHandler.getRoutesSharedToMe( function(route){
-                console.log("read");
                 if (route === undefined || route == null) {
                     this.wasError = true;
                 } else {
@@ -127,10 +127,9 @@ class RouteList extends React.Component {
                     $("#messageArea").empty();
                 }
             }.bind(this), function(){
-                console.log("final");
                 if(this.wasError){
                     this.wasError = false;
-                    toast.error("Someone erased a shared route");
+                    toast.error("Someone erased a shared route. Click to clean your ALL shared files");
                 }
             }.bind(this));
         }

@@ -8,14 +8,29 @@ import PodStorageHandler from "../components/podService/podStoreHandler";
 import MyRoute from "../model/MyRoute";
 import $ from "jquery";
 import RouteList from "./RouteList";
+import Button from "react-bootstrap/Button";
 const auth = require('solid-auth-client');
 
 export default class RouteSharedList extends RouteList {
 
     constructor(props) {
         super(props);
-        if (props.sync === undefined || props.sync == true)
+        /*this.routeManager = RouteManager;
+        this.cardDeckSize = 4;
+        this.state = {
+            routes: [],
+            sharedRoutes : [],
+            spinnerHidden: false,
+        };
+        if (props.sync == undefined || props.sync == true) { // avoid sync with pod, used for RouteList.test.js
             this.readInbox();
+            this.syncRoutesWithPod().then(() => {
+                this.state.spinnerHidden = true;
+            });
+            this.processedRoutes = 0;
+            this.retrievedRoutes = 0;
+        }*/
+        this.readInbox();
     }
 
     async readInbox() {
@@ -47,6 +62,11 @@ export default class RouteSharedList extends RouteList {
                         (t) => <h1 style={{ padding: "1%" }}>{t('routeListText')}</h1>
                     }
                 </Translation>
+                <Button onClick = {() => {
+
+                    if (window.confirm("Are you sure?"))
+                        this.cleanSharedFolder();
+                }}>Exterminate Shared Folder</Button>
                 <Translation>
                     {
                         (t) => <h2 style={{ padding: "1%" }} hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
@@ -61,4 +81,13 @@ export default class RouteSharedList extends RouteList {
             </div>
         );
     }
+
+    async cleanSharedFolder(){
+        let session = await auth.currentSession();
+        let storageHandler = new PodStorageHandler(session);
+        storageHandler._eliminateSharedFolder();
+        toast.success("Routes Eliminated!");
+        //this.syncRoutesWithPod();
+    }
+
 }

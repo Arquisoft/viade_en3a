@@ -195,7 +195,8 @@ export default class PodStorageHandler extends PodHandler{
                                 if (quad) {
                                     if ( quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
                                         forEachMail(quad.object.id);
-                                        this.sharedRoutesToAdd.push(quad.object.id.split("\"").join(""));
+                                        this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
+                                        this._eliminateFile(url);
                                     }
                                 }
                             }.bind(this));
@@ -207,7 +208,20 @@ export default class PodStorageHandler extends PodHandler{
             }.bind(this),
             (error) => {  }
         );
-        this.addRoutesAsShared(this.sharedRoutesToAdd);
+
+    }
+
+    _eliminateFile(url){
+        fc.delete(url);
+    }
+
+    _eliminateSharedFolder(){
+        let url = this.repository + this.defaultFolder + this.sharedDirectory;
+        this.getFolder(url).then(function(folder){
+            for (let i = 0; i < folder.files.length; i++) {
+                this._eliminateFile(folder.files[i].url);
+            }
+        }.bind(this));
     }
 
     /**
