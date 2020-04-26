@@ -38,6 +38,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-toastify": "^5.5.0",
+    "selenium-webdriver": "^4.0.0-alpha.7",
     "shx": "0.3.2",
     "solid-acl-utils": "github:otto-aa/solid-acl-utils",
     "solid-auth-client": "^2.4.1",
@@ -46,6 +47,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "nothing": "",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "test:e2e": "jest -c e2e/jest.config.js",
