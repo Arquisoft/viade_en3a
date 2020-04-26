@@ -1,5 +1,4 @@
 import PodHandler from "./podHandler";
-import RouteMedia from "../../model/RouteMedia";
 import MyRoute from "../../model/MyRoute";
 
 const N3 = require('n3');
@@ -186,8 +185,6 @@ export default class PodStorageHandler extends PodHandler{
     async checkInbox(forEachMail = () => {}){
         await this.getFolder(this.repository + "/inbox/").then(
             async function (folder) {
-                let newRoutes = [];
-
                 await folder.files.map( (file) => {return file.url}).forEach( async function(url) { // For each message
                     await this.getFile(url).then( function(content){
                             const parser = new N3.Parser();

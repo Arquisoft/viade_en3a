@@ -1,7 +1,6 @@
 import './../css/App.css';
 import React, { Component } from 'react';
 import profileImg from './../assets/profile/profile_img.png';
-import { Button } from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
 

@@ -58,11 +58,11 @@ export default class RouteHelp extends React.Component {
             <Translation>
                 {(t) => <p>{t('routeHelpIntro_1')}</p>}
             </Translation>
-            <img src={viadeMainView} width="65%"/>
+            <img alt="Viade main view" src={viadeMainView} width="65%"/>
             <Translation>
                 {(t) => <p>{t('routeHelpIntro_2')}</p>}
             </Translation>
-            <img src={viadeSampleRoutes} width="65%"/>
+            <img alt="Viade sample routes" src={viadeSampleRoutes} width="65%"/>
         </div>;
     }
 
@@ -96,7 +96,7 @@ export default class RouteHelp extends React.Component {
             <Translation>
                 {(t) => <p>{t('routeHelpCreateRoutes_1')}</p>}
             </Translation>
-            <img src={viadeCreateRoute} width="65%"/>
+            <img alt="Create your route" src={viadeCreateRoute} width="65%"/>
         </div>;
     }
 
@@ -108,7 +108,7 @@ export default class RouteHelp extends React.Component {
             <Translation>
                 {(t) => <p>{t('routeHelpViewRoutes_1')}</p>}
             </Translation>
-            <img src={viadeDetailsRoute} width="65%"/>
+            <img alt="Details of the route" src={viadeDetailsRoute} width="65%"/>
         </div>;
     }
 

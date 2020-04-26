@@ -82,7 +82,7 @@ class RouteList extends React.Component {
 
             // Handle my Routes
             storageHandler.getRoutes((routeJson, error) => {
-                if (routeJson == null) {
+                if (routeJson === null) {
                     toast.error(i18n.t('alertAccessPOD'));
                 } else {
                     if (routeJson.length !== 0) {
@@ -92,7 +92,7 @@ class RouteList extends React.Component {
                         let tempList = this.state.routes;
                         tempList.push(tempRoute);
                         this.processedRoutes += 1;
-                        if (this.processedRoutes == this.retrievedRoutes) {
+                        if (this.processedRoutes === this.retrievedRoutes) {
                             this.setState({ routes: tempList });
                             $("#messageArea").empty();
                         }
@@ -117,7 +117,7 @@ class RouteList extends React.Component {
 
             // Handle Shared Routes
             storageHandler.getRoutesSharedToMe( function(route){
-                if (route === undefined || route == null) {
+                if (route === undefined || route === null) {
                     this.wasError = true;
                 } else {
                     this.routeManager.addSharedRoute(route);

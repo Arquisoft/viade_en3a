@@ -1,15 +1,11 @@
 import React from "react";
-import RouteManager from "../model/RouteManager";
 import {CardDeck, Spinner} from "react-bootstrap";
 import RouteCard from "../components/routeList/RouteCard";
 import {toast, ToastContainer} from "react-toastify";
 import {Translation} from "react-i18next";
 import PodStorageHandler from "../components/podService/podStoreHandler";
-import MyRoute from "../model/MyRoute";
-import $ from "jquery";
 import RouteList from "./RouteList";
 import Button from "react-bootstrap/Button";
-import i18next from "i18next";
 import i18n from '../i18n';
 const auth = require('solid-auth-client');
 

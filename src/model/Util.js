@@ -1,8 +1,5 @@
 const auth = require('solid-auth-client');
 const { default: data } = require('@solid/query-ldflex');
-const $rdf = require('rdflib');
-const store  = $rdf.graph();
-
 class UserDetails {
 
     static async getName(){
