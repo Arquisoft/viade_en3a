@@ -158,7 +158,7 @@ export default class PodStorageHandler extends PodHandler{
         return result;
     }
 
-    async getRoutesSharedToMe(forEachRoute = () => {}){
+    async getRoutesSharedToMe(forEachRoute = () => {}, afterAllRoutes = () => {}){
         await this._getSharedFolder(async function (file) {
             // Transform file to JSON
             let fileAsJSON = JSON.parse(file);
@@ -175,6 +175,7 @@ export default class PodStorageHandler extends PodHandler{
                         forEachRoute(routeObject);
                 }, (error) => {forEachRoute(null);} );
             }
+            afterAllRoutes();
         }.bind(this));
     }
 
