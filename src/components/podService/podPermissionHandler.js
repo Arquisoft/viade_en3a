@@ -69,10 +69,7 @@ export default class PodPermissionHandler extends PodHandler{
 
         try {
             await acl.addRule(permissions, agents);
-            //console.log("updated acl");
         } catch (e) {
-            //console.error('Error while adding rule');
-            //onsole.error(e);
             throw e;
         }
     }
