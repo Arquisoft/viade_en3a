@@ -1,12 +1,16 @@
 import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
-import Card from 'react-bootstrap/Card';
+import { Card, CardDeck } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { toast, ToastContainer } from "react-toastify";
 import i18n from '../i18n';
+import MyGroup from "../model/MyGroup";
+import PodStorageHandler from "../components/podService/podStoreHandler";
+import groupManager from "./../model/GroupManager";
+import $ from "jquery";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,45 +18,83 @@ class ShareView extends React.Component {
 
     constructor(props) {
         super();
+        this.groupManager = groupManager;
         this.state = {
-            friends: []
+            friends: [],
+            groups: []
         };
+        this.processedGroups = 0;
+        this.retrievedGroups = 0;
         this.readFriends();
+        this.syncGroupsWithPod();
         this.webId = null;
         this.id = props.match.params.id;
     }
 
     render() {
-        return (
-            <div className="App-header">
-                <ToastContainer
-                        position={toast.POSITION.TOP_CENTER}
-                        autoClose={5000}
-                    />
-                <div style={{
-                    backgroundColor: "#282c34",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    color: "black"
-                }}>
-                    {
-                        this.state.friends.map((friend) => {
-                            return <div>
-                                <Card style={{ width: '18rem', margin: "10px" }}>
-                                    <Card.Img variant="top" src={friend.image} />
-                                    <Card.Body>
-                                        <Card.Title>{friend.name}</Card.Title>
-                                        <Button variant="primary"
-                                            onClick={() => { this.send(friend.inbox); }}>Share</Button>
-                                    </Card.Body>
-                                </Card>
-                            </div>;
-                        })
-                    }
-                </div>
-            </div>
+
+        let friendsCardDeck = this.generateCardDecks(
+            this.state.friends,
+            4,
+            (friend) => {
+                return (
+                    <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                        <Card.Img variant="top" src={friend.image} />
+                        <Card.Body>
+                            <Card.Title>{friend.name}</Card.Title>
+                            <Button variant="primary"
+                                onClick={() => { this.send(friend.inbox); }}>Share</Button>
+                        </Card.Body>
+                    </Card>
+                );
+            }
         );
+
+        let groupsCardDeck = this.generateCardDecks(
+            this.state.groups,
+            4,
+            (group) => {
+                return (
+                    <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                        <Card.Body>
+                            <Card.Title>{group.name}</Card.Title>
+                            {group.users.map((user) => <Card.Text>{user.name}</Card.Text>)}
+                            <Button variant="primary"
+                                onClick={() => { this.sendToGroup(group.users); }}>Share</Button>
+                        </Card.Body>
+                    </Card>
+                );
+            }
+        );
+
+        return (
+            <div>
+                <ToastContainer
+                    position={toast.POSITION.TOP_CENTER}
+                    autoClose={5000}
+                />
+                <h2 style={{ padding: "1%" }}>Amigos</h2>
+                {friendsCardDeck}
+                <h2 style={{ padding: "1%" }}>Grupos</h2>
+                {groupsCardDeck}
+            </div >
+        );
+    }
+
+    generateCardDecks(list, cardDeckSize = 4, componentMappingFunction = (n) => { }) {
+        let components = [];
+        let counter = 0;
+        while (counter <= list.length) {
+            components.push(
+                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
+                    {list.slice(counter, counter + cardDeckSize).map((listItem) => {
+                        return componentMappingFunction(listItem);
+                    })}
+                </CardDeck>
+            );
+            counter += cardDeckSize;
+        }
+        return components;
     }
 
     async readFriends() {
@@ -131,6 +173,52 @@ class ShareView extends React.Component {
         let wId = this.webId;
         let tmp = wId.split("profile")[0];
         return tmp;
+    }
+
+    async syncGroupsWithPod() {
+        this.groupManager.resetGroups();
+        let session = await auth.currentSession();
+        if (session !== null && session !== undefined) {
+            let storageHandler = new PodStorageHandler(session);
+            storageHandler.getGroups((groupJson, error) => {
+                if (groupJson === null) {
+                    toast.error(i18n.t('alertAccessPOD'));
+                } else {
+                    if (groupJson.length !== 0) {
+                        let tempGroup = new MyGroup("", []);
+                        tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
+                        this.groupManager.addGroup(tempGroup);
+                        let tempList = this.state.groups;
+                        tempList.push(tempGroup);
+                        this.processedGroups += 1;
+                        if (this.processedGroups === this.retrievedGroups) {
+                            this.setState({ groups: tempList });
+                            $("#messageArea").empty();
+                        }
+                    }
+                }
+            }).then(
+                (result) => {
+                    if (result === 0) {
+                        this.setState({
+                            message:
+                                <div>
+                                    <h3>{i18n.t("messageNoGroups")}</h3>
+                                    <p>{i18n.t("messageNoGroupsCreateOne")}</p>
+                                </div>
+                        });
+                    } else {
+                        this.retrievedGroups = result;
+                    }
+                }
+            );
+        }
+    }
+
+    sendToGroup(users) {
+        users.forEach((user) => {
+            this.send(user.inbox);
+        });
     }
 
 }

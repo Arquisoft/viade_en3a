@@ -2,7 +2,7 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
-import i18n from '../i18n'; 
+import i18n from '../i18n';
 
 import PodStorageHandler from "../components/podService/podStoreHandler";
 import RouteCard from "../components/routeList/RouteCard";
@@ -22,7 +22,7 @@ class RouteList extends React.Component {
         this.cardDeckSize = 4;
         this.state = {
             routes: [],
-            sharedRoutes : [],
+            sharedRoutes: [],
             spinnerHidden: false,
         };
         if (props.sync === undefined || props.sync === true) { // avoid sync with pod, used for RouteList.test.js
@@ -104,8 +104,8 @@ class RouteList extends React.Component {
                         this.setState({
                             message:
                                 <div>
-                                    <h3>Oops! We didn't find any route in your POD</h3>
-                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                    <h3>{i18n.t('routeListOoopsTitle')}</h3>
+                                    <p>{i18n.t('routeListOoopsParagraph')}</p>
                                 </div>
                         });
                     } else {
@@ -113,25 +113,6 @@ class RouteList extends React.Component {
                     }
                 }
             );
-
-
-            // Handle Shared Routes
-            storageHandler.getRoutesSharedToMe( function(route){
-                if (route === undefined || route === null) {
-                    this.wasError = true;
-                } else {
-                    this.routeManager.addSharedRoute(route);
-                    let tempList = this.state.sharedRoutes;
-                    tempList.push(route);
-                    this.setState({ sharedRoutes: tempList });
-                    $("#messageArea").empty();
-                }
-            }.bind(this), function(){
-                if(this.wasError){
-                    this.wasError = false;
-                    toast.error(i18n.t("alertUnavailableRoutes"));
-                }
-            }.bind(this));
         }
     }
 

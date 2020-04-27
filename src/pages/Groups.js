@@ -1,6 +1,6 @@
 import './../css/App.css';
-import React, { Component } from 'react';
-import { Button} from 'react-bootstrap';
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
 import FriendCard from '../components/friendCard/FriendCard';
 import { Translation } from 'react-i18next';
@@ -20,7 +20,7 @@ const groupsStyle = {
     padding: "2%"
 };
 
-class Groups extends Component {
+class Groups extends React.Component {
 
     constructor(props) {
         super(props);
@@ -64,8 +64,8 @@ class Groups extends Component {
                         this.setState({
                             message:
                                 <div>
-                                    <h3>Oops! We didn't find any route in your POD</h3>
-                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                    <h3>{i18n.t("messageNoGroups")}</h3>
+                                    <p>{i18n.t("messageNoGroupsCreateOne")}</p>
                                 </div>
                         });
                     } else {
@@ -79,44 +79,48 @@ class Groups extends Component {
     render() {
         return (
             <div className="App-FlexCenterColumn">
-            <Translation>
-                {
-                    (t) => <h1 style={{ padding: "1%" }}>{t('groupsTitle')}</h1>
-                }
-            </Translation>
-            <Translation>
+                <Translation>
                     {
-                        (t) => <Button variant="primary" size="lg" href="#createGroup" 
-                        style={{ margin: "2vh" }}>{t('groupsCreate')}</Button>
+                        (t) => <h1 style={{ padding: "1%" }}>{t('groupsTitle')}</h1>
                     }
-            </Translation>
-            <div style={groupsStyle}>
-                {
-                    this.state.groups.map((group) => {
-                        return <div>
-                            <h2>{group.name}</h2>
-                            <div>
-                                {
-                                    group.users.map((user) => {
-                                        return <div style={groupsStyle}>
-                                            <FriendCard
-                                                friendImage={user.image}
-                                                friendName={user.name}
-                                                friendLink={user.webId}
-                                                />
-                                        </div>;
-                                    })
-                                }
-                            </div>;
-                        </div>;
-                    })
-                }
+                </Translation>
+                <Translation>
+                    {
+                        (t) => <Button variant="primary" size="lg" href="#createGroup"
+                            style={{ margin: "2vh" }}>{t('groupsCreate')}</Button>
+                    }
+                </Translation>
+                <div style={groupsStyle}>
+                    {
+                        this.state.groups.map((group) => {
+                            return (
+                                <div>
+                                    <h2>{group.name}</h2>
+                                    <div>
+                                        {
+                                            group.users.map((user) => {
+                                                return (
+                                                    <div style={groupsStyle}>
+                                                        <FriendCard
+                                                            friendImage={user.image}
+                                                            friendName={user.name}
+                                                            friendLink={user.webId}
+                                                        />
+                                                    </div>
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
 
-            </div>
-            <div id="messageArea">
+                </div>
+                <div id="messageArea">
                     {this.state.message}
-            </div>
-        </div >
+                </div>
+            </div >
         );
 
     }

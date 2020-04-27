@@ -1,12 +1,11 @@
 import PodHandler from "./podHandler";
-import MyRoute from "../../model/MyRoute";
 
 const N3 = require('n3');
 const auth = require('solid-auth-client');
 const FC = require('solid-file-client');
 const fc = new FC(auth);
 
-export default class PodStorageHandler extends PodHandler{
+export default class PodStorageHandler extends PodHandler {
 
     /**
      * @param {Session} currentSession - auth.currentSession()
@@ -74,7 +73,7 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     /**
-     * Retrieves every single file from the POD routes directory if present. Then executes the callback function
+     * Retrieves every single file from the POD groups directory if present. Then executes the callback function
      * passed as a parameter for each file retrieved. This operation will automatically generate the default 
      * storage folders if not present.
      *
@@ -134,87 +133,74 @@ export default class PodStorageHandler extends PodHandler{
     }
 
 
-    async _getSharedFolder(forEachFile = () => {}){
-        let result = [];
-        let directory = null;
-        await this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
-            (folder) => {directory = folder},
-            (error) => { result = null; }
+    async getRoutesSharedToMe(forEachFile = (file, error) => { }) {
+        this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
+            async (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    await this.getFile(directory.files[i].url).then(
+                        async (sharedRoutesfile) => {
+                            let parsedFileRoutes = JSON.parse(sharedRoutesfile).routes;
+                            for (let j = 0; j < parsedFileRoutes.length; j++) {
+                                await this.getFile(parsedFileRoutes[j]["@id"]).then(
+                                    (fileContents) => {
+                                        let lastFile =
+                                            (i === directory.files.length - 1) &&
+                                            (j === parsedFileRoutes.length - 1);
+                                        forEachFile(fileContents, null, lastFile);
+                                    },
+                                    (error) => { forEachFile(); }
+                                );
+                            }
+                        },
+                        (error) => { forEachFile(null, error); }
+                    );
+                }
+                return directory.files.length === 0;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return false;
+            }
         );
-        if (directory) {
-            for(let i = 0; i < directory.files.length; i++) {
-                await this.getFile(directory.files[i].url).then(
-                    function (file) {
-                        forEachFile(file);
-                        result.push(file);
-                    },
-                    (error) => { forEachFile(null); }
-                );
-            }
-        } else {
-            this.createBasicFolders();
-        }
-        return result;
-    }
-
-    async getRoutesSharedToMe(forEachRoute = () => {}, afterAllRoutes = () => {}){
-        await this._getSharedFolder(async function (file) {
-            // Transform file to JSON
-            let fileAsJSON = JSON.parse(file);
-            let sharedRoutes = fileAsJSON["routes"];
-
-            // get all routes files
-            sharedRoutes = sharedRoutes.map((j) => { return j["@id"]; });
-            for (let i = 0; i < sharedRoutes.length; i++){
-                let fileUrl = sharedRoutes[i];
-                await this.getFile(fileUrl).then( function(content) {
-                        // Create routes from JSON
-                        let routeObject = new MyRoute();
-                        routeObject.modifyFromJsonLd(JSON.parse(content));
-                        forEachRoute(routeObject);
-                }, (error) => {forEachRoute(null);} );
-            }
-            afterAllRoutes();
-        }.bind(this));
     }
 
     /**
      * Checks for routes in the inbox, adding them onto a shared route file at /viade/shared/
      * forEachMail is called for each new route
      */
-    async checkInbox(forEachMail = () => {}){
+    async checkInbox(forEachMail = () => { }) {
         await this.getFolder(this.repository + "/inbox/").then(
             async function (folder) {
-                await folder.files.map( (file) => {return file.url}).forEach( async function(url) { // For each message
-                    await this.getFile(url).then( function(content){
-                            const parser = new N3.Parser();
-                            parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
-                                if (quad) {
-                                    if ( quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
-                                        forEachMail(quad.object.id);
-                                        this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
-                                        this._eliminateFile(url);
-                                    }
+                await folder.files.map((file) => { return file.url }).forEach(async function (url) { // For each message
+                    await this.getFile(url).then(function (content) {
+                        const parser = new N3.Parser();
+                        parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
+                            if (quad) {
+                                if (quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/")) { // If the quad is the url of the route
+                                    forEachMail(quad.object.id);
+                                    this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
+                                    this._eliminateFile(url);
                                 }
-                            }.bind(this));
-                        }.bind(this),
-                            (error) => {}
+                            }
+                        }.bind(this));
+                    }.bind(this),
+                        (error) => { }
                     );
                 }.bind(this));
 
             }.bind(this),
-            (error) => {  }
+            (error) => { }
         );
 
     }
 
-    _eliminateFile(url){
+    _eliminateFile(url) {
         fc.delete(url);
     }
 
-    _eliminateSharedFolder(){
+    _eliminateSharedFolder() {
         let url = this.repository + this.defaultFolder + this.sharedDirectory;
-        this.getFolder(url).then(function(folder){
+        this.getFolder(url).then(function (folder) {
             for (let i = 0; i < folder.files.length; i++) {
                 this._eliminateFile(folder.files[i].url);
             }
@@ -234,7 +220,7 @@ export default class PodStorageHandler extends PodHandler{
         );
     }
 
-    storeFile(url, data, callback = () => {}) {
+    storeFile(url, data, callback = () => { }) {
         let response = fc.createFile(url, data);
         response.then(
             (response) => { callback(response.url, response); }
@@ -242,7 +228,7 @@ export default class PodStorageHandler extends PodHandler{
         );
     }
 
-    async addRoutesAsShared(urls){
+    async addRoutesAsShared(urls) {
         let file = null;
         let filename = "en3a.json";
 
@@ -269,16 +255,16 @@ export default class PodStorageHandler extends PodHandler{
         }
 
         // 2.- Remove duplicated routes
-        let alreadyRoutes = file["routes"].map((url) => {return url["@id"];});
+        let alreadyRoutes = file["routes"].map((url) => { return url["@id"]; });
         urls.forEach((url) => {
-           if (alreadyRoutes.indexOf(url) === -1) {
-               alreadyRoutes.push( url );
-           }
+            if (alreadyRoutes.indexOf(url) === -1) {
+                alreadyRoutes.push(url);
+            }
         });
         urls = [];
 
         // 3.- Rewrite file
-        file["routes"] = alreadyRoutes.map((url) => {return {"@id": url.toString()}});
+        file["routes"] = alreadyRoutes.map((url) => { return { "@id": url.toString() } });
 
         this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, JSON.stringify(file));
     }
@@ -291,7 +277,7 @@ export default class PodStorageHandler extends PodHandler{
         return fc.readFile(url);
     }
 
-    async createBasicFolders(){
+    async createBasicFolders() {
         await fc.createFolder(this.repository + this.defaultFolder);
         fc.createFolder(this.repository + this.defaultFolder + this.routesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.resourcesDirectory);
