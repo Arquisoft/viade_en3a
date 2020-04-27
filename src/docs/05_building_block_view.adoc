@@ -82,6 +82,9 @@ Interfaces::
 | Solid-acl-utils
 | Utilities used to manage POD's permissions. More info link:https://github.com/Otto-AA/solid-acl-utils[here]
 
+| N3
+| A library used to parse turtle files. Required for some files of the POD as, for example, inbox notifications. More info link:https://github.com/rdfjs/N3.js[here].
+
 | Airmap elevation
 | This API provides a result for the elevation of a couple of coordinates given latitude and longitude. More info link:https://developers.airmap.com/docs/elevation-api[here].
 
