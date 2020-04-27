@@ -4,11 +4,13 @@
 === Route Creation
 image::RuntimeViewRouteCreation.png[RouteCreation]
 
-The user creates a route using the map in the UI. Once it presses save,
-using the data it defined (name, description, route points), the route 
-is created. In this point the altitude for each of the points is calculated
-calling an external API. Once created the route is added to the list mantained
-in the Route Manager. Asynchronously the new route is added to the POD.
+The user creates a route using the map in the UI. Each time he creates a new point
+a temporal object is created which stores name and description. Moreover, at creation
+time or when it's position is updated, a real point is created (without name and description)
+in order to ask the API for its altitude. This process is asynchronous and once we have the
+response the elevation chart in the view is updated. Finally, when all the points are created,
+the route is decorated with name and description for all the points. Then, it's uploaded to the POD.
+
 
 === Route Listing
 image::RuntimeViewRouteDetailed.png[RouteListing]
@@ -17,10 +19,10 @@ Once the user clicks in route listing the following process is executed.
 
 [arabic]
 . The Route Manager is called to get the user's routes.
-. The routes are showng as independent cards, one for each with a button
-on each one allowing you to display the more info view.
+. The routes are showng as independent cards, one for each, with a button allowing you to display the "More info" view.
 . The more info view contains:
-.. The route image
-.. More information about the route (description, name, ...)
-.. MyMap React component showing the points.
+.. The route images in a gallery.
+.. More information about the route (description, name, author, total route distance)
+.. MyMap React component showing the points, movable and clickable to display each point's information.
 .. MyElevationChart React component showing the altitude for each of the points.
+.. A button to export the route as JSON file.

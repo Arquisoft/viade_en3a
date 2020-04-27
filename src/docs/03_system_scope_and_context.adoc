@@ -7,6 +7,8 @@ The stakeholders of the application are described in the next lines and how the 
 
 image::BusinessContext.png[BusiContext]
 
+This is a high level view of the system. Showing the main idea behind the app.
+
 User:: The user creates routes on our application or in other compatible aplications that use viadeSpec standard.
 User Friends:: User SOLID friends can also create routes in their favourite application following the standard.
 Applications:: Both applications will communicate between each other, showing and editing the routes or creating them. For an application to be considered compatible it must follow link:https://github.com/Arquisoft/viadeSpec[ViadeSpec].
@@ -16,16 +18,18 @@ Applications:: Both applications will communicate between each other, showing an
 
 image:TechnicalContext.png[TechContext]
 
+Here we show deeply how the communication is done and which are the important parts of the system.
+
 ==== Internally Controlled:
 
-Application Front End:: 
+Application Front End:::
 	We use React to design it and Bootstrap to ease the design of the interface.
 	It is our framework of choice for the frontend of the application, so this part will be developed in javascript and HTML.
 	Its task is to build the HTMLs views which the user interacts with.
 
-Application Back End::
+Application Back End:::
 
-RDFLib.js::
+rdflib::
     It's a library used to communicate with the Pods (where the information is stored); to fetch and update data whenever necessary.
 
 solid-file-client::
@@ -33,6 +37,13 @@ solid-file-client::
 
 solid-auth-client::
     A library used to authenticate a user securely and have access to parts of their PODs.
+
+solid-acl-utils::
+    Used to manage POD's permissions.
+
+ldflex::
+    It's used to query data from the different PODs.
+
 
 The application is based on the SOLID project for the re-decentralization of the web, therefore
 each user is the owner of its own data through the mentioned Pods.

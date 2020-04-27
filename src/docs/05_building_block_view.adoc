@@ -6,17 +6,17 @@
 
 This application has a very simple top level design. This is introduced by <<section-system-scope-and-context>>.
 
-image::BusinessContext.png[BusiContext]
+image::BuildingBlock1.png[BuildingBlockLevel1]
 
-Our application:: 
-Manages the user's routes. Some actions possible are:
+Viade application::
+It's the application we're talking about.
 
-*  Creating new routes.
-*  Displaying information of existing routes.
-*  Sending notifications to some friend to initiate route sharing process.
+External APIs::
+We use some APIs available on the internet, to manage maps and points. They are detailed in the last point of this section.
 
-Other applications:: 
-Applications that use some data format to represent routes. The supported data formats are specified in the standard described in link:https://github.com/Arquisoft/viadeSpec[ViadeSpec] GitHub repository.
+PODs::
+As we said is the service we use to store routes, groups and all the user's information.
+Through them, we allow other compatible apps to share data with us.
 
 Contained blackboxes::
 [cols="1,4", options="header"]
@@ -35,7 +35,7 @@ Contained blackboxes::
 
 This whitebox contains several blackboxes that depend on a series of interfaces to external sources of information. These modules can be seen in the diagram image shown below.
 
-image::viadeWhiteBoxLevel1.png[ViadeWhiteBoxLevel1]
+image::viadeWhiteBoxLevel1.png[ViadeWhiteBoxLevel2]
 
 This representation focuses on functionality. Hence some components wont match their corresponding file or might be represented by more than one file. Some other functionalities weren't represented since they were considered as non-relevant.
 
@@ -47,8 +47,8 @@ Contained blackboxes::
 | RouteCreation
 | Contains the functionalities that can be used by the users to create new routes. Once created, provided a list of values with some requirements, the route is stored inside the user's POD.
 
-| Profile
-| Provides the users with the ability to inspect their profile.
+| Profile & group management
+| Provides the users with the ability to inspect their profile and manage their groups of friends.
 
 | RouteList
 | Lists the set of routes stored inside the user's POD. Gives the option to learn more about the route, such as its points, altitude of them or media related to them.
@@ -79,10 +79,16 @@ Interfaces::
 | Solid-auth-client
 | This one is needed to obtain and manage user session details with regards to SOLID POD and account. More information about this API link:https://github.com/solid/solid-auth-client[here].
 
+| Solid-acl-utils
+| Utilities used to manage POD's permissions. More info link:https://github.com/Otto-AA/solid-acl-utils[here]
+
 | Airmap elevation
 | This API provides a result for the elevation of a couple of coordinates given latitude and longitude. More info link:https://developers.airmap.com/docs/elevation-api[here].
 
 | Leaflet
 | This API is needed to mainpulate the map components that React-Leaflet provides. More on that link:https://react-leaflet.js.org/[here].
+
+| Nominatim
+| It's a free search engine to allow looking for concrete places and get their coordinates. More info link:https://nominatim.openstreetmap.org/[here]
 
 |===
