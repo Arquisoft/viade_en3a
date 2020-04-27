@@ -74,7 +74,7 @@ export default class PodStorageHandler extends PodHandler{
     }
 
     /**
-     * Retrieves every single file from the POD routes directory if present. Then executes the callback function
+     * Retrieves every single file from the POD groups directory if present. Then executes the callback function
      * passed as a parameter for each file retrieved. This operation will automatically generate the default 
      * storage folders if not present.
      *

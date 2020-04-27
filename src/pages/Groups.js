@@ -64,8 +64,8 @@ class Groups extends Component {
                         this.setState({
                             message:
                                 <div>
-                                    <h3>Oops! We didn't find any route in your POD</h3>
-                                    <p>You can move to "Route management >> Create a new route" to add a new route!</p>
+                                    <h3>{i18n.t("messageNoGroups")}</h3>
+                                    <p>{i18n.t("messageNoGroupsCreateOne")}</p>
                                 </div>
                         });
                     } else {

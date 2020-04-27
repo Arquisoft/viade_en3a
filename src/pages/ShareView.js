@@ -1,12 +1,15 @@
 import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
-import Card from 'react-bootstrap/Card';
+import { Card, CardDeck } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
 import { toast, ToastContainer } from "react-toastify";
 import i18n from '../i18n';
+import MyGroup from "../model/MyGroup";
+import PodStorageHandler from "../components/podService/podStoreHandler";
+import $ from "jquery";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,8 +17,10 @@ class ShareView extends React.Component {
 
     constructor(props) {
         super();
+        this.groupManager = props.groupManager;
         this.state = {
-            friends: []
+            friends: [],
+            groups: []
         };
         this.readFriends();
         this.webId = null;
@@ -23,36 +28,68 @@ class ShareView extends React.Component {
     }
 
     render() {
+        /*while (counter <= this.state.groups.length) {
+            groups.push(
+                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
+                    {this.state.groups.slice(counter, counter + this.cardDeckSize).map(
+                        (group) =>
+                            <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                                <Card.Img variant="top" src={friend.image} />
+                                <Card.Body>
+                                    <Card.Title>{friend.name}</Card.Title>
+                                    <Button variant="primary"
+                                        onClick={() => { this.send(friend.inbox); }}>Share</Button>
+                                </Card.Body>
+                            </Card>
+                    )}
+                </CardDeck>
+            );
+            counter += this.cardDeckSize;
+        }*/
+
+        let friendsCardDeck = this.generateCardDecks(
+            this.state.friends,
+            4,
+            (friend) => {
+                return (
+                    <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                        <Card.Img variant="top" src={friend.image} />
+                        <Card.Body>
+                            <Card.Title>{friend.name}</Card.Title>
+                            <Button variant="primary"
+                                onClick={() => { this.send(friend.inbox); }}>Share</Button>
+                        </Card.Body>
+                    </Card>
+                );
+            }
+        );
+
         return (
             <div className="App-header">
                 <ToastContainer
-                        position={toast.POSITION.TOP_CENTER}
-                        autoClose={5000}
-                    />
-                <div style={{
-                    backgroundColor: "#282c34",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    color: "black"
-                }}>
-                    {
-                        this.state.friends.map((friend) => {
-                            return <div>
-                                <Card style={{ width: '18rem', margin: "10px" }}>
-                                    <Card.Img variant="top" src={friend.image} />
-                                    <Card.Body>
-                                        <Card.Title>{friend.name}</Card.Title>
-                                        <Button variant="primary"
-                                            onClick={() => { this.send(friend.inbox); }}>Share</Button>
-                                    </Card.Body>
-                                </Card>
-                            </div>;
-                        })
-                    }
-                </div>
+                    position={toast.POSITION.TOP_CENTER}
+                    autoClose={5000}
+                />
+                <h2>Amigos</h2>
+                {friendsCardDeck}
+                <h2>Grupos</h2>
             </div>
         );
+    }
+
+    generateCardDecks(list, cardDeckSize = 4, componentMappingFunction = (n) => { }) {
+        let components = [];
+        let counter = 0;
+        while (counter <= list.length) {
+            components.push(
+                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
+                    {list.slice(counter, counter + cardDeckSize).map((listItem) => { return componentMappingFunction(listItem) }
+                    )}
+                </CardDeck>
+            );
+            counter += cardDeckSize;
+        }
+        return list;
     }
 
     async readFriends() {
@@ -79,7 +116,7 @@ class ShareView extends React.Component {
             }
             friends = [...friends, f];
         }
-        this.setState({ friends });
+        this.setState({ friends: friends });
     }
 
 
@@ -132,7 +169,6 @@ class ShareView extends React.Component {
         let tmp = wId.split("profile")[0];
         return tmp;
     }
-
 }
 
 export default ShareView;

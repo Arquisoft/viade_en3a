@@ -105,7 +105,9 @@ const resources = {
       "searching" : "Searching...",
       "alertUnableToRetrieveRoute" : "There was an error trying to show the information for this route",
       "alertUnavailableRoutes" : "One of your friends erased a route shared to you. Go to Shared routes and remove them to discard this message",
-      "alertRoutesRemoved" : "Routes Eliminated!"
+      "alertRoutesRemoved" : "Routes Eliminated!",
+      "messageNoGroups" : "You have no groups created yet!",
+      "messageNoGroupsCreateOne" : "Click on the button and create one!"
     }
   },
   es: {
@@ -210,7 +212,9 @@ const resources = {
       "searching" : "Buscando...",
       "alertUnableToRetrieveRoute" : "Hubo un error tratando de mostrar la información sobre la ruta",
       "alertUnavailableRoutes" : "Uno de tus amigos elimino una o varias rutas que te había compartido. Ve a la sección de rutas compartidas y eliminalas para descartar este mensaje",
-      "alertRoutesRemoved" : "¡Rutas eliminadas!"
+      "alertRoutesRemoved" : "¡Rutas eliminadas!",
+      "messageNoGroups" : "¡Todavía no has creado ningun grupo!",
+      "messageNoGroupsCreateOne" : "Pulsa en el botón y crea uno"
     }
   }
 };
