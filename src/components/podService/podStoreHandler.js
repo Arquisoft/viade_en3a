@@ -171,7 +171,7 @@ export default class PodStorageHandler extends PodHandler {
     async checkInbox(forEachMail = () => { }) {
         await this.getFolder(this.repository + "/inbox/").then(
             async function (folder) {
-                await folder.files.map((file) => { return file.url }).forEach(async function (url) { // For each message
+                await folder.files.map((file) => { return file.url; }).forEach(async function (url) { // For each message
                     await this.getFile(url).then(function (content) {
                         const parser = new N3.Parser();
                         parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
@@ -264,7 +264,7 @@ export default class PodStorageHandler extends PodHandler {
         urls = [];
 
         // 3.- Rewrite file
-        file["routes"] = alreadyRoutes.map((url) => { return { "@id": url.toString() } });
+        file["routes"] = alreadyRoutes.map((url) => { return { "@id": url.toString() }; });
 
         this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, JSON.stringify(file));
     }
