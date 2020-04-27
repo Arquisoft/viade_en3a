@@ -30,6 +30,8 @@ class ShareView extends React.Component {
     }
 
     render() {
+        console.log(this.state.groups);
+
         let friendsCardDeck = this.generateCardDecks(
             this.state.friends,
             4,
@@ -58,15 +60,12 @@ class ShareView extends React.Component {
                             <Card.Title>{group.name}</Card.Title>
                             {group.users.map((user) => <Card.Text>{user.name}</Card.Text>)}
                             <Button variant="primary"
-                                onClick={() => { this.send(group.inbox); }}>Share</Button>
+                                onClick={() => { this.sendToGroup(group.users); }}>Share</Button>
                         </Card.Body>
                     </Card>
                 );
             }
         );
-
-        // console.log(groupsCardDeck);
-        // console.log(this.state.groups);
 
         return (
             <div>
@@ -214,6 +213,13 @@ class ShareView extends React.Component {
                 }
             );
         }
+    }
+
+    sendToGroup(users) {
+        users.forEach(user => {
+            console.log(user.inbox);
+            this.send(user.inbox)
+        });
     }
 
 }
