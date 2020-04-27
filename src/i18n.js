@@ -100,7 +100,12 @@ const resources = {
       "alertAlreadyIncluded" : " already included",
       "alertAddedSuccessfully" : " added successfully",
       "alertErrorInPermissions" : "Unable to share your route. Your friend does not allow sharing",
-      "alertSuccessInPermissions" : "Your route was successfully shared!" 
+      "alertSuccessInPermissions" : "Your route was successfully shared!",
+      "alertNoInputOnSearch" : "Oopss... At least try to search for some place :D",
+      "searching" : "Searching...",
+      "alertUnableToRetrieveRoute" : "There was an error trying to show the information for this route",
+      "alertUnavailableRoutes" : "One of your friends erased a route shared to you. Go to Shared routes and remove them to discard this message",
+      "alertRoutesRemoved" : "Routes Eliminated!"
     }
   },
   es: {
@@ -200,7 +205,12 @@ const resources = {
       "alertAlreadyIncluded" : " ya está incluido",
       "alertAddedSuccessfully" : " añadido correctamente",
       "alertErrorInPermissions" : "Imposible compartir la ruta. Tu amigo no permite esta acción",
-      "alertSuccessInPermissions" : "Tu ruta ha sido compartida con éxito" 
+      "alertSuccessInPermissions" : "Tu ruta ha sido compartida con éxito",
+      "alertNoInputOnSearch" : "Oopss... Debes indicar un sitio para poder buscarlo :D",
+      "searching" : "Buscando...",
+      "alertUnableToRetrieveRoute" : "Hubo un error tratando de mostrar la información sobre la ruta",
+      "alertUnavailableRoutes" : "Uno de tus amigos elimino una o varias rutas que te había compartido. Ve a la sección de rutas compartidas y eliminalas para descartar este mensaje",
+      "alertRoutesRemoved" : "¡Rutas eliminadas!"
     }
   }
 };

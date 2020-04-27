@@ -83,7 +83,7 @@ export default class RouteSharedList extends RouteList {
         let session = await auth.currentSession();
         let storageHandler = new PodStorageHandler(session);
         storageHandler._eliminateSharedFolder();
-        toast.success("Routes Eliminated!");
+        toast.success(i18n.t("alertRoutesRemoved"));
         //this.syncRoutesWithPod();
     }
 

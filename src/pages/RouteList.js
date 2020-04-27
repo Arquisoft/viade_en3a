@@ -129,7 +129,7 @@ class RouteList extends React.Component {
             }.bind(this), function(){
                 if(this.wasError){
                     this.wasError = false;
-                    toast.error("Someone erased a shared route. Click to clean your ALL shared files");
+                    toast.error("alertUnavailableRoutes");
                 }
             }.bind(this));
         }

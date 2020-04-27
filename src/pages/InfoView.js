@@ -17,6 +17,7 @@ import logo1 from "../assets/logo/logo.jpeg";
 import logo2 from "../assets/logo/logo_alt.jpeg";
 
 import "./../css/infoView.css";
+import i18n from "../i18n";
 
 const auth = require('solid-auth-client');
 
@@ -177,7 +178,7 @@ class InfoView extends React.Component {
                 let storageHandler = new PodStorageHandler(session);
                 storageHandler.getRoutes((jsonRoute, error) => {
                     if (jsonRoute === null) {
-                        toast.error("There was an error trying to show the information for this route");
+                        toast.error(i18n.t("alertUnableToRetrieveRoute"));
                     } else {
                         if (jsonRoute.includes(this.id)) {
                             let tempRoute = new MyRoute("", "", "", []);
