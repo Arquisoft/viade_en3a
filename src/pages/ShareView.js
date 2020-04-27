@@ -32,7 +32,6 @@ class ShareView extends React.Component {
     }
 
     render() {
-        console.log(this.state.groups);
 
         let friendsCardDeck = this.generateCardDecks(
             this.state.friends,
@@ -55,7 +54,6 @@ class ShareView extends React.Component {
             this.state.groups,
             4,
             (group) => {
-                console.log(group);
                 return (
                     <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
                         <Card.Body>
@@ -90,7 +88,7 @@ class ShareView extends React.Component {
             components.push(
                 <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
                     {list.slice(counter, counter + cardDeckSize).map((listItem) => {
-                        return componentMappingFunction(listItem)
+                        return componentMappingFunction(listItem);
                     })}
                 </CardDeck>
             );
@@ -123,7 +121,7 @@ class ShareView extends React.Component {
             }
             friends = [...friends, f];
         }
-        this.setState({ friends: friends });
+        this.setState({ friends });
     }
 
 
@@ -218,9 +216,8 @@ class ShareView extends React.Component {
     }
 
     sendToGroup(users) {
-        users.forEach(user => {
-            console.log(user.inbox);
-            this.send(user.inbox)
+        users.forEach((user) => {
+            this.send(user.inbox);
         });
     }
 

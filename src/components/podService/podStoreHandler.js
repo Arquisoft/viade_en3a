@@ -155,7 +155,7 @@ export default class PodStorageHandler extends PodHandler {
                         (error) => { forEachFile(null, error); }
                     );
                 }
-                return directory.files.length === 0
+                return directory.files.length === 0;
             },
             (error) => {
                 this.createBasicFolders();
