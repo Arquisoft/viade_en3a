@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import i18n from '../i18n';
 import MyGroup from "../model/MyGroup";
 import PodStorageHandler from "../components/podService/podStoreHandler";
+import groupManager from "./../model/GroupManager";
 import $ from "jquery";
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,36 +18,18 @@ class ShareView extends React.Component {
 
     constructor(props) {
         super();
-        this.groupManager = props.groupManager;
+        this.groupManager = groupManager;
         this.state = {
             friends: [],
             groups: []
         };
         this.readFriends();
+        this.syncGroupsWithPod();
         this.webId = null;
         this.id = props.match.params.id;
     }
 
     render() {
-        /*while (counter <= this.state.groups.length) {
-            groups.push(
-                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
-                    {this.state.groups.slice(counter, counter + this.cardDeckSize).map(
-                        (group) =>
-                            <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
-                                <Card.Img variant="top" src={friend.image} />
-                                <Card.Body>
-                                    <Card.Title>{friend.name}</Card.Title>
-                                    <Button variant="primary"
-                                        onClick={() => { this.send(friend.inbox); }}>Share</Button>
-                                </Card.Body>
-                            </Card>
-                    )}
-                </CardDeck>
-            );
-            counter += this.cardDeckSize;
-        }*/
-
         let friendsCardDeck = this.generateCardDecks(
             this.state.friends,
             4,
@@ -64,16 +47,38 @@ class ShareView extends React.Component {
             }
         );
 
+        let groupsCardDeck = this.generateCardDecks(
+            this.state.groups,
+            4,
+            (group) => {
+                console.log(group);
+                return (
+                    <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                        <Card.Body>
+                            <Card.Title>{group.name}</Card.Title>
+                            {group.users.map((user) => <Card.Text>{user.name}</Card.Text>)}
+                            <Button variant="primary"
+                                onClick={() => { this.send(group.inbox); }}>Share</Button>
+                        </Card.Body>
+                    </Card>
+                );
+            }
+        );
+
+        // console.log(groupsCardDeck);
+        // console.log(this.state.groups);
+
         return (
-            <div className="App-header">
+            <div>
                 <ToastContainer
                     position={toast.POSITION.TOP_CENTER}
                     autoClose={5000}
                 />
-                <h2>Amigos</h2>
+                <h2 style={{ padding: "1%" }}>Amigos</h2>
                 {friendsCardDeck}
-                <h2>Grupos</h2>
-            </div>
+                <h2 style={{ padding: "1%" }}>Grupos</h2>
+                {groupsCardDeck}
+            </div >
         );
     }
 
@@ -83,13 +88,14 @@ class ShareView extends React.Component {
         while (counter <= list.length) {
             components.push(
                 <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
-                    {list.slice(counter, counter + cardDeckSize).map((listItem) => { return componentMappingFunction(listItem) }
-                    )}
+                    {list.slice(counter, counter + cardDeckSize).map((listItem) => {
+                        return componentMappingFunction(listItem)
+                    })}
                 </CardDeck>
             );
             counter += cardDeckSize;
         }
-        return list;
+        return components;
     }
 
     async readFriends() {
@@ -169,6 +175,47 @@ class ShareView extends React.Component {
         let tmp = wId.split("profile")[0];
         return tmp;
     }
+
+    async syncGroupsWithPod() {
+        this.groupManager.resetGroups();
+        let session = await auth.currentSession();
+        if (session !== null && session !== undefined) {
+            let storageHandler = new PodStorageHandler(session);
+            storageHandler.getGroups((groupJson, error) => {
+                if (groupJson === null) {
+                    toast.error(i18n.t('alertAccessPOD'));
+                } else {
+                    if (groupJson.length !== 0) {
+                        let tempGroup = new MyGroup("", []);
+                        tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
+                        this.groupManager.addGroup(tempGroup);
+                        let tempList = this.state.groups;
+                        tempList.push(tempGroup);
+                        this.processedGroups += 1;
+                        if (this.processedGroups === this.retrievedGroups) {
+                            this.setState({ groups: tempList });
+                            $("#messageArea").empty();
+                        }
+                    }
+                }
+            }).then(
+                (result) => {
+                    if (result === 0) {
+                        this.setState({
+                            message:
+                                <div>
+                                    <h3>{i18n.t("messageNoGroups")}</h3>
+                                    <p>{i18n.t("messageNoGroupsCreateOne")}</p>
+                                </div>
+                        });
+                    } else {
+                        this.retrievedGroups = result;
+                    }
+                }
+            );
+        }
+    }
+
 }
 
 export default ShareView;
