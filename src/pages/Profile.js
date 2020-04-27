@@ -51,11 +51,6 @@ class Profile extends Component {
                     }
                 </Translation>
                 <h3 id="phone"></h3>
-                <Translation>
-                    {
-                        (t) => <h1 style={{ padding: "1%" }}>{t('profileLastRoutes')}</h1>
-                    }
-                </Translation>
             </div>
         );
     }
@@ -75,9 +70,16 @@ class Profile extends Component {
 
     async loadAddress() {
         var role = document.getElementById("address");
-        role.appendChild(document.createTextNode(await UserDetails.getLocality()));
-        role.appendChild(document.createTextNode(", "));
-        role.appendChild(document.createTextNode(await UserDetails.getRegion()));
+        var locality = await UserDetails.getLocality();
+        var region = await UserDetails.getRegion();
+
+        if (region==="No info available"&&region==="No info available"){
+            role.appendChild(document.createTextNode("No info available"));
+        } else {
+            role.appendChild(document.createTextNode(locality));
+            role.appendChild(document.createTextNode(", "));
+            role.appendChild(document.createTextNode(region));
+        }
     }
 
     async loadEmail() {
