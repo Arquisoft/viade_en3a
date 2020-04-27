@@ -3,7 +3,7 @@ const auth = require('solid-auth-client');
 
 class RouteMedia {
 
-    constructor(route, file = null){
+    constructor(route, file = null) {
         this.fileData = file;
         this.podURL = null;
         this.podExpectedPath = null;
@@ -22,31 +22,31 @@ class RouteMedia {
         this.calculateExpectedPodUrl();
     }
 
-    getUploadFileName(){
+    getUploadFileName() {
         return this.route.getId() + "_" + this.name;
     }
 
-    getPodUrl(){
+    getPodUrl() {
         return this.podURL || this.podExpectedPath;
     }
 
-    async calculateExpectedPodUrl(){
+    async calculateExpectedPodUrl() {
         if (this.name) {
             let store = new PodStorageHandler(await auth.currentSession());
             this.podExpectedPath = store.getExpectedPathForResource(this.getUploadFileName());
         }
     }
 
-    async loadFromPod(){
+    async loadFromPod() {
         if (this.podURL) {
             let store = new PodStorageHandler(await auth.currentSession());
             store.getFile(this.podURL).then(
-                (f) => {this.fileData = f; this.isInLocal = true;}, (err) => {console.log(err);} //TODO;
+                (f) => { this.fileData = f; this.isInLocal = true; }, (err) => { } //TODO;
             );
         }
     }
 
-    async uploadToPod(){
+    async uploadToPod() {
         if (this.fileData) {
             this.name = this.fileData.name;
             this.calculateExpectedPodUrl();

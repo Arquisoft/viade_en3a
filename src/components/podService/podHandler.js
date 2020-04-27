@@ -4,10 +4,12 @@ export default class PodHandler {
  *                                              https://example.solid.community, note the lack of '/' at the end
      */
     constructor(currentSession) {
-        if (currentSession instanceof String)
+        if (currentSession instanceof String) {
             this.repository = currentSession;
-        else
+        }
+        else {
             this.repository = "https://" + (currentSession).webId.split('/')[2];
+        }
         this.defaultFolder = "/viade/";
 
         this.routesDirectory = "routes/";
