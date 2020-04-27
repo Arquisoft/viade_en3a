@@ -2,7 +2,7 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { CardDeck, Spinner } from "react-bootstrap";
 import { Translation } from 'react-i18next';
-import i18n from '../i18n'; 
+import i18n from '../i18n';
 
 import PodStorageHandler from "../components/podService/podStoreHandler";
 import RouteCard from "../components/routeList/RouteCard";
@@ -22,7 +22,7 @@ class RouteList extends React.Component {
         this.cardDeckSize = 4;
         this.state = {
             routes: [],
-            sharedRoutes : [],
+            sharedRoutes: [],
             spinnerHidden: false,
         };
         if (props.sync === undefined || props.sync === true) { // avoid sync with pod, used for RouteList.test.js
@@ -116,7 +116,7 @@ class RouteList extends React.Component {
 
 
             // Handle Shared Routes
-            storageHandler.getRoutesSharedToMe( function(route){
+            storageHandler.getRoutesSharedToMe(function (route) {
                 if (route === undefined || route === null) {
                     this.wasError = true;
                 } else {
@@ -126,8 +126,8 @@ class RouteList extends React.Component {
                     this.setState({ sharedRoutes: tempList });
                     $("#messageArea").empty();
                 }
-            }.bind(this), function(){
-                if(this.wasError){
+            }.bind(this), function () {
+                if (this.wasError) {
                     this.wasError = false;
                     toast.error(i18n.t("alertUnavailableRoutes"));
                 }

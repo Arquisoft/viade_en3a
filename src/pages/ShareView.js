@@ -23,6 +23,8 @@ class ShareView extends React.Component {
             friends: [],
             groups: []
         };
+        this.processedGroups = 0;
+        this.retrievedGroups = 0;
         this.readFriends();
         this.syncGroupsWithPod();
         this.webId = null;
