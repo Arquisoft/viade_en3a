@@ -20,7 +20,11 @@ class UserDetails {
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
               .then((addressCard) => {
-                resolve(data[addressCard].vcard_locality.value);
+                data[addressCard].vcard_locality.value
+                .then((locality) => {
+                  resolve(locality);
+                })
+                .catch((error) => reject(error));
               })
               .catch((error) => reject(error));
         });
@@ -30,7 +34,11 @@ class UserDetails {
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
               .then((addressCard) => {
-                resolve(data[addressCard].vcard_region.value);
+                data[addressCard].vcard_region.value
+                  .then((region) => {
+                    resolve(region);
+                  })
+                  .catch((error) => reject(error));
               })
               .catch((error) => reject(error));
         });
