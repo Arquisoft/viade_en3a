@@ -129,7 +129,7 @@ class RouteList extends React.Component {
             }.bind(this), function(){
                 if(this.wasError){
                     this.wasError = false;
-                    toast.error("alertUnavailableRoutes");
+                    toast.error(i18n.t("alertUnavailableRoutes"));
                 }
             }.bind(this));
         }

@@ -108,7 +108,7 @@ class RouteCreation extends Component {
 					autoClose={5000}
 				/>
 				<Translation role="title">
-					{(t) => <h1 style={{ padding: "1%" }} role="title">{t('mapCreationTitle')}</h1>}
+					{(t) => <h1 style={{ padding: "1%" }} id="title">{t('mapCreationTitle')}</h1>}
 				</Translation>
 
 				<RouteCreationForm
