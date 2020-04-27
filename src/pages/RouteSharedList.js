@@ -2,7 +2,6 @@ import React from "react";
 import {CardDeck, Spinner} from "react-bootstrap";
 import RouteCard from "../components/routeList/RouteCard";
 import {toast, ToastContainer} from "react-toastify";
-import {Translation} from "react-i18next";
 import PodStorageHandler from "../components/podService/podStoreHandler";
 import RouteList from "./RouteList";
 import Button from "react-bootstrap/Button";
@@ -64,12 +63,8 @@ export default class RouteSharedList extends RouteList {
                     }
                     }}>Clean files shared to you</Button>
                 </div>
-
-                <Translation>
-                    {
-                        (t) => <h2 style={{ padding: "1%" }} hidden={this.state.spinnerHidden}>{t('routeListLoadingMessage')}</h2>
-                    }
-                </Translation>
+                
+                <h2 style={{ padding: "1%" }} hidden={this.state.spinnerHidden}>{i18n.t('routeListLoadingMessage')}</h2>
 
                 <Spinner id={"spinner"} hidden={this.state.spinnerHidden} animation="border" />
                 {routesForCardDecks}

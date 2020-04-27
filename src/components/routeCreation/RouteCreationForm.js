@@ -49,7 +49,6 @@ export default function RouteCreationForm(props) {
                                     multiple
                                     accept="image/*"
                                     className="custom-file-input"
-                                    role="fileInput"
                                 />
                             </div>
                         </div>
