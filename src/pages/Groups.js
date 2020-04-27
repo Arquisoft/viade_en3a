@@ -93,22 +93,26 @@ class Groups extends React.Component {
                 <div style={groupsStyle}>
                     {
                         this.state.groups.map((group) => {
-                            return <div>
-                                <h2>{group.name}</h2>
+                            return (
                                 <div>
-                                    {
-                                        group.users.map((user) => {
-                                            return <div style={groupsStyle}>
-                                                <FriendCard
-                                                    friendImage={user.image}
-                                                    friendName={user.name}
-                                                    friendLink={user.webId}
-                                                />
-                                            </div>;
-                                        })
-                                    }
-                                </div>;
-                        </div>;
+                                    <h2>{group.name}</h2>
+                                    <div>
+                                        {
+                                            group.users.map((user) => {
+                                                return (
+                                                    <div style={groupsStyle}>
+                                                        <FriendCard
+                                                            friendImage={user.image}
+                                                            friendName={user.name}
+                                                            friendLink={user.webId}
+                                                        />
+                                                    </div>
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            );
                         })
                     }
 
