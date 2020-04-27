@@ -4,11 +4,6 @@ const expect = require('expect-puppeteer');
 const puppeteer = require('puppeteer');
 
 jest.setTimeout(400000);
-function delay(time) {
-    return new Promise(function (resolve) {
-        setTimeout(resolve, time)
-    });
-}
 
 defineFeature(feature, test => {
 
