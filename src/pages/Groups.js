@@ -1,5 +1,5 @@
 import './../css/App.css';
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify";
 import FriendCard from '../components/friendCard/FriendCard';

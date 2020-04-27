@@ -1,5 +1,4 @@
 import PodHandler from "./podHandler";
-import MyRoute from "../../model/MyRoute";
 
 const N3 = require('n3');
 const auth = require('solid-auth-client');
@@ -145,8 +144,8 @@ export default class PodStorageHandler extends PodHandler {
                                 await this.getFile(parsedFileRoutes[j]["@id"]).then(
                                     (fileContents) => {
                                         let lastFile =
-                                            (i == directory.files.length - 1) &&
-                                            (j == parsedFileRoutes.length - 1);
+                                            (i === directory.files.length - 1) &&
+                                            (j === parsedFileRoutes.length - 1);
                                         forEachFile(fileContents, null, lastFile);
                                     },
                                     (error) => { forEachFile(); }
