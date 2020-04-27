@@ -57,7 +57,7 @@ function MyNavBar(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title={t('navBarProfile')} id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
+              <NavDropdown.Item id="profileNavButton" href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
               <NavDropdown.Item href="#groups">{t('navBarGroups')}</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={t('navBarRoutes')} id="collapsible-nav-dropdown">
