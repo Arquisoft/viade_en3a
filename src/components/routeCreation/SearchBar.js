@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
                     this.search.current.value = firstFound.display_name;
 
                     toast.dismiss();
-                    toast.success("mapCreationSearchBarFound " + firstFound.display_name);
+                    toast.success(i18n.t("mapCreationSearchBarFound") + firstFound.display_name);
                 }
                 else {
                     this.search.current.value = "";

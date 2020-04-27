@@ -123,7 +123,7 @@ class InfoView extends React.Component {
                                         </Form.Group>
                                         <Translation>
                                             {
-                                                (t) => <Button variant="primary" type="submit"> {t('infoViewSubmit')} </Button>
+                                                (t) => <Button variant="primary" onClick={() => { toast.info(i18n.t('infoViewCommentsNotYetImplemented')) }} type="submit" > {t('infoViewSubmit')} </Button>
                                             }
                                         </Translation>
                                     </Form>
@@ -146,7 +146,7 @@ class InfoView extends React.Component {
                         <div id="routeCommentsList">
                         </div>
                     </div>
-                </div>
+                </div >
             );
         } else {
             return (

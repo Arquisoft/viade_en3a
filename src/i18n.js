@@ -112,7 +112,9 @@ const resources = {
       "routeListOoopsTitle": "Oops! We didn't find any route in your POD",
       "routeListOoopsParagraph": "You can move to \"Route management >> Create a new route\" to add a new route!",
       "sharedRouteListOoopsTitle": "Oops! It seems that you haven't been shared any route yet. Sad...",
-      "sharedRouteListOoopsParagraph": "You can ask some friend to share one to you"
+      "sharedRouteListOoopsParagraph": "You can ask some friend to share one to you",
+      "infoViewCommentsNotYetImplemented": "This functionality is not currently being supported. We are sorry for the inconvenieces.",
+      "routeCreationElevationPreviewTitle": "Route elevation previeww"
     }
   },
   es: {
@@ -224,7 +226,9 @@ const resources = {
       "routeListOoopsTitle": "¡Vaya! No hemos podido encontrar ninguna ruta en tu POD",
       "routeListOoopsParagraph": "¡Puedes usar la vista de creación de rutas \"Gestión de rutas >> Crear una nueva ruta\" para añadir una nueva!",
       "sharedRouteListOoopsTitle": "¡Vaya! Parece que no se te ha compartido ninguna ruta todavía. Triste, socio...",
-      "sharedRouteListOoopsParagraph": "Puedes pedirle algún amigo o amiga que te comparta una para verla aquí"
+      "sharedRouteListOoopsParagraph": "Puedes pedirle algún amigo o amiga que te comparta una para verla aquí",
+      "infoViewCommentsNotYetImplemented": "Esta funcionalidad todavía no está soportada. Nos disculpamos por los inconvenientes que esto pueda causar.",
+      "routeCreationElevationPreviewTitle": "Vista previa del perfil altimétrico"
     }
   }
 };
