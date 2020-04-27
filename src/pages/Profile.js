@@ -4,6 +4,7 @@ import profileImg from './../assets/profile/profile_img.png';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
 import $ from "jquery";
+import ProfileCard from '../components/friendCard/ProfileCard';
 
 class Profile extends Component {
 
@@ -20,6 +21,8 @@ class Profile extends Component {
                         (t) => <h1 style={{ padding: "1%" }}>{t('profileTitle')}</h1>
                     }
                 </Translation>
+                <ProfileCard profileName="No info available"
+                />
                 <img
                     src={profileImg}
                     width="180"
@@ -32,7 +35,7 @@ class Profile extends Component {
                         (t) => <h2 style={{ padding: "1%" }}>{t('profileUsername')}</h2>
                     }
                 </Translation>
-                <h3 id="username">No info available</h3>
+                <h3 id="profile">No info available</h3>
                 <Translation>
                     {
                         (t) => <h2 style={{ padding: "1%" }}>{t('profileAddress')}</h2>
@@ -58,15 +61,15 @@ class Profile extends Component {
     async loadInfo() {
 
         this.loadName();
-        this.loadAddress();
-        this.loadEmail();
-        this.loadPhone();
+        //this.loadAddress();
+        //this.loadEmail();
+        //this.loadPhone();
     }
 
     async loadName() {
         var name = await UserDetails.getName();
         if (name !== null){
-            $("#username").text(name);
+            $(".card-title.h5").text(name);
         } 
     }
 

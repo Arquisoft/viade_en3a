@@ -13,6 +13,11 @@ class UserDetails {
         return (session).webId.split('/')[2].split('.')[0];
     }
 
+    static async getSolidProfile(){
+      var session = await auth.currentSession();
+      return (session).webId;
+  }
+
     static async getLocality(){
         return new Promise((resolve, reject) => {
             data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
