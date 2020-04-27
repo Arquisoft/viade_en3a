@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { search } from "nominatim";
 import { toast } from "react-toastify";
+import i18n from '../../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,9 +24,9 @@ class SearchBar extends React.Component {
     lookFor(text) {
         toast.dismiss();
         if (this.search.current.value.length === 0) {
-            toast.error("Oopss... At least try to search for some place :D");
+            toast.error(i18n.t("alertNoInputOnSearch"));
         } else {
-            toast.info("Searching...");
+            toast.info(i18n.t("searching"));
 
             search({ q: text }, function (err, opts, results) {
                 if (results.length > 0) {
@@ -43,7 +44,7 @@ class SearchBar extends React.Component {
                     this.search.current.value = "";
 
                     toast.dismiss();
-                    toast.error("mapCreationSearchBarError");
+                    toast.error(i18n.t("mapCreationSearchBarError"));
                 }
 
             }.bind(this));

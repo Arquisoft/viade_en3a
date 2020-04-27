@@ -2,7 +2,7 @@ import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
 import Card from 'react-bootstrap/Card';
-import { Button, Form, ToastHeader } from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import i18n from '../i18n';
 import MyGroup from "../model/MyGroup";

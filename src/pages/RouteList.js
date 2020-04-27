@@ -25,7 +25,7 @@ class RouteList extends React.Component {
             sharedRoutes : [],
             spinnerHidden: false,
         };
-        if (props.sync == undefined || props.sync == true) {
+        if (props.sync === undefined || props.sync === true) { // avoid sync with pod, used for RouteList.test.js
             this.syncRoutesWithPod().then(() => {
                 this.state.spinnerHidden = true;
             });
@@ -114,10 +114,11 @@ class RouteList extends React.Component {
                 }
             );
 
+
             // Handle Shared Routes
-            storageHandler.getRoutesSharedToMe( (route) => {
-                if (route === undefined || route == null) {
-                    toast.error("We can't access your POD. Please, review its permissions");
+            storageHandler.getRoutesSharedToMe( function(route){
+                if (route === undefined || route === null) {
+                    this.wasError = true;
                 } else {
                     this.routeManager.addSharedRoute(route);
                     let tempList = this.state.sharedRoutes;
@@ -125,7 +126,12 @@ class RouteList extends React.Component {
                     this.setState({ sharedRoutes: tempList });
                     $("#messageArea").empty();
                 }
-            });
+            }.bind(this), function(){
+                if(this.wasError){
+                    this.wasError = false;
+                    toast.error("alertUnavailableRoutes");
+                }
+            }.bind(this));
         }
     }
 

@@ -1,5 +1,4 @@
 import PodHandler from "./podHandler";
-import RouteMedia from "../../model/RouteMedia";
 import MyRoute from "../../model/MyRoute";
 
 const N3 = require('n3');
@@ -158,7 +157,7 @@ export default class PodStorageHandler extends PodHandler{
         return result;
     }
 
-    async getRoutesSharedToMe(forEachRoute = () => {}){
+    async getRoutesSharedToMe(forEachRoute = () => {}, afterAllRoutes = () => {}){
         await this._getSharedFolder(async function (file) {
             // Transform file to JSON
             let fileAsJSON = JSON.parse(file);
@@ -175,6 +174,7 @@ export default class PodStorageHandler extends PodHandler{
                         forEachRoute(routeObject);
                 }, (error) => {forEachRoute(null);} );
             }
+            afterAllRoutes();
         }.bind(this));
     }
 
@@ -185,8 +185,6 @@ export default class PodStorageHandler extends PodHandler{
     async checkInbox(forEachMail = () => {}){
         await this.getFolder(this.repository + "/inbox/").then(
             async function (folder) {
-                let newRoutes = [];
-
                 await folder.files.map( (file) => {return file.url}).forEach( async function(url) { // For each message
                     await this.getFile(url).then( function(content){
                             const parser = new N3.Parser();
@@ -194,7 +192,8 @@ export default class PodStorageHandler extends PodHandler{
                                 if (quad) {
                                     if ( quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/") ) { // If the quad is the url of the route
                                         forEachMail(quad.object.id);
-                                        this.sharedRoutesToAdd.push(quad.object.id.split("\"").join(""));
+                                        this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
+                                        this._eliminateFile(url);
                                     }
                                 }
                             }.bind(this));
@@ -206,7 +205,20 @@ export default class PodStorageHandler extends PodHandler{
             }.bind(this),
             (error) => {  }
         );
-        this.addRoutesAsShared(this.sharedRoutesToAdd);
+
+    }
+
+    _eliminateFile(url){
+        fc.delete(url);
+    }
+
+    _eliminateSharedFolder(){
+        let url = this.repository + this.defaultFolder + this.sharedDirectory;
+        this.getFolder(url).then(function(folder){
+            for (let i = 0; i < folder.files.length; i++) {
+                this._eliminateFile(folder.files[i].url);
+            }
+        }.bind(this));
     }
 
     /**

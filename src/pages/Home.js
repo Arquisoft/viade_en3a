@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import viadeLogo from './../assets/logo/logo_full.jpeg';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
-import PodStorageHandler from "../components/podService/podStoreHandler";
-
-const auth = require('solid-auth-client');
 
 class Home extends Component {
 

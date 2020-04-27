@@ -5,6 +5,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { namedNode } from '@rdfjs/data-model';
 import PodPermissionHandler from "../components/podService/podPermissionHandler";
+import { toast, ToastContainer } from "react-toastify";
+import i18n from '../i18n';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 class ShareView extends React.Component {
 
     constructor(props) {
@@ -20,32 +25,38 @@ class ShareView extends React.Component {
     render() {
         return (
             <div className="App-header">
-            <div style={{backgroundColor: "#282c34", 
-            display:"flex", 
-            flexDirection: "row",
-            justifyContent:"center",
-            color:"black"}}>
-                {
-                    this.state.friends.map((friend) => {
-                        return <div> 
-                        <Card style={{ width: '18rem' , margin: "10px"}}>
-                            <Card.Img variant="top" src={friend.image} />
-                            <Card.Body>
-                                <Card.Title>{friend.name}</Card.Title>
-                                <Button variant="primary" 
-                                onClick={() => {this.send(friend.inbox);}}>Share</Button>
-                            </Card.Body>
-                        </Card>
-                        </div>;
-                    })
-                }
-            </div>
+                <ToastContainer
+                        position={toast.POSITION.TOP_CENTER}
+                        autoClose={5000}
+                    />
+                <div style={{
+                    backgroundColor: "#282c34",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    color: "black"
+                }}>
+                    {
+                        this.state.friends.map((friend) => {
+                            return <div>
+                                <Card style={{ width: '18rem', margin: "10px" }}>
+                                    <Card.Img variant="top" src={friend.image} />
+                                    <Card.Body>
+                                        <Card.Title>{friend.name}</Card.Title>
+                                        <Button variant="primary"
+                                            onClick={() => { this.send(friend.inbox); }}>Share</Button>
+                                    </Card.Body>
+                                </Card>
+                            </div>;
+                        })
+                    }
+                </div>
             </div>
         );
     }
 
     async readFriends() {
-        let session = await auth.currentSession(); 
+        let session = await auth.currentSession();
         this.webId = session.webId;
         let friends = [];
         for await (const friend of data.user.friends) {
@@ -73,25 +84,28 @@ class ShareView extends React.Component {
 
 
     async send(destination) {
-        var message = {};
-        message.date = new Date(Date.now());
-        message.id = message.date.getTime();
-        message.sender = this.webId;
-        message.recipient = destination;
+        try {
+            var message = {};
+            message.date = new Date(Date.now());
+            message.id = message.date.getTime();
+            message.sender = this.webId;
+            message.recipient = destination;
 
-        let folder = "viade/routes/";
-        message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
+            let folder = "viade/routes/";
+            message.content = this.getWebIdWithoutProfile() + folder + this.id + ".json";
 
-        message.title = "Check out this route shared to you by " + this.getSessionName();
-        message.url = message.recipient + message.id + ".json";
+            message.title = "Check out this route shared to you by " + this.getSessionName();
+            message.url = message.recipient + message.id + ".json";
 
-        await this.buildMessage(message);
-        alert ("Your friend has received a notification with your route!");
-
+            await this.buildMessage(message);
+            toast.success(i18n.t('alertSuccessInPermissions'));
+        } catch (e) {
+            toast.error(i18n.t('alertErrorInPermissions'));
+        }
         this.changePermissions(this.id + ".json", [destination.split("inbox")[0] + "profile/card#me"]);
     }
 
-    async changePermissions(routeName, webIds){
+    async changePermissions(routeName, webIds) {
         let session = await auth.currentSession();
         let perm = new PodPermissionHandler(session);
         await perm.shareRouteAndResources(routeName, webIds);
@@ -105,19 +119,18 @@ class ShareView extends React.Component {
         await data[mess].schema$dateSent.add(message.date.toISOString());
         await data[mess].rdf$type.add(namedNode('https://schema.org/Message'));
         await data[mess].schema$sender.add(namedNode(this.webId));
-    } 
+    }
 
-    getSessionName(){
+    getSessionName() {
         var session = this.webId;
         var tmp = session.split(".")[0];
         return tmp.split("//")[1];
     }
 
-    getWebIdWithoutProfile(){
+    getWebIdWithoutProfile() {
         let wId = this.webId;
         let tmp = wId.split("profile")[0];
         return tmp;
-
     }
 
 }

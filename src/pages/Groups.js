@@ -1,7 +1,7 @@
 import './../css/App.css';
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { toast, ToastContainer } from "react-toastify";
+import { Button} from 'react-bootstrap';
+import { toast } from "react-toastify";
 import FriendCard from '../components/friendCard/FriendCard';
 import { Translation } from 'react-i18next';
 import i18n from '../i18n';
