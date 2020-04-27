@@ -1,6 +1,6 @@
 import './../css/App.css';
 import React, { Component } from 'react';
-import profileImg from './../assets/profile/profile_img.png';
+import viadeLogo from './../assets/logo/logo_old.jpeg';
 import { Translation } from 'react-i18next';
 import UserDetails from "../model/Util";
 import $ from "jquery";
@@ -21,39 +21,17 @@ class Profile extends Component {
                         (t) => <h1 style={{ padding: "1%" }}>{t('profileTitle')}</h1>
                     }
                 </Translation>
-                <ProfileCard profileName="No info available"
+                <ProfileCard 
+                    profileLink="No info available"
+                    profileImage="Not loaded"
                 />
                 <img
-                    src={profileImg}
-                    width="180"
-                    height="200"
-                    className="d-inline-block align-top"
+                    src={viadeLogo}
+                    width="150"
+                    height="150"
+                    className="align-top"
                     alt="Viade logo"
                 />
-                <Translation>
-                    {
-                        (t) => <h2 style={{ padding: "1%" }}>{t('profileUsername')}</h2>
-                    }
-                </Translation>
-                <h3 id="profile">No info available</h3>
-                <Translation>
-                    {
-                        (t) => <h2 style={{ padding: "1%" }}>{t('profileAddress')}</h2>
-                    }
-                </Translation>
-                <h3 id="address">No info available</h3>
-                <Translation>
-                    {
-                        (t) => <h2 style={{ padding: "1%" }}>{t('profileEmail')}</h2>
-                    }
-                </Translation>
-                <h3 id="email">No info available</h3>
-                <Translation>
-                    {
-                        (t) => <h2 style={{ padding: "1%" }}>{t('profilePhone')}</h2>
-                    }
-                </Translation>
-                <h3 id="phone">No info available</h3>
             </div>
         );
     }
@@ -61,9 +39,10 @@ class Profile extends Component {
     async loadInfo() {
 
         this.loadName();
-        //this.loadAddress();
-        //this.loadEmail();
-        //this.loadPhone();
+        this.loadAddress();
+        this.loadEmail();
+        this.loadSolidProfile();
+        this.loadImage();
     }
 
     async loadName() {
@@ -74,7 +53,7 @@ class Profile extends Component {
     }
 
     async loadAddress() {
-        var address = $("#address");
+        var address = $(".card-subtitle.h6");
         var locality = await UserDetails.getLocality();
         var region = await UserDetails.getRegion();
 
@@ -92,16 +71,22 @@ class Profile extends Component {
         var email = await UserDetails.getEmail();
 
         if (email !== undefined){
-            $("#email").text(email);
+            $(".card-text").text(email);
         }
     }
 
-    async loadPhone() {
-        var phone = await UserDetails.getPhone();
+    async loadSolidProfile() {
+        var link = await UserDetails.getSolidProfile();
+        if (link !== null){
+            $(".btn.btn-solid").attr("href",link);
+        } 
+    }
 
-        if (phone !== undefined){
-            $("#phone").text(phone);
-        }
+    async loadImage(){
+        var img = await UserDetails.getImage();
+        if (img !== null){
+            $(".d-inline-block.align-top").attr("src",img);
+        } 
     }
 
 }

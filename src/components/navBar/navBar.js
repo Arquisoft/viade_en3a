@@ -42,14 +42,14 @@ function MyNavBar(props) {
             src={viadeLogo}
             width="40"
             height="40"
-            className="d-inline-block align-top"
+            className="d-inline-block"
             alt="Viade logo"
           />
           <img
             src={viadeText}
             width="140"
             height="40"
-            className="d-inline-block align-top"
+            className="d-inline-block"
             alt="Viade text"
           />
         </Navbar.Brand>

@@ -7,20 +7,18 @@ import { useTranslation } from 'react-i18next';
 function ProfileCard(props) {
     const { t } = useTranslation();
     return (
-        <Card className="text-center" border="info" text="dark" style={{ width: "20vw", height: "auto", margin: "1%" }}>
+        <Card className="text-center" border="dark" text="dark" style={{ width: "20vw", height: "auto", margin: "1%" }}>
             <Card.Header style={{ alignItems: "center", padding: "0" }}>
                 <img src={props.profileImage}
-                width="170"
-                height="170"
+                width="200"
+                height="200"
                 className="d-inline-block align-top"
                 alt="Profile img"/>
             </Card.Header>
             <Card.Body>
                 <Card.Title >{props.profileName}</Card.Title>
-                <Card.Subtitle>{props.profileUsername}</Card.Subtitle>
-                <Card.Text>{props.profileAddress}</Card.Text>
+                <Card.Subtitle>{props.profileAddress}</Card.Subtitle>
                 <Card.Text>{props.profileEmail}</Card.Text>
-                <Card.Text>{props.profilePhone}</Card.Text>
                 <style type="text/css">
                     {`
                     .btn-solid {

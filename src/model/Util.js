@@ -74,8 +74,11 @@ class UserDetails {
         });
     }
 
-
-
+    static async getImage(){
+      var session = await auth.currentSession();
+        var photo = data[session.webId].vcard_hasPhoto;
+        return photo;
+    }
 }
 
 export default UserDetails;
