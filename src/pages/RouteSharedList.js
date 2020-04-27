@@ -59,8 +59,9 @@ export default class RouteSharedList extends RouteList {
                     <h1 style={{ margin: "2%", display:"inline" }}>{i18n.t('routeListText')}</h1>
                     <Button style={{display:"inline", float:"right", margin:"2%"}} variant ="danger" onClick = {() => {
 
-                    if (window.confirm("Are you sure?"))
+                    if (window.confirm("Are you sure?")){
                         this.cleanSharedFolder();
+                    }
                     }}>Clean files shared to you</Button>
                 </div>
 

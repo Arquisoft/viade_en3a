@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { search } from "nominatim";
 import { toast } from "react-toastify";
-import i18n from '../i18n';
+import i18n from '../../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
 

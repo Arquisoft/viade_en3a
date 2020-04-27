@@ -86,11 +86,8 @@ export default class PodPermissionHandler extends PodHandler{
 
         try {
             await acl.deleteRule(permissions, agents);
-            console.log("updated acl");
         } catch (e) {
-            console.error('Error while deleting rule');
-            console.error(e);
-            throw e
+            throw e;
         }
     }
 
