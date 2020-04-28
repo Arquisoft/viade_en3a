@@ -1,6 +1,6 @@
 import React from 'react';
 import RouteCreation from './../pages/RouteCreation';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import RouteManager from "./../model/RouteManager";
 
@@ -12,7 +12,7 @@ test('Test create route', () => {
 
 	getByRole('presentation');
 
-	const title = getByRole('title');
+	const title = getByText(i18n.t('mapCreationTitle'));
 	const leftClick = { button: 1 };
 	fireEvent.click(title, leftClick);
 	fireEvent.keyDown(title, { key: 'A' });

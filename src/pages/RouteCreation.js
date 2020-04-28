@@ -99,9 +99,9 @@ class RouteCreation extends Component {
 					position={toast.POSITION.TOP_CENTER}
 					autoClose={5000}
 				/>
-				<Translation role="title">
-					{(t) => <h1 style={{ padding: "1%" }} id="title">{t('mapCreationTitle')}</h1>}
-				</Translation>
+
+				<h1 style={{ padding: "1%" }} id="title">{i18n.t('mapCreationTitle')}</h1>
+				
 
 				<RouteCreationForm
 					routeNameRef={this.routeName}

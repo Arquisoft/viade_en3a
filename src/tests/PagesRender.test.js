@@ -27,7 +27,7 @@ test("render friends", () => {
 
 test("render home", () => {
     const { getByText, findByText } = render(<Home />);
-    const title = getByText(i18n.t("homeWelcome"));
+    const title = getByText(i18n.t("homeWelcome2"));
     expect(title).toBeInTheDocument();
 });
 

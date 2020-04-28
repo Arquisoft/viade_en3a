@@ -13,7 +13,7 @@ class Home extends Component {
                     {
                         (t) => {
                             if (this.username) {
-                                return <h1 id="name">{t('homeWelcome') + this.username + ","}</h1>;
+                                return <h1 id="name">{t('homeWelcome') + " " + this.username + ","}</h1>;
                             }
                             else {
                                 return <h1 id="name">{t('homeWelcome')}</h1>;
