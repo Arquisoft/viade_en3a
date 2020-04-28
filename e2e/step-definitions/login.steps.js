@@ -5,6 +5,8 @@ const puppeteer = require('puppeteer');
 //import a from "../support/field";
 
 jest.setTimeout(400000);
+let idp = "https://uo263624.solid.community";
+let account = "uo263624";
 
 function a(){
     return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8')
@@ -19,7 +21,7 @@ function delay(time) {
 defineFeature(feature, test => {
 
     beforeEach(async () => {
-        delay(10000);
+        await delay(10000);
         //Open browser
         const browser = await puppeteer.launch({
             //headless let watch the chrome window interacting with the application
@@ -46,14 +48,14 @@ defineFeature(feature, test => {
             ]);
 
             await popup.waitForSelector('input[type="url"]');
-            await expect(popup).toFill('input[type="url"]', "https://uo263624.solid.community");
+            await expect(popup).toFill('input[type="url"]', idp);
             await popup.click('[type="submit"]');
 
             await popup.waitForNavigation({
                 waitUntil: 'networkidle2'
             });
             await popup.waitForSelector('input[id="username"]');
-            await expect(popup).toFill('input[id="username"]', "uo263624");
+            await expect(popup).toFill('input[id="username"]', account);
             await expect(popup).toFill('input[id="password"]', a());
             await popup.click('[type="submit"]');
             await popup.waitForNavigation({
