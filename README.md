@@ -44,7 +44,7 @@ npm install
 ### Starting
 The app can be run as:
 ```shell
-npm install
+npm start
 ```
 Once executed, it should be available at [http://localhost:3000](http://localhost:3000)
 
