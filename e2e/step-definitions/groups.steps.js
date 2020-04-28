@@ -11,16 +11,16 @@ let page = null;
 
 function a(){
     //return "viadeen3atest123";
-    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8')
+    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8');
 }
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
-defineFeature(feature, test => {
+defineFeature(feature, (test) => {
 
     beforeEach(async () => {
         await delay(10000);
@@ -34,12 +34,11 @@ defineFeature(feature, test => {
         await page.goto('http://localhost:3000');
 
         // Login
-        console.log("Logging in...");
         await page.waitForSelector('button.btn-outline-light');
         await page.click('button.btn-outline-light');
 
         const [popup] = await Promise.all([
-            new Promise(resolve => page.once('popup', resolve)),
+            new Promise((resolve) => {page.once('popup', resolve);}),
         ]);
 
         await popup.waitForSelector('input[type="url"]');

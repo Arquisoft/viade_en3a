@@ -10,16 +10,16 @@ let account = "uo263624";
 let page = null
 
 function a(){
-    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8')
+    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8');
 }
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
-defineFeature(feature, test => {
+defineFeature(feature, (test) => {
 
     beforeEach(async () => {
         delay(10000);
@@ -33,18 +33,11 @@ defineFeature(feature, test => {
         await page.goto('http://localhost:3000');
 
         // Login
-        await page.evaluate(async () => {
-            //let btns = [...document.querySelectorAll("button")];
-            //if (btns.length != 0 && btns.map(btn => btn.innerText).find(s => s.includes("Identifícate"))){
-
-            //}
-        });
-        console.log("Logging in...");
         await page.waitForSelector('button.btn-outline-light');
         await page.click('button.btn-outline-light');
 
         const [popup] = await Promise.all([
-            new Promise(resolve => page.once('popup', resolve)),
+            new Promise((resolve) => {page.once('popup', resolve);}),
         ]);
 
         await popup.waitForSelector('input[type="url"]');
@@ -75,8 +68,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let btns = [...document.querySelectorAll("a")];
                 btns.forEach(async function (btn) {
-                    if (btn.firstChild.innerText == "Gestión de rutas"){
-                        console.log("Clicked Gestión")
+                    if (btn.firstChild.innerText === "Gestión de rutas"){
                         btn.click();
                     }
                 });
@@ -103,8 +95,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let btns = [...document.querySelectorAll("a")];
                 btns.forEach(async function (btn) {
-                    if (btn.firstChild.innerText == "Gestión de rutas"){
-                        console.log("Clicked Gestión")
+                    if (btn.firstChild.innerText === "Gestión de rutas"){
                         btn.click();
                     }
                 });
@@ -129,8 +120,7 @@ defineFeature(feature, test => {
             await page.evaluate(() => {
                 let btns = [...document.querySelectorAll("a")];
                 btns.forEach(async function (btn) {
-                    if (btn.firstChild.innerText == "Gestión de rutas"){
-                        console.log("Clicked Gestión")
+                    if (btn.firstChild.innerText === "Gestión de rutas"){
                         btn.click();
                     }
                 });

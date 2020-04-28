@@ -4,16 +4,17 @@ const expect = require('expect-puppeteer');
 const puppeteer = require('puppeteer');
 
 jest.setTimeout(400000);
+let page = null;
+
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
-defineFeature(feature, test => {
+defineFeature(feature, (test) => {
 
     beforeEach(async () => {
         await delay(10000);
-        console.log("Before each");
         //Open browser
         const browser = await puppeteer.launch({
             //headless let watch the chrome window interacting with the application
@@ -22,7 +23,7 @@ defineFeature(feature, test => {
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000');
-    })
+    });
 
     test('Access the main view of the App', ({ given, when, then }) => {
 

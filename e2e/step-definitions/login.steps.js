@@ -7,18 +7,19 @@ const puppeteer = require('puppeteer');
 jest.setTimeout(400000);
 let idp = "https://uo263624.solid.community";
 let account = "uo263624";
+let page = null;
 
 function a(){
-    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8')
+    return Buffer.from("SXo5X1NlVjRfJA==", "base64").toString('utf-8');
 }
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
-defineFeature(feature, test => {
+defineFeature(feature, (test) => {
 
     beforeEach(async () => {
         await delay(10000);
@@ -30,7 +31,7 @@ defineFeature(feature, test => {
         });
         page = await browser.newPage();
         await page.goto('http://localhost:3000');
-    })
+    });
 
     test('Login to an account', ({ given, when, then }) => {
 
@@ -44,7 +45,7 @@ defineFeature(feature, test => {
             await page.click('button.btn-outline-light');
 
             const [popup] = await Promise.all([
-                new Promise(resolve => page.once('popup', resolve)),
+                new Promise((resolve) => {page.once('popup', resolve);}),
             ]);
 
             await popup.waitForSelector('input[type="url"]');
