@@ -1,0 +1,10 @@
+{
+  "simulation": "viade.Simulation1",
+  "simulationId": "simulation1",
+  "start": 1588099559125,
+  "description": "Routes list, 50 users at once",
+  "scenarios": ["Simulation1"],
+  "assertions": [
+
+  ]
+}
