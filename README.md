@@ -69,7 +69,7 @@ Viade is an Application whose task is to manage routes.
 It allows you to store your favourite scenic routes on your [Solid Pod](https://solid.inrupt.com/how-it-works) and to share it with your friends and family as well as comment on those of your friends'.
 
 <p>
-    <img class="fullPic" src="./public/img/sample/Screenshot_2.png">
+    <img class="fullPic" src="./public/img/sample/newRouteList.png">
 </p>
 
 ## To Start
