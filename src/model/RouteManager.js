@@ -16,7 +16,7 @@ class RouteManager {
         this.routes.push(route);
     }
 
-    addSharedRoute(route){
+    addSharedRoute(route) {
         this.routesSharedToMe.push(route);
     }
 

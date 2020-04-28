@@ -10,12 +10,12 @@ class RoutePoint {
      * @param {String} Name of the waypoint.
      * @param {String} Description of this waypoint.
      */
-    constructor(latitude, longitude, elevation = -1, name="", description="") {
+    constructor(latitude, longitude, elevation = -1, name = "", description = "") {
         this.latitude = latitude;
         this.longitude = longitude;
         this.elevation = elevation;
-        this.name=name;
-        this.description=description;
+        this.name = name;
+        this.description = description;
     }
 
     getElevation() {
@@ -64,7 +64,7 @@ class RoutePoint {
         };
     }
 
-    toWaypointJson(){
+    toWaypointJson() {
         return {
             "name": this.name,
             "description": this.description,

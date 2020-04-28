@@ -197,7 +197,8 @@ class InfoView extends React.Component {
             pics.push(
                 <Carousel.Item key={url}>
                     <Image src={url} fluid />
-                </Carousel.Item>)
+                </Carousel.Item>
+            );
         });
 
         // Placeholder

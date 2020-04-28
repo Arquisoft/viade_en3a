@@ -15,7 +15,7 @@ const auth = require('solid-auth-client');
 function processPoints(points) {
 	let list = [];
 	points.forEach((point) => {
-		let routePoint = new RoutePoint(point.lat, point.lng, point.elv,point.name,point.description);
+		let routePoint = new RoutePoint(point.lat, point.lng, point.elv, point.name, point.description);
 		routePoint.askForElevation(() => { });
 		list.push(routePoint);
 	});
@@ -96,13 +96,13 @@ class MyRoute {
 		this.media.push(new RouteMedia(this, file));
 	}
 
-	addSimplePoints(points){
+	addSimplePoints(points) {
 
 		points.forEach((point) => {
-			let exists = this.points.find((p) => p.getLatitude()===point.lat || p.getLongitude()===point.lng);
+			let exists = this.points.find((p) => p.getLatitude() === point.lat || p.getLongitude() === point.lng);
 
-			if(exists===undefined){ //point not exists in waypoints
-				let newPoint = new RoutePoint(point.lat,point.lng,point.elv);
+			if (exists === undefined) { //point not exists in waypoints
+				let newPoint = new RoutePoint(point.lat, point.lng, point.elv);
 				newPoint.askForElevation();
 				this.points.push(newPoint);
 			}
@@ -115,13 +115,13 @@ class MyRoute {
 		let storageHandler = new PodStorageHandler(session);
 
 
-        //this.media.forEach(await async function(m){ await m.uploadToPod(); });
+		//this.media.forEach(await async function(m){ await m.uploadToPod(); });
 		await this.uploadMedia();
 		await storageHandler.storeRoute(this.getFileName(), this.toJsonLd(), callback);
 	}
 
-	async uploadMedia(){
-		for(let i = 0; i < this.media.length; i++) {
+	async uploadMedia() {
+		for (let i = 0; i < this.media.length; i++) {
 			await this.media[i].uploadToPod();
 		}
 	}
