@@ -49,7 +49,7 @@ class RouteList extends React.Component {
         }
 
         return (
-            <div>
+            <div style={{ backgroundColor: "white !important", color: "black" }}>
                 <ToastContainer
                     position={toast.POSITION.TOP_CENTER}
                     autoClose={5000}
