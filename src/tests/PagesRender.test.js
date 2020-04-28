@@ -12,43 +12,43 @@ import i18n from '../i18n';
 const leftClick = { button: 1 };
 
 test("render edit profile", () => {
-    const { getByText } = render(<EditProfile/>);
+    const { getByText } = render(<EditProfile />);
     const title = getByText(i18n.t("editProfileTitle"));
     expect(title).toBeInTheDocument();
 });
 
-test("render friends", ()=> {
-    const { getByText } = render(<Friends/>);
+test("render friends", () => {
+    const { getByText } = render(<Friends />);
     const title = getByText(i18n.t("friendsTitle"));
     expect(title).toBeInTheDocument();
     const button = document.getElementById("addBtn");
-    fireEvent.click(button,leftClick);
+    fireEvent.click(button, leftClick);
 });
 
-test("render home", ()=> {
-    const { getByText, findByText } = render(<Home/>);
-    const title = getByText(i18n.t("homeWelcome"));
+test("render home", () => {
+    const { getByText, findByText } = render(<Home />);
+    const title = getByText(i18n.t("homeWelcome2"));
     expect(title).toBeInTheDocument();
 });
 
-test("render profile", ()=> {
-    const { getByText } = render(<Profile/>);
+test("render profile", () => {
+    const { getByText } = render(<Profile />);
     const title = getByText(i18n.t("profileUsername"));
     expect(title).toBeInTheDocument();
 });
 
-test("render sign up", ()=> {
-    render(<SignUp/>);
+test("render sign up", () => {
+    render(<SignUp />);
 });
 
-test("render pagenotfound", ()=> {
-    const { getByText,  } = render(<PageNotFound/>);
+test("render pagenotfound", () => {
+    const { getByText, } = render(<PageNotFound />);
     const title = getByText(i18n.t("pageNotFoundHeader"));
     expect(title).toBeInTheDocument();
 });
 
-test("render navBar", ()=> {
-    const { getByText, findByText } = render(<MyNavBar/>);
+test("render navBar", () => {
+    const { getByText, findByText } = render(<MyNavBar />);
     let btn = getByText(i18n.t("navBarProfile"));
     expect(btn).toBeInTheDocument();
 });

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Spinner } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import { Translation } from 'react-i18next';
-import i18n from '../i18n'; 
+import i18n from '../i18n';
 
 import EditableMap from '../components/editableMap/EditableMap';
 import MyRoute from "../model/MyRoute";
@@ -61,15 +61,7 @@ class RouteCreation extends Component {
 
 		let description = this.routeDescription.current.value;
 		let route = new MyRoute(name, await UserDetails.getUsername(), description, points);
-
-		/*let route = undefined;
-		await UserDetails.getUser().then( // OLD, better way to do so, but its glitched
-			function (username) {
-				route = new MyRoute(name, username, description, points);
-			}
-		);*/
 		return route;
-
 	}
 
 	checkRouteChanged(newRoute) {
@@ -107,9 +99,9 @@ class RouteCreation extends Component {
 					position={toast.POSITION.TOP_CENTER}
 					autoClose={5000}
 				/>
-				<Translation role="title">
-					{(t) => <h1 style={{ padding: "1%" }} id="title">{t('mapCreationTitle')}</h1>}
-				</Translation>
+
+				<h1 style={{ padding: "1%" }} id="title">{i18n.t('mapCreationTitle')}</h1>
+				
 
 				<RouteCreationForm
 					routeNameRef={this.routeName}
@@ -130,13 +122,13 @@ class RouteCreation extends Component {
 						/>
 					</div>
 					<div id="pointManager">
-						<h2 style={{ padding: "3% 1% 2% 1%" }}>Route elevation preview</h2>
+						<h2 style={{ padding: "3% 1% 2% 1%" }}>{i18n.t('routeCreationElevationPreviewTitle')}</h2>
 						<MyElevationChart style={{ padding: "3% 1% 2% 1%" }} ref={this.elevationChart} route={this.newRoute} />
 					</div>
 				</div>
 
-				<div style={{margin: "1.5vh"}}>
-					<PointInfo map={this.map} ref={this.pointInfo}/>
+				<div style={{ margin: "1.5vh" }}>
+					<PointInfo map={this.map} ref={this.pointInfo} />
 				</div>
 
 				<div>
