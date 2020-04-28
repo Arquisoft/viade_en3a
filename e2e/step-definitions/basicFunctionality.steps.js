@@ -4,11 +4,15 @@ const expect = require('expect-puppeteer');
 const puppeteer = require('puppeteer');
 
 jest.setTimeout(400000);
-
+function delay(time) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, time)
+    });
+}
 defineFeature(feature, test => {
 
     beforeEach(async () => {
-        delay(10000);
+        await delay(10000);
         console.log("Before each");
         //Open browser
         const browser = await puppeteer.launch({
