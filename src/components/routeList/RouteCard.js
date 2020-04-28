@@ -2,6 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import MyMap from './../myMap/MyMap';
+import i18n from "../../i18n";
+
 
 class RouteCard extends React.Component {
 
@@ -28,10 +30,9 @@ class RouteCard extends React.Component {
     }
 
     render() {
-
         let buttons = [
-            this.showInfoButton && <Button variant="dark" href={`#routes/info/${this.route.id}`}>Info</Button>,
-            this.showShareButton && <Button variant="dark" style={{ margin: "16px" }} href={`#routes/share/${this.route.id}`}>Share</Button>
+            this.showInfoButton && <Button variant="dark" href={`#routes/info/${this.route.id}`}>{i18n.t('info')}</Button>,
+            this.showShareButton && <Button variant="dark" style={{ margin: "16px" }} href={`#routes/share/${this.route.id}`}>{i18n.t('share')}</Button>
         ];
 
         return (

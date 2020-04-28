@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Button, FormControl} from 'react-bootstrap';
-
+import i18n from "../../i18n";
 class PointInfo extends React.Component {
 
     constructor(props) {
@@ -59,7 +59,7 @@ class PointInfo extends React.Component {
 
     printPoint(){
         if(this.state.point===undefined){
-            return <tr><td colSpan={5}>Click over a point to edit it</td></tr>;
+            return <tr><td colSpan={5}>{i18n.t('editMessage')}</td></tr>;
         }
         else {
          return(this.isEditing());
@@ -67,17 +67,16 @@ class PointInfo extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Actions</th>
+                            <th>{i18n.t('latitude')}</th>
+                            <th>{i18n.t('longitude')}</th>
+                            <th>{i18n.t('name')}</th>
+                            <th>{i18n.t('description')}</th>
+                            <th>{i18n.t('actions')}</th>
                         </tr>
                     </thead>
                     <tbody>

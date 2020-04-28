@@ -2,18 +2,21 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {useTranslation} from "react-i18next";
 
 export default function RouteCreationForm(props) {
+    const {t} = useTranslation();
+
     return (
         <div id="routeCreationFormDiv" style={{ padding: "0% 10% 0% 5%" }}>
             <Form>
                 <Form.Group as={Row}>
                     <Col sm={2}>
-                        <Form.Label>Route name:</Form.Label>
+                        <Form.Label>{t('routeName')}</Form.Label>
                     </Col>
                     <Col>
                         <Form.Control
-                            placeholder="Type in route name"
+                            placeholder={t('routeNamePlaceholder')}
                             ref={props.routeNameRef}
                             role="name"
                         />
@@ -21,12 +24,12 @@ export default function RouteCreationForm(props) {
                 </Form.Group>
                 <Form.Group as={Row}>
                     <Col sm={2}>
-                        <Form.Label>Route description:</Form.Label>
+                        <Form.Label>{t('routeDescription')}</Form.Label>
                     </Col>
                     <Col>
                         <Form.Control
                             as={"textarea"}
-                            placeholder="An optional description of the route"
+                            placeholder={t('routeDescriptionPlaceholder')}
                             ref={props.routeDescriptionRef}
                             role="description"
                             rows={3}
@@ -35,13 +38,13 @@ export default function RouteCreationForm(props) {
                 </Form.Group>
                 <Form.Group as={Row}>
                     <Col sm={2}>
-                        <Form.Label>File upload:</Form.Label>
+                        <Form.Label>{t('fileUpload')}</Form.Label>
                     </Col>
                     <Col>
                         <div className="input-group">
                             <div className="custom-file">
                                 <label className="custom-file-label" htmlFor="routeFileUpload">
-                                    You can upload more than one file
+                                    {t('fileUploadLabel')}
                                 </label>
                                 <input
                                     id="routeFileUpload"

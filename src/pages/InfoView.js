@@ -131,13 +131,13 @@ class InfoView extends React.Component {
                             </div>
                             <div id="ircTabs">
                                 <Tabs>
-                                    <Tab eventKey="routeMap" title="Map view">
+                                    <Tab eventKey="routeMap" title={i18n.t('infoViewMap')}>
                                         <MyMap route={this.state.route} movable={true} zoom={12} style={{ width: "45vw", height: "50vh", margin: "0" }} />
                                     </Tab>
-                                    <Tab eventKey="elevationChart" title="Elevation chart">
+                                    <Tab eventKey="elevationChart" title={i18n.t('infoViewElevation')}>
                                         <MyElevationChart route={this.state.route} style={{ width: "100%" }} />
                                     </Tab>
-                                    <Tab eventKey="imageCarousel" title="Image gallery">
+                                    <Tab eventKey="imageCarousel" title={i18n.t('infoViewImg')}>
                                         {this.getCarousel()}
                                     </Tab>
                                 </Tabs>

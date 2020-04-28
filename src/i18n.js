@@ -1,6 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Form from "react-bootstrap/Form";
+import React from "react";
 
 const resources = {
   en: {
@@ -114,7 +116,23 @@ const resources = {
       "sharedRouteListOoopsTitle": "Oops! It seems that you haven't been shared any route yet. Sad...",
       "sharedRouteListOoopsParagraph": "You can ask some friend to share one to you",
       "infoViewCommentsNotYetImplemented": "This functionality is not currently being supported. We are sorry for the inconvenieces.",
-      "routeCreationElevationPreviewTitle": "Route elevation previeww"
+      "routeCreationElevationPreviewTitle": "Route elevation preview",
+      "info": "Info",
+      "share": "Share",
+      "routeName": "Route Name:",
+      "routeNamePlaceholder": "Type in route name",
+      "routeDescription" : "Route Description:",
+      "routeDescriptionPlaceholder": "Write here an optional description of the route",
+      "fileUpload": "File Upload: ",
+      "fileUploadLabel": "You can upload more than one file",
+      "searchBarLabel": "Search for a place:",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "name":"Name",
+      "description":"Description",
+      "actions":"Actions",
+      "editMessage": "Click over a point to edit it",
+      "grupos": "Groups",
     }
   },
   es: {
@@ -228,7 +246,23 @@ const resources = {
       "sharedRouteListOoopsTitle": "¡Vaya! Parece que no se te ha compartido ninguna ruta todavía. Triste, socio...",
       "sharedRouteListOoopsParagraph": "Puedes pedirle algún amigo o amiga que te comparta una para verla aquí",
       "infoViewCommentsNotYetImplemented": "Esta funcionalidad todavía no está soportada. Nos disculpamos por los inconvenientes que esto pueda causar.",
-      "routeCreationElevationPreviewTitle": "Vista previa del perfil altimétrico"
+      "routeCreationElevationPreviewTitle": "Vista previa del perfil altimétrico",
+      "info": "Info",
+      "share": "Compartir",
+      "routeName": "Nombre de la ruta:",
+      "routeNamePlaceholder": "Introduce el nombre de la ruta",
+      "routeDescription" : "Descripción de la ruta:",
+      "routeDescriptionPlaceholder": "Escribe una descripción opcional de la ruta",
+      "fileUpload": "Subida de Archivos: ",
+      "fileUploadLabel": "Puedes subir más de un archivo",
+      "searchBarLabel": "Buscar:",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "name":"Nombre",
+      "description":"Descripción",
+      "actions":"Acciones",
+      "editMessage": "Pincha sobre un punto para editarlo",
+      "grupos": "Grupos",
     }
   }
 };

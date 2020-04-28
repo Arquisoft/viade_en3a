@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import i18n from '../../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
+import {useTranslation} from "react-i18next";
 
 class SearchBar extends React.Component {
 
@@ -53,12 +54,13 @@ class SearchBar extends React.Component {
 
 
     render() {
+
         return (
             <div>
                 <Form style={{ margin: "1%" }}>
                     <Form.Group as={Row}>
                         <Col sm={2}>
-                            <Form.Label>Search for a place:</Form.Label>
+                            <Form.Label>{i18n.t('searchBarLabel')}</Form.Label>
                         </Col>
                         <Col>
                             <Form.Control
