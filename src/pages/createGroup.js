@@ -1,7 +1,7 @@
 import React from "react";
 import * as auth from 'solid-auth-client';
 import data from '@solid/query-ldflex';
-import Card from 'react-bootstrap/Card';
+import { Card, CardDeck } from 'react-bootstrap';
 import { Button, Form} from 'react-bootstrap';
 import { Translation } from 'react-i18next';
 import i18n from '../i18n';
@@ -99,9 +99,48 @@ class CreateGroup extends React.Component {
 				window.location.href = "#groups";
 			}
 		});
-	}
+    }
+    
+    generateCardDecks(list, cardDeckSize = 4, componentMappingFunction = (n) => { }) {
+        let components = [];
+        let counter = 0;
+        while (counter <= list.length) {
+            components.push(
+                <CardDeck style={{ padding: "1% 0% 1% 2%", width: "100%" }}>
+                    {list.slice(counter, counter + cardDeckSize).map((listItem) => {
+                        return componentMappingFunction(listItem);
+                    })}
+                </CardDeck>
+            );
+            counter += cardDeckSize;
+        }
+        return components;
+    }
 
     render() {
+
+        let friendsCardDeck = this.generateCardDecks(
+            this.state.friends, 
+            4,
+            (friend) => {
+                return (
+                    <Card style={{ width: '18rem', margin: "10px", color: "black" }}>
+                        <Card.Img variant="top" src={friend.image} />
+                        <Card.Body>
+                            <Card.Title>{friend.name}</Card.Title>
+                            <Translation> 
+                                {
+                                (t) => <Button variant="success"
+                                onClick={() => {this.annotateFriend(friend);}}>
+                                    {t('groupsAdd')}</Button>
+                                }
+                            </Translation>
+                        </Card.Body>
+                    </Card>
+                    );
+                }
+            )
+
         return (
             <div className="App-header">
                 <ToastContainer
@@ -110,32 +149,8 @@ class CreateGroup extends React.Component {
 					autoClose={5000}
 				/>
                 <h1>Select the members</h1>
-                <div style={{backgroundColor: "#282c34", 
-                display:"flex", 
-                flexDirection: "row",
-                justifyContent:"center",
-                color:"black"}}>
-                    {
-                        this.state.friends.map((friend) => {
-                            return <div> 
-                            <Card style={{ flexWrap: "wrap",
-                                justifyContent: "space-between",
-                                padding: "2%"}}>
-                                <Card.Img variant="top" src={friend.image} />
-                                <Card.Body>
-                                    <Card.Title>{friend.name}</Card.Title>
-                                    <Translation> 
-                                        {
-                                        (t) => <Button variant="success"
-                                        onClick={() => {this.annotateFriend(friend);}}>
-                                            {t('groupsAdd')}</Button>
-                                        }
-                                    </Translation>
-                                </Card.Body>
-                            </Card>
-                            </div>;
-                        })
-                    }
+                <div>
+                {friendsCardDeck}
                 </div>
                     <Form style={{ margin: "1%" }}>
                         <Form.Group>

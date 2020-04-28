@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 function FriendCard(props) {
     const { t } = useTranslation();
     return (
-        <Card text="dark" style={{ width: "20vw", height: "auto", margin: "1%" }}>
+        <Card text="dark" border="primary" style={{ width: "20vw", height: "auto", margin: "1%" }}>
             <Card.Header style={{ alignItems: "center", padding: "0" }}>
                 <img src={props.friendImage}
                 width="170"
