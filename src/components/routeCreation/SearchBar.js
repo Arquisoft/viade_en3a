@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import i18n from '../../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
-import {useTranslation} from "react-i18next";
 
 class SearchBar extends React.Component {
 
