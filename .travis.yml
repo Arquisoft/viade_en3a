@@ -11,7 +11,7 @@ before_install:
 script:
   - npm install -g codecov
   - npm test && codecov
-  - npm test:e2e && codecov
+  - npm jest
   - CI=false npm run build
   - npm run docs
 deploy:
