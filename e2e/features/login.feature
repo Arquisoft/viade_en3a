@@ -1,6 +1,6 @@
-Feature: Access the application
+Feature: Basic access to the application
 
-Scenario: Edit profile info
-  Given An already registered user on the profile page
-  When I click the edit profile button
-  Then The edit profile page appears
+Scenario: Login to an account
+  Given An unlogged user with account
+  When I click Log in
+  Then I should be logged in

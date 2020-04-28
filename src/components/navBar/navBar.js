@@ -57,14 +57,14 @@ function MyNavBar(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title={t('navBarProfile')} id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
+              <NavDropdown.Item id="profileNavButton" href="#profile">{t('navBarMyProfile')}</NavDropdown.Item>
               <NavDropdown.Item href="#groups">{t('navBarGroups')}</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={t('navBarRoutes')} id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#routes/list">{t('navBarMyRoutes')}</NavDropdown.Item>
-              <NavDropdown.Item href="#routes/add">{t('navBarCreateRoute')}</NavDropdown.Item>
+              <NavDropdown.Item id="routeListNavButton" href="#routes/list">{t('navBarMyRoutes')}</NavDropdown.Item>
+              <NavDropdown.Item id="routeAddNavButton" href="#routes/add">{t('navBarCreateRoute')}</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#routes/shared">{t('navBarSharedRoutes')}</NavDropdown.Item>
+              <NavDropdown.Item id="routeSharedNavButton" href="#routes/shared">{t('navBarSharedRoutes')}</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#routes/example">{t('navBarRouteHelp')}</NavDropdown.Item>
             </NavDropdown>
