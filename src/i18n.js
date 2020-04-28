@@ -169,7 +169,7 @@ const resources = {
       "editProfileChangePass": "Cambiar contraseña",
       "editProfileNewPass": "Nueva contraseña",
       "editProfileSave": "Guardar",
-      "homeWelcome": "Hola",
+      "homeWelcome": "Hola ",
       "homeWelcome2": "bienvenido a",
       "profileTitle": "Tu Perfil",
       "profileUsername": "Usuario:",
