@@ -93,7 +93,7 @@ class RouteCreation extends Component {
 
 	render() {
 		return (
-			<div className="App-Black-LightGray" id="routeCreationContainer" >
+			<div id="routeCreationContainer" >
 				<ToastContainer
 					id="toastContainer"
 					position={toast.POSITION.TOP_CENTER}
@@ -101,7 +101,7 @@ class RouteCreation extends Component {
 				/>
 
 				<h1 style={{ padding: "1%" }} id="title">{i18n.t('mapCreationTitle')}</h1>
-				
+
 
 				<RouteCreationForm
 					routeNameRef={this.routeName}
