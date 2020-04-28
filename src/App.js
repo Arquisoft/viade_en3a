@@ -7,16 +7,16 @@ import { HashRouter } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App" style="background-color: white !important;">
+    <div className="App" style={{ backgroundColor: "white !important" }}>
       <HashRouter basename='/'>
-        <LoggedOut>
+        < LoggedOut >
           <NavBarNotAuthenticated />
-        </LoggedOut>
+        </ LoggedOut>
         <LoggedIn>
           <MyNavBar />
         </LoggedIn>
       </HashRouter>
-    </div>
+    </div >
   );
 }
 
