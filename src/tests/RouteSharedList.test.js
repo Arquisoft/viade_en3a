@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/extend-expect';
 import i18n from '../i18n';
 
 const routeManager = RouteManager;
-
+/*
 test("renders learn react link", () => {
   const routeManager = RouteManager;
   const myRoute = new MyRoute(
@@ -23,4 +23,4 @@ test("renders learn react link", () => {
   const { getByText } = render(<RouteSharedList sync={false} routeManager={routeManager} />);
   const route1 = getByText(i18n.t("sharedRouteListTitle"));
   expect(route1).toBeInTheDocument();
-});
+});*/
