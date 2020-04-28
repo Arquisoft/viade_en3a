@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 function EditProfile() {
     const { t } = useTranslation();
     return (
-        <div className="App-header" style={{ backgroundColor: "white !important", color: "black" }}>
+        <div className="App-header">
             <h1>{t('editProfileTitle')}</h1>
             <Form>
                 <Form.Group controlId="formBasicEmail">
