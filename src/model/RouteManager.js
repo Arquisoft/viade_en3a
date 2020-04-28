@@ -1,7 +1,7 @@
 class RouteManager {
 
     constructor() {
-        this.routes = [];
+        this.resetRoutes();
     }
 
     getRoutes() {
@@ -16,10 +16,23 @@ class RouteManager {
         this.routes.push(route);
     }
 
-    resetRoutes() {
-        this.routes = [];
+    addSharedRoute(route) {
+        this.routesSharedToMe.push(route);
     }
 
+    getSharedRouteById(id) {
+        return this.routesSharedToMe.find((route) => route.getId() === id);
+    }
+
+    resetRoutes() {
+        this.routes = [];
+        this.routesSharedToMe = [];
+    }
+
+    getAnyRouteById(id) {
+        return this.getRouteById(id) || this.getSharedRouteById(id);
+    }
 }
 
-export default RouteManager;
+const routeManager = new RouteManager();
+export default routeManager;

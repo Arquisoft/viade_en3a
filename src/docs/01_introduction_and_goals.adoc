@@ -35,9 +35,8 @@ In this application we aim to develop a decentralized routes social network. We 
 | _1_ | _Usability_ | _It must be a simple application to ensure that any user, independently of their expertise, can use it to its full potential._
 | _2_ | _Performance_ | _Ensure that our app runs fluently and that access to data is fast to avoid loading screens._
 | _3_ | _Testability_ | _The app must be tested exhaustively, so bugs and programming errors are minimized._
-| _4_ | _Portability_ | _The app must be available both in the navigator and in a mobile device where it is installed._
-| _5_ | _Security_ | _Although the app must have some security measures, performance and usability limits strict security, so it will not be as important to avoid loosing these other attributes as a tradeoff._
-| _6_ | _Reliability_ | _The number of errors should be minimized to achieve consistency and increase the level of confidence of our users. A good degree of testability should help improve reliance_
+| _4_ | _Security_ | _Although the app must have some security measures, performance and usability limits strict security, so it will not be as important to avoid loosing these other attributes as a tradeoff._
+| _5_ | _Reliability_ | _The number of errors should be minimized to achieve consistency and increase the level of confidence of our users. A good degree of testability should help improve reliance_
 
 |===
 

@@ -3,7 +3,8 @@
 
 == Deployment View
 
-Viade is multiplatform, so in the following lines we will show the physical architecture that our app will run over.
+Viade is a client application, so we don't have multiple servers or a complex topology
+to explain here. Therefore, this will be very simple.
 
 === Infrastructure Level 1
 
@@ -14,30 +15,28 @@ image::DeploymentView.png[DepView]
 |===
 | *Part* | *Explanation*
 
-| Mobile Applications
-| Android and iOS Applications will be generated and will run over such devices.
+| Internet Available APIs
+| All the APIs we use are free, and online accesible.
 
-| Web Applications
-| Main browsers will be able to run the application.
-
-| Node.js
-| Will be the runtime environment executing the javaScript code as server-side (not client-side).
+| Viade App
+| Our app will be deployed in GitHub Pages.
 
 | Solid PODs
-| Will store the users information (their routes)
+| They are allocated in Inrupt or Solid Community servers and maintained by them.
 |===
 
 
 Motivation::
 
-It is a constraint that we must use Node.js, Solid PODs and be multiplatform so this structure is the result of that.
-
-Quality and/or Performance Features::
-
-_<explanation in text form>_
+* The use of Internet Available APIs is an advantage. Thanks to this
+we don't have to store maps in our central server (which we don't have) nor in the client.
+* Using GitHub pages avoids us to configure and mantain a server. All system administration is provided by GitHub.
+* The use of Solid PODs is a constraint.
 
 Mapping of Building Blocks to Infrastructure::
-_<description of the mapping>_
+
+The mapping seems pretty clear. The "Viade Application" blackbox is the web displayed.
+The interfaces shown are the ones we refer here and also the PODs.
 
 === Test Environment
 Tests of the application are a relevant aspect of Viade.

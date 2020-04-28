@@ -31,27 +31,27 @@ function Friends() {
     const handleClick = () => setLoading(true);
 
     return (
-        <div className="App-header">
+        <div className="App-FlexCenterColumn">
             <Translation>
                 {
-                    (t) => <h1>{t('friendsTitle')}</h1>
+                    (t) => <h1 style={{ padding: "1%" }}>{t('friendsTitle')}</h1>
                 }
             </Translation>
             <Translation>
                 {
-                    (t) => <h2>{t('friendsAdd')}</h2>
+                    (t) => <h2 style={{ padding: "1%" }}>{t('friendsAdd')}</h2>
                 }
             </Translation>
             <Form inline="true" class="forms-inline">
                 <Form.Control type="text" placeholder="Friend username" />
-                <Button variant="primary" disabled={isLoading}
+                <Button id="addBtn" variant="primary" disabled={isLoading}
                     onClick={!isLoading ? handleClick : null}>
                     {isLoading ? 'Adding…' : 'Add'}
                 </Button>
             </Form>
             <Translation>
                 {
-                    (t) => <h2>{t('friendsList')}</h2>
+                    (t) => <h2 style={{ paddingTop: "1%" }}>{t('friendsList')}</h2>
                 }
             </Translation>
             <div style={routeFriendsStyle}>
@@ -66,7 +66,7 @@ function Friends() {
                     friendUsername="miguelm85"
                 />
             </div>
-        </div>
+        </div >
     );
 
 }

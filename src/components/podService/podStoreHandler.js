@@ -1,19 +1,18 @@
+import PodHandler from "./podHandler";
+
+const N3 = require('n3');
 const auth = require('solid-auth-client');
 const FC = require('solid-file-client');
 const fc = new FC(auth);
 
-export default class PodStorageHandler {
+export default class PodStorageHandler extends PodHandler {
 
     /**
      * @param {Session} currentSession - auth.currentSession()
      */
     constructor(currentSession) {
-        this.repository = "https://" + (currentSession).webId.split('/')[2];
-        this.defaultFolder = "/viade/";
-
-        this.routesDirectory = "routes/";
-        this.resourcesDirectory = "resources/";
-        this.commentsDirectory = "comments/";
+        super(currentSession);
+        this.sharedRoutesToAdd = [];
     }
 
     /**
@@ -31,37 +30,75 @@ export default class PodStorageHandler {
     }
 
     /**
-     * Gets an Array<String> with all the files stored in the routes directory
-     * Will automatically generate the default storage folders if not present
+     * Retrieves every single file from the POD routes directory if present. Then executes the callback function
+     * passed as a parameter for each file retrieved. This operation will automatically generate the default 
+     * storage folders if not present.
      *
-     * @param {Function} callback - 2 Parameter function,
-     *                             + the first is {Array<String>} or null if there was an error. Array with all the routes
-     *                             + the second null or the error found.
+     * @param {Function} callbackPerFile - A callback function to execute when each single file is retrieved.
+     * It receives two parameters,the first is the file that just got retrieved or null if there was an error. 
+     * The second receives null if everything went fine or the error found as an object.
      */
-    async getRoutes(callback) {
-        let result = [];
-        let folder = null;
-
-        await this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
-            (directory) => {folder = directory;},
-            (error) => {folder = null;}
-        );
-        if (folder) {
-            // Get files from directory
-            for (let i = 0; i < folder.files.length; i++) {
-                await this.getFile(folder.files[i].url).then(
-                    function (file) {
-                        result.push(file);
-                    },
-                    (error) => { callback(null, error); }
-                );
+    async getRoutes(callbackPerFile = (file, error) => { }) {
+        return this.getFolder(this.repository + this.defaultFolder + this.routesDirectory).then(
+            (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    this.getFile(directory.files[i].url).then(
+                        (file) => { callbackPerFile(file, null); },
+                        (error) => { callbackPerFile(null, error); }
+                    );
+                }
+                return directory.files.length;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return 0;
             }
-        } else {
-            // Create viade/routes folder
-            this.createBasicFolders();
-        }
+        ).then(
+            (value) => { return value; }
+        );
+    }
 
-        callback(result, null);
+    /**
+     * Stores a route under the /viade/routes/'routeFileName' URL
+     *
+     * @param {String} routeFileName - File name with extension, for example: myRoute.txt or LasXanas.json
+     * @param {Blob|String} data - The contents of the route
+     * @param {Function} callback - Calls the function with two parameters,
+     *                            + the first is the URL where the route is stored or null
+     *                            + the second is the actual response or error of the POD
+     */
+    async storeGroup(groupFileName, data, callback = () => { }) {
+        let url = this.repository + this.defaultFolder + this.groupsDirectory + groupFileName;
+        this.storeFile(url, data, callback);
+    }
+
+    /**
+     * Retrieves every single file from the POD groups directory if present. Then executes the callback function
+     * passed as a parameter for each file retrieved. This operation will automatically generate the default 
+     * storage folders if not present.
+     *
+     * @param {Function} callbackPerFile - A callback function to execute when each single file is retrieved.
+     * It receives two parameters,the first is the file that just got retrieved or null if there was an error. 
+     * The second receives null if everything went fine or the error found as an object.
+     */
+    async getGroups(callbackPerFile = (file, error) => { }) {
+        return this.getFolder(this.repository + this.defaultFolder + this.groupsDirectory).then(
+            (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    this.getFile(directory.files[i].url).then(
+                        (file) => { callbackPerFile(file, null); },
+                        (error) => { callbackPerFile(null, error); }
+                    );
+                }
+                return directory.files.length;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return 0;
+            }
+        ).then(
+            (value) => { return value; }
+        );
     }
 
     /**
@@ -74,8 +111,12 @@ export default class PodStorageHandler {
      *                            + the second is the actual response or error of the POD
      */
     storeResource(resourceFileName, data, callback = () => { }) {
-        let url = this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
+        let url = this.getExpectedPathForResource(resourceFileName);
         this.storeFile(url, data, callback);
+    }
+
+    getExpectedPathForResource(resourceFileName) {
+        return this.repository + this.defaultFolder + this.resourcesDirectory + resourceFileName;
     }
 
     /**
@@ -87,11 +128,83 @@ export default class PodStorageHandler {
      *                             + the second null or the error found.
      */
     async getResources(callback) {
-        //let result = [];
-        //let folder = null;
         // Not yet implemented
-
         callback(null, null);
+    }
+
+
+    async getRoutesSharedToMe(forEachFile = (file, error) => { }) {
+        this.getFolder(this.repository + this.defaultFolder + this.sharedDirectory).then(
+            async (directory) => {
+                for (let i = 0; i < directory.files.length; i++) {
+                    await this.getFile(directory.files[i].url).then(
+                        async (sharedRoutesfile) => {
+                            let parsedFileRoutes = JSON.parse(sharedRoutesfile).routes;
+                            for (let j = 0; j < parsedFileRoutes.length; j++) {
+                                await this.getFile(parsedFileRoutes[j]["@id"]).then(
+                                    (fileContents) => {
+                                        let lastFile =
+                                            (i === directory.files.length - 1) &&
+                                            (j === parsedFileRoutes.length - 1);
+                                        forEachFile(fileContents, null, lastFile);
+                                    },
+                                    (error) => { forEachFile(); }
+                                );
+                            }
+                        },
+                        (error) => { forEachFile(null, error); }
+                    );
+                }
+                return directory.files.length === 0;
+            },
+            (error) => {
+                this.createBasicFolders();
+                return false;
+            }
+        );
+    }
+
+    /**
+     * Checks for routes in the inbox, adding them onto a shared route file at /viade/shared/
+     * forEachMail is called for each new route
+     */
+    async checkInbox(forEachMail = () => { }) {
+        await this.getFolder(this.repository + "/inbox/").then(
+            async function (folder) {
+                await folder.files.map((file) => { return file.url; }).forEach(async function (url) { // For each message
+                    await this.getFile(url).then(function (content) {
+                        const parser = new N3.Parser();
+                        parser.parse(content, function (error, quad, prefixes) { // parse the content of the message
+                            if (quad) {
+                                if (quad.predicate.id === "http://schema.org/text" && quad.object.id.includes("/viade/routes/")) { // If the quad is the url of the route
+                                    forEachMail(quad.object.id);
+                                    this.addRoutesAsShared([quad.object.id.split("\"").join("")]);
+                                    this._eliminateFile(url);
+                                }
+                            }
+                        }.bind(this));
+                    }.bind(this),
+                        (error) => { }
+                    );
+                }.bind(this));
+
+            }.bind(this),
+            (error) => { }
+        );
+
+    }
+
+    _eliminateFile(url) {
+        fc.delete(url);
+    }
+
+    _eliminateSharedFolder() {
+        let url = this.repository + this.defaultFolder + this.sharedDirectory;
+        this.getFolder(url).then(function (folder) {
+            for (let i = 0; i < folder.files.length; i++) {
+                this._eliminateFile(folder.files[i].url);
+            }
+        }.bind(this));
     }
 
     /**
@@ -100,19 +213,60 @@ export default class PodStorageHandler {
      * @param callback - 1 parameter function,
      *                      + String "OK" if the process finished, null if there was an error
      */
-    async deleteAll(callback = () => {}){
+    async deleteAll(callback = () => { }) {
         fc.deleteFolderRecursively(this.repository + this.defaultFolder).then(
             (res) => { callback("OK"); },
             (error) => { callback(null); }
         );
     }
 
-    storeFile(url, data, callback) {
+    storeFile(url, data, callback = () => { }) {
         let response = fc.createFile(url, data);
         response.then(
             (response) => { callback(response.url, response); }
             , (error) => { callback(null, error); }
         );
+    }
+
+    async addRoutesAsShared(urls) {
+        let file = null;
+        let filename = "en3a.json";
+
+        // 1.- Get a shared File
+        try {
+            file = await this.getFile(this.repository + this.defaultFolder + this.sharedDirectory + filename);
+            file = JSON.parse(file);
+        } catch (e) {
+            if (e.status !== 404) {
+                throw e;
+            } else {
+                file = {
+                    "@context": {
+                        "@version": 1.1,
+                        "routes": {
+                            "@container": "@list",
+                            "@id": "viade:routes"
+                        },
+                        "viade": "http://arquisoft.github.io/viadeSpec/"
+                    },
+                    "routes": []
+                };
+            }
+        }
+
+        // 2.- Remove duplicated routes
+        let alreadyRoutes = file["routes"].map((url) => { return url["@id"]; });
+        urls.forEach((url) => {
+            if (alreadyRoutes.indexOf(url) === -1) {
+                alreadyRoutes.push(url);
+            }
+        });
+        urls = [];
+
+        // 3.- Rewrite file
+        file["routes"] = alreadyRoutes.map((url) => { return { "@id": url.toString() }; });
+
+        this.storeFile(this.repository + this.defaultFolder + this.sharedDirectory + filename, JSON.stringify(file));
     }
 
     async getFolder(url) {
@@ -123,9 +277,11 @@ export default class PodStorageHandler {
         return fc.readFile(url);
     }
 
-    async createBasicFolders(){
+    async createBasicFolders() {
+        await fc.createFolder(this.repository + this.defaultFolder);
         fc.createFolder(this.repository + this.defaultFolder + this.routesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.resourcesDirectory);
         fc.createFolder(this.repository + this.defaultFolder + this.commentsDirectory);
+        fc.createFolder(this.repository + this.defaultFolder + this.sharedDirectory);
     }
 }

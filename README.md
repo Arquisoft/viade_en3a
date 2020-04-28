@@ -5,21 +5,60 @@
 # VIADE EN3A
 
 ## Index
-1.  Index
 
-2.  Introduction
+1.  [How-to-use](#how-to-use)
 
-3.  To Start
-    1.  Create a POD
-    2.  Login
-    3.  Create a route
-    4.  View a route    
+    1.  [Installation](#installation)
+
+    2.  [Starting](#starting)
+
+    3.  [Testing](#testing)
+
+        1.  [Unit tests](#unit-tests)
+
+        2.  [Cucumber tests](#cucumber-tests)
+
+2.  [Introduction](#introduction)
+
+3.  [To Start](#to-start)
+
+    1.  [Create a POD](#create-a-pod)
+
+    2.  [Login](#login)
+
+    3.  [Create a route](#create-a-route)
+
+    4.  [View a route](#view-a-route)
     
+4.  [Miscellaneous information](#miscellaneous-information)
 
-4.  Miscellaneous Information
+5.  [Developers names](#developers-names)
 
+## How-to-use
+### Installation
+In order to install the packages needed for the app to work run:
+```shell
+npm install
+```
 
-5.  Developers Names
+### Starting
+The app can be run as:
+```shell
+npm start
+```
+Once executed, it should be available at [http://localhost:3000](http://localhost:3000)
+
+### Testing
+#### Unit tests
+For executing the unit tests run:
+```shell
+npm test
+```
+#### Cucumber tests
+For executing the [Cucumber](https://cucumber.io/) tests run:
+```shell
+npm run-script test:e2e
+```
 
 ## Introduction
 Viade is an Application whose task is to manage routes.
@@ -30,7 +69,7 @@ Viade is an Application whose task is to manage routes.
 It allows you to store your favourite scenic routes on your [Solid Pod](https://solid.inrupt.com/how-it-works) and to share it with your friends and family as well as comment on those of your friends'.
 
 <p>
-    <img class="fullPic" src="./public/img/sample/Screenshot_2.png">
+    <img class="fullPic" src="./public/img/sample/newRouteList.png">
 </p>
 
 ## To Start
@@ -49,7 +88,8 @@ Once logged in you will have access to new options.
 From "Route Management > Create a new Route" you can create a new route.
 Just set a title, description, select the waypoints of the route and press "Save route in POD".
 <p>
-    <img class="fullPic" src="./public/img/sample/createRoute.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_1.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_3.png">
 </p>
 
 ### View a route
@@ -67,10 +107,10 @@ When displaying all routes "Route Management > My Routes", you can click on the 
 This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.
 
 <p>
-    <img class="fullPic" src="./public/img/sample/shareRoutes.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_4.png">
 </p>
 
-## Miscellaneous Information
+## Miscellaneous information
 
 This project is an assignment for the [Software Architecture course](https://arquisoft.github.io/) following [these requirements](https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/).
 

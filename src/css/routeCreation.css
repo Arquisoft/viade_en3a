@@ -1,0 +1,15 @@
+#mapPointsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "mapAndSearch pointManager";
+}
+
+#mapAndSearch {
+    grid-area: mapAndSearch;
+    padding: 10px;
+}
+
+#pointManager {
+    grid-area: pointManager;
+}

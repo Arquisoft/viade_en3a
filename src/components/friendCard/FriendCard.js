@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 function FriendCard(props) {
     const { t } = useTranslation();
     return (
-        <Card text="dark" style={{ width: "20vw", height: "auto", margin: "1%" }}>
+        <Card text="dark" border="primary" style={{ width: "20vw", height: "auto", margin: "1%" }}>
             <Card.Header style={{ alignItems: "center", padding: "0" }}>
                 <img src={props.friendImage}
                 width="170"
@@ -17,8 +17,15 @@ function FriendCard(props) {
             </Card.Header>
             <Card.Body>
                 <Card.Title style={{ fontSize: "24px" }}>{props.friendName}</Card.Title>
-                <Card.Text style={{ fontSize: "18px" }}>{props.friendUsername}</Card.Text>
-                <Button variant="danger">{t('friendCardDelete')}</Button>
+                <style type="text/css">
+                    {`
+                    .btn-solid {
+                    background-color: #7C4DFF;
+                    color: white;
+                    }
+                    `}
+                </style>
+                <Button variant="solid" href={props.friendLink}>{t('friendCardProfile')}</Button>
             </Card.Body>
         </Card>
     );
