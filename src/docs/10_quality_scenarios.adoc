@@ -23,8 +23,7 @@ image::10_qualityTree.png[QualityTree]
 |3|Performance - Responsive|User interaction must be reflected with a low response time, with a maximum acceptable limit of 1 second
 |4|Performance - Loading times|Loading times don't have to be a bother to the user, with an average of 2 seconds
 |5|Testability - Fully tested UI|We must reach a suitable coverage percentage, 50% at minimum
-|6|Portability - Platforms|The app must be available both in the navigator and in a mobile device
-|7|Security - Data security|If an unauthorized user access is detected it must be reported
-|8|Reliability - Error handling|95% of the errors have to be handled by the program, not leading to a system crash
+|6|Security - Data security|If an unauthorized user access is detected it must be reported
+|7|Reliability - Error handling|95% of the errors have to be handled by the program, not leading to a system crash
 |===
 ****

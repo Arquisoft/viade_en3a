@@ -70,7 +70,7 @@ We chose chart_js as our plotting tool.
 
 * More space occupied
 
-=== AirMap Elevation API
+=== _AirMap Elevation API_
 
 .Pros
 
@@ -82,22 +82,11 @@ We chose chart_js as our plotting tool.
 
 * For some points, such as seas, lakes or oceans may not give a response.
 
-=== Sharing of routes
+=== _Sharing of routes_
 
-There are two ways to do so:
+Our approach saves all files in a private directory (that is, viade/ inside the POD). Then, when sharing, giving the user's friends rights to view the files and sending a notification to each user of the newly shared route to them.
 
-1.- Storing them on a public directory, so ANY user can see them (therefore sharing among users is easily done).
-
-.Pros
-
-* Easy implementation.
-
-.Cons
-
-* No privacy.
-
-
-2.- Storing them on a private directory, then giving the user's friends rights to view the files (may result on problems with permissions such as user not being able to view its own files).
+The other approach would have been saving everything on public/ directory.
 
 .Pros
 
@@ -109,5 +98,4 @@ There are two ways to do so:
 * Harder to implement.
 * If not careful may result in loss of rights on files.
 * A need of learning a library or method to edit the permissions of the POD.
-
-The approach to be followed is still a work in progress and needs further investigation.
+* Creating a notification system to inform to the receiver of the share.
