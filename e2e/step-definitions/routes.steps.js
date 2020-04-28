@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
 jest.setTimeout(400000);
 let idp = "https://uo263624.solid.community";
 let account = "uo263624";
-let page = null
+let page = null;
 
 function a(){
     //return "viadeen3atest123";
@@ -107,6 +107,101 @@ defineFeature(feature, test => {
         then('The route is created', async () => {
             await page.waitForFunction('document.querySelector("body").innerText.includes("Lista de ")');
             await page.waitForFunction('document.querySelector("div").innerText.includes("Cucumber")');
+        });
+    });
+
+    test('Error popup when no title', ({ given, when, then }) => {
+
+
+        given('An already registered user at route creation view', async () => {
+            // logged in done
+            // move to correct view
+            await page.goto('http://localhost:3000/#/routes/add');
+            await page.waitForSelector("[id=routeNameInput]");
+        });
+
+        when('Creating a route with no title', async () => {
+            await page.waitForSelector("textarea");
+            await expect(page).toFill('textarea', "Description of the route Route");
+            await delay(300);
+
+            // Point 1
+            await page.mouse.move(100, 650);
+            await page.mouse.down({ button: 'left' });
+            await page.mouse.up({ button: 'left' });
+            await delay(300);
+
+            // Point 2
+            await page.mouse.move(100, 700);
+            await page.mouse.down({ button: 'left' });
+            await page.mouse.up({ button: 'left' });
+            await delay(300);
+
+            // Point 3
+            await page.mouse.move(200, 700);
+            await page.mouse.down({ button: 'left' });
+            await page.mouse.up({ button: 'left' });
+            await delay(300);
+
+            //Point 4
+            await page.mouse.move(200, 650);
+            await page.mouse.down({ button: 'left' });
+            await page.mouse.up({ button: 'left' });
+            await delay(300);
+
+            /* Depending on resolution, and scrren, at least some of the points will render */
+
+            await page.click('button[id="btnSave"]');
+        });
+
+        then('The route is not created and a popup appears', async () => {
+            await page.waitForSelector("textarea");
+            await page.waitForFunction('document.querySelector("div").innerText.includes("no puede estar vac")');
+        });
+    });
+
+    test('Error popup when no points', ({ given, when, then }) => {
+
+
+        given('An already registered user at route creation view', async () => {
+            // logged in done
+            // move to correct view
+            await page.goto('http://localhost:3000/#/routes/add');
+            await page.waitForSelector("[id=routeNameInput]");
+        });
+
+        when('Creating a route with no points', async () => {
+            await page.waitForSelector("[id=routeNameInput]");
+            await expect(page).toFill('[id="routeNameInput"]', "Cucumber test Route");
+            await expect(page).toFill('textarea', "Description of the route Route");
+            await page.click('button[id="btnSave"]');
+        });
+
+        then('The route is not created and a popup appears', async () => {
+            await page.waitForSelector("textarea");
+            await page.waitForFunction('document.querySelector("body").innerText.includes("contener al menos dos")');
+        });
+    });
+
+    test('Error popups with no data at all', ({ given, when, then }) => {
+
+
+        given('An already registered user at route creation view', async () => {
+            // logged in done
+            // move to correct view
+            await page.goto('http://localhost:3000/#/routes/add');
+            await page.waitForSelector("[id=routeNameInput]");
+        });
+
+        when('Creating a route with no data', async () => {
+            await page.waitForSelector("[id=routeNameInput]");
+            await page.click('button[id="btnSave"]');
+        });
+
+        then('The route is not created and two popups appear', async () => {
+            await page.waitForSelector("textarea");
+            await page.waitForFunction('document.querySelector("div").innerText.includes("no puede estar vac")');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("contener al menos dos")');
         });
     });
 });
