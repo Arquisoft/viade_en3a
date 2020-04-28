@@ -43,7 +43,7 @@ class ShareView extends React.Component {
                         <Card.Body>
                             <Card.Title>{friend.name}</Card.Title>
                             <Button variant="primary"
-                                onClick={() => { this.send(friend.inbox); }}>Share</Button>
+                                onClick={() => { this.send(friend.inbox); }}>{i18n.t("share")}</Button>
                         </Card.Body>
                     </Card>
                 );
@@ -60,7 +60,7 @@ class ShareView extends React.Component {
                             <Card.Title>{group.name}</Card.Title>
                             {group.users.map((user) => <Card.Text>{user.name}</Card.Text>)}
                             <Button variant="primary"
-                                onClick={() => { this.sendToGroup(group.users); }}>Share</Button>
+                                onClick={() => { this.sendToGroup(group.users); }}>{i18n.t("share")}</Button>
                         </Card.Body>
                     </Card>
                 );
@@ -73,9 +73,9 @@ class ShareView extends React.Component {
                     position={toast.POSITION.TOP_CENTER}
                     autoClose={5000}
                 />
-                <h2 style={{ padding: "1%" }}>Amigos</h2>
+                <h2 style={{ padding: "1%" }}>{i18n.t("friendsTitle")}</h2>
                 {friendsCardDeck}
-                <h2 style={{ padding: "1%" }}>Grupos</h2>
+                <h2 style={{ padding: "1%" }}>{i18n.t("grupos")}</h2>
                 {groupsCardDeck}
             </div >
         );

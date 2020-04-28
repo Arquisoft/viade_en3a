@@ -132,6 +132,7 @@ const resources = {
       "description":"Description",
       "actions":"Actions",
       "editMessage": "Click over a point to edit it",
+      "grupos": "Groups",
     }
   },
   es: {
@@ -261,6 +262,7 @@ const resources = {
       "description":"Descripción",
       "actions":"Acciones",
       "editMessage": "Pincha sobre un punto para editarlo",
+      "grupos": "Grupos",
     }
   }
 };
