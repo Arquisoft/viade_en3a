@@ -13,19 +13,24 @@ class UserDetails {
     return (session).webId.split('/')[2].split('.')[0];
   }
 
-  static async getLocality() {
-    return new Promise((resolve, reject) => {
-      data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
-        .then((addressCard) => {
-          data[addressCard].vcard_locality.value
-            .then((locality) => {
-              resolve(locality);
-            })
-            .catch((error) => reject(error));
-        })
-        .catch((error) => reject(error));
-    });
+    static async getSolidProfile(){
+      var session = await auth.currentSession();
+      return (session).webId;
   }
+
+    static async getLocality(){
+        return new Promise((resolve, reject) => {
+            data.user["http://www.w3.org/2006/vcard/ns#hasAddress"].value
+              .then((addressCard) => {
+                data[addressCard].vcard_locality.value
+                .then((locality) => {
+                  resolve(locality);
+                })
+                .catch((error) => reject(error));
+              })
+              .catch((error) => reject(error));
+        });
+    }
 
   static async getRegion() {
     return new Promise((resolve, reject) => {
@@ -69,8 +74,11 @@ class UserDetails {
     });
   }
 
-
-
+    static async getImage(){
+      var session = await auth.currentSession();
+        var photo = data[session.webId].vcard_hasPhoto;
+        return photo;
+    }
 }
 
 export default UserDetails;
