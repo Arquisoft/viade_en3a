@@ -139,7 +139,7 @@ class CreateGroup extends React.Component {
                     </Card>
                     );
                 }
-            )
+            );
 
         return (
             <div className="App-header">
