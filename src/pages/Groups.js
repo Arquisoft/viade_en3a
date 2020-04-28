@@ -86,7 +86,7 @@ class Groups extends React.Component {
                 </Translation>
                 <Translation>
                     {
-                        (t) => <Button variant="primary" size="lg" href="#createGroup"
+                        (t) => <Button id="btnCreateGroup" variant="primary" size="lg" href="#createGroup"
                             style={{ margin: "2vh" }}>{t('groupsCreate')}</Button>
                     }
                 </Translation>

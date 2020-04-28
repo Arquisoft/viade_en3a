@@ -19,6 +19,7 @@ export default function RouteCreationForm(props) {
                             placeholder={t('routeNamePlaceholder')}
                             ref={props.routeNameRef}
                             role="name"
+                            id="routeNameInput"
                         />
                     </Col>
                 </Form.Group>
