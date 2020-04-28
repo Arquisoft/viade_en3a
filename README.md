@@ -88,7 +88,8 @@ Once logged in you will have access to new options.
 From "Route Management > Create a new Route" you can create a new route.
 Just set a title, description, select the waypoints of the route and press "Save route in POD".
 <p>
-    <img class="fullPic" src="./public/img/sample/createRoute.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_1.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_3.png">
 </p>
 
 ### View a route
@@ -106,7 +107,7 @@ When displaying all routes "Route Management > My Routes", you can click on the 
 This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.
 
 <p>
-    <img class="fullPic" src="./public/img/sample/shareRoutes.png">
+    <img class="fullPic" src="./public/img/sample/Screenshot_4.png">
 </p>
 
 ## Miscellaneous information
