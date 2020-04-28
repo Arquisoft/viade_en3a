@@ -33,7 +33,7 @@ test("render home", () => {
 
 test("render profile", () => {
     const { getByText } = render(<Profile />);
-    const title = getByText(i18n.t("profileUsername"));
+    const title = getByText(i18n.t("profileTitle"));
     expect(title).toBeInTheDocument();
 });
 
