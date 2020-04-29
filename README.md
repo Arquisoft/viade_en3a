@@ -17,18 +17,6 @@
         1.  [Unit tests](#unit-tests)
 
         2.  [Cucumber tests](#cucumber-tests)
-
-2.  [Introduction](#introduction)
-
-3.  [To Start](#to-start)
-
-    1.  [Create a POD](#create-a-pod)
-
-    2.  [Login](#login)
-
-    3.  [Create a route](#create-a-route)
-
-    4.  [View a route](#view-a-route)
     
 4.  [Miscellaneous information](#miscellaneous-information)
 
@@ -57,58 +45,8 @@ npm test
 #### Cucumber tests
 For executing the [Cucumber](https://cucumber.io/) tests run:
 ```shell
-npm run-script test:e2e
+npm run test:e2e
 ```
-
-## Introduction
-Viade is an Application whose task is to manage routes.
-<p>
-    <img class="fullPic" src="./public/img/sample/main.png">
-</p>
-
-It allows you to store your favourite scenic routes on your [Solid Pod](https://solid.inrupt.com/how-it-works) and to share it with your friends and family as well as comment on those of your friends'.
-
-<p>
-    <img class="fullPic" src="./public/img/sample/newRouteList.png">
-</p>
-
-## To Start
-### Create a POD
-
-If you are not an owner of a POD you can create one by pressing the register button.
-This will redirect you to a provider, where you can create your POD.
-
-### Login
-
-Once the POD is created, press the login button and a popup will ask you for credentials.
-Once logged in you will have access to new options.
-
-### Create a route
-
-From "Route Management > Create a new Route" you can create a new route.
-Just set a title, description, select the waypoints of the route and press "Save route in POD".
-<p>
-    <img class="fullPic" src="./public/img/sample/Screenshot_1.png">
-    <img class="fullPic" src="./public/img/sample/Screenshot_3.png">
-</p>
-
-### View a route
-
-We can now navigate to "Route Management > My Routes", where the routes you have created are listed.
-When clicking on "Info" of the new route a new window will display all the information recorded, as well as comments posted and a elevation chart of the waypoints.
-
-<p>
-    <img class="fullPic" src="./public/img/sample/routeDetails.png">
-</p>
-
-### Share with friends
-
-When displaying all routes "Route Management > My Routes", you can click on the share option.
-This will list all friends and when clicking share, a message with the route will be sent to the inbox of your friend.
-
-<p>
-    <img class="fullPic" src="./public/img/sample/Screenshot_4.png">
-</p>
 
 ## Miscellaneous information
 
