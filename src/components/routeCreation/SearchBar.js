@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
         } else {
             toast.info(i18n.t("searching"));
 
-            fetch("https://nominatim.openstreetmap.org/search?q="+text+"&addressdetails=1&limit=3&format=json").then( (response) =>{
+            fetch("https://nominatim.openstreetmap.org/search?q="+text+"&addressdetails=1&limit=3&format=json").then( (response) => {
                 if(response.status===200){
                     response.json().then( (results) => {
                         if (results.length > 0) {
