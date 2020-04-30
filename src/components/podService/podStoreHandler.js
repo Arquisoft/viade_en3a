@@ -139,17 +139,22 @@ export default class PodStorageHandler extends PodHandler {
                 for (let i = 0; i < directory.files.length; i++) {
                     await this.getFile(directory.files[i].url).then(
                         async (sharedRoutesfile) => {
-                            let parsedFileRoutes = JSON.parse(sharedRoutesfile).routes;
-                            for (let j = 0; j < parsedFileRoutes.length; j++) {
-                                await this.getFile(parsedFileRoutes[j]["@id"]).then(
-                                    (fileContents) => {
-                                        let lastFile =
-                                            (i === directory.files.length - 1) &&
-                                            (j === parsedFileRoutes.length - 1);
-                                        forEachFile(fileContents, null, lastFile);
-                                    },
-                                    (error) => { forEachFile(); }
-                                );
+                            try {
+                                let parsedFileRoutes = JSON.parse(sharedRoutesfile).routes;
+                                for (let j = 0; j < parsedFileRoutes.length; j++) {
+                                    await this.getFile(parsedFileRoutes[j]["@id"]).then(
+                                        (fileContents) => {
+                                            let lastFile =
+                                                (i === directory.files.length - 1) &&
+                                                (j === parsedFileRoutes.length - 1);
+                                            forEachFile(fileContents, null, lastFile);
+                                        },
+                                        (error) => { forEachFile(); }
+                                    );
+                                }
+                            } catch (error) {
+                                console.log("From getRoutesSharedToMe");
+                                console.log(error);
                             }
                         },
                         (error) => { forEachFile(null, error); }

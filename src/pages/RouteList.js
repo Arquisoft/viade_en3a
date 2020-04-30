@@ -87,7 +87,7 @@ class RouteList extends React.Component {
                 } else {
                     if (routeJson.length !== 0) {
                         let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(JSON.parse(routeJson));
+                        tempRoute.modifyFromJsonLd(routeJson);
                         this.routeManager.addRoute(tempRoute);
                         let tempList = this.state.routes;
                         tempList.push(tempRoute);

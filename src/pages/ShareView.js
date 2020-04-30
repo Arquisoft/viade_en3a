@@ -186,7 +186,7 @@ class ShareView extends React.Component {
                 } else {
                     if (groupJson.length !== 0) {
                         let tempGroup = new MyGroup("", []);
-                        tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
+                        tempGroup.modifyFromJsonLd(groupJson);
                         this.groupManager.addGroup(tempGroup);
                         let tempList = this.state.groups;
                         tempList.push(tempGroup);
