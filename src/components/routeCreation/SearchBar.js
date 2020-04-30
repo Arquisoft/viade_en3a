@@ -28,26 +28,36 @@ class SearchBar extends React.Component {
         } else {
             toast.info(i18n.t("searching"));
 
-            search({ q: text }, function (err, opts, results) {
-                if (results.length > 0) {
-                    let firstFound = results[0];
+            fetch("https://nominatim.openstreetmap.org/search?q="+text+"&addressdetails=1&limit=3&format=json").then( (response) => {
+                if(response.status===200){
+                    response.json().then( (results) => {
+                        if (results.length > 0) {
+                            let firstFound = results[0];
 
-                    this.map.current.setState({ editablePosition: [firstFound.lat, firstFound.lon] });
-                    this.map.current.setState({ boundingbox: firstFound.boundingBox });
+                            this.map.current.setState({ editablePosition: [firstFound.lat, firstFound.lon] });
+                            this.map.current.setState({ boundingbox: firstFound.boundingBox });
 
-                    this.search.current.value = firstFound.display_name;
+                            this.search.current.value = firstFound.display_name;
 
-                    toast.dismiss();
-                    toast.success(i18n.t("mapCreationSearchBarFound") + firstFound.display_name);
+                            toast.dismiss();
+                            toast.success(i18n.t("mapCreationSearchBarFound") + firstFound.display_name);
+                        }
+                        else {
+                            this.search.current.value = "";
+
+                            toast.dismiss();
+                            toast.error(i18n.t("mapCreationSearchBarError"));
+                        }
+                    });
                 }
-                else {
+                else{
                     this.search.current.value = "";
 
                     toast.dismiss();
                     toast.error(i18n.t("mapCreationSearchBarError"));
-                }
 
-            }.bind(this));
+                }
+            });
         }
     }
 
