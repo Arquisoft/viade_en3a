@@ -153,6 +153,7 @@ export default class PodStorageHandler extends PodHandler {
                                     );
                                 }
                             } catch (error) {
+                                // Continue with execution and ignore the route
                             }
                         },
                         (error) => { forEachFile(null, error); }
