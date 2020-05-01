@@ -99,8 +99,6 @@ export default class PodPermissionHandler extends PodHandler {
                 this.shareFile(mediaURIs[i], permissions, agents);
             }
         } catch (error) {
-            console.log("From _processRouteFileForShare");
-            console.log(error);
         }
     }
 
@@ -112,8 +110,6 @@ export default class PodPermissionHandler extends PodHandler {
                 this.unshareFile(mediaURIs[i], permissions, agents);
             }
         } catch (error) {
-            console.log("From _processRouteFileForUnshare");
-            console.log(error);
         }
     }
 }

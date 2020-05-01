@@ -153,8 +153,6 @@ export default class PodStorageHandler extends PodHandler {
                                     );
                                 }
                             } catch (error) {
-                                console.log("From getRoutesSharedToMe");
-                                console.log(error);
                             }
                         },
                         (error) => { forEachFile(null, error); }

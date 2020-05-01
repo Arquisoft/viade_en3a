@@ -158,7 +158,6 @@ class MyRoute {
 			parsedRoute["id"] = "";
 			return JSON.stringify(parsedRoute);
 		} catch (error) {
-			console.log(error);
 			return JSON.stringify({});
 		}
 	}
@@ -220,7 +219,6 @@ class MyRoute {
 
 			return true;
 		} catch (error) {
-			console.log(error);
 			return false;
 		}
 	}

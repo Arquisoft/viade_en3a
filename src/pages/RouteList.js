@@ -123,7 +123,7 @@ class RouteList extends React.Component {
                     }
 
                 }
-            )
+            );
         }
     }
 
