@@ -178,28 +178,35 @@ class MyRoute {
 			this.description = parsedRoute["description"];
 
 			let rawWaypoints = parsedRoute["waypoints"];
-			rawWaypoints = rawWaypoints.map((jsonPoint) => {
-				return {
-					lat: jsonPoint["latitude"],
-					lng: jsonPoint["longitude"],
-					elv: jsonPoint["elevation"],
-					name: jsonPoint["name"],
-					description: jsonPoint["description"]
-				};
-			});
+			if(rawWaypoints!==undefined) {
+				rawWaypoints = rawWaypoints.map((jsonPoint) => {
+					return {
+						lat: jsonPoint["latitude"],
+						lng: jsonPoint["longitude"],
+						elv: jsonPoint["elevation"],
+						name: jsonPoint["name"],
+						description: jsonPoint["description"]
+					};
+				});
 
-			this.points = processPoints(rawWaypoints);
+
+				this.points = processPoints(rawWaypoints);
+			}
 
 			let rawPoints = parsedRoute["points"];
-			rawPoints = rawPoints.map((jsonPoint) => {
-				return {
-					lat: jsonPoint["latitude"],
-					lng: jsonPoint["longitude"],
-					elv: jsonPoint["elevation"]
-				};
-			});
-			this.addSimplePoints(rawPoints);
-
+			if(rawPoints!==undefined) {
+				rawPoints = rawPoints.map((jsonPoint) => {
+					return {
+						lat: jsonPoint["latitude"],
+						lng: jsonPoint["longitude"],
+						elv: jsonPoint["elevation"]
+					};
+				});
+				this.addSimplePoints(rawPoints);
+			}
+			if(this.points.length===0){
+				return false;
+			}
 			this.media = [];
 			let mediaURIs = parsedRoute["media"];
 			mediaURIs.map((j) => { return j["@id"]; }).forEach(function (url) {

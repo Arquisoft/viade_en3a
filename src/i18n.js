@@ -131,6 +131,7 @@ const resources = {
       "actions":"Actions",
       "editMessage": "Click over a point to edit it",
       "grupos": "Groups",
+      "invalidRoute": "Route with invalid format ignored",
     }
   },
   es: {
@@ -261,6 +262,7 @@ const resources = {
       "actions":"Acciones",
       "editMessage": "Pincha sobre un punto para editarlo",
       "grupos": "Grupos",
+      "invalidRoute": "Ruta con formato inválido ignorada",
     }
   }
 };
