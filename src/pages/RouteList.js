@@ -86,28 +86,27 @@ class RouteList extends React.Component {
                     toast.error(i18n.t('alertAccessPOD'));
                     return 0;
                 } else {
-                        if (routeJson.length !== 0) {
-                            let tempRoute = new MyRoute("", "", "", []);
-                            if (tempRoute.modifyFromJsonLd(routeJson)) { //isValid
-                                this.routeManager.addRoute(tempRoute);
-                                let tempList = this.state.routes;
-                                tempList.push(tempRoute);
-                                this.processedRoutes += 1;
-                                if (this.processedRoutes === this.retrievedRoutes) {
-                                    this.setState({routes: tempList});
-                                    $("#messageArea").empty();
-                                }
+                    if (routeJson.length !== 0) {
+                        let tempRoute = new MyRoute("", "", "", []);
+                        if (tempRoute.modifyFromJsonLd(routeJson)) { //isValid
+                            this.routeManager.addRoute(tempRoute);
+                            let tempList = this.state.routes;
+                            tempList.push(tempRoute);
+                            this.processedRoutes += 1;
+                            if (this.processedRoutes === this.retrievedRoutes) {
+                                this.setState({ routes: tempList });
+                                $("#messageArea").empty();
                             }
-                            else{ //isinvalid
-                                toast.error(i18n.t('invalidRoute'));
-                                this.retrievedRoutes--;
-                                if (this.processedRoutes === this.retrievedRoutes) {
-                                    this.setState({routes: this.state.routes});
-                                    $("#messageArea").empty();
-                                }
+                        } else { //isinvalid
+                            toast.error(i18n.t('invalidRoute'));
+                            this.retrievedRoutes--;
+                            if (this.processedRoutes === this.retrievedRoutes) {
+                                this.setState({ routes: this.state.routes });
+                                $("#messageArea").empty();
                             }
                         }
-                        return this.processedRoutes;
+                    }
+                    return this.processedRoutes;
                 }
             }).then(
                 (result) => {

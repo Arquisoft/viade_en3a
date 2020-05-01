@@ -178,7 +178,7 @@ class MyRoute {
 			this.description = parsedRoute["description"];
 
 			let rawWaypoints = parsedRoute["waypoints"];
-			if(rawWaypoints!==undefined) {
+			if (rawWaypoints !== undefined) {
 				rawWaypoints = rawWaypoints.map((jsonPoint) => {
 					return {
 						lat: jsonPoint["latitude"],
@@ -194,7 +194,7 @@ class MyRoute {
 			}
 
 			let rawPoints = parsedRoute["points"];
-			if(rawPoints!==undefined) {
+			if (rawPoints !== undefined) {
 				rawPoints = rawPoints.map((jsonPoint) => {
 					return {
 						lat: jsonPoint["latitude"],
@@ -204,7 +204,7 @@ class MyRoute {
 				});
 				this.addSimplePoints(rawPoints);
 			}
-			if(this.points.length===0){
+			if (this.points.length === 0) {
 				return false;
 			}
 			this.media = [];
