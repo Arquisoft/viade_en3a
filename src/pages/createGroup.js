@@ -159,7 +159,8 @@ class CreateGroup extends React.Component {
                             <Translation> 
                                 {
                                     (t) => <Button id="btnCreate" variant="primary"
-                                    onClick={() => {this.uploadToPod(this.nameRef.current.value);}}>{t('groupsCreateBtn')}</Button>
+                                    onClick={() => {this.uploadToPod(this.nameRef.current.value);}}>
+                                        {t('groupsCreateBtn')}</Button>
                                 }
                             </Translation>
                         </Form.Group>

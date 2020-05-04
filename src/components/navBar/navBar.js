@@ -80,7 +80,7 @@ function MyNavBar(props) {
                 src={gitHubLogo}
                 width="30"
                 height="30"
-                className="d-inline-block align-top"
+                className="d-inline-block align-top not-modify"
                 alt="GitHub link"
               />
             </Nav.Link>
