@@ -15,14 +15,11 @@ the route is decorated with name and description for all the points. Then, it's 
 === Route Listing
 image::RuntimeViewRouteDetailed.png[RouteListing]
 
-Once the user clicks in route listing the following process is executed.
+The process for listing routes is the following.
 
 [arabic]
-. The Route Manager is called to get the user's routes.
-. The routes are showng as independent cards, one for each, with a button allowing you to display the "More info" view.
-. The more info view contains:
-.. The route images in a gallery.
-.. More information about the route (description, name, author, total route distance)
-.. MyMap React component showing the points, movable and clickable to display each point's information.
-.. MyElevationChart React component showing the altitude for each of the points.
-.. A button to export the route as JSON file.
+. The Route Manager gets cleaned in order to then load the new routes.
+. A POD Storage Handler is created with the current user to gain access to the POD.
+. The method getRoutes() starts an asynchronous route loading.
+. For each of the routes retrieved we create a new one, and populate it with the data returned.
+. The route is then added to the manager and printed in the screen for the user.
