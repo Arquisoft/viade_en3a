@@ -182,7 +182,7 @@ class InfoView extends React.Component {
                     } else {
                         if (jsonRoute.includes(this.id)) {
                             let tempRoute = new MyRoute("", "", "", []);
-                            tempRoute.modifyFromJsonLd(JSON.parse(jsonRoute));
+                            tempRoute.modifyFromJsonLd(jsonRoute);
                             this.setState({ route: tempRoute });
                         }
                     }

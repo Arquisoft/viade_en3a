@@ -94,7 +94,7 @@ export default class RouteSharedList extends React.Component {
                 } else {
                     if (routeJson.length !== 0) {
                         let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(JSON.parse(routeJson));
+                        tempRoute.modifyFromJsonLd(routeJson);
                         this.routeManager.addSharedRoute(tempRoute);
                         let tempList = this.state.sharedRoutes;
                         tempList.push(tempRoute);

@@ -9,7 +9,7 @@ const { AclApi } = SolidAclUtils;
 // const { AclApi, AclDoc, AclParser, AclRule, Permissions, Agents } = SolidAclUtils;
 // const { READ, WRITE, APPEND, CONTROL } = Permissions;
 
-export default class PodPermissionHandler extends PodHandler{
+export default class PodPermissionHandler extends PodHandler {
 
     /**
      * @param {Session} currentSession - auth.currentSession()
@@ -31,7 +31,7 @@ export default class PodPermissionHandler extends PodHandler{
         // Share resources
         this.podStoreHandler.getFile(url).then(
             (file) => { this._processRouteFileForUnshare(file, permissions, webIds); },
-            (error) => {  }
+            (error) => { }
         );
 
         // Share route
@@ -50,7 +50,7 @@ export default class PodPermissionHandler extends PodHandler{
         // Share resources
         this.podStoreHandler.getFile(url).then(
             (file) => { this._processRouteFileForShare(file, permissions, webIds); },
-            (error) => {  }
+            (error) => { }
         );
 
         // Share route
@@ -62,7 +62,7 @@ export default class PodPermissionHandler extends PodHandler{
      * @param {SolidAclUtils.Permissions} permissions - Permission to give to the file
      * @param {String|Array<String>|SolidAclUtils.Agents} agents - People to share with
      */
-    async shareFile(url, permissions, agents){
+    async shareFile(url, permissions, agents) {
         const fetch = auth.fetch.bind(auth);
         const utils = new AclApi(fetch, { autoSave: true });
         const acl = await utils.loadFromFileUrl(url);
@@ -79,7 +79,7 @@ export default class PodPermissionHandler extends PodHandler{
      * @param {SolidAclUtils.Permissions} permissions - Permission to remove of the file
      * @param {String|Array<String>|SolidAclUtils.Agents} agents - People to unshare with
      */
-    async unshareFile(url, permissions, agents){
+    async unshareFile(url, permissions, agents) {
         const fetch = auth.fetch.bind(auth);
         const utils = new AclApi(fetch, { autoSave: true });
         const acl = await utils.loadFromFileUrl(url);
@@ -92,20 +92,26 @@ export default class PodPermissionHandler extends PodHandler{
     }
 
     _processRouteFileForShare(routeJson, permissions, agents) {
-        let parsedRoute = JSON.parse(routeJson);
-        let mediaURIs = parsedRoute["media"].map( (j) => {return j["@id"];});
-
-        for(let i = 0; i < mediaURIs.length; i++) {
-            this.shareFile(mediaURIs[i], permissions, agents);
+        try {
+            let parsedRoute = JSON.parse(routeJson);
+            let mediaURIs = parsedRoute["media"].map((j) => { return j["@id"]; });
+            for (let i = 0; i < mediaURIs.length; i++) {
+                this.shareFile(mediaURIs[i], permissions, agents);
+            }
+        } catch (error) {
+            // Continue with the execution and ignore the error
         }
     }
 
     _processRouteFileForUnshare(routeJson, permissions, agents) {
-        let parsedRoute = JSON.parse(routeJson);
-        let mediaURIs = parsedRoute["media"].map( (j) => {return j["@id"];});
-
-        for(let i = 0; i < mediaURIs.length; i++) {
-            this.unshareFile(mediaURIs[i], permissions, agents);
+        try {
+            let parsedRoute = JSON.parse(routeJson);
+            let mediaURIs = parsedRoute["media"].map((j) => { return j["@id"]; });
+            for (let i = 0; i < mediaURIs.length; i++) {
+                this.unshareFile(mediaURIs[i], permissions, agents);
+            }
+        } catch (error) {
+            // Continue with the execution and ignore the error
         }
     }
 }

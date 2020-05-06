@@ -1,10 +1,10 @@
 import React from "react";
 import { Translation } from 'react-i18next';
 import viadeMainView from '../assets/howRoutesWork/main.png';
-import viadeSampleRoutes from '../assets/howRoutesWork/Screenshot_2.png';
-import viadeCreateRoute from '../assets/howRoutesWork/createRoute.png'; // TODO; Update Pic
+import viadeSampleRoutes from '../assets/howRoutesWork/newRouteList.png';
+import viadeCreateRoute from '../assets/howRoutesWork/Screenshot_1.png';
 import viadeDetailsRoute from '../assets/howRoutesWork/routeDetails.png';
-import viadeShareRoute from '../assets/howRoutesWork/shareRoutes.png';
+import viadeShareRoute from '../assets/howRoutesWork/Screenshot_4.png';
 
 import '../css/routeHelp.css';
 
