@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/viade_en3a/static/css/main.cec0b682.chunk.css",
+    "main.js": "/viade_en3a/static/js/main.f44a17c1.chunk.js",
+    "main.js.map": "/viade_en3a/static/js/main.f44a17c1.chunk.js.map",
+    "runtime-main.js": "/viade_en3a/static/js/runtime-main.382c944d.js",
+    "runtime-main.js.map": "/viade_en3a/static/js/runtime-main.382c944d.js.map",
+    "static/css/2.e5b99fdb.chunk.css": "/viade_en3a/static/css/2.e5b99fdb.chunk.css",
+    "static/js/2.8318b827.chunk.js": "/viade_en3a/static/js/2.8318b827.chunk.js",
+    "static/js/2.8318b827.chunk.js.map": "/viade_en3a/static/js/2.8318b827.chunk.js.map",
+    "index.html": "/viade_en3a/index.html",
+    "precache-manifest.19c6c19a4b2abd31e401c0b2f5f73762.js": "/viade_en3a/precache-manifest.19c6c19a4b2abd31e401c0b2f5f73762.js",
+    "service-worker.js": "/viade_en3a/service-worker.js",
+    "static/css/2.e5b99fdb.chunk.css.map": "/viade_en3a/static/css/2.e5b99fdb.chunk.css.map",
+    "static/css/main.cec0b682.chunk.css.map": "/viade_en3a/static/css/main.cec0b682.chunk.css.map",
+    "static/js/2.8318b827.chunk.js.LICENSE.txt": "/viade_en3a/static/js/2.8318b827.chunk.js.LICENSE.txt",
+    "static/media/Screenshot_1.png": "/viade_en3a/static/media/Screenshot_1.5c6dfa65.png",
+    "static/media/Screenshot_4.png": "/viade_en3a/static/media/Screenshot_4.36cf0ace.png",
+    "static/media/car_img1.jpeg": "/viade_en3a/static/media/car_img1.774f104c.jpeg",
+    "static/media/car_img2.jpg": "/viade_en3a/static/media/car_img2.67c42e97.jpg",
+    "static/media/iconEdited.svg": "/viade_en3a/static/media/iconEdited.4bb0f0c0.svg",
+    "static/media/iconNormal.svg": "/viade_en3a/static/media/iconNormal.7350e1f9.svg",
+    "static/media/iconSelected.svg": "/viade_en3a/static/media/iconSelected.808b19f1.svg",
+    "static/media/logo.jpeg": "/viade_en3a/static/media/logo.7e2fd075.jpeg",
+    "static/media/logo_alt.jpeg": "/viade_en3a/static/media/logo_alt.bdb0bd56.jpeg",
+    "static/media/logo_full.jpeg": "/viade_en3a/static/media/logo_full.ddf87e7e.jpeg",
+    "static/media/logo_letters.jpeg": "/viade_en3a/static/media/logo_letters.c6e6636f.jpeg",
+    "static/media/logo_old.jpeg": "/viade_en3a/static/media/logo_old.7e2fd075.jpeg",
+    "static/media/main.png": "/viade_en3a/static/media/main.06374f03.png",
+    "static/media/newRouteList.png": "/viade_en3a/static/media/newRouteList.0a843bdf.png",
+    "static/media/routeDetails.png": "/viade_en3a/static/media/routeDetails.2a1e5f72.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.382c944d.js",
+    "static/css/2.e5b99fdb.chunk.css",
+    "static/js/2.8318b827.chunk.js",
+    "static/css/main.cec0b682.chunk.css",
+    "static/js/main.f44a17c1.chunk.js"
+  ]
+}
