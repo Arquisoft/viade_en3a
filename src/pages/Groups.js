@@ -46,7 +46,7 @@ class Groups extends React.Component {
                     toast.error(i18n.t('alertAccessPOD'));
                 } else {
                     if (groupJson.length !== 0) {
-                        try{
+                        try {
                             let tempGroup = new MyGroup("", []);
                             tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
                             this.groupManager.addGroup(tempGroup);
@@ -58,7 +58,7 @@ class Groups extends React.Component {
                                 $("#messageArea").empty();
                             }
                         } catch (error) {
-                            console.log(error);
+                            // Ignored
                         }
                     }
                 }

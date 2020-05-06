@@ -197,7 +197,7 @@ class ShareView extends React.Component {
                                 $("#messageArea").empty();
                             }
                         } catch (error) {
-                            console.log(error);
+                            // Ignored
                         }
                     }
                 }
