@@ -84,19 +84,29 @@ class RouteList extends React.Component {
             storageHandler.getRoutes((routeJson, error) => {
                 if (routeJson === null) {
                     toast.error(i18n.t('alertAccessPOD'));
+                    return 0;
                 } else {
                     if (routeJson.length !== 0) {
                         let tempRoute = new MyRoute("", "", "", []);
-                        tempRoute.modifyFromJsonLd(JSON.parse(routeJson));
-                        this.routeManager.addRoute(tempRoute);
-                        let tempList = this.state.routes;
-                        tempList.push(tempRoute);
-                        this.processedRoutes += 1;
-                        if (this.processedRoutes === this.retrievedRoutes) {
-                            this.setState({ routes: tempList });
-                            $("#messageArea").empty();
+                        if (tempRoute.modifyFromJsonLd(routeJson)) { //isValid
+                            this.routeManager.addRoute(tempRoute);
+                            let tempList = this.state.routes;
+                            tempList.push(tempRoute);
+                            this.processedRoutes += 1;
+                            if (this.processedRoutes === this.retrievedRoutes) {
+                                this.setState({ routes: tempList });
+                                $("#messageArea").empty();
+                            }
+                        } else { //isinvalid
+                            toast.error(i18n.t('invalidRoute'));
+                            this.retrievedRoutes--;
+                            if (this.processedRoutes === this.retrievedRoutes) {
+                                this.setState({ routes: this.state.routes });
+                                $("#messageArea").empty();
+                            }
                         }
                     }
+                    return this.processedRoutes;
                 }
             }).then(
                 (result) => {
@@ -111,10 +121,13 @@ class RouteList extends React.Component {
                     } else {
                         this.retrievedRoutes = result;
                     }
+
                 }
             );
         }
     }
+
+
 
 }
 

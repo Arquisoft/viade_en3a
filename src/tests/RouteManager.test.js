@@ -16,12 +16,12 @@ test('Test add route to manager', () => {
 
     let jsonLd = myRoute.toJsonLd();
 
-    const route = new MyRoute("","","",[]);
-    route.modifyFromJsonLd(JSON.parse(jsonLd));
+    const route = new MyRoute("", "", "", []);
+    route.modifyFromJsonLd(jsonLd);
 
     const string1 = myRoute.getComparableString();
     const string2 = route.getComparableString();
-    assert.equal(string1,string2,"Route comparable string equal");
+    assert.equal(string1, string2, "Route comparable string equal");
 
     routeManager.addRoute(myRoute);
     routeManager.addRoute(myRoute);

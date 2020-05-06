@@ -46,15 +46,19 @@ class Groups extends React.Component {
                     toast.error(i18n.t('alertAccessPOD'));
                 } else {
                     if (groupJson.length !== 0) {
-                        let tempGroup = new MyGroup("", []);
-                        tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
-                        this.groupManager.addGroup(tempGroup);
-                        let tempList = this.state.groups;
-                        tempList.push(tempGroup);
-                        this.processedGroups += 1;
-                        if (this.processedGroups === this.retrievedGroups) {
-                            this.setState({ groups: tempList });
-                            $("#messageArea").empty();
+                        try {
+                            let tempGroup = new MyGroup("", []);
+                            tempGroup.modifyFromJsonLd(JSON.parse(groupJson));
+                            this.groupManager.addGroup(tempGroup);
+                            let tempList = this.state.groups;
+                            tempList.push(tempGroup);
+                            this.processedGroups += 1;
+                            if (this.processedGroups === this.retrievedGroups) {
+                                this.setState({ groups: tempList });
+                                $("#messageArea").empty();
+                            }
+                        } catch (error) {
+                            // Ignored
                         }
                     }
                 }
